@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit_first_message_hint">Enter a message</string>
     <string name="button_first_send">Send</string>
+    <string name="angela_message">Angela was here!</string>
 </resources>

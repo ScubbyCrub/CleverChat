@@ -22,7 +22,7 @@
         android:id="@+id/text_AngelaSignature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Angela was here!"
+        android:text="@string/angela_message"
         android:textColor="@color/teal_700"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
