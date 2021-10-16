@@ -18,16 +18,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_AngelaSignature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/angela_message"
-        android:textColor="@color/teal_700"
-        android:textSize="16sp"
+    <ImageButton
+        android:id="@+id/angelaButton"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/teal_700"
+        android:src="@drawable/ic_smile_white_36"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_message" />
+        app:layout_constraintTop_toBottomOf="@+id/text_message"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

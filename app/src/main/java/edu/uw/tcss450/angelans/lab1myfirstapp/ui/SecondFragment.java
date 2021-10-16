@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.angelans.lab1myfirstapp.R;
+import edu.uw.tcss450.angelans.lab1myfirstapp.databinding.FragmentAngelaBinding;
 import edu.uw.tcss450.angelans.lab1myfirstapp.databinding.FragmentSecondBinding;
 
 /**
@@ -26,6 +28,14 @@ public class SecondFragment extends Fragment {
         // Instantiate the Binding object and Inflate the layout for this fragment
         mBinding = FragmentSecondBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
+
+        /*
+        On button click, navigate to Second Home
+                mBinding.angelaButton.setOnClickListener(button ->
+                        Navigation.findNavController(getView()).navigate(
+                                SecondFragmentDirections
+                                        .actionSecondFragmentToAngelaFragment()));
+        */
     }
 
     @Override

@@ -22,5 +22,13 @@
         <argument
             android:name="message"
             app:argType="string" />
+        <action
+            android:id="@+id/action_secondFragment_to_angelaFragment"
+            app:destination="@id/angelaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/angelaFragment"
+        android:name="edu.uw.tcss450.angelans.lab1myfirstapp.ui.AngelaFragment"
+        android:label="fragment_angela"
+        tools:layout="@layout/fragment_angela" />
 </navigation>
