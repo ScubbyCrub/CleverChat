@@ -7,21 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.FirstFragment">
 
-<EditText
-    android:id="@+id/edit_message"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
-    android:ems="10"
-    android:hint="@string/edit_first_message_hint"
-    android:minHeight="48dp"
-    app:layout_constraintEnd_toStartOf="@+id/button_send"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/edit_first_message_hint"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_send"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
-<Button
+    <Button
     android:id="@+id/button_send"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
