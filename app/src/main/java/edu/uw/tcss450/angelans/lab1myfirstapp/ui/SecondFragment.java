@@ -29,13 +29,6 @@ public class SecondFragment extends Fragment {
         mBinding = FragmentSecondBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
 
-        /*
-        On button click, navigate to Second Home
-                mBinding.angelaButton.setOnClickListener(button ->
-                        Navigation.findNavController(getView()).navigate(
-                                SecondFragmentDirections
-                                        .actionSecondFragmentToAngelaFragment()));
-        */
     }
 
     @Override
@@ -47,5 +40,10 @@ public class SecondFragment extends Fragment {
 
         // SEt the text color of the label. NOTE no need to cast
         mBinding.textMessage.setText(args.getMessage());
+
+        // On button click, navigate to Second Home
+        mBinding.angelaButton.setOnClickListener(button ->
+                Navigation.findNavController(getView())
+                        .navigate(SecondFragmentDirections.actionSecondFragmentToAngelaFragment()));
     }
 }
