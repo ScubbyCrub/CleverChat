@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.15982776089159068" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/fragment_first.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/fragment_second.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProjectPractice/app/src/main/res/drawable/ic_smile_button_24.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProjectPractice/app/src/main/res/drawable/ic_smile_white_36.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProjectPractice/app/src/main/res/layout/fragment_angela.xml" value="0.3671875" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProjectPractice/app/src/main/res/layout/fragment_second.xml" value="0.335" />
-      </map>
-    </option>
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
