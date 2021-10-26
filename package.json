@@ -1,0 +1,19 @@
+{
+  "name": "tcss450-group6-lab1practice",
+  "version": "1.0.0",
+  "description": "This Android Studio application is for practicing using GitHub.\r Using Lab 1 from class as a base, random changes will be made in order to demonstrate the group knows how to checkout, branch, merge, and rebase.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice/issues"
+  },
+  "homepage": "https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice#readme"
+}
