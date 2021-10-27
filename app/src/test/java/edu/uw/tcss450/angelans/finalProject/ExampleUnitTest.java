@@ -1,4 +1,4 @@
-package edu.uw.tcss450.angelans.lab1myfirstapp;
+package edu.uw.tcss450.angelans.finalProject;
 
 import org.junit.Test;
 
