@@ -1,4 +1,6 @@
 package edu.uw.tcss450.angelans.finalProject.ui.auth.signin;
 
-public class SignInFragment {
+import androidx.fragment.app.Fragment;
+
+public class SignInFragment extends Fragment {
 }

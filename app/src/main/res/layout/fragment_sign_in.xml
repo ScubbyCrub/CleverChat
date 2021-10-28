@@ -20,7 +20,7 @@
          />
 
     <EditText
-        android:id="@+id/edit_email"
+        android:id="@+id/edit_fname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -30,7 +30,7 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_sign_in" />
+        app:layout_constraintTop_toBottomOf="@+id/text_sign_up" />
 
     <Button
         android:id="@+id/button_sign_up"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_fname" />
 
     <TextView
         android:id="@+id/text_forgot_password"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
     <TextView
-        android:id="@+id/text_sign_in"
+        android:id="@+id/text_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
