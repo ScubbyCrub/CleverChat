@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice/issues"
   },
-  "homepage": "https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice#readme"
+  "homepage": "https://github.com/ScubbyCrub/TCSS450-Group6-Lab1Practice#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express.js": "^1.0.0",
+    "nodemailer": "^6.7.0",
+    "save": "^2.4.0",
+    "uuid": "^8.3.2"
+  }
 }
