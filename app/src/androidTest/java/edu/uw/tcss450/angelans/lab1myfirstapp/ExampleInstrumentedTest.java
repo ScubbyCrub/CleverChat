@@ -1,4 +1,4 @@
-package edu.uw.tcss450.angelans.tcss450group6groupproject;
+package edu.uw.tcss450.angelans.lab1myfirstapp;
 
 import android.content.Context;
 

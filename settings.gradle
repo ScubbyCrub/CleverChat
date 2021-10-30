@@ -6,5 +6,5 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "TCSS450 Group 6 Group Project"
+rootProject.name = "Lab 1 My First App"
 include ':app'
