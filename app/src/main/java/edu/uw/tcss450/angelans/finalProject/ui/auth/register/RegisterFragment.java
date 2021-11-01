@@ -130,13 +130,13 @@ public class RegisterFragment extends Fragment {
     }
 
     private void navigateToLogin() {
-        binding.buttonSignUp.setOnClickListener(button ->
-                Navigation.findNavController(getView()).navigate(
-                        RegisterFragmentDirections.actionRegisterFragmentToSignInFragment(
-                                binding.editEmailSignup.getText().toString(),
-                                binding.editPasswordSignup.getText().toString()
-                        )
-                ));
+        RegisterFragmentDirections.ActionRegisterFragmentToSignInFragment directions =
+                RegisterFragmentDirections.actionRegisterFragmentToSignInFragment();
+
+        directions.setEmail(binding.editEmailSignup.getText().toString());
+        directions.setPassword(binding.editPasswordSignup.getText().toString());
+
+        Navigation.findNavController(getView()).navigate(directions);
 
     }
 
