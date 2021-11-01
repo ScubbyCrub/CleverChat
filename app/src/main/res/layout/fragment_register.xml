@@ -67,6 +67,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/hint_first_name"
+        android:hintTextColor="#546E7A"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
