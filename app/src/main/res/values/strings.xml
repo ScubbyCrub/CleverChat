@@ -11,4 +11,5 @@
     <string name="title_weather">Weather</string>
     <string name="title_contact">Contact</string>
     <string name="title_chat">Chat</string>
+    <string name="title_home">Home</string>
 </resources>

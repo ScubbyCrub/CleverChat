@@ -1,4 +1,4 @@
-package edu.uw.tcss450.angelans.finalProject.ui;
+package edu.uw.tcss450.angelans.finalProject.ui.home;
 
 import android.os.Bundle;
 
