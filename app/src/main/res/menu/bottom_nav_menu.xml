@@ -7,11 +7,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_weather"
-        android:icon="@drawable/ic_weather_black_24dp"
-        android:title="@string/title_weather" />
-
-    <item
         android:id="@+id/navigation_contact"
         android:icon="@drawable/ic_contact_black_24"
         android:title="@string/title_contact" />
@@ -20,4 +15,9 @@
         android:id="@+id/navigation_chat"
         android:icon="@drawable/ic_chat_black_24dp"
         android:title="@string/title_chat" />
+
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/ic_weather_black_24dp"
+        android:title="@string/title_weather" />
 </menu>
