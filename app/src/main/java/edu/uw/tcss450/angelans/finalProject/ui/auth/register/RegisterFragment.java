@@ -72,7 +72,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //When hit Sign In button navigate to Sign In page with user's email and password
+        //When hit Sign Up button navigate to Sign In page with user's email and password
         binding.buttonSignUp.setOnClickListener(this::attemptRegister);
         registerViewModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);

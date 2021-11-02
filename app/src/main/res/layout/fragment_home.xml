@@ -6,7 +6,7 @@
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    tools:context="edu.uw.tcss450.angelans.finalProject.ui.HomeFragment">
 
     <TextView
         android:id="@+id/text_hello"
