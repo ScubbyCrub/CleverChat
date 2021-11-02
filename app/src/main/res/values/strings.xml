@@ -6,4 +6,5 @@
     <string name="hint_password">Password</string>
     <string name="hint_re_password">Re-type Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="hello">Hello</string>
 </resources>
