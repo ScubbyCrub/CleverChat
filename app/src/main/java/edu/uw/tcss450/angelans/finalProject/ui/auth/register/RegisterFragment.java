@@ -82,6 +82,13 @@ public class RegisterFragment extends Fragment {
         checkFirstName();
     }
 
+    private void checkEmail() {
+        emailCheck.processResult(
+                emailCheck.apply(binding.editEmailSignup.getText().toString().trim()),
+                this::checkPasswordsMatch,
+                result -> binding.editEmailSignup.setError("Please enter a valid Email address."));
+    }
+
     private void checkFirstName() {
         nameCheck.processResult(
                 nameCheck.apply(binding.editFirstnameSignup.getText().toString().trim()),
@@ -94,13 +101,6 @@ public class RegisterFragment extends Fragment {
                 nameCheck.apply(binding.editLastnameSignup.getText().toString().trim()),
                 this::checkEmail,
                 result -> binding.editLastnameSignup.setError("Please enter your last name."));
-    }
-
-    private void checkEmail() {
-         emailCheck.processResult(
-                emailCheck.apply(binding.editEmailSignup.getText().toString().trim()),
-                this::checkPasswordsMatch,
-                result -> binding.editEmailSignup.setError("Please enter a valid Email address."));
     }
 
     private void checkPasswordsMatch() {
