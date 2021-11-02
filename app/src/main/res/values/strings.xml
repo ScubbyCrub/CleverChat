@@ -8,4 +8,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="hello">Hello</string>
+    <string name="title_weather">Weather</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_chat">Chat</string>
 </resources>
