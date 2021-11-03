@@ -38,7 +38,7 @@ public class ResetEmailSentOutFragment extends Fragment {
         //add listener that will send the request to the backend
         binding.buttonBackToSignIn.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
-                    PasswordResetDirections.actionPasswordResetToSignInFragment()
+                    ResetEmailSentOutFragmentDirections.actionResetEmailSentOutFragmentToSignInFragment()
             );
         });
     }
