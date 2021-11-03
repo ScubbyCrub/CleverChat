@@ -39,11 +39,7 @@ public class PasswordReset extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         //add listener that will send the request to the backend
-        binding.buttonBackToSignIn.setOnClickListener(this::attemptRegister);
-
-
-
-
+        binding.buttonResetPassword.setOnClickListener(this::attemptRegister);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +64,7 @@ public class PasswordReset extends Fragment {
         passwordResetViewModel.connect(binding.editEmail.getText().toString().trim());
         //TODO: ADD navigation to fragment that confirms the email was sent
         Navigation.findNavController(getView()).navigate(
-                PasswordResetDirections.actionPasswordResetToResetEmailSentFragment()
+                PasswordResetDirections.actionPasswordResetToResetEmailSentOutFragment()
         );
     }
 }
