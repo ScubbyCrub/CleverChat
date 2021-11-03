@@ -58,7 +58,12 @@ public class SignInFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //when reset button click nav to reset screen
+        binding.textAskForgotPassword.setOnClickListener(text ->{
+            Navigation.findNavController((getView())).navigate((
+                    SignInFragmentDirections.actionSignInFragmentToPasswordReset()
+                    ));
+        });
         //When hit Sign Up button navigate to Sign Up page
         binding.buttonToSignUp.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(
