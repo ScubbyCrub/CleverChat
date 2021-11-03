@@ -56,5 +56,16 @@
         <action
             android:id="@+id/action_passwordReset_to_SignInFragment"
             app:destination="@id/SignInFragment" />
+        <action
+            android:id="@+id/action_passwordReset_to_resetEmailSentFragment"
+            app:destination="@id/resetEmailSentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetEmailSentFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.auth.passwordreset.PasswordResetViewModel$ResetEmailSentFragment"
+        android:label="ResetEmailSentFragment" >
+        <action
+            android:id="@+id/action_resetEmailSentFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment" />
     </fragment>
 </navigation>

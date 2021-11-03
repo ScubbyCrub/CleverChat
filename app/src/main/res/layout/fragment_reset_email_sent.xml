@@ -34,25 +34,13 @@
         app:layout_constraintTop_toTopOf="@+id/view"
         tools:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <EditText
-        android:id="@+id/edit_email"
-        android:layout_width="225dp"
-        android:layout_height="63dp"
-        android:ems="10"
-        android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/button_back_to_sign_in"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/text_reset_password" />
-
     <Button
         android:id="@+id/button_back_to_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:backgroundTint="@color/background_gradient_1"
-        android:text="@string/reset"
+        android:text="@string/button_back_to_sign_in"
         android:textColor="@color/white"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -65,9 +53,8 @@
         android:id="@+id/text_check_email"
         android:layout_width="232dp"
         android:layout_height="97dp"
-        android:text="@string/reset_instructions"
+        android:text="@string/text_email_sent"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/edit_email"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/text_reset_password" />
