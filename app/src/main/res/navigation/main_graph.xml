@@ -2,17 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_graph"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_home">
     <fragment
         android:id="@+id/navigation_home"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_weather"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherFragment"
-        android:label="fragment_weather"
+        android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
     <fragment
         android:id="@+id/navigation_chat"
