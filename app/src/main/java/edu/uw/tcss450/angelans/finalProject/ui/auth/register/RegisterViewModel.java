@@ -65,11 +65,11 @@ public class RegisterViewModel extends AndroidViewModel {
                         final String last,
                         final String email,
                         final String password) {
-        String url = "https://cfb3-tcss450-labs-2021sp.herokuapp.com/auth";
+        String url = "https://cleverchat.herokuapp.com/api/register";
         JSONObject body = new JSONObject();
         try {
-            body.put("first", first);
-            body.put("last", last);
+            body.put("firstName", first);
+            body.put("lastName", last);
             body.put("email", email);
             body.put("password", password);
         } catch (JSONException e) {
