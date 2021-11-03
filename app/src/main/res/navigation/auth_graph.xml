@@ -57,15 +57,15 @@
             android:id="@+id/action_passwordReset_to_SignInFragment"
             app:destination="@id/SignInFragment" />
         <action
-            android:id="@+id/action_passwordReset_to_resetEmailSentFragment"
-            app:destination="@id/resetEmailSentFragment" />
+            android:id="@+id/action_passwordReset_to_resetEmailSentOutFragment"
+            app:destination="@id/resetEmailSentOutFragment" />
     </fragment>
     <fragment
-        android:id="@+id/resetEmailSentFragment"
-        android:name="edu.uw.tcss450.angelans.finalProject.ui.auth.passwordreset.PasswordResetViewModel$ResetEmailSentFragment"
-        android:label="ResetEmailSentFragment" >
+        android:id="@+id/resetEmailSentOutFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.auth.passwordreset.ResetEmailSentOutFragment"
+        android:label="ResetEmailSentOutFragment" >
         <action
-            android:id="@+id/action_resetEmailSentFragment_to_SignInFragment"
+            android:id="@+id/action_resetEmailSentOutFragment_to_SignInFragment"
             app:destination="@id/SignInFragment" />
     </fragment>
 </navigation>
