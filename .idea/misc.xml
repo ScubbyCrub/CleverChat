@@ -3,13 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/activity_main.xml" value="0.15982776089159068" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/fragment_first.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/Lab1AndroidProject/app/src/main/res/layout/fragment_second.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/button_gradient_color.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_round.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/button_state_list_anim_material.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/gradient_color.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.27760416666666665" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

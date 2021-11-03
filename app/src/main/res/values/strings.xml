@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">TCSS 450 Group Project</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_re_password">Re-type Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="hello">Hello</string>
+    <string name="title_weather">Weather</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_home">Home</string>
 </resources>
