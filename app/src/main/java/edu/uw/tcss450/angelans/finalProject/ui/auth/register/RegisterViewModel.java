@@ -31,53 +31,53 @@ import java.util.Objects;
  */
 public class RegisterViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> response;
+    private MutableLiveData<JSONObject> mResponse;
 
     /**
      * Constructor for RegisterViewModel.
      *
-     * @param application The application that RegisterViewModel should exist in.
+     * @param theApplication The application that RegisterViewModel should exist in.
      */
-    public RegisterViewModel(@NonNull Application application) {
-        super(application);
-        response = new MutableLiveData<>();
-        response.setValue(new JSONObject());
+    public RegisterViewModel(@NonNull Application theApplication) {
+        super(theApplication);
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     /**
      * Add an observer to the register data to notify once data changes.
      *
-     * @param owner The owner of the class that has an android life cycle.
-     * @param observer The observer to respond to when data is updated.
+     * @param theOwner The owner of the class that has an android life cycle.
+     * @param theObserver The observer to respond to when data is updated.
      */
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        response.observe(owner, observer);
+    public void addResponseObserver(@NonNull LifecycleOwner theOwner,
+                                    @NonNull Observer<? super JSONObject> theObserver) {
+        mResponse.observe(theOwner, theObserver);
     }
 
     /**
      * How to handle if the network response comes back with errors.
      *
-     * @param error The error sent back from the web service.
+     * @param theError The error sent back from the web service.
      */
-    private void handleError(final VolleyError error) {
-        if (Objects.isNull(error.networkResponse)) {
+    private void handleError(final VolleyError theError) {
+        if (Objects.isNull(theError.networkResponse)) {
             try {
-                response.setValue(new JSONObject("{" +
-                        "error:\"" + error.getMessage() +
+                mResponse.setValue(new JSONObject("{" +
+                        "error:\"" + theError.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
         }
         else {
-            String data = new String(error.networkResponse.data, Charset.defaultCharset())
+            String data = new String(theError.networkResponse.data, Charset.defaultCharset())
                     .replace('\"', '\'');
             try {
                 JSONObject response = new JSONObject();
-                response.put("code", error.networkResponse.statusCode);
+                response.put("code", theError.networkResponse.statusCode);
                 response.put("data", new JSONObject(data));
-                this.response.setValue(response);
+                this.mResponse.setValue(response);
             } catch (JSONException e) {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
@@ -87,22 +87,22 @@ public class RegisterViewModel extends AndroidViewModel {
     /**
      * Send a web request to the server to register a new user account.
      *
-     * @param first The first name of the new account.
-     * @param last The last name of the new account.
-     * @param email The email of the new account.
-     * @param password The password of the new account.
+     * @param theFirst The first name of the new account.
+     * @param theLast The last name of the new account.
+     * @param theEmail The email of the new account.
+     * @param thePassword The password of the new account.
      */
-    public void connect(final String first,
-                        final String last,
-                        final String email,
-                        final String password) {
+    public void connect(final String theFirst,
+                        final String theLast,
+                        final String theEmail,
+                        final String thePassword) {
         String url = "https://cleverchat.herokuapp.com/api/register";
         JSONObject body = new JSONObject();
         try {
-            body.put("firstName", first);
-            body.put("lastName", last);
-            body.put("email", email);
-            body.put("password", password);
+            body.put("firstName", theFirst);
+            body.put("lastName", theLast);
+            body.put("email", theEmail);
+            body.put("password", thePassword);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class RegisterViewModel extends AndroidViewModel {
                 Request.Method.POST,
                 url,
                 body,
-                response::setValue,
+                mResponse::setValue,
                 this::handleError);
         request.setRetryPolicy(new DefaultRetryPolicy(
                 10_000,

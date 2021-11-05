@@ -19,12 +19,12 @@ public class UserInfoViewModel extends ViewModel {
     /**
      * Private constructor for UserInfoViewModel.
      *
-     * @param email The user's email.
-     * @param jwt The JSON Web Token supplied by the server.
+     * @param theEmail The user's email.
+     * @param theJwt The JSON Web Token supplied by the server.
      */
-    private UserInfoViewModel(String email, String jwt) {
-        mEmail = email;
-        mJwt = jwt;
+    private UserInfoViewModel(String theEmail, String theJwt) {
+        mEmail = theEmail;
+        mJwt = theJwt;
     }
 
     /**
@@ -51,18 +51,18 @@ public class UserInfoViewModel extends ViewModel {
      */
     public static class UserInfoViewModelFactory implements ViewModelProvider.Factory {
 
-        private final String email;
-        private final String jwt;
+        private final String mEmail;
+        private final String mJwt;
 
         /**
          * Constructor for UserInfoViewModelFactory.
          *
-         * @param email User's email.
-         * @param jwt The JSON Web Token supplied by the server.
+         * @param theEmail User's email.
+         * @param theJwt The JSON Web Token supplied by the server.
          */
-        public UserInfoViewModelFactory(String email, String jwt) {
-            this.email = email;
-            this.jwt = jwt;
+        public UserInfoViewModelFactory(String theEmail, String theJwt) {
+            this.mEmail = theEmail;
+            this.mJwt = theJwt;
         }
 
         /**
@@ -76,7 +76,7 @@ public class UserInfoViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass == UserInfoViewModel.class) {
-                return (T) new UserInfoViewModel(email, jwt);
+                return (T) new UserInfoViewModel(mEmail, mJwt);
             }
             throw new IllegalArgumentException(
                     "Argument must be: " + UserInfoViewModel.class);

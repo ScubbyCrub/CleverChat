@@ -30,17 +30,17 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
  */
 public class SignInFragment extends Fragment {
 
-    private FragmentSignInBinding binding;
+    private FragmentSignInBinding mBinding;
 
-    private SignInViewModel signInViewModel;
+    private SignInViewModel mSignInViewModel;
 
     //Email has more than 2 char, no white space and include special char "@"
-    private PasswordValidator checkEmail = checkPWLength(2)
+    private PasswordValidator mCheckEmail = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
 
     //Password has more than 1 char, no space
-    private PasswordValidator checkPassword = checkPWLength(1)
+    private PasswordValidator mCheckPassword = checkPWLength(1)
             .and(checkExcludeWhiteSpace());
 
     /**
@@ -51,44 +51,44 @@ public class SignInFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        signInViewModel = new ViewModelProvider(getActivity())
+    public void onCreate(@Nullable Bundle theSavedInstanceState) {
+        super.onCreate(theSavedInstanceState);
+        mSignInViewModel = new ViewModelProvider(getActivity())
                 .get(SignInViewModel.class);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentSignInBinding.inflate(inflater);
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
+        mBinding = FragmentSignInBinding.inflate(theInflater);
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return mBinding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
+        super.onViewCreated(theView, theSavedInstanceState);
         //when reset button click nav to reset screen
-        binding.textAskForgotPassword.setOnClickListener(text ->{
+        mBinding.textAskForgotPassword.setOnClickListener(text ->{
             Navigation.findNavController((getView())).navigate((
                     SignInFragmentDirections.actionSignInFragmentToPasswordReset()
                     ));
         });
         //When hit Sign Up button navigate to Sign Up page
-        binding.buttonToSignUp.setOnClickListener(button ->
+        mBinding.buttonToSignUp.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(
                     SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
                 ));
-        binding.buttonSignIn.setOnClickListener(this::attemptSignIn);
+        mBinding.buttonSignIn.setOnClickListener(this::attemptSignIn);
 
-        signInViewModel.addResponseObserver(
+        mSignInViewModel.addResponseObserver(
                 getViewLifecycleOwner(),
                 this::observeResponse);
 
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
-        binding.editEmailSignin.setText(args.getEmail()
+        mBinding.editEmailSignin.setText(args.getEmail()
                 .equals("default") ? "" : args.getEmail());
-        binding.editPasswordSignin.setText(args.getPassword()
+        mBinding.editPasswordSignin.setText(args.getPassword()
                 .equals("default") ? "" : args.getPassword());
     }
 
@@ -96,9 +96,9 @@ public class SignInFragment extends Fragment {
      * Starts a chain to check if the fields on the client side are formatted correctly
      * before attempting to send to the web service.
      *
-     * @param button The button that begins the sign in process.
+     * @param theButton The button that begins the sign in process.
      */
-    private void attemptSignIn(final View button) {
+    private void attemptSignIn(final View theButton) {
         checkEmail();
     }
 
@@ -106,20 +106,20 @@ public class SignInFragment extends Fragment {
      * Checks if the email is formatted properly before signing in the user.
      */
     private void checkEmail() {
-        checkEmail.processResult(
-                checkEmail.apply(binding.editEmailSignin.getText().toString().trim()),
+        mCheckEmail.processResult(
+                mCheckEmail.apply(mBinding.editEmailSignin.getText().toString().trim()),
                 this::checkPassword,
-                result -> binding.editEmailSignin.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmailSignin.setError("Please enter a valid Email address."));
     }
 
     /**
      * Checks if the password is formatted properly before signing in the user.
      */
     private void checkPassword() {
-        checkPassword.processResult(
-                checkPassword.apply(binding.editPasswordSignin.getText().toString()),
+        mCheckPassword.processResult(
+                mCheckPassword.apply(mBinding.editPasswordSignin.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> binding.editPasswordSignin.setError("Please enter a valid Password."));
+                result -> mBinding.editPasswordSignin.setError("Please enter a valid Password."));
     }
 
     /**
@@ -127,44 +127,44 @@ public class SignInFragment extends Fragment {
      * are valid for signing in.
      */
     private void verifyAuthWithServer() {
-        signInViewModel.connect(
-                binding.editEmailSignin.getText().toString(),
-                binding.editPasswordSignin.getText().toString());
+        mSignInViewModel.connect(
+                mBinding.editEmailSignin.getText().toString(),
+                mBinding.editPasswordSignin.getText().toString());
     }
 
     /**
      * Helper to abstract the navigation to the Activity past Authentication.
      *
-     * @param email user's email.
-     * @param jwt the JSON Web Token supplied by the server.
+     * @param theEmail user's email.
+     * @param theJwt the JSON Web Token supplied by the server.
      */
-    private void navigateToSuccess(final String email, final String jwt) {
+    private void navigateToSuccess(final String theEmail, final String theJwt) {
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
-                        .actionSignInFragmentToMainActivity(email,jwt));
+                        .actionSignInFragmentToMainActivity(theEmail,theJwt));
     }
 
     /**
      * An observer on the HTTP Response from the web server. This observer should be
      * attached to SignInViewModel.
      *
-     * @param response the Response from the server.
+     * @param theResponse the Response from the server.
      */
-    private void observeResponse(final JSONObject response) {
-        if (response.length() > 0) {
-            if (response.has("code")) {
+    private void observeResponse(final JSONObject theResponse) {
+        if (theResponse.length() > 0) {
+            if (theResponse.has("code")) {
                 try {
-                    binding.editEmailSignin.setError(
+                    mBinding.editEmailSignin.setError(
                             "Error Authenticating: " +
-                                    response.getJSONObject("data").getString("message"));
+                                    theResponse.getJSONObject("data").getString("message"));
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }
             } else {
                 try {
                     navigateToSuccess(
-                            binding.editEmailSignin.getText().toString(),
-                            response.getString("token")
+                            mBinding.editEmailSignin.getText().toString(),
+                            theResponse.getString("token")
                     );
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());

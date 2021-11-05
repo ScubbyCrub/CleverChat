@@ -24,8 +24,8 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle theSavedInstanceState) {
+        super.onCreate(theSavedInstanceState);
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 

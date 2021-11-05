@@ -18,8 +18,8 @@ import com.android.volley.toolbox.Volley;
  * @version Sprint 1
  */
 public class RequestQueueSingleton {
-    private static RequestQueueSingleton instance;
-    private static Context context;
+    private static RequestQueueSingleton mInstance;
+    private static Context mContext;
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
@@ -31,7 +31,7 @@ public class RequestQueueSingleton {
      *                this app.
      */
     private RequestQueueSingleton(Context context) {
-        RequestQueueSingleton.context = context;
+        RequestQueueSingleton.mContext = context;
         mRequestQueue = getmRequestQueue();
 
         mImageLoader = new ImageLoader(mRequestQueue,
@@ -54,15 +54,15 @@ public class RequestQueueSingleton {
     /**
      * Create a synchronized RequestQueueSingleton that lasts the lifetime of the app.
      *
-     * @param context globally available, application-specific resources and classes for
+     * @param theContext globally available, application-specific resources and classes for
      *                this app.
      * @return A synchronized RequestQueueSingleton that lasts the lifetime of the app.
      */
-    public static synchronized RequestQueueSingleton getInstance(Context context) {
-        if (instance == null) {
-            instance = new RequestQueueSingleton(context);
+    public static synchronized RequestQueueSingleton getInstance(Context theContext) {
+        if (mInstance == null) {
+            mInstance = new RequestQueueSingleton(theContext);
         }
-        return instance;
+        return mInstance;
     }
 
     /**
@@ -74,7 +74,7 @@ public class RequestQueueSingleton {
         if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
-            mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
+            mRequestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
         }
         return mRequestQueue;
     }

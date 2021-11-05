@@ -29,15 +29,15 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
  */
 public class RegisterFragment extends Fragment {
 
-    private FragmentRegisterBinding binding;
+    private FragmentRegisterBinding mBinding;
 
-    private RegisterViewModel registerViewModel;
+    private RegisterViewModel mRegisterViewModel;
 
     //Name contains at 1 or more char
-    private PasswordValidator nameCheck = checkPWLength(1);
+    private PasswordValidator mNameCheck = checkPWLength(1);
 
     //Email has more than 2 char, no white space and include special char "@"
-    private PasswordValidator emailCheck = checkPWLength(2)
+    private PasswordValidator mEmailCheck = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
 
@@ -49,8 +49,8 @@ public class RegisterFragment extends Fragment {
     PW include 1 digit
     PW include lower and upper cases
      */
-    private PasswordValidator passwordCheck =
-            checkClientPredicate(pwd -> pwd.equals(binding.editRePasswordSignup
+    private PasswordValidator mPasswordCheck =
+            checkClientPredicate(pwd -> pwd.equals(mBinding.editRePasswordSignup
                     .getText().toString()))
                     .and(checkPWLength(7))
                     .and(checkPwdSpecialChar())
@@ -66,35 +66,35 @@ public class RegisterFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        registerViewModel = new ViewModelProvider(getActivity())
+    public void onCreate(@Nullable Bundle theSavedInstanceState) {
+        super.onCreate(theSavedInstanceState);
+        mRegisterViewModel = new ViewModelProvider(getActivity())
                 .get(RegisterViewModel.class);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentRegisterBinding.inflate(inflater);
-        return binding.getRoot();
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
+        mBinding = FragmentRegisterBinding.inflate(theInflater);
+        return mBinding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
+        super.onViewCreated(theView, theSavedInstanceState);
 
         //When hit Sign Up button navigate to Sign In page with user's email and password
-        binding.buttonSignUp.setOnClickListener(this::attemptRegister);
-        registerViewModel.addResponseObserver(getViewLifecycleOwner(),
+        mBinding.buttonSignUp.setOnClickListener(this::attemptRegister);
+        mRegisterViewModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
     }
 
     /**
      * Starts chain that checks if registration attempt meets all field requirements.
      *
-     * @param button The button that is used to submit the register field checks.
+     * @param theButton The button that is used to submit the register field checks.
      */
-    private void attemptRegister(final View button) {
+    private void attemptRegister(final View theButton) {
         checkFirstName();
     }
 
@@ -102,30 +102,30 @@ public class RegisterFragment extends Fragment {
      * Checks if the email meets all minimum requirements.
      */
     private void checkEmail() {
-        emailCheck.processResult(
-                emailCheck.apply(binding.editEmailSignup.getText().toString().trim()),
+        mEmailCheck.processResult(
+                mEmailCheck.apply(mBinding.editEmailSignup.getText().toString().trim()),
                 this::checkPasswordsMatch,
-                result -> binding.editEmailSignup.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmailSignup.setError("Please enter a valid Email address."));
     }
 
     /**
      * Checks if the first name meets all minimum requirements.
      */
     private void checkFirstName() {
-        nameCheck.processResult(
-                nameCheck.apply(binding.editFirstnameSignup.getText().toString().trim()),
+        mNameCheck.processResult(
+                mNameCheck.apply(mBinding.editFirstnameSignup.getText().toString().trim()),
                 this::checkLastName,
-                result -> binding.editFirstnameSignup.setError("Please enter your first name."));
+                result -> mBinding.editFirstnameSignup.setError("Please enter your first name."));
     }
 
     /**
      * Checks if the last name meets all minimum requirements.
      */
     private void checkLastName() {
-        nameCheck.processResult(
-                nameCheck.apply(binding.editLastnameSignup.getText().toString().trim()),
+        mNameCheck.processResult(
+                mNameCheck.apply(mBinding.editLastnameSignup.getText().toString().trim()),
                 this::checkEmail,
-                result -> binding.editLastnameSignup.setError("Please enter your last name."));
+                result -> mBinding.editLastnameSignup.setError("Please enter your last name."));
     }
 
     /**
@@ -134,34 +134,34 @@ public class RegisterFragment extends Fragment {
     private void checkPasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
-                        pwd -> pwd.equals(binding.editRePasswordSignup.getText()
+                        pwd -> pwd.equals(mBinding.editRePasswordSignup.getText()
                                 .toString().trim()));
 
-        emailCheck.processResult(
-                matchValidator.apply(binding.editPasswordSignup.getText().toString().trim()),
+        mEmailCheck.processResult(
+                matchValidator.apply(mBinding.editPasswordSignup.getText().toString().trim()),
                 this::checkPassword,
-                result -> binding.editPasswordSignup.setError("Passwords must match."));
+                result -> mBinding.editPasswordSignup.setError("Passwords must match."));
     }
 
     /**
      * Checks if the password meets all minimum requirements.
      */
     private void checkPassword() {
-        passwordCheck.processResult(
-                passwordCheck.apply(binding.editPasswordSignup.getText().toString()),
+        mPasswordCheck.processResult(
+                mPasswordCheck.apply(mBinding.editPasswordSignup.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> binding.editPasswordSignup.setError("Please enter a valid Password."));
+                result -> mBinding.editPasswordSignup.setError("Please enter a valid Password."));
     }
 
     /**
      * Connects to the web service to register the user through the database.
      */
     private void verifyAuthWithServer() {
-        registerViewModel.connect(
-                binding.editFirstnameSignup.getText().toString(),
-                binding.editLastnameSignup.getText().toString(),
-                binding.editEmailSignup.getText().toString(),
-                binding.editPasswordSignup.getText().toString());
+        mRegisterViewModel.connect(
+                mBinding.editFirstnameSignup.getText().toString(),
+                mBinding.editLastnameSignup.getText().toString(),
+                mBinding.editEmailSignup.getText().toString(),
+                mBinding.editPasswordSignup.getText().toString());
     }
 
     /**
@@ -172,8 +172,8 @@ public class RegisterFragment extends Fragment {
         RegisterFragmentDirections.ActionRegisterFragmentToSignInFragment directions =
                 RegisterFragmentDirections.actionRegisterFragmentToSignInFragment();
 
-        directions.setEmail(binding.editEmailSignup.getText().toString());
-        directions.setPassword(binding.editPasswordSignup.getText().toString());
+        directions.setEmail(mBinding.editEmailSignup.getText().toString());
+        directions.setPassword(mBinding.editPasswordSignup.getText().toString());
 
         Navigation.findNavController(getView()).navigate(directions);
 
@@ -183,15 +183,15 @@ public class RegisterFragment extends Fragment {
      * An observer on the HTTP Response from the web server. This observer should be
      * attached to SignInViewModel.
      *
-     * @param response the Response from the server.
+     * @param theResponse the Response from the server.
      */
-    private void observeResponse(final JSONObject response) {
-        if (response.length() > 0) {
-            if (response.has("code")) {
+    private void observeResponse(final JSONObject theResponse) {
+        if (theResponse.length() > 0) {
+            if (theResponse.has("code")) {
                 try {
-                    binding.editEmailSignup.setError(
+                    mBinding.editEmailSignup.setError(
                             "Error Authenticating: " +
-                                    response.getJSONObject("data").getString("message"));
+                                    theResponse.getJSONObject("data").getString("message"));
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatBinding;
-import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
 
 /**
  * Chat Fragment to allow for UI elements to function when the user is interacting with
@@ -18,14 +17,14 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
  * @version Sprint 1
  */
 public class ChatFragment extends Fragment {
-    private FragmentChatBinding binding;
+    private FragmentChatBinding mBinding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentChatBinding.inflate(inflater);
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
+        mBinding = FragmentChatBinding.inflate(theInflater);
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return mBinding.getRoot();
     }
 
 

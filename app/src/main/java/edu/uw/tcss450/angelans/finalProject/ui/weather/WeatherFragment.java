@@ -17,13 +17,13 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentWeatherBinding;
  * @version Sprint 1
  */
 public class WeatherFragment extends Fragment {
-    private FragmentWeatherBinding binding;
+    private FragmentWeatherBinding mBinding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentWeatherBinding.inflate(inflater);
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
+        mBinding = FragmentWeatherBinding.inflate(theInflater);
         // Inflate the layout for this fragment
-        return binding.getRoot();
+        return mBinding.getRoot();
     }
 }

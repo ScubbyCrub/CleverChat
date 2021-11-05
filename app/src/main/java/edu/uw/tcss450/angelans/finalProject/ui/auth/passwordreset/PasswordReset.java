@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentPasswordResetBinding;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
@@ -29,31 +28,31 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
  */
 public class PasswordReset extends Fragment {
 
-    private PasswordValidator emailCheck = checkPWLength(2)
+    private PasswordValidator mEmailCheck = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-    private FragmentPasswordResetBinding binding;
-    private PasswordResetViewModel passwordResetViewModel;
+    private FragmentPasswordResetBinding mBinding;
+    private PasswordResetViewModel mPasswordResetViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        passwordResetViewModel = new ViewModelProvider(getActivity())
+    public void onCreate(@Nullable Bundle theSavedInstanceState){
+        super.onCreate(theSavedInstanceState);
+        mPasswordResetViewModel = new ViewModelProvider(getActivity())
                 .get(PasswordResetViewModel.class);
     }
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        super.onViewCreated(view,savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
+        super.onViewCreated(theView,theSavedInstanceState);
         //add listener that will send the request to the backend
-        binding.buttonResetPassword.setOnClickListener(this::attemptRegister);
+        mBinding.buttonResetPassword.setOnClickListener(this::attemptRegister);
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
         //make binding so we can access fields
-        binding = FragmentPasswordResetBinding.inflate(inflater);
+        mBinding = FragmentPasswordResetBinding.inflate(theInflater);
 
-        return binding.getRoot();
+        return mBinding.getRoot();
         //inflater.inflate(R.layout.fragment_password_reset, container, false);
     }
 
@@ -61,19 +60,19 @@ public class PasswordReset extends Fragment {
      * Checks if the user's email is one that is stored as a registered account before
      * sending a password reset email.
      *
-     * @param button The button that starts the email checking process.
+     * @param theButton The button that starts the email checking process.
      */
-    private void attemptRegister(final View button) {checkEmail();}
+    private void attemptRegister(final View theButton) {checkEmail();}
 
     /**
      * Prepares the email to be sent to the web service to see if it exists in the
      * Members database.
      */
     private void checkEmail() {
-        emailCheck.processResult(
-                emailCheck.apply(binding.editEmail.getText().toString().trim()),
+        mEmailCheck.processResult(
+                mEmailCheck.apply(mBinding.editEmail.getText().toString().trim()),
                 this::sendToServer,
-                result -> binding.editEmail.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmail.setError("Please enter a valid Email address."));
     }
 
     /**
@@ -82,7 +81,7 @@ public class PasswordReset extends Fragment {
      */
     private void sendToServer() {
         System.out.println("Sending to the server");
-        passwordResetViewModel.connect(binding.editEmail.getText().toString().trim());
+        mPasswordResetViewModel.connect(mBinding.editEmail.getText().toString().trim());
         //TODO: ADD navigation to fragment that confirms the email was sent
         Navigation.findNavController(getView()).navigate(
                 PasswordResetDirections.actionPasswordResetToResetEmailSentOutFragment()

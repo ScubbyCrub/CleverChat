@@ -34,48 +34,48 @@ import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
  */
 public class SignInViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> response;
+    private MutableLiveData<JSONObject> mResponse;
 
     /**
      * Constructor for SignInViewModel.
      *
-     * @param application The application that SignInViewModel should exist in.
+     * @param theApplication The application that SignInViewModel should exist in.
      */
-    public SignInViewModel(@NonNull Application application) {
-        super(application);
-        response = new MutableLiveData<>();
-        response.setValue(new JSONObject());
+    public SignInViewModel(@NonNull Application theApplication) {
+        super(theApplication);
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     /**
      * Add an observer to the sign in data to notify once data changes.
      *
-     * @param owner The owner of the class that has an android life cycle.
-     * @param observer The observer to respond to when data is updated.
+     * @param theOwner The owner of the class that has an android life cycle.
+     * @param theObserver The observer to respond to when data is updated.
      */
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        response.observe(owner, observer);
+    public void addResponseObserver(@NonNull LifecycleOwner theOwner,
+                                    @NonNull Observer<? super JSONObject> theObserver) {
+        mResponse.observe(theOwner, theObserver);
     }
 
     /**
      * Send a web request to the server to sign in to an account.
      *
-     * @param email The user's email that will attempt to be signed in.
-     * @param password The user's password that will attempt to be signed in.
+     * @param theEmail The user's email that will attempt to be signed in.
+     * @param thePassword The user's password that will attempt to be signed in.
      */
-    public void connect(final String email, final String password) {
+    public void connect(final String theEmail, final String thePassword) {
         String url = "https://cleverchat.herokuapp.com/api/signin";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
-                response::setValue,
+                mResponse::setValue,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                String credentials = email + ":" + password;
+                String credentials = theEmail + ":" + thePassword;
                 String auth = "Basic "
                         + Base64.encodeToString(credentials.getBytes(),
                         Base64.NO_WRAP);
@@ -94,26 +94,26 @@ public class SignInViewModel extends AndroidViewModel {
     /**
      * How to handle if the network response comes back with errors.
      *
-     * @param error The error sent back from the web service.
+     * @param theError The error sent back from the web service.
      */
-    private void handleError(final VolleyError error) {
-        if (Objects.isNull(error.networkResponse)) {
+    private void handleError(final VolleyError theError) {
+        if (Objects.isNull(theError.networkResponse)) {
             try {
-                response.setValue(new JSONObject("{" +
-                        "error:\"" + error.getMessage() +
+                mResponse.setValue(new JSONObject("{" +
+                        "error:\"" + theError.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
         }
         else {
-            String data = new String(error.networkResponse.data, Charset.defaultCharset())
+            String data = new String(theError.networkResponse.data, Charset.defaultCharset())
                     .replace('\"', '\'');
             try {
                 JSONObject response = new JSONObject();
-                response.put("code", error.networkResponse.statusCode);
+                response.put("code", theError.networkResponse.statusCode);
                 response.put("data", new JSONObject(data));
-                this.response.setValue(response);
+                this.mResponse.setValue(response);
             } catch (JSONException e) {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }

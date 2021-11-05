@@ -32,15 +32,15 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return theInflater.inflate(R.layout.fragment_home, theContainer, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
+        super.onViewCreated(theView, theSavedInstanceState);
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentResetEmailSentOutBinding;
 
 /**
@@ -22,7 +21,7 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentResetEmailSentOu
  * @version Sprint 1
  */
 public class ResetEmailSentOutFragment extends Fragment {
-    private FragmentResetEmailSentOutBinding binding;
+    private FragmentResetEmailSentOutBinding mBinding;
 
     /**
      * Constructor for ResetEmailSentOutFragment
@@ -32,19 +31,19 @@ public class ResetEmailSentOutFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentResetEmailSentOutBinding.inflate(inflater);
-        return binding.getRoot();
+        mBinding = FragmentResetEmailSentOutBinding.inflate(theInflater);
+        return mBinding.getRoot();
         // return inflater.inflate(R.layout.fragment_reset_email_sent_out, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        super.onViewCreated(view,savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
+        super.onViewCreated(theView,theSavedInstanceState);
         //add listener that will send the request to the backend
-        binding.buttonBackToSignIn.setOnClickListener(button -> {
+        mBinding.buttonBackToSignIn.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
                     ResetEmailSentOutFragmentDirections
                             .actionResetEmailSentOutFragmentToSignInFragment()

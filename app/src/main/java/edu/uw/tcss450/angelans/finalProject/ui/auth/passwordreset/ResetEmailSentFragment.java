@@ -33,17 +33,17 @@ public class ResetEmailSentFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
+                             Bundle theSavedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentResetEmailSentBinding.inflate(inflater);
+        binding = FragmentResetEmailSentBinding.inflate(theInflater);
         return binding.getRoot();
     }
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        super.onViewCreated(view,savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
+        super.onViewCreated(theView,theSavedInstanceState);
         //add listener that will send the request to the backend
         binding.buttonBackToSignIn.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
