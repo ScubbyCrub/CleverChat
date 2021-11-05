@@ -1,16 +1,20 @@
 package edu.uw.tcss450.angelans.finalProject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
@@ -23,6 +27,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
+
     @Override
     protected void onCreate(Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
@@ -43,5 +48,4 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
     }
-
 }

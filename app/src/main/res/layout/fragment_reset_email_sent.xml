@@ -10,7 +10,7 @@
 
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/view_scroll"
         android:layout_width="340dp"
         android:layout_height="618dp"
         android:background="@android:drawable/dialog_holo_light_frame"
@@ -29,9 +29,9 @@
         android:text="@string/reset_password"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toTopOf="@+id/view_scroll"
         tools:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
@@ -40,8 +40,8 @@
         android:layout_height="97dp"
         android:text="@string/text_email_sent"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toBottomOf="@+id/text_reset_password" />
 
     <Button
@@ -51,10 +51,10 @@
         android:backgroundTint="@color/background_gradient_1"
         android:text="Button"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
 
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toBottomOf="@+id/text_check_email"
         app:layout_constraintVertical_bias="0.849"
         tools:cornerRadius="30" />
