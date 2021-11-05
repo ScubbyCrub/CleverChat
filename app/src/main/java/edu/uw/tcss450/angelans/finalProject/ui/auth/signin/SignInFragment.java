@@ -21,6 +21,13 @@ import org.json.JSONObject;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
+/**
+ * Sign In Fragment to allow for UI elements to function when the user is prompted
+ * to sign in to their existing account.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class SignInFragment extends Fragment {
 
     private FragmentSignInBinding binding;
@@ -36,6 +43,9 @@ public class SignInFragment extends Fragment {
     private PasswordValidator checkPassword = checkPWLength(1)
             .and(checkExcludeWhiteSpace());
 
+    /**
+     * Constructor for SignInFragment.
+     */
     public SignInFragment() {
         // Required empty public constructor
     }
@@ -80,10 +90,19 @@ public class SignInFragment extends Fragment {
         binding.editPasswordSignin.setText(args.getPassword().equals("default") ? "" : args.getPassword());
     }
 
+    /**
+     * Starts a chain to check if the fields on the client side are formatted correctly
+     * before attempting to send to the web service.
+     *
+     * @param button The button that begins the sign in process.
+     */
     private void attemptSignIn(final View button) {
         checkEmail();
     }
 
+    /**
+     * Checks if the email is formatted properly before signing in the user.
+     */
     private void checkEmail() {
         checkEmail.processResult(
                 checkEmail.apply(binding.editEmailSignin.getText().toString().trim()),
@@ -91,6 +110,9 @@ public class SignInFragment extends Fragment {
                 result -> binding.editEmailSignin.setError("Please enter a valid Email address."));
     }
 
+    /**
+     * Checks if the password is formatted properly before signing in the user.
+     */
     private void checkPassword() {
         checkPassword.processResult(
                 checkPassword.apply(binding.editPasswordSignin.getText().toString()),
@@ -98,18 +120,34 @@ public class SignInFragment extends Fragment {
                 result -> binding.editPasswordSignin.setError("Please enter a valid Password."));
     }
 
+    /**
+     * Sends the email and the password to the web service to see if the credentials
+     * are valid for signing in.
+     */
     private void verifyAuthWithServer() {
         signInViewModel.connect(
                 binding.editEmailSignin.getText().toString(),
                 binding.editPasswordSignin.getText().toString());
     }
 
+    /**
+     * Helper to abstract the navigation to the Activity past Authentication.
+     *
+     * @param email user's email.
+     * @param jwt the JSON Web Token supplied by the server.
+     */
     private void navigateToSuccess(final String email, final String jwt) {
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
                         .actionSignInFragmentToMainActivity(email,jwt));
     }
 
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be
+     * attached to SignInViewModel.
+     *
+     * @param response the Response from the server.
+     */
     private void observeResponse(final JSONObject response) {
         if (response.length() > 0) {
             if (response.has("code")) {

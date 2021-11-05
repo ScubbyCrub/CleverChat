@@ -22,22 +22,44 @@ import java.nio.charset.Charset;
 
 import java.util.Objects;
 
-
+/**
+ * Register ViewModel that protects user input to register their account beyond the
+ * lifetime of the fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class RegisterViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> response;
 
+    /**
+     * Constructor for RegisterViewModel.
+     *
+     * @param application The application that RegisterViewModel should exist in.
+     */
     public RegisterViewModel(@NonNull Application application) {
         super(application);
         response = new MutableLiveData<>();
         response.setValue(new JSONObject());
     }
 
+    /**
+     * Add an observer to the register data to notify once data changes.
+     *
+     * @param owner The owner of the class that has an android life cycle.
+     * @param observer The observer to respond to when data is updated.
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         response.observe(owner, observer);
     }
 
+    /**
+     * How to handle if the network response comes back with errors.
+     *
+     * @param error The error sent back from the web service.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
@@ -61,6 +83,15 @@ public class RegisterViewModel extends AndroidViewModel {
             }
         }
     }
+
+    /**
+     * Send a web request to the server to register a new user account.
+     *
+     * @param first The first name of the new account.
+     * @param last The last name of the new account.
+     * @param email The email of the new account.
+     * @param password The password of the new account.
+     */
     public void connect(final String first,
                         final String last,
                         final String email,

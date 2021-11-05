@@ -20,6 +20,13 @@ import org.json.JSONObject;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentRegisterBinding;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
+/**
+ * Register Fragment to allow for UI elements to function when the user is prompted
+ * to register a new account.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
@@ -50,6 +57,9 @@ public class RegisterFragment extends Fragment {
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
+    /**
+     * Register Fragment constructor.
+     */
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -78,10 +88,18 @@ public class RegisterFragment extends Fragment {
                 this::observeResponse);
     }
 
+    /**
+     * Starts chain that checks if registration attempt meets all field requirements.
+     *
+     * @param button The button that is used to submit the register field checks.
+     */
     private void attemptRegister(final View button) {
         checkFirstName();
     }
 
+    /**
+     * Checks if the email meets all minimum requirements.
+     */
     private void checkEmail() {
         emailCheck.processResult(
                 emailCheck.apply(binding.editEmailSignup.getText().toString().trim()),
@@ -89,6 +107,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editEmailSignup.setError("Please enter a valid Email address."));
     }
 
+    /**
+     * Checks if the first name meets all minimum requirements.
+     */
     private void checkFirstName() {
         nameCheck.processResult(
                 nameCheck.apply(binding.editFirstnameSignup.getText().toString().trim()),
@@ -96,6 +117,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editFirstnameSignup.setError("Please enter your first name."));
     }
 
+    /**
+     * Checks if the last name meets all minimum requirements.
+     */
     private void checkLastName() {
         nameCheck.processResult(
                 nameCheck.apply(binding.editLastnameSignup.getText().toString().trim()),
@@ -103,6 +127,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editLastnameSignup.setError("Please enter your last name."));
     }
 
+    /**
+     * Checks if the passwords match when the user types in their password twice.
+     */
     private void checkPasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
@@ -114,6 +141,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editPasswordSignup.setError("Passwords must match."));
     }
 
+    /**
+     * Checks if the password meets all minimum requirements.
+     */
     private void checkPassword() {
         passwordCheck.processResult(
                 passwordCheck.apply(binding.editPasswordSignup.getText().toString()),
@@ -121,6 +151,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editPasswordSignup.setError("Please enter a valid Password."));
     }
 
+    /**
+     * Connects to the web service to register the user through the database.
+     */
     private void verifyAuthWithServer() {
         registerViewModel.connect(
                 binding.editFirstnameSignup.getText().toString(),
@@ -129,6 +162,10 @@ public class RegisterFragment extends Fragment {
                 binding.editPasswordSignup.getText().toString());
     }
 
+    /**
+     * After the user registers successfully, navigate back to the sign in screen with their
+     * email and password copied to the respective sign in fields.
+     */
     private void navigateToLogin() {
         RegisterFragmentDirections.ActionRegisterFragmentToSignInFragment directions =
                 RegisterFragmentDirections.actionRegisterFragmentToSignInFragment();
@@ -140,6 +177,12 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be
+     * attached to SignInViewModel.
+     *
+     * @param response the Response from the server.
+     */
     private void observeResponse(final JSONObject response) {
         if (response.length() > 0) {
             if (response.has("code")) {

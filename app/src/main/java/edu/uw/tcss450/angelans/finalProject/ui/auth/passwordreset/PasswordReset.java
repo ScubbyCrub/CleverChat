@@ -21,6 +21,11 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentPasswordResetBin
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
+ * Password Reset Fragment to allow for UI elements to function when the user is prompted
+ * to reset their password.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
  */
 public class PasswordReset extends Fragment {
 
@@ -50,8 +55,18 @@ public class PasswordReset extends Fragment {
         return binding.getRoot();//inflater.inflate(R.layout.fragment_password_reset, container, false);
     }
 
+    /**
+     * Checks if the user's email is one that is stored as a registered account before
+     * sending a password reset email.
+     *
+     * @param button The button that starts the email checking process.
+     */
     private void attemptRegister(final View button) {checkEmail();}
 
+    /**
+     * Prepares the email to be sent to the web service to see if it exists in the
+     * Members database.
+     */
     private void checkEmail() {
         emailCheck.processResult(
                 emailCheck.apply(binding.editEmail.getText().toString().trim()),
@@ -59,6 +74,10 @@ public class PasswordReset extends Fragment {
                 result -> binding.editEmail.setError("Please enter a valid Email address."));
     }
 
+    /**
+     * Sends the email address to be checked in the database of registered users, to see
+     * if changing a password would be possible.
+     */
     private void sendToServer() {
         System.out.println("Sending to the server");
         passwordResetViewModel.connect(binding.editEmail.getText().toString().trim());

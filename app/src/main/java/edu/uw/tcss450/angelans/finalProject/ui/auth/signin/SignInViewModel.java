@@ -25,21 +25,45 @@ import java.util.Objects;
 
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
+/**
+ * Sign In ViewModel that protects user input to register their account beyond the
+ * lifetime of the fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class SignInViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> response;
 
+    /**
+     * Constructor for SignInViewModel.
+     *
+     * @param application The application that SignInViewModel should exist in.
+     */
     public SignInViewModel(@NonNull Application application) {
         super(application);
         response = new MutableLiveData<>();
         response.setValue(new JSONObject());
     }
 
+    /**
+     * Add an observer to the sign in data to notify once data changes.
+     *
+     * @param owner The owner of the class that has an android life cycle.
+     * @param observer The observer to respond to when data is updated.
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         response.observe(owner, observer);
     }
 
+    /**
+     * Send a web request to the server to sign in to an account.
+     *
+     * @param email The user's email that will attempt to be signed in.
+     * @param password The user's password that will attempt to be signed in.
+     */
     public void connect(final String email, final String password) {
         String url = "https://cleverchat.herokuapp.com/api/signin";
         Request request = new JsonObjectRequest(
@@ -67,6 +91,11 @@ public class SignInViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    /**
+     * How to handle if the network response comes back with errors.
+     *
+     * @param error The error sent back from the web service.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {

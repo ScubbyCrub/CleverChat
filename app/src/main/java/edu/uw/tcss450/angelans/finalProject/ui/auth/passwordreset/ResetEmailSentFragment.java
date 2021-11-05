@@ -16,10 +16,22 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentResetEmailSentBinding;
 
 /**
-
+ * Reset Email Sent Fragment to allow for UI elements to function when the user wants
+ * to know if an email sent to reset their password.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
  */
 public class ResetEmailSentFragment extends Fragment {
     private FragmentResetEmailSentBinding binding;
+
+    /**
+     * Constructor for ResetEmailSentFragment.
+     */
+    public ResetEmailSentFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,9 +39,8 @@ public class ResetEmailSentFragment extends Fragment {
         binding = FragmentResetEmailSentBinding.inflate(inflater);
         return binding.getRoot();
     }
-    public ResetEmailSentFragment() {
 
-    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);

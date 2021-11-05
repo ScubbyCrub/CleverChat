@@ -10,6 +10,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * This class handles network requests and caches the requests throughout the lifetime of
+ * the app.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class RequestQueueSingleton {
     private static RequestQueueSingleton instance;
     private static Context context;
@@ -17,6 +24,12 @@ public class RequestQueueSingleton {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
+    /**
+     * Private constructor for RequestQueueSingleton.
+     *
+     * @param context globally available, application-specific resources and classes for
+     *                this app.
+     */
     private RequestQueueSingleton(Context context) {
         RequestQueueSingleton.context = context;
         mRequestQueue = getmRequestQueue();
@@ -38,6 +51,13 @@ public class RequestQueueSingleton {
                 });
     }
 
+    /**
+     * Create a synchronized RequestQueueSingleton that lasts the lifetime of the app.
+     *
+     * @param context globally available, application-specific resources and classes for
+     *                this app.
+     * @return A synchronized RequestQueueSingleton that lasts the lifetime of the app.
+     */
     public static synchronized RequestQueueSingleton getInstance(Context context) {
         if (instance == null) {
             instance = new RequestQueueSingleton(context);
@@ -45,6 +65,11 @@ public class RequestQueueSingleton {
         return instance;
     }
 
+    /**
+     * Getter method for mRequestQueue.
+     *
+     * @return a copy of mRequestQueue.
+     */
     public RequestQueue getmRequestQueue() {
         if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
@@ -54,10 +79,21 @@ public class RequestQueueSingleton {
         return mRequestQueue;
     }
 
+    /**
+     * Adds a request to the request queue.
+     *
+     * @param req The request to be added to the request queue.
+     * @param <T> The type of request that can be added to the request queue.
+     */
     public <T> void addToRequestQueue(Request<T> req) {
         getmRequestQueue().add(req);
     }
 
+    /**
+     * Getter methods for mImageLoader.
+     *
+     * @return a reference to mImageLoader.
+     */
     public ImageLoader getmImageLoader() {
         return mImageLoader;
     }

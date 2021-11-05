@@ -15,10 +15,18 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentResetEmailSentOutBinding;
 
 /**
-
+ * Reset Email Sent Fragment to allow for UI elements to function when the user wants
+ * to know if an email sent to reset their password.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
  */
 public class ResetEmailSentOutFragment extends Fragment {
     private FragmentResetEmailSentOutBinding binding;
+
+    /**
+     * Constructor for ResetEmailSentOutFragment
+     */
     public ResetEmailSentOutFragment() {
         // Required empty public constructor
     }

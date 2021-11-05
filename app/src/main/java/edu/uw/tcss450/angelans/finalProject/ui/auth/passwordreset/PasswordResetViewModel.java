@@ -28,19 +28,43 @@ import java.util.Objects;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 
+/**
+ * Password Reset ViewModel that protects user input to reset their password beyond the
+ * lifetime of the fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class PasswordResetViewModel extends AndroidViewModel {
     private MutableLiveData<JSONObject> response;
+
+    /**
+     * Constructor for PasswordResetViewModel.
+     *
+     * @param application The application that PasswordResetViewModel should exist in.
+     */
     public PasswordResetViewModel(@NonNull Application application){
         super(application);
         response = new MutableLiveData<>();
         response.setValue(new JSONObject());
     }
-    //add obvserver to our data
+
+    /**
+     * Add an observer to the PasswordReset data to notify once data changes.
+     *
+     * @param owner The owner of the class that has an android life cycle.
+     * @param observer The observer to respond to when data is updated.
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         response.observe(owner, observer);
     }
-    //this is what will actually send the request to our server
+
+    /**
+     * Send a web request to the server to request a user's password be changed.
+     *
+     * @param email The user's email.
+     */
     public void connect(final String email){
         String url = "https://cleverchat.herokuapp.com/api/passwordreset";
         JSONObject body = new JSONObject();
@@ -65,7 +89,12 @@ public class PasswordResetViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
-    //you done messed up aaron
+
+    /**
+     * How to handle if the network response comes back with errors.
+     *
+     * @param error The error sent back from the web service.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {

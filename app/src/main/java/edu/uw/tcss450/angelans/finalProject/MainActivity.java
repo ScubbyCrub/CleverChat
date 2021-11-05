@@ -14,6 +14,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
+/**
+ * The activity that hosts fragments of the app that are available after a successful
+ * sign in to an account (Home, Contacts, Chat, Weather, etc.).
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     @Override

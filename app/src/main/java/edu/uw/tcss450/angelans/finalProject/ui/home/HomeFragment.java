@@ -15,13 +15,21 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentHomeBinding;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
-
+/**
+ * Home Fragment to allow for UI elements to function when the user is interacting with
+ * the home screen.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 1
+ */
 public class HomeFragment extends Fragment {
 
+    /**
+     * Constructor for HomeFragment.
+     */
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
