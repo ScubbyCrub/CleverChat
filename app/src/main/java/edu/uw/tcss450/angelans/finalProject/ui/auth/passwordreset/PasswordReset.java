@@ -38,7 +38,8 @@ public class PasswordReset extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        passwordResetViewModel = new ViewModelProvider(getActivity()).get(PasswordResetViewModel.class);
+        passwordResetViewModel = new ViewModelProvider(getActivity())
+                .get(PasswordResetViewModel.class);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
@@ -52,7 +53,8 @@ public class PasswordReset extends Fragment {
         //make binding so we can access fields
         binding = FragmentPasswordResetBinding.inflate(inflater);
 
-        return binding.getRoot();//inflater.inflate(R.layout.fragment_password_reset, container, false);
+        return binding.getRoot();
+        //inflater.inflate(R.layout.fragment_password_reset, container, false);
     }
 
     /**

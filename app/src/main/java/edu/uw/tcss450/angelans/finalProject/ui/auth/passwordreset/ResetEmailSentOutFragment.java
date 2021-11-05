@@ -37,7 +37,7 @@ public class ResetEmailSentOutFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentResetEmailSentOutBinding.inflate(inflater);
         return binding.getRoot();
-//        return inflater.inflate(R.layout.fragment_reset_email_sent_out, container, false);
+        // return inflater.inflate(R.layout.fragment_reset_email_sent_out, container, false);
     }
 
     @Override
@@ -46,7 +46,8 @@ public class ResetEmailSentOutFragment extends Fragment {
         //add listener that will send the request to the backend
         binding.buttonBackToSignIn.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
-                    ResetEmailSentOutFragmentDirections.actionResetEmailSentOutFragmentToSignInFragment()
+                    ResetEmailSentOutFragmentDirections
+                            .actionResetEmailSentOutFragmentToSignInFragment()
             );
         });
     }

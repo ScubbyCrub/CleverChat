@@ -50,7 +50,8 @@ public class RegisterFragment extends Fragment {
     PW include lower and upper cases
      */
     private PasswordValidator passwordCheck =
-            checkClientPredicate(pwd -> pwd.equals(binding.editRePasswordSignup.getText().toString()))
+            checkClientPredicate(pwd -> pwd.equals(binding.editRePasswordSignup
+                    .getText().toString()))
                     .and(checkPWLength(7))
                     .and(checkPwdSpecialChar())
                     .and(checkExcludeWhiteSpace())
@@ -133,7 +134,8 @@ public class RegisterFragment extends Fragment {
     private void checkPasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
-                        pwd -> pwd.equals(binding.editRePasswordSignup.getText().toString().trim()));
+                        pwd -> pwd.equals(binding.editRePasswordSignup.getText()
+                                .toString().trim()));
 
         emailCheck.processResult(
                 matchValidator.apply(binding.editPasswordSignup.getText().toString().trim()),
