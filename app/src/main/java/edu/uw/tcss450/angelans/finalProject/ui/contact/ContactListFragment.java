@@ -48,9 +48,8 @@ public class ContactListFragment extends Fragment {
         mModel.addBlogListObserver(getViewLifecycleOwner(), blogList -> {
             if (!blogList.isEmpty()) {
                 binding.listRoot.setAdapter(
-                        new BlogRecyclerViewAdapter(blogList)
+                        new ContactRecyclerViewAdapter(blogList)
                 );
-                binding.layoutWait.setVisibility(View.GONE);
             }
         });
     }

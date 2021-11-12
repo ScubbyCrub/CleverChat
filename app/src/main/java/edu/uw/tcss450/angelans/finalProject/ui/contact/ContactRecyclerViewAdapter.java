@@ -2,25 +2,19 @@ package edu.uw.tcss450.angelans.finalProject.ui.contact;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ContactViewHolder> {
+    private final List<ContactInfo> mContactList;
 
-    String username;
-    String name;
-    int[] avt;
-
-    public ContactRecyclerViewAdapter(int[] avtimage, String Username, String Name) {
-        avt = avtimage;
-        username = Username;
-        name = Name;
+    public ContactRecyclerViewAdapter(List<ContactInfo> contactInfos) {
+        mContactList = contactInfos;
     }
 
     @NonNull
@@ -31,15 +25,15 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-
-        holder.mAvt.setImageResource(avt[position]);
-        holder.mUsername.setText();
-        holder.mName.setText(name.[position]);
+        ContactInfo contactInfo = mContactList.get(position);
+        holder.mName.setText(contactInfo.getmName());
+        holder.mUsername.setText(contactInfo.getmUsername());
+        holder.mAvt.setImageResource(contactInfo.getmImageURL());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mContactList.size();
     }
 
     public class ContactViewHolder extends RecyclerView.ViewHolder {
