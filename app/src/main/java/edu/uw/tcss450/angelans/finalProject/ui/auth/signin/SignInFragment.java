@@ -34,14 +34,27 @@ public class SignInFragment extends Fragment {
 
     private SignInViewModel mSignInViewModel;
 
-    //Email has more than 2 char, no white space and include special char "@"
     private PasswordValidator mCheckEmail = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
-            .and(checkPwdSpecialChar("@"));
+            .and(checkPwdSpecialChar("@"))
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
 
-    //Password has more than 1 char, no space
-    private PasswordValidator mCheckPassword = checkPWLength(1)
-            .and(checkExcludeWhiteSpace());
+    /*
+    PW length > 7
+    PW = re-type PW
+    PW include one of @#$%&*!?
+    PW no white space
+    PW include 1 digit
+    PW include lower and upper cases
+     */
+    private PasswordValidator mCheckPassword =
+            checkClientPredicate(pwd -> pwd.equals(mBinding.editPasswordSignin
+                    .getText().toString()))
+                    .and(checkPWLength(7))
+                    .and(checkPwdSpecialChar())
+                    .and(checkExcludeWhiteSpace())
+                    .and(checkPwdDigit())
+                    .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
     /**
      * Constructor for SignInFragment.
@@ -109,7 +122,10 @@ public class SignInFragment extends Fragment {
         mCheckEmail.processResult(
                 mCheckEmail.apply(mBinding.editEmailSignin.getText().toString().trim()),
                 this::checkPassword,
-                result -> mBinding.editEmailSignin.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmailSignin.setError("Emails must be:\n" +
+                        "1) 3-255 characters long\n" +
+                        "2) Have an @ sign\n" +
+                        "3) Only contain letters, numbers, hyphens, underscores, or periods"));
     }
 
     /**
@@ -119,7 +135,10 @@ public class SignInFragment extends Fragment {
         mCheckPassword.processResult(
                 mCheckPassword.apply(mBinding.editPasswordSignin.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> mBinding.editPasswordSignin.setError("Please enter a valid Password."));
+                result -> mBinding.editPasswordSignin.setError("Passwords must be:\n" +
+                        "1) 7-255 characters long\n" +
+                        "2) Contain at least one capital letter, one lowercase letter, " +
+                        "one number, and one of the special characters @#$%&*!?"));
     }
 
     /**
