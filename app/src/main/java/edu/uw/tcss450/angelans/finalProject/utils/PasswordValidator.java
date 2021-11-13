@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 
 public interface PasswordValidator  extends Function<String, Optional<PasswordValidator.ValidationResult>> {
 
+    static final int MAX_CHAR_INPUT_LENGTH = 255;
+
     //Password length more than 7
     static PasswordValidator checkPWLength() {
         return checkPWLength(7);
@@ -15,7 +17,8 @@ public interface PasswordValidator  extends Function<String, Optional<PasswordVa
 
     static PasswordValidator checkPWLength(int length) {
         return password ->
-                Optional.of(password.length() > length ?
+                Optional.of(password.length() > length
+                        && password.length() <= MAX_CHAR_INPUT_LENGTH ?
                         ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH);
     }
 
@@ -50,6 +53,57 @@ public interface PasswordValidator  extends Function<String, Optional<PasswordVa
                 Optional.of(checkStringContains(password,
                         c -> specialChars.contains(Character.toString((char) c))) ?
                         ValidationResult.SUCCESS : ValidationResult.PWD_MISSING_SPECIAL);
+    }
+
+    // Checks if an input only contains letters, spaces, or hyphens as chars.
+    static PasswordValidator checkPwdOnlyHasLettersSpacesHyphens() {
+        return password ->
+                Optional.of(hasLettersSpacesHyphens(password) ?
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INCLUDES_EXCLUDED);
+    }
+
+    // Helper method for checkPwdOnlyHasLettersSpacesHyphens()
+    static boolean hasLettersSpacesHyphens(String thePassword) {
+        boolean checkResult = true;
+        for (int i = 0; i < thePassword.length(); i++) {
+            char currentChar = thePassword.charAt(i);
+            if (currentChar < 32                            // 32 = space
+                || (currentChar > 32 && currentChar < 45)   // 45 = hyphen
+                || (currentChar > 45 && currentChar < 65)   // 65-90 = A-Z
+                || (currentChar > 90 && currentChar < 97)   // 97-122 = a-z
+                || (currentChar > 122)
+            ) { // If any char falls in illegal range, set to return false
+                checkResult = false;
+                break;
+            }
+        }
+        return checkResult;
+    }
+
+    // Checks if an input only contains letters, numbers, hyphens, underscores, periods, @ signs
+    static PasswordValidator checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign() {
+        return password ->
+                Optional.of(hasLettersNumbersHyphensUnderscoresPeriodsAtSign(password) ?
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INCLUDES_EXCLUDED);
+    }
+
+    // Helper method for checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign()
+    static boolean hasLettersNumbersHyphensUnderscoresPeriodsAtSign(String thePassword) {
+        boolean checkResult = true;
+        for (int i = 0; i < thePassword.length(); i++) {
+            char currentChar = thePassword.charAt(i);
+            if (currentChar < 45                                // 45-46 = hyphen, period
+                    || (currentChar > 46 && currentChar < 48)   // 48-57 = numbers
+                    || (currentChar > 57 && currentChar < 64)   // 64-90 = @ sign, A-Z
+                    || (currentChar > 90 && currentChar < 95)   // 95 = underscore
+                    || (currentChar > 95 && currentChar < 97)   // 97-122 = a-z
+                    || (currentChar > 122)
+            ) { // If any char falls in illegal range, set to return false
+                checkResult = false;
+                break;
+            }
+        }
+        return checkResult;
     }
 
     //Check if the password contain any of the characters found in excludeChars
