@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_background_white_85.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_default_white_50.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_auth.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_main.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact_card.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_password_reset.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_register.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.3671875" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_sign_in.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_weather.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.12284701114488349" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.12284701114488349" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.12284701114488349" />

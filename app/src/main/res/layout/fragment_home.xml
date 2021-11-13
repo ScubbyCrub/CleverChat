@@ -6,18 +6,66 @@
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.uw.tcss450.angelans.finalProject.ui.home.HomeFragment">
+    tools:context="edu.uw.tcss450.angelans.finalProject.ui.home.HomeFragment"
+    android:background="@drawable/button_gradient_color">
 
-    <TextView
-        android:id="@+id/text_hello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello"
+    <View
+        android:id="@+id/view_scroll"
+        android:layout_width="370dp"
+        android:layout_height="635dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.45" />
+
+    <TextView
+        android:id="@+id/text_home_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_username"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toTopOf="@+id/view_scroll"
+        app:layout_constraintVertical_bias="0.26" />
+
+    <TextView
+        android:id="@+id/text_home_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_email"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toBottomOf="@+id/text_home_username"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/image_home_profile_icon_background"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/ic_profile_icon_background_white_100dp"
+        android:tint="@color/background_gradient_1"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toTopOf="@+id/view_scroll"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <ImageView
+        android:id="@+id/image_home_profile_icon_default"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:src="@drawable/ic_profile_icon_default_white_100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_home_profile_icon_background"
+        app:layout_constraintEnd_toEndOf="@+id/image_home_profile_icon_background"
+        app:layout_constraintStart_toStartOf="@+id/image_home_profile_icon_background"
+        app:layout_constraintTop_toTopOf="@+id/image_home_profile_icon_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
