@@ -13,7 +13,7 @@ public class ChatGenerator {
     static {
         CHATS = new Chat[COUNT];
         for (int i = 0; i < CHATS.length; i++) {
-            CHATS[i] = new Chat("C00lX0NT@CT");
+            CHATS[i] = new Chat("C00lX0NT@CT", 1);
         }
     }
 

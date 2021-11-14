@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatListBinding;
 
 public class ChatListFragment extends Fragment {
-
+    private ChatListViewModel mModel;
     public ChatListFragment() {
         // Required empty public constructor
     }
@@ -45,14 +46,22 @@ public class ChatListFragment extends Fragment {
         return view;
 //        return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
+        mModel.connectGet();
+    }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
         FragmentChatListBinding binding = FragmentChatListBinding.bind(getView());
         //assign the adapaer to the actual recycler view3
-        binding.listRoot.setAdapter(
-                new ChatRecyclerViewAdapter(ChatGenerator.getChatList())
-        );
+        mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
+            binding.listRoot.setAdapter(
+                    new ChatRecyclerViewAdapter(chatList)
+            );
+            //TODO: Add loading overlay here
+        });
     }
 
 
