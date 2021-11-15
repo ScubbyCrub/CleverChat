@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -61,6 +62,13 @@ public class ChatListFragment extends Fragment {
                     new ChatRecyclerViewAdapter(chatList)
             );
             //TODO: Add loading overlay here
+        });
+
+        //add listener to new chat button
+        binding.buttonNewChat.setOnClickListener(button -> {
+            Navigation.findNavController(getView()).navigate(
+                    ChatListFragmentDirections.actionNavigationChatToNewChatFragment()
+            );
         });
     }
 
