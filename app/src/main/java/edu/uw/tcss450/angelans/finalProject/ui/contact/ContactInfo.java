@@ -18,15 +18,15 @@ public class ContactInfo implements Serializable {
             this.mImageURL = mImageURL;
         }
 
-        public ContactInfo info() {
+        public ContactInfo build() {
             return new ContactInfo(this);
         }
     }
 
-    private ContactInfo(final Builder info) {
-        this.mImageURL = info.mImageURL;
-        this.mUsername = info.mUsername;
-        this.mName = info.mName;
+    private ContactInfo(final Builder builder) {
+        this.mImageURL = builder.mImageURL;
+        this.mUsername = builder.mUsername;
+        this.mName = builder.mName;
     }
 
     public String getmName() {

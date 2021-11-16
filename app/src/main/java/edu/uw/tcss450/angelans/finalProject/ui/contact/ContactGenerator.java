@@ -1,27 +1,35 @@
 package edu.uw.tcss450.angelans.finalProject.ui.contact;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
+import java.util.Arrays;
+import java.util.List;
+
+import edu.uw.tcss450.angelans.finalProject.R;
 
 /**
  * This class is used to create contact username, name and images for testing.
  */
 
-import edu.uw.tcss450.angelans.finalProject.databinding.FragmentContactListBinding;
-
 
 public class ContactGenerator {
-//    private FragmentContactListBinding mBinding;
-//
-//    @Override
-//    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
-//                             Bundle theSavedInstanceState) {
-//        mBinding = FragmentContactListBinding.inflate(theInflater);
-//        // Inflate the layout for this fragment
-//        return mBinding.getRoot();
-//    }
+    public static final int COUNT = 20;
+    public static final ContactInfo[] CONTACTS;
+
+    static {
+        CONTACTS = new ContactInfo[COUNT];
+        for (int i = 0; i < CONTACTS.length; i++) {
+            CONTACTS[i] = new ContactInfo.Builder(
+                    "tpln99",
+                    "Teresa Nguyen",
+                    R.drawable.ic_contact_black_24)
+                    .build();
+        }
+    }
+
+    public static List<ContactInfo> getContactList() {
+        return Arrays.asList(CONTACTS);
+    }
+
+    public ContactGenerator() {
+    }
 }

@@ -22,7 +22,7 @@ public class ContactListViewModel extends AndroidViewModel {
         mContactList.setValue(new ArrayList<>());
     }
 
-    public void addBlogListObserver(@NonNull LifecycleOwner owner,
+    public void addContactListObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super List<ContactInfo>> observer) {
         mContactList.observe(owner, observer);
     }

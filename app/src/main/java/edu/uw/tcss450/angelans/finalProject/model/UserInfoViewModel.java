@@ -45,6 +45,7 @@ public class UserInfoViewModel extends ViewModel {
         return mJwt;
     }
 
+
     /**
      * Inner class to help instantiate UserInfoViewModel (since the constructor defined
      * above is private).
