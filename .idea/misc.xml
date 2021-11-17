@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_chat_notification.xml" value="0.17685185185185184" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_background_white_85.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_default_white_50.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_send.xml" value="0.17685185185185184" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_send_dark.xml" value="0.17685185185185184" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_auth.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_main.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat_message.xml" value="0.317481884057971" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact_card.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.3596014492753623" />

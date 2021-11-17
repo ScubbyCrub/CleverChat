@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,13 @@ public class HomeFragment extends Fragment {
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        FragmentHomeBinding.bind(getView()).textHomeEmail.setText(model.getEmail());
+        FragmentHomeBinding binding = FragmentHomeBinding.bind(getView());
+
+        binding.textHomeEmail.setText(model.getEmail());
+
+        binding.tempChatButton.setOnClickListener(button ->
+                Navigation.findNavController(getView())
+                        .navigate(HomeFragmentDirections.actionNavigationHomeToNavigationChat()
+                ));
     }
 }

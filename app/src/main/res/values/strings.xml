@@ -17,10 +17,12 @@
     <string name="reset_instructions">Please enter the email to send
         the reset instructions to.</string>
     <string name="button_back_to_sign_in">Back To Sign In</string>
-    <string name="text_email_sent">Please check your emai. You will receive follow up instructions
+    <string name="text_email_sent">Please check your email. You will receive follow up instructions
         if there is account associated with this email.</string>
     <string name="placeholder_username">Username</string>
     <string name="placeholder_email">sampleEmail@website.com</string>
+    <string name="base_url">https://cleverchat.herokuapp.com/</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
