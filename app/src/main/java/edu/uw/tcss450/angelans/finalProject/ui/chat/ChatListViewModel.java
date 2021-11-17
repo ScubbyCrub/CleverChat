@@ -103,7 +103,7 @@ public class ChatListViewModel extends AndroidViewModel {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
                 //TODO: Replace this to use the actual jwt stored in the app
-                headers.put("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZsYWRpc2xhdnRyZWd1Ym92MDBAZ21haWwuY29tIiwibWVtYmVyaWQiOjcsImlhdCI6MTYzNjkxODQ1MywiZXhwIjoxNjQ1NTU4NDUzfQ.gMDHi5otZhfc4gdO8nmQNSrv5qi06UEFL71TMKByxUg");
+                headers.put("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZXRhYmxldGd1eTIuMEBnbWFpbC5jb20iLCJtZW1iZXJpZCI6MTEsImlhdCI6MTYzNzA0MjQxNywiZXhwIjoxNjQ1NjgyNDE3fQ.jtb2T3ARPEV_4yK14gVh-rGeL0d9eTldceK3iUPmgSg");
                 return headers;
             }
         };

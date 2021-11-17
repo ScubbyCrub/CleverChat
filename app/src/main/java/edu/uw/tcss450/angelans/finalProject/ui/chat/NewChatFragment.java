@@ -32,8 +32,11 @@ public class NewChatFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
         super.onViewCreated(theView,theSavedInstanceState);
-        String[] members = new String[1];
+        String[] members = new String[4];
         members[0] = "7";
+        members[1] = "1";
+        members[2] = "2";
+        members[3] = "3";
         //send the request
         mBinding.buttonCreateNewChat.setOnClickListener(button -> {
             //make request

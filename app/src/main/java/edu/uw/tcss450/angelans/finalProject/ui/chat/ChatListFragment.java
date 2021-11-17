@@ -63,7 +63,6 @@ public class ChatListFragment extends Fragment {
             );
             //TODO: Add loading overlay here
         });
-
         //add listener to new chat button
         binding.buttonNewChat.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
