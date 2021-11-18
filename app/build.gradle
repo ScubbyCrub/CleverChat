@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "edu.uw.tcss450.angelans.lab1myfirstapp"
+        applicationId "edu.uw.tcss450.angelans.finalProject"
         minSdk 24
         targetSdk 31
         versionCode 1

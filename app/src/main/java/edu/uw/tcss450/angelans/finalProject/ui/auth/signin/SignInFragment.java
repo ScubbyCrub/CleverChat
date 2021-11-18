@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
+import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -33,6 +34,7 @@ public class SignInFragment extends Fragment {
     private FragmentSignInBinding mBinding;
 
     private SignInViewModel mSignInViewModel;
+    private WeatherViewModel mWeatherViewModel;
 
     //Email has more than 2 char, no white space and include special char "@"
     private PasswordValidator mCheckEmail = checkPWLength(2)

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.153125" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.3671875" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.12284701114488349" />
@@ -36,7 +37,7 @@
         <entry key="app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.375" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1_round.xml" value="0.1" />
