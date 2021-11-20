@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +50,23 @@ public class ChatListFragment extends Fragment {
         return view;
 //        return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
+    /*
+    TODO the issue happens when we do not stay signed in, because in that case the json web token is not stored
+    just kinda store it every time as a seperate jwt propperty that is diff than the one we use for loin
+    only update that when we update the login one
+    and boom
+    perfect
+    reset both when we sign out
+     */
     public void onCreate(@Nullable Bundle savedInstanceState){
+        //TODO determine if this is an issue because we move from the auth act to main act
+        super.onCreate(savedInstanceState);
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
                         "shared_prefs",
                         Context.MODE_PRIVATE);
-        super.onCreate(savedInstanceState);
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
+        Log.e("Contains json", ""+prefs.getString("jwt",""));
         mModel.connectGet(prefs.getString("jwt",""));
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){

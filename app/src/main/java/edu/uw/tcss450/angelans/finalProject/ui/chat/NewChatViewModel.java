@@ -46,7 +46,7 @@ public class NewChatViewModel extends AndroidViewModel {
         //you should add much better error handling in a production release.
         //i.e. YOUR PROJECT
         //TODO: Make better error handling
-        Log.e("CONNECTION ERROR", error.getLocalizedMessage());
+//        Log.e("CONNECTION ERROR", error.getLocalizedMessage(;
         throw new IllegalStateException(error.getMessage());
     }
     public void handleResult(final JSONObject result) {
@@ -55,7 +55,7 @@ public class NewChatViewModel extends AndroidViewModel {
         System.out.println("new chat has been made!");
         mStatus.setValue(true);
     }
-    public void connectPost(final String name, final String[] members) {
+    public void connectPost(final String name, final String[] members, String jwt) {
         //make body
         JSONObject body = new JSONObject();
         try {
@@ -77,7 +77,7 @@ public class NewChatViewModel extends AndroidViewModel {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
                 //TODO: Replace this to use the actual jwt stored in the app
-                headers.put("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZXRhYmxldGd1eTIuMEBnbWFpbC5jb20iLCJtZW1iZXJpZCI6MTEsImlhdCI6MTYzNzA0MjQxNywiZXhwIjoxNjQ1NjgyNDE3fQ.jtb2T3ARPEV_4yK14gVh-rGeL0d9eTldceK3iUPmgSg");
+                headers.put("Authorization", jwt);
                 return headers;
             }
         };

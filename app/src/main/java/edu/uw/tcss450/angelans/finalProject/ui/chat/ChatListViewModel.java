@@ -91,7 +91,9 @@ public class ChatListViewModel extends AndroidViewModel {
         mChatList.setValue(mChatList.getValue());
     }
     public void connectGet(String jwt) {
+        Log.e("jwt","MADE IT INSIDE CONNECTGET");
 
+//    Log.e("jwt", jwt);
         String url =
                 "http://10.0.2.2:5000/api/chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
@@ -105,7 +107,7 @@ public class ChatListViewModel extends AndroidViewModel {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
                 //TODO: Replace this to use the actual jwt stored in the app
-                headers.put("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZXRhYmxldGd1eTIuMEBnbWFpbC5jb20iLCJtZW1iZXJpZCI6MTEsImlhdCI6MTYzNzA0MjQxNywiZXhwIjoxNjQ1NjgyNDE3fQ.jtb2T3ARPEV_4yK14gVh-rGeL0d9eTldceK3iUPmgSg");
+                headers.put("Authorization", jwt);
                 return headers;
             }
         };

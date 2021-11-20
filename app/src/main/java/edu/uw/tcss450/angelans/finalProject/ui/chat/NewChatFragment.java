@@ -1,5 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,17 +34,23 @@ public class NewChatFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
         super.onViewCreated(theView,theSavedInstanceState);
-        String[] members = new String[4];
-        members[0] = "7";
-        members[1] = "1";
-        members[2] = "2";
-        members[3] = "3";
+        String[] members = new String[1];
+
+        members[0] = "15";
+//        members[1] = "1";
+//        members[2] = "2";
+//        members[3] = "3";
         //send the request
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        "shared_prefs",
+                        Context.MODE_PRIVATE);
         mBinding.buttonCreateNewChat.setOnClickListener(button -> {
             //make request
             mNewChatViewModel.connectPost(
                     mBinding.editTextChatName.getText().toString().trim(),
-                    members
+                    members,
+                    prefs.getString("jwt","")
             );
 
         });
