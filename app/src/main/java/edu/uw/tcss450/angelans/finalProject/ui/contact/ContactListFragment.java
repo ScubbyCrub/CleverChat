@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -53,9 +54,7 @@ public class ContactListFragment extends Fragment {
         super.onViewCreated(theView, theSavedInstanceState);
 
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
-
-        List<ContactInfo> contactInfoList = ContactGenerator.getContactList();
-        ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(contactInfoList);
+        ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(mContactListViewModel.getContactListByEMail(mUserModel.getEmail), mUserModel.getmJwt());
         binding.listRoot.setAdapter(adapter);
         binding.layoutWait.setVisibility(View.GONE);
     }
