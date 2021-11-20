@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
+
 public class ContactListViewModel extends AndroidViewModel {
 
     private Map<String, MutableLiveData<List<ContactInfo>>> mContactList;
@@ -52,12 +54,19 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     public void getContactList(final String email, final String jwt) {
-        String url = "https://cleverchat.herokuapp.com/contact/list";
+        String url = "http://10.0.2.2:5000/api/contact/list";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Request request = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
-                null, //no body for this get request
+                body,
                 this::handelSuccess,
                 this::handleError) {
 
@@ -75,14 +84,13 @@ public class ContactListViewModel extends AndroidViewModel {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Instantiate the RequestQueue and add the request to the queue
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
     }
 
     private void handelSuccess(final JSONObject response) {
         List<ContactInfo> list;
         if (!response.has("email")) {
-            throw new IllegalStateException("Unexpected response in ChatViewModel: " + response);
+            throw new IllegalStateException("Unexpected response in ContactListViewModel: " + response);
         }
         try {
             list = getContactListByEMail(response.getString("email"));

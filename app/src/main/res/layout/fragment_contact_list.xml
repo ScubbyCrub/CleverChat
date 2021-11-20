@@ -22,11 +22,20 @@
         tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
         tools:listitem="@layout/fragment_contact_card" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/empty_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:visibility="gone"-->
+<!--        android:text="@string/text_no_contact" />-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_wait"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
