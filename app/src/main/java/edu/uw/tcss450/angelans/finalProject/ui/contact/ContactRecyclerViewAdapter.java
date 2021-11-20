@@ -28,7 +28,6 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         ContactInfo contactInfo = mContactList.get(position);
         holder.mName.setText(contactInfo.getmName());
         holder.mUsername.setText(contactInfo.getmUsername());
-        holder.mAvt.setImageResource(contactInfo.getmImageURL());
     }
 
     @Override
@@ -37,13 +36,11 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     }
 
     public class ContactViewHolder extends RecyclerView.ViewHolder {
-        public ImageView mAvt;
         public TextView mUsername;
         public TextView mName;
 
         public ContactViewHolder(View view) {
             super(view);
-            mAvt = view.findViewById(R.id.image_contact_avt);
             mUsername = view.findViewById(R.id.text_contact_username);
             mName = view.findViewById(R.id.text_contact_name);
         }
