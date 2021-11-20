@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,8 +56,22 @@ public class WeatherViewModel extends AndroidViewModel {
         return mWeather.get(time);
     }
 
-    public void getCurrentData() {
-        String url = "https://api.openweathermap.org/data/2.5/weather?units=metric&zip=98404,us&appid=d2dbfefbb461190d58e8c89d87bc0636";
+    public void getCurrentData(String time) {
+        String url;
+        if (time == "current"){
+            url = "https://api.openweathermap.org/data/2.5/weather?units=metric&zip=98404,us&appid=d2dbfefbb461190d58e8c89d87bc0636";
+        }
+        else if (time == "hourly"){
+            url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.2113&lon=-122.4126&units=metric&exclude=minutely,alert,daily,curernt&appid=d2dbfefbb461190d58e8c89d87bc0636";
+
+        }
+        else if (time == "daily"){
+            url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.2113&lon=-122.4126&units=metric&exclude=minutely,alert,hourly,current&appid=d2dbfefbb461190d58e8c89d87bc0636";
+        }
+        else {
+            throw new IllegalStateException("Wrong time given");
+        }
+
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -120,27 +135,30 @@ public class WeatherViewModel extends AndroidViewModel {
 
     private void handelSuccess(final JSONObject response) {
         List<Weather> list;
-        if (!response.has("main")) {
+        if (!response.has("main") && !response.has("daily") && !response.has("hourly")) {
             throw new IllegalStateException("Unexpected response in WeatherViewModel: " + response);
         }
-        try {
-            JSONObject current_weather_data = response.getJSONArray("weather").getJSONObject(0);
-            JSONObject current_main_data = response.getJSONObject("main");
-            JSONObject current_wind_data = response.getJSONObject("wind");
-            JSONObject current_sys_data = response.getJSONObject("sys");
-            list = getWeatherListByTime("current");
+        if (response.has("main")){
+            try {
+                list = getWeatherListByTime("current");
+                JSONObject current_weather_data = response.getJSONArray("weather").getJSONObject(0);
+                JSONObject current_main_data = response.getJSONObject("main");
+                JSONObject current_wind_data = response.getJSONObject("wind");
+                JSONObject current_sys_data = response.getJSONObject("sys");
                 Weather weather = new Weather(
                         response.getString("name"),
                         current_sys_data.getString("country"),
                         current_weather_data.getString("main"),
+                        "",
                         current_main_data.getLong("temp"),
                         current_main_data.getLong("temp_min"),
                         current_main_data.getLong("temp_max"),
-                        current_sys_data.getString("sunrise"),
-                        current_sys_data.getString("sunset"),
+                        current_sys_data.getLong("sunrise"),
+                        current_sys_data.getLong("sunset"),
                         current_wind_data.getDouble("speed"),
                         current_main_data.getLong("pressure"),
-                        current_main_data.getLong("humidity")
+                        current_main_data.getLong("humidity"),
+                        ""
                 );
                 if (!list.contains(weather)) {
                     // don't add a duplicate
@@ -151,11 +169,74 @@ public class WeatherViewModel extends AndroidViewModel {
                     Log.wtf("Weather temp already received",
                             "Or duplicate time:" + weather.getCurr_temp());
                 }
-            //inform observers of the change (setValue)
-            getOrCreateMapEntry("current").setValue(list);
-        }catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
-            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+                //inform observers of the change (setValue)
+                getOrCreateMapEntry("current").setValue(list);
+            }catch (JSONException e) {
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+            }
         }
+        else if (response.has("hourly")){
+            try {
+                list = getWeatherListByTime("hourly");
+                JSONArray hourly_weather_data = response.getJSONArray("hourly");
+                Calendar now = Calendar.getInstance();
+                for (int i = 0; i < 24;i++) {
+                    JSONObject hourly_weather = hourly_weather_data.getJSONObject(i);
+                    int hour = now.get(Calendar.HOUR_OF_DAY);
+                    Weather weather = new Weather(
+                            Integer.toString(hour),
+                            hourly_weather.getLong("temp"),
+                            hourly_weather.getJSONArray("weather").getJSONObject(0).getString("icon")
+                    );
+                    if (!list.contains(weather)) {
+                        // don't add a duplicate
+                        list.add(weather);
+                    } else {
+                        // this shouldn't happen but could with the asynchronous
+                        // nature of the application
+                        Log.wtf("Weather temp already received",
+                                "Or duplicate time:" + weather.getCurr_temp());
+                    }
+                    now.add(Calendar.HOUR,1);
+                    //inform observers of the change (setValue)
+                }
+                System.out.println("Size:"+list.size());
+                getOrCreateMapEntry("hourly").setValue(list);
+            }catch (JSONException e) {
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+            }
+        }
+        else if (response.has("daily")){
+            try {
+                list = getWeatherListByTime("daily");
+                JSONArray daily_weather_data = response.getJSONArray("daily");
+                for (int i = 0; i < daily_weather_data.length();i++) {
+                    JSONObject daily_weather = daily_weather_data.getJSONObject(i);
+                    Weather weather = new Weather(
+                            daily_weather.getJSONObject("temp").getLong("temp"),
+                            daily_weather.getJSONObject("temp").getLong("min"),
+                            daily_weather.getJSONObject("temp").getLong("max"),
+                            ""
+                    );
+                    if (!list.contains(weather)) {
+                        // don't add a duplicate
+                        list.add(weather);
+                    } else {
+                        // this shouldn't happen but could with the asynchronous
+                        // nature of the application
+                        Log.wtf("Weather temp already received",
+                                "Or duplicate time:" + weather.getCurr_temp());
+                    }
+                }
+                //inform observers of the change (setValue)
+                getOrCreateMapEntry("daily").setValue(list);
+            }catch (JSONException e) {
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+            }
+        }
+
     }
 }

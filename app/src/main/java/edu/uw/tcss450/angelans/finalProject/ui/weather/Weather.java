@@ -8,24 +8,27 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class Weather implements Serializable {
-    private final String sunrise;
-    private final String sunset;
+    private final long sunrise;
+    private final long sunset;
     private final double wind;
     private final long humidity;
     private final long pressure;
     private final String description;
+    private final String time;
     private final String city;
     private final String country;
     private final long curr_temp;
     private final long min_temp;
     private final long max_temp;
+    private final String icon;
 
-    public Weather(String city, String country, String description, long curr_temp,
-                   long min_temp, long max_temp, String sunrise, String sunset, double wind,
-                   long pressure, long humidity) {
+    public Weather(String city, String country, String description, String time, long curr_temp,
+                   long min_temp, long max_temp, long sunrise, long sunset, double wind,
+                   long pressure, long humidity, String icon) {
         this.city = city;
         this.country = country;
         this.description = description;
+        this.time = time;
         this.curr_temp = curr_temp;
         this.min_temp = min_temp;
         this.max_temp = max_temp;
@@ -34,6 +37,15 @@ public class Weather implements Serializable {
         this.wind = convertMeterspersecToMilesperhour(wind);
         this.pressure = pressure;
         this.humidity = humidity;
+        this.icon = icon;
+    }
+
+    public Weather (long curr_temp, long min_temp, long max_temp, String icon){
+        this("","","","",curr_temp,min_temp,max_temp,-1,-1,-1.0,-1,-1,icon);
+    }
+
+    public Weather (String hour, long temp, String icon){
+        this("","","",hour,temp,-1,-1,-1,-1,-1.0,-1,-1,icon);
     }
 
 //    /**
@@ -81,16 +93,20 @@ public class Weather implements Serializable {
         return description;
     }
 
-    public String getSunrise() {
+    public long getSunrise() {
         return sunrise;
     }
 
-    public String getSunset() {
+    public long getSunset() {
         return sunset;
     }
 
     public long getCurr_temp() {
         return curr_temp;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public static double convertMeterspersecToMilesperhour(double meterspersec) {

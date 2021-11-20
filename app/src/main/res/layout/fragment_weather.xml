@@ -75,796 +75,796 @@
 
     </LinearLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/weather_24h"
-        android:layout_width="576dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="10dp"
-        android:scrollbars="none"
-        android:background="#3CF1EBF1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewContainer">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/layout_current"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/current_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/sunny" />
-
-                <TextView
-                    android:id="@+id/current_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_1h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_current"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/haze" />
-
-                <TextView
-                    android:id="@+id/next_one_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_2h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_1h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_two_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_3h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_2h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_three_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_4h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_3h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_four"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/snow" />
-
-                <TextView
-                    android:id="@+id/next_four_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_5h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_4h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_five"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_five_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_6h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_5h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_six"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/haze" />
-
-                <TextView
-                    android:id="@+id/next_six_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_7h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_6h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_seven"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_seven_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_8h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_7h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_eight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_eight_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_9h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_8h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_nine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_nine_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_10h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_9h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_ten"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/sunny" />
-
-                <TextView
-                    android:id="@+id/next_ten_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_11h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_10h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_ele"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/sunny" />
-
-                <TextView
-                    android:id="@+id/next_ele_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_12h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_11h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_twelve"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_twelve_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_13h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_12h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_13h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/snow" />
-
-                <TextView
-                    android:id="@+id/next_13h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_14h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_13h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_14h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_14h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_15h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_14h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_15h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_15h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_16h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_15h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_16h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView17"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/storm" />
-
-                <TextView
-                    android:id="@+id/next_16h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_17h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_16h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_17h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView18"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_17h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_18h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_17h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_18h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/haze" />
-
-                <TextView
-                    android:id="@+id/next_18h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_19h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_18h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_19h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView20"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_19h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_20h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_19h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_20h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView21"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/haze" />
-
-                <TextView
-                    android:id="@+id/next_20h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_21h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_20h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_21h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView22"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cloudy" />
-
-                <TextView
-                    android:id="@+id/next_21h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_22h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_21h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_22h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView23"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/rain" />
-
-                <TextView
-                    android:id="@+id/next_22h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_23h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_22h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_23h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/storm" />
-
-                <TextView
-                    android:id="@+id/next_23h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_24h"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="50dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="@id/layout_23h"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/next_24h"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Now"
-                    android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/imageView25"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/haze" />
-
-                <TextView
-                    android:id="@+id/next_24h_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15*C"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </HorizontalScrollView>
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/weather_24h"-->
+<!--        android:layout_width="576dp"-->
+<!--        android:layout_height="92dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:scrollbars="none"-->
+<!--        android:background="#3CF1EBF1"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/overviewContainer">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_current"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/current_time"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/sunny" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/current_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_1h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_current"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_one"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView2"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/haze" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_one_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_2h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_1h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_two"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView3"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_two_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_3h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_2h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_three"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView4"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_three_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_4h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_3h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_four"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView5"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/snow" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_four_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_5h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_4h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_five"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView6"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_five_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_6h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_5h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_six"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView7"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/haze" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_six_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_7h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_6h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_seven"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView8"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_seven_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_8h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_7h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_eight"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView9"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_eight_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_9h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_8h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_nine"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView10"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_nine_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_10h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_9h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_ten"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView11"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/sunny" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_ten_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_11h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_10h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_ele"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView12"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/sunny" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_ele_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_12h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_11h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_twelve"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView13"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_twelve_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_13h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_12h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_13h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView14"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/snow" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_13h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_14h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_13h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_14h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView15"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_14h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_15h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_14h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_15h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView16"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_15h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_16h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_15h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_16h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView17"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/storm" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_16h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_17h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_16h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_17h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView18"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_17h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_18h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_17h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_18h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView19"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/haze" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_18h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_19h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_18h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_19h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView20"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_19h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_20h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_19h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_20h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView21"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/haze" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_20h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_21h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_20h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_21h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView22"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/cloudy" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_21h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_22h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_21h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_22h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView23"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/rain" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_22h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_23h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_22h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_23h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView24"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/storm" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_23h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/layout_24h"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginStart="50dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_constraintStart_toStartOf="@id/layout_23h"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_24h"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Now"-->
+<!--                    android:textColor="@color/white" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageView25"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/haze" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/next_24h_temp"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="15*C"-->
+<!--                    android:textColor="@color/white" />-->
+<!--            </LinearLayout>-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </HorizontalScrollView>-->
 
     <LinearLayout
         android:id="@+id/detailsContainer"
@@ -873,7 +873,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/weather_24h">
+        app:layout_constraintTop_toBottomOf="@id/recylerView_24h">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1058,6 +1058,19 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerView_24h"
+        android:layout_width="576dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        android:background="#3CF1EBF1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewContainer"
+    />
 
     <ScrollView
         android:id="@+id/weekly_weather"
