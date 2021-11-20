@@ -120,4 +120,16 @@
         app:layout_constraintTop_toTopOf="@+id/view_outer_signin"
         app:layout_constraintVertical_bias="0.735" />
 
+    <Switch
+        android:id="@+id/switch_stay_signed_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="121dp"
+        android:text="@string/stay_signed_in"
+        app:layout_constraintBottom_toBottomOf="@+id/view_outer_signin"
+        app:layout_constraintEnd_toEndOf="@+id/view_outer_signin"
+        app:layout_constraintStart_toStartOf="@+id/view_outer_signin"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

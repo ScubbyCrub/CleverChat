@@ -3,6 +3,8 @@ package edu.uw.tcss450.angelans.finalProject.ui.auth.signin;
 import static edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator.*;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.auth0.android.jwt.JWT;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
@@ -131,7 +136,24 @@ public class SignInFragment extends Fragment {
                 mBinding.editEmailSignin.getText().toString(),
                 mBinding.editPasswordSignin.getText().toString());
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        "shared_prefs",
+                        Context.MODE_PRIVATE);
+        if (prefs.contains("jwt")) {
+            String token = prefs.getString("jwt", "");
+            JWT jwt = new JWT(token);
+            //check to see expired
+            if(!jwt.isExpired(0)) {
+                String email = jwt.getClaim("email").asString();
+                navigateToSuccess(email, token);
+                return;
+            }
+        }
+    }
     /**
      * Helper to abstract the navigation to the Activity past Authentication.
      *
@@ -139,9 +161,21 @@ public class SignInFragment extends Fragment {
      * @param theJwt the JSON Web Token supplied by the server.
      */
     private void navigateToSuccess(final String theEmail, final String theJwt) {
+        if(mBinding.switchStaySignedIn.isChecked()){
+            SharedPreferences prefs =
+                    getActivity().getSharedPreferences(
+                            "shared_prefs",
+                            Context.MODE_PRIVATE
+                    );
+            //store the credentials in the shared preferences
+            prefs.edit().putString("jwt", theJwt).apply();
+        }
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
                         .actionSignInFragmentToMainActivity(theEmail,theJwt));
+
+        //remove the activity from the stack to not let the user back to the lock screen after
+        getActivity().finish();
     }
 
     /**

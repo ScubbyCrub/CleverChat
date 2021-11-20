@@ -9,7 +9,11 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,6 +32,48 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
+    /**
+     * Removes the users jwt token from the saved preferences on signout
+     */
+    private void signOut() {
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        "shared_prefs",
+                        Context.MODE_PRIVATE);
+        prefs.edit().remove("jwt").apply();
+        //End the app completely
+        finishAndRemoveTask();
+    }
+    /**
+     * This method inflates the menu and displays it on the screen
+     * @param menu the menu object to inflate
+     * @return true
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.drop_down, menu);
+        return true;
+    }
+
+    /**
+     * This handles clicks to the menu and signs out the user
+     * @param item the item we are checking click for
+     * @return the item
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if(id == R.id.action_sign_out){
+            signOut();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    /**
+     *
+     * @param theSavedInstanceState
+     */
     @Override
     protected void onCreate(Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
