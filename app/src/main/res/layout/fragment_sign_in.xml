@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_outer_signin"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintVertical_bias="0.708" />
 
     <Switch
         android:id="@+id/switch_stay_signed_in"

@@ -184,10 +184,22 @@ public class SignInFragment extends Fragment {
      *
      * @param theResponse the Response from the server.
      */
-    private void observeResponse(final JSONObject theResponse) {
+    private void observeResponse(final JSONObject theResponse)  {
         if (theResponse.length() > 0) {
             if (theResponse.has("code")) {
+                Log.e("observerresponse","Respnose with code triggered");
                 try {
+                    //navigate to resend if it was an unverified user error
+                    if(theResponse.getString("code").equals("400")){
+                        //navigate to the verify user fragment
+                        SignInFragmentDirections.ActionSignInFragmentToEmailVerificationFragment dir
+                                = SignInFragmentDirections.actionSignInFragmentToEmailVerificationFragment();
+                        dir.setEmail(String.valueOf(mBinding.editEmailSignin.getText()));
+                        mSignInViewModel.resetValue();
+                        Navigation.findNavController(getView()).navigate(dir);
+                        //remove this from the backstack or something like that
+
+                    }
                     mBinding.editEmailSignin.setError(
                             "Error Authenticating: " +
                                     theResponse.getJSONObject("data").getString("message"));

@@ -25,6 +25,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_new_chat">Create New Chat</string>
     <string name="create">Create</string>
-    <string name ="stay_signed_in">Stay Signed In</string>
-    <string name = "action_sign_out">Sign Out</string>
+    <string name="stay_signed_in">Stay Signed In</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="whoops">Whoops!</string>
+    <string name="resend_verification">Resend Email</string>
+    <string name = "not_verified_text">It appears that your email has not been verified. \n\n Please check your email for the verification email. \Or click the button below to resend the verification email.</string>
 </resources>

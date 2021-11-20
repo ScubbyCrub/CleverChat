@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
@@ -65,7 +66,9 @@ public class SignInViewModel extends AndroidViewModel {
      * @param thePassword The user's password that will attempt to be signed in.
      */
     public void connect(final String theEmail, final String thePassword) {
-        String url = "https://cleverchat.herokuapp.com/api/signin";
+//        String url = "https://cleverchat.herokuapp.com/api/signin";
+        //TODO Point this back to the web endpoint
+         String url = "http://10.0.2.2:5000/api/signin";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -97,6 +100,8 @@ public class SignInViewModel extends AndroidViewModel {
      * @param theError The error sent back from the web service.
      */
     private void handleError(final VolleyError theError) {
+        Log.e("Request", "" + theError.networkResponse.statusCode);
+
         if (Objects.isNull(theError.networkResponse)) {
             try {
                 mResponse.setValue(new JSONObject("{" +
@@ -118,6 +123,9 @@ public class SignInViewModel extends AndroidViewModel {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
         }
+    }
+    public void resetValue(){
+        mResponse.setValue(new JSONObject());
     }
 
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/button_gradient_color"
+    tools:context=".ui.auth.signin.EmailVerificationFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <View
+        android:id="@+id/view_outer_verification"
+        android:layout_width="308dp"
+        android:layout_height="562dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.674" />
+
+    <TextView
+        android:id="@+id/text_whoops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whoops"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_outer_verification"
+        app:layout_constraintEnd_toEndOf="@+id/view_outer_verification"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/view_outer_verification"
+        app:layout_constraintTop_toTopOf="@+id/view_outer_verification"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/text_reset_text"
+        android:layout_width="266dp"
+        android:layout_height="142dp"
+        android:gravity="center"
+        android:text="@string/not_verified_text"
+        app:layout_constraintBottom_toBottomOf="@+id/view_outer_verification"
+        app:layout_constraintEnd_toEndOf="@+id/view_outer_verification"
+        app:layout_constraintStart_toStartOf="@+id/view_outer_verification"
+        app:layout_constraintTop_toBottomOf="@+id/text_whoops"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <Button
+        android:id="@+id/button_resend_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_verification"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/view_outer_verification"
+        app:layout_constraintEnd_toEndOf="@+id/view_outer_verification"
+        app:layout_constraintStart_toStartOf="@+id/view_outer_verification"
+        app:layout_constraintTop_toBottomOf="@+id/text_reset_text"
+        app:layout_constraintVertical_bias="0.708" />
+</androidx.constraintlayout.widget.ConstraintLayout>
