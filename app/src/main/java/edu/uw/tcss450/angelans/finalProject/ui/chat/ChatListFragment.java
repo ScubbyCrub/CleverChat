@@ -1,5 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,9 +50,13 @@ public class ChatListFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
     public void onCreate(@Nullable Bundle savedInstanceState){
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        "shared_prefs",
+                        Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
-        mModel.connectGet();
+        mModel.connectGet(prefs.getString("jwt",""));
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);

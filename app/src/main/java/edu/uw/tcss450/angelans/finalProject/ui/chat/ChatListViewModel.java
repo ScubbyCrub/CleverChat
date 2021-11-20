@@ -1,6 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -89,7 +90,8 @@ public class ChatListViewModel extends AndroidViewModel {
 
         mChatList.setValue(mChatList.getValue());
     }
-    public void connectGet() {
+    public void connectGet(String jwt) {
+
         String url =
                 "http://10.0.2.2:5000/api/chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
