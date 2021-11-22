@@ -21,6 +21,9 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatMessageBindi
 
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder> {
 
+    private final int CHAT_BACKGROUND_ALPHA = 255;
+    private final int CHAT_OUTLINE_ALPHA = 255;
+
     private final List<ChatMessage> mMessages;
     private final String mEmail;
     public ChatRecyclerViewAdapter(List<ChatMessage> messages, String email) {
@@ -77,15 +80,15 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
-                            res.getColor(R.color.background_gradient_2, null),
-                            16));
+                            res.getColor(R.color.background_gradient_1, null),
+                            CHAT_BACKGROUND_ALPHA));
                 binding.textMessage.setTextColor(
-                        res.getColor(R.color.black, null));
+                        res.getColor(R.color.white, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
-                        res.getColor(R.color.background_gradient_2, null),
-                        200));
+                        res.getColor(R.color.background_gradient_1, null),
+                        CHAT_OUTLINE_ALPHA));
 
                 //Round the corners on the left side
                 card.setShapeAppearanceModel(
@@ -113,16 +116,16 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
-                                res.getColor(R.color.blue, null),
-                                16));
+                                res.getColor(R.color.background_gradient_2_darker, null),
+                                CHAT_BACKGROUND_ALPHA));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
-                        res.getColor(R.color.blue, null),
-                        200));
+                        res.getColor(R.color.background_gradient_2_darker, null),
+                        CHAT_OUTLINE_ALPHA));
 
                 binding.textMessage.setTextColor(
-                        res.getColor(R.color.black, null));
+                        res.getColor(R.color.white, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(

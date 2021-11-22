@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
         FragmentHomeBinding binding = FragmentHomeBinding.bind(getView());
 
-        binding.textHomeEmail.setText(model.getEmail());
+        binding.textHomeUsername.setText(model.getEmail());
 
         binding.tempChatButton.setOnClickListener(button ->
                 Navigation.findNavController(getView())

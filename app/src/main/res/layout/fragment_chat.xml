@@ -5,7 +5,8 @@
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chat.ChatFragment">
+    tools:context=".ui.chat.ChatFragment"
+    android:background="@drawable/button_gradient_color_chat">
 
     <EditText
         android:id="@+id/edit_message"
@@ -29,7 +30,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="TODO"
-        android:src="@drawable/ic_send_dark"
+        android:src="@drawable/ic_send_white_30dp"
+        app:tint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

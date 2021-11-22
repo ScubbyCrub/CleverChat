@@ -21,19 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
 
-    <TextView
-        android:id="@+id/text_home_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_username"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
-        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/view_scroll"
-        app:layout_constraintTop_toTopOf="@+id/view_scroll"
-        app:layout_constraintVertical_bias="0.26" />
-
+    <!-- Once Usernames work, display email as a subheading
     <TextView
         android:id="@+id/text_home_email"
         android:layout_width="wrap_content"
@@ -44,19 +32,33 @@
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toBottomOf="@+id/text_home_username"
         app:layout_constraintVertical_bias="0.0" />
+    -->
 
     <ImageView
         android:id="@+id/image_home_profile_icon_background"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:src="@drawable/ic_profile_icon_background_white_100dp"
-        android:tint="@color/background_gradient_1"
         app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toTopOf="@+id/view_scroll"
-        app:layout_constraintVertical_bias="0.04" />
+        app:layout_constraintVertical_bias="0.125"
+        app:tint="@color/background_gradient_1" />
+
+    <TextView
+        android:id="@+id/text_home_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_username"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toTopOf="@+id/view_scroll"
+        app:layout_constraintVertical_bias="0.321" />
 
     <ImageView
         android:id="@+id/image_home_profile_icon_default"
