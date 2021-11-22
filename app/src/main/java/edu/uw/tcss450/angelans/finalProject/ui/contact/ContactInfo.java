@@ -1,5 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.contact;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class ContactInfo implements Serializable {
@@ -17,5 +19,16 @@ public class ContactInfo implements Serializable {
 
     public String getmUsername() {
         return mUsername;
+    }
+
+
+    //Avoid duplicate
+    @Override
+    public boolean equals(@Nullable Object other) {
+        boolean result = false;
+        if(other instanceof ContactInfo) {
+            result = mUsername.equals(((ContactInfo) other).mUsername);
+        }
+        return result;
     }
 }

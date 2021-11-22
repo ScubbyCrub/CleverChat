@@ -6,36 +6,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--    <TextView-->
+<!--        android:id="@+id/empty_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/text_no_contact"-->
+<!--        android:visibility="invisible" />-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/title_contact"
+        app:layout_constraintBottom_toTopOf="@+id/list_contact"
+        app:layout_constraintEnd_toEndOf="@+id/layout_wait"
+        app:layout_constraintStart_toStartOf="@+id/layout_wait"
+        app:layout_constraintTop_toTopOf="@+id/layout_wait" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_root"
+        android:id="@+id/list_contact"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="357dp"
+        android:layout_height="538dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
         tools:listitem="@layout/fragment_contact_card" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/empty_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:gravity="center"-->
-<!--        android:visibility="gone"-->
-<!--        android:text="@string/text_no_contact" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_wait"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

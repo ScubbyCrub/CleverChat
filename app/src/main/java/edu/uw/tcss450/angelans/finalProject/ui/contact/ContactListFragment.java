@@ -28,8 +28,6 @@ public class ContactListFragment extends Fragment {
 
     private ContactListViewModel mContactListViewModel;
     private UserInfoViewModel mUserModel;
-    private RecyclerView recyclerView;
-    private TextView textView;
 
     public ContactListFragment() {
         // Required empty public constructor
@@ -55,23 +53,16 @@ public class ContactListFragment extends Fragment {
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
+        final RecyclerView rv = binding.listContact;
         ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(mContactListViewModel.getContactListByEMail(mUserModel.getEmail()));
-        binding.listRoot.setAdapter(adapter);
-
-        //if the user don't have any contact, show message instead of recyclerview
-//        recyclerView = (RecyclerView) getView().findViewById(R.id.list_root);
-//        textView = (TextView) getView().findViewById(R.id.empty_view);
-//        if (adapter.getItemCount()==0) {
-//            recyclerView.setVisibility(View.GONE);
-//            textView.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//            recyclerView.setVisibility(View.VISIBLE);
-//            textView.setVisibility(View.GONE);
-//        }
-
-        //set the wait fragment to invisible
-        binding.layoutWait.setVisibility(View.GONE);
+        rv.setAdapter(adapter);
+        mContactListViewModel.addContactListObserver(mUserModel.getEmail(),getViewLifecycleOwner(), contactList -> {
+            if (!contactList.isEmpty()) {
+                rv.getAdapter().notifyDataSetChanged();
+                //set the wait fragment to invisible
+                binding.layoutWait.setVisibility(View.GONE);
+            }
+        });
     }
 
 
