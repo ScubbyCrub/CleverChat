@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "edu.uw.tcss450.angelans.lab1myfirstapp"
+        applicationId "edu.uw.tcss450.angelans.finalProject"
         minSdk 24
         targetSdk 31
         versionCode 1
@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation 'me.pushy:sdk:1.0.54'
+    implementation 'me.pushy:sdk:1.0.76'
     implementation 'com.auth0.android:jwtdecode:2.0.0'
 
 }
