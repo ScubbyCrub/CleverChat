@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.chat.NewChatFragment" >
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_root"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.ContactCardListNewChatFragment"
+        android:layout_width="327dp"
+        android:layout_height="458dp"
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.661"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_chat_participants"
+        app:layout_constraintVertical_bias="0.0"
+        tools:context="edu.uw.tcss450.angelans.finalProject.ui.chat.ContactCardListNewChatFragment"
+        tools:listitem="@layout/fragment_contact_card_new_chat" />
+
     <View
         android:id="@+id/view_name3"
         android:layout_width="0dp"
@@ -34,12 +50,11 @@
         android:id="@+id/edit_text_chat_name"
         android:layout_width="317dp"
         android:layout_height="45dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_name3" />
 
@@ -47,24 +62,27 @@
         android:id="@+id/edit_text_chat_participants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="504dp"
-        android:text="Add participants later"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_participants"
+        app:layout_constraintBottom_toTopOf="@+id/button_create_new_chat"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_chat_name" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_chat_name"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_create_new_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="132dp"
+        android:backgroundTint="@color/red"
         android:text="@string/create"
         android:textColor="@color/white"
-        android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,12 @@ public class HomeFragment extends Fragment {
         mBinding.buttonSignOut.setOnClickListener(button -> {
             signOut();
         });
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "shared_prefs",
+                Context.MODE_PRIVATE
+        );
+        prefs.edit().putString("email", model.getEmail()).apply();
+        System.out.println("email: " + model.getEmail());
         FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
     }
 
