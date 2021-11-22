@@ -7,13 +7,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/button_gradient_color">
 
-    <!--    <TextView-->
-<!--        android:id="@+id/empty_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/text_no_contact"-->
-<!--        android:visibility="invisible" />-->
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_round"
+        android:src="@drawable/ic_search_white_30dp"
+        app:layout_constraintEnd_toEndOf="@+id/layout_root"
+        app:layout_constraintStart_toEndOf="@+id/text_title_contact"
+        app:layout_constraintTop_toTopOf="@+id/layout_root" />
 
     <TextView
         android:id="@+id/text_title_contact"
@@ -26,9 +31,10 @@
         android:textColor="@color/white"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/list_contact"
-        app:layout_constraintEnd_toEndOf="@+id/layout_wait"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/layout_wait"
         app:layout_constraintTop_toTopOf="@+id/layout_wait" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_contact"
@@ -52,8 +58,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <ProgressBar
             android:id="@+id/progressBar"

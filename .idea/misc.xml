@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_search_white_30dp.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
