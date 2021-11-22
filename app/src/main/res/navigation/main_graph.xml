@@ -21,7 +21,10 @@
         tools:layout="@layout/fragment_chat_list" >
         <action
             android:id="@+id/action_navigation_chat_to_newChatFragment"
-            app:destination="@id/newChatFragment" />
+            app:destination="@id/newChatFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/navigation_contact"
