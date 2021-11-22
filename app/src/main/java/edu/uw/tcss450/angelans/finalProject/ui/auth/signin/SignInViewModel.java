@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
 /**
@@ -65,7 +66,7 @@ public class SignInViewModel extends AndroidViewModel {
      * @param thePassword The user's password that will attempt to be signed in.
      */
     public void connect(final String theEmail, final String thePassword) {
-        String url = "https://cleverchat.herokuapp.com/api/signin";
+        String url = getApplication().getResources().getString(R.string.base_url) + "signin";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

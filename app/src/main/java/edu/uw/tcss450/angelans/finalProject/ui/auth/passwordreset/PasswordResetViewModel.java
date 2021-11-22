@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
+import edu.uw.tcss450.angelans.finalProject.R;
+
 /**
  * Password Reset ViewModel that protects user input to reset their password beyond the
  * lifetime of the fragment.
@@ -59,7 +61,7 @@ public class PasswordResetViewModel extends AndroidViewModel {
      * @param theEmail The user's email.
      */
     public void connect(final String theEmail) {
-        String url = "https://cleverchat.herokuapp.com/api/passwordreset";
+        String url = getApplication().getResources().getString(R.string.base_url) + "passwordreset";
         JSONObject body = new JSONObject();
         //add stuff to body
         try{

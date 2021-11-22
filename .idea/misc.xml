@@ -3,54 +3,55 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_chat_notification.xml" value="0.17685185185185184" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_background_white_85.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_profile_icon_default_white_50.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_send.xml" value="0.17685185185185184" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/ic_send_dark.xml" value="0.17685185185185184" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_auth.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_main.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat_message.xml" value="0.317481884057971" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact_card.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_password_reset.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_register.xml" value="0.3596014492753623" />
+        <entry key="../../../../../layout/custom_preview.xml" value="0.153125" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/drawable/button_gradient_color.xml" value="0.2101851851851852" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_auth.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.3671875" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_sign_in.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_weather.xml" value="0.3596014492753623" />
-        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/menu/drop_down.xml" value="0.3671875" />
-        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.12284701114488349" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/card_chat.xml" value="0.33" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat_card.xml" value="0.5" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_chat_list.xml" value="0.15853658536585366" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.12284701114488349" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact_card.xml" value="0.22" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_email_verification.xml" value="0.3578125" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.12284701114488349" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_new_chat.xml" value="0.33" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_password_reset.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.25" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.2296195652173913" />
-        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_sign_in.xml" value="0.33" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_sign_in.xml" value="0.5" />
+        <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/menu/drop_down.xml" value="0.196875" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/button_gradient_color.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_round.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/button_state_list_anim_material.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/gradient_color.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_add_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_cloud_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.25068870523415976" />
         <entry key="app/src/main/res/layout/fragment_contact_card.xml" value="0.2827587565989237" />
+        <entry key="app/src/main/res/layout/fragment_daily_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_hourly_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_password_reset.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1404494382022472" />
+        <entry key="app/src/main/res/layout/fragment_weather_hour.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_weather_hourly.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1_round.xml" value="0.1" />
