@@ -3,6 +3,8 @@ package edu.uw.tcss450.angelans.finalProject.ui.auth.signin;
 import static edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator.*;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
+import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
+import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -31,8 +35,10 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 public class SignInFragment extends Fragment {
 
     private FragmentSignInBinding mBinding;
-
     private SignInViewModel mSignInViewModel;
+
+    private PushyTokenViewModel mPushyTokenViewModel;
+    private UserInfoViewModel mUserViewModel;
 
     private PasswordValidator mCheckEmail = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
@@ -68,6 +74,9 @@ public class SignInFragment extends Fragment {
         super.onCreate(theSavedInstanceState);
         mSignInViewModel = new ViewModelProvider(getActivity())
                 .get(SignInViewModel.class);
+
+        mPushyTokenViewModel = new ViewModelProvider(getActivity())
+                .get(PushyTokenViewModel.class);
     }
 
     @Override
@@ -97,6 +106,14 @@ public class SignInFragment extends Fragment {
         mSignInViewModel.addResponseObserver(
                 getViewLifecycleOwner(),
                 this::observeResponse);
+
+        mPushyTokenViewModel.addResponseObserver(
+                getViewLifecycleOwner(),
+                this::observePushyPutResponse);
+
+        // User unable to hit sign in button until pushy token retrieved
+        mPushyTokenViewModel.addTokenObserver(getViewLifecycleOwner(), token ->
+                mBinding.buttonSignIn.setEnabled(!token.isEmpty()));
 
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         mBinding.editEmailSignin.setText(args.getEmail()
@@ -161,6 +178,9 @@ public class SignInFragment extends Fragment {
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
                         .actionSignInFragmentToMainActivity(theEmail,theJwt));
+
+        // Remove activity from the task list (Pops off the backstack)
+        getActivity().finish();
     }
 
     /**
@@ -181,10 +201,12 @@ public class SignInFragment extends Fragment {
                 }
             } else {
                 try {
-                    navigateToSuccess(
-                            mBinding.editEmailSignin.getText().toString(),
-                            theResponse.getString("token")
-                    );
+                    mUserViewModel = new ViewModelProvider(getActivity(),
+                            new UserInfoViewModel.UserInfoViewModelFactory(
+                                    mBinding.editEmailSignin.getText().toString(),
+                                    theResponse.getString("token")
+                            )).get(UserInfoViewModel.class);
+                    sendPushyToken();
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }
@@ -193,4 +215,33 @@ public class SignInFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
     }
+
+    /**
+     * Helper to abstract the request to send the pushy token to the web service
+     */
+    private void sendPushyToken() {
+        mPushyTokenViewModel.sendTokenToWebservice(mUserViewModel.getmJwt());
+    }
+
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be attached to
+     * PushyTokenViewModel.
+     *
+     * @param theResponse the Response from the server
+     */
+    private void observePushyPutResponse(final JSONObject theResponse) {
+        if (theResponse.length() > 0) {
+            if (theResponse.has("code")) {
+                // This error cannot be fixed by the user changing credentials...
+                mBinding.editEmailSignin.setError("Error Authenticating on Push Token. " +
+                        "Please contact support");
+            } else {
+                navigateToSuccess(
+                        mBinding.editEmailSignin.getText().toString(),
+                        mUserViewModel.getmJwt()
+                );
+            }
+        }
+    }
+
 }
