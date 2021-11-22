@@ -22,6 +22,8 @@ import java.nio.charset.Charset;
 
 import java.util.Objects;
 
+import edu.uw.tcss450.angelans.finalProject.R;
+
 /**
  * Register ViewModel that protects user input to register their account beyond the
  * lifetime of the fragment.
@@ -96,7 +98,7 @@ public class RegisterViewModel extends AndroidViewModel {
                         final String theLast,
                         final String theEmail,
                         final String thePassword) {
-        String url = "https://cleverchat.herokuapp.com/api/register";
+        String url = getApplication().getResources().getString(R.string.base_url) + "register";
         JSONObject body = new JSONObject();
         try {
             body.put("firstName", theFirst);

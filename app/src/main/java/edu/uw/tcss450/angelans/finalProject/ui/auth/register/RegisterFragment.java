@@ -33,13 +33,16 @@ public class RegisterFragment extends Fragment {
 
     private RegisterViewModel mRegisterViewModel;
 
-    //Name contains at 1 or more char
-    private PasswordValidator mNameCheck = checkPWLength(1);
+    // Name contains at least 2 or more char and only contains letters, hyphens, or spaces.
+    private PasswordValidator mNameCheck = checkPWLength(1)
+            .and(checkPwdOnlyHasLettersSpacesHyphens());
 
-    //Email has more than 2 char, no white space and include special char "@"
+    // Email has more than 3 char, include special char "@", and only contains letters,
+    // numbers, hyphens, underscores, or periods.
     private PasswordValidator mEmailCheck = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
-            .and(checkPwdSpecialChar("@"));
+            .and(checkPwdSpecialChar("@"))
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
 
     /*
     PW length > 7
@@ -105,7 +108,11 @@ public class RegisterFragment extends Fragment {
         mEmailCheck.processResult(
                 mEmailCheck.apply(mBinding.editEmailSignup.getText().toString().trim()),
                 this::checkPasswordsMatch,
-                result -> mBinding.editEmailSignup.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmailSignup.setError("Emails must be:\n" +
+                        "1) Only associated with one account\n" +
+                        "2) 3-255 characters long\n" +
+                        "3) Have an @ sign\n" +
+                        "4) Only contain letters, numbers, hyphens, underscores, or periods"));
     }
 
     /**
@@ -115,7 +122,9 @@ public class RegisterFragment extends Fragment {
         mNameCheck.processResult(
                 mNameCheck.apply(mBinding.editFirstnameSignup.getText().toString().trim()),
                 this::checkLastName,
-                result -> mBinding.editFirstnameSignup.setError("Please enter your first name."));
+                result -> mBinding.editFirstnameSignup.setError("First names must be:\n" +
+                        "1) 2-255 characters long\n" +
+                        "2) Only contain letters, spaces, or hyphens"));
     }
 
     /**
@@ -125,7 +134,9 @@ public class RegisterFragment extends Fragment {
         mNameCheck.processResult(
                 mNameCheck.apply(mBinding.editLastnameSignup.getText().toString().trim()),
                 this::checkEmail,
-                result -> mBinding.editLastnameSignup.setError("Please enter your last name."));
+                result -> mBinding.editLastnameSignup.setError("Last names must be:\n" +
+                        "1) 2-255 characters long\n" +
+                        "2) Only contain letters, spaces, or hyphens"));
     }
 
     /**
@@ -150,7 +161,10 @@ public class RegisterFragment extends Fragment {
         mPasswordCheck.processResult(
                 mPasswordCheck.apply(mBinding.editPasswordSignup.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> mBinding.editPasswordSignup.setError("Please enter a valid Password."));
+                result -> mBinding.editPasswordSignup.setError("Passwords must be:\n" +
+                        "1) 7-255 characters long\n" +
+                        "2) Contain at least one capital letter, one lowercase letter, " +
+                        "one number, and one of the special characters @#$%&*!?"));
     }
 
     /**

@@ -25,6 +25,8 @@ import org.json.JSONObject;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
 import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
+import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
+import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -37,18 +39,33 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 public class SignInFragment extends Fragment {
 
     private FragmentSignInBinding mBinding;
-
     private SignInViewModel mSignInViewModel;
     private WeatherViewModel mWeatherViewModel;
 
-    //Email has more than 2 char, no white space and include special char "@"
+    private PushyTokenViewModel mPushyTokenViewModel;
+    private UserInfoViewModel mUserViewModel;
+
     private PasswordValidator mCheckEmail = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
-            .and(checkPwdSpecialChar("@"));
+            .and(checkPwdSpecialChar("@"))
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
 
-    //Password has more than 1 char, no space
-    private PasswordValidator mCheckPassword = checkPWLength(1)
-            .and(checkExcludeWhiteSpace());
+    /*
+    PW length > 7
+    PW = re-type PW
+    PW include one of @#$%&*!?
+    PW no white space
+    PW include 1 digit
+    PW include lower and upper cases
+     */
+    private PasswordValidator mCheckPassword =
+            checkClientPredicate(pwd -> pwd.equals(mBinding.editPasswordSignin
+                    .getText().toString()))
+                    .and(checkPWLength(7))
+                    .and(checkPwdSpecialChar())
+                    .and(checkExcludeWhiteSpace())
+                    .and(checkPwdDigit())
+                    .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
     /**
      * Constructor for SignInFragment.
@@ -62,6 +79,9 @@ public class SignInFragment extends Fragment {
         super.onCreate(theSavedInstanceState);
         mSignInViewModel = new ViewModelProvider(getActivity())
                 .get(SignInViewModel.class);
+
+        mPushyTokenViewModel = new ViewModelProvider(getActivity())
+                .get(PushyTokenViewModel.class);
     }
 
     @Override
@@ -97,6 +117,14 @@ public class SignInFragment extends Fragment {
                 getViewLifecycleOwner(),
                 this::observeResponse);
 
+        mPushyTokenViewModel.addResponseObserver(
+                getViewLifecycleOwner(),
+                this::observePushyPutResponse);
+
+        // User unable to hit sign in button until pushy token retrieved
+        mPushyTokenViewModel.addTokenObserver(getViewLifecycleOwner(), token ->
+                mBinding.buttonSignIn.setEnabled(!token.isEmpty()));
+
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         mBinding.editEmailSignin.setText(args.getEmail()
                 .equals("default") ? "" : args.getEmail());
@@ -121,7 +149,10 @@ public class SignInFragment extends Fragment {
         mCheckEmail.processResult(
                 mCheckEmail.apply(mBinding.editEmailSignin.getText().toString().trim()),
                 this::checkPassword,
-                result -> mBinding.editEmailSignin.setError("Please enter a valid Email address."));
+                result -> mBinding.editEmailSignin.setError("Emails must be:\n" +
+                        "1) 3-255 characters long\n" +
+                        "2) Have an @ sign\n" +
+                        "3) Only contain letters, numbers, hyphens, underscores, or periods"));
     }
 
     /**
@@ -131,7 +162,10 @@ public class SignInFragment extends Fragment {
         mCheckPassword.processResult(
                 mCheckPassword.apply(mBinding.editPasswordSignin.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> mBinding.editPasswordSignin.setError("Please enter a valid Password."));
+                result -> mBinding.editPasswordSignin.setError("Passwords must be:\n" +
+                        "1) 7-255 characters long\n" +
+                        "2) Contain at least one capital letter, one lowercase letter, " +
+                        "one number, and one of the special characters @#$%&*!?"));
     }
 
     /**
@@ -215,10 +249,12 @@ public class SignInFragment extends Fragment {
                 }
             } else {
                 try {
-                    navigateToSuccess(
-                            mBinding.editEmailSignin.getText().toString(),
-                            theResponse.getString("token")
-                    );
+                    mUserViewModel = new ViewModelProvider(getActivity(),
+                            new UserInfoViewModel.UserInfoViewModelFactory(
+                                    mBinding.editEmailSignin.getText().toString(),
+                                    theResponse.getString("token")
+                            )).get(UserInfoViewModel.class);
+                    sendPushyToken();
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }
@@ -227,4 +263,33 @@ public class SignInFragment extends Fragment {
             Log.d("JSON Response", "No Response");
         }
     }
+
+    /**
+     * Helper to abstract the request to send the pushy token to the web service
+     */
+    private void sendPushyToken() {
+        mPushyTokenViewModel.sendTokenToWebservice(mUserViewModel.getmJwt());
+    }
+
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be attached to
+     * PushyTokenViewModel.
+     *
+     * @param theResponse the Response from the server
+     */
+    private void observePushyPutResponse(final JSONObject theResponse) {
+        if (theResponse.length() > 0) {
+            if (theResponse.has("code")) {
+                // This error cannot be fixed by the user changing credentials...
+                mBinding.editEmailSignin.setError("Error Authenticating on Push Token. " +
+                        "Please contact support");
+            } else {
+                navigateToSuccess(
+                        mBinding.editEmailSignin.getText().toString(),
+                        mUserViewModel.getmJwt()
+                );
+            }
+        }
+    }
+
 }
