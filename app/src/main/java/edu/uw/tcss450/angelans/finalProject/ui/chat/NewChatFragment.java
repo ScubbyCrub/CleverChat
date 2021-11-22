@@ -8,15 +8,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import edu.uw.tcss450.angelans.finalProject.R;
+import java.util.List;
+import java.util.function.Consumer;
+
+import edu.uw.tcss450.angelans.finalProject.MainActivity;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentNewChatBinding;
-import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInViewModel;
+import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
 
 public class NewChatFragment extends Fragment {
@@ -28,8 +35,17 @@ public class NewChatFragment extends Fragment {
 
     public void onCreate(@Nullable Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
+        //get shared prefs
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        "shared_prefs",
+                        Context.MODE_PRIVATE);
+        //make needed requests
         mNewChatViewModel = new ViewModelProvider(getActivity())
                 .get(NewChatViewModel.class);
+        System.out.println(prefs.getString("email","") + " is the email");
+        mNewChatViewModel.connectGetContacts(prefs.getString("email",""),
+                prefs.getString("jwt",""));
     }
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
@@ -37,26 +53,33 @@ public class NewChatFragment extends Fragment {
         String[] members = new String[1];
 
         members[0] = "15";
-//        members[1] = "1";
-//        members[2] = "2";
-//        members[3] = "3";
+
         //send the request
+        Log.e("dfdfg", "onViewCreated: is this even working " );
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
                         "shared_prefs",
                         Context.MODE_PRIVATE);
+//        mNewChatViewModel.connectGetContacts("vladislavtregubov00@gmail.com", prefs.getString("jwt",""));
+
         mBinding.buttonCreateNewChat.setOnClickListener(button -> {
             //make request
             mNewChatViewModel.connectPost(
                     mBinding.editTextChatName.getText().toString().trim(),
-                    members,
                     prefs.getString("jwt","")
             );
 
         });
+        Consumer<Contact> add = (contact) -> mNewChatViewModel.addContact(contact);
+        Consumer<Contact> remove = (contact) -> mNewChatViewModel.removeContact(contact);
+        ContactGeneratorChat stuff = new ContactGeneratorChat();
+        mNewChatViewModel.addSelectedChatObserver(getViewLifecycleOwner(), contactList -> {
+            System.out.println("My Contact: " + contactList.toString());
+            mBinding.listRoot.setAdapter(new ContactCardListRecyclerViewAdapter(contactList, add, remove));
+        });
+
 
         //add observer to navigate away from the page
-        //TODO: FIGURE OUT WHY THE OBSERVER AUTO NAVIGATES YOU BACK
 //        mNewChatViewModel.addNewChatObserver(getViewLifecycleOwner(), data -> {
 //            Navigation.findNavController(getView()).navigate(
 //                    NewChatFragmentDirections.actionNewChatFragmentToNavigationChat()

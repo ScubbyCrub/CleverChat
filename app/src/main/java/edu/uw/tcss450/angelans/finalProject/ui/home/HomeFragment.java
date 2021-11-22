@@ -1,5 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
  * @version Sprint 1
  */
 public class HomeFragment extends Fragment {
-
+    FragmentHomeBinding mBinding;
     /**
      * Constructor for HomeFragment.
      */
@@ -36,7 +38,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
                              Bundle theSavedInstanceState) {
         // Inflate the layout for this fragment
-        return theInflater.inflate(R.layout.fragment_home, theContainer, false);
+        mBinding = FragmentHomeBinding.inflate(theInflater);
+//        return theInflater.inflate(R.layout.fragment_home, theContainer, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -53,5 +57,29 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(getView())
                         .navigate(HomeFragmentDirections.actionNavigationHomeToSingleChatFragment()
                 ));
+        mBinding.buttonSignOut.setOnClickListener(button -> {
+            signOut();
+        });
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                "shared_prefs",
+                Context.MODE_PRIVATE
+        );
+        prefs.edit().putString("email", model.getEmail()).apply();
+        System.out.println("email: " + model.getEmail());
+//        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
+    }
+
+    /**
+     *
+     */
+    private void signOut() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+         "shared_prefs",
+                Context.MODE_PRIVATE
+        );
+
+        prefs.edit().remove("jwt").apply();
+        //End the app completely
+        getActivity().finishAndRemoveTask();
     }
 }
