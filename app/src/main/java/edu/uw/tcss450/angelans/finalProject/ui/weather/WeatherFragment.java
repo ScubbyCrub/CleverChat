@@ -79,7 +79,6 @@ public class WeatherFragment extends Fragment {
 
         mWeatherViewModel.addResponseObserver("hourly",getViewLifecycleOwner(),weatherList ->{
             if (!weatherList.isEmpty()){
-                System.out.println("hour:" + weatherList.size());
                 hourly_recyclerView.setAdapter(new WeatherHourlyRecyclerViewAdapter(
                         weatherList));
             }
@@ -87,7 +86,6 @@ public class WeatherFragment extends Fragment {
 
 
         mWeatherViewModel.addResponseObserver("daily",getViewLifecycleOwner(),weatherList ->{
-            System.out.println("daily"+ weatherList.size());
             if (!weatherList.isEmpty()){
                 daily_recycleView.setAdapter(new WeatherDailyRecyclerViewAdapter(
                         weatherList));

@@ -45,19 +45,6 @@ public class Weather implements Serializable {
         this("","","",hour,temp,-1,-1,-1,-1,-1.0,-1,-1,icon);
     }
 
-//    /**
-//     * Static factory method to turn a properly formatted JSON String into a
-//     * ChatMessage object.
-//     * @param cmAsJson the String to be parsed into a ChatMessage Object.
-//     * @return a ChatMessage Object with the details contained in the JSON String.
-//     * @throws JSONException when cmAsString cannot be parsed into a ChatMessage.
-//     */
-//    public static Weather createFromJsonString(final String cmAsJson) throws JSONException {
-//        final JSONObject data = new JSONObject(cmAsJson);
-//        return new Weather(data.getLong("temp"));
-//    }
-
-
     public String getCity() {
         return city;
     }

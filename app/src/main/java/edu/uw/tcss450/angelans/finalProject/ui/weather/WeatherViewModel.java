@@ -206,6 +206,5 @@ public class WeatherViewModel extends AndroidViewModel {
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
-
     }
 }

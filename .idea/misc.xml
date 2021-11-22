@@ -39,7 +39,7 @@
         <entry key="app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1404494382022472" />
         <entry key="app/src/main/res/layout/fragment_weather_hour.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_weather_hourly.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
