@@ -871,9 +871,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/recylerView_24h">
+        app:layout_constraintBottom_toTopOf="@+id/hourly_recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/overviewContainer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -893,7 +895,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/haze" />
+                    android:src="@drawable/sunrise" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -929,7 +931,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/cloudy" />
+                    android:src="@drawable/sunset" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -965,7 +967,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/snow" />
+                    android:src="@drawable/wind" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -1001,7 +1003,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/cloudy" />
+                    android:src="@drawable/pressure" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -1037,7 +1039,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/cloudy" />
+                    android:src="@drawable/humidity" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -1060,459 +1062,467 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recylerView_24h"
-        android:layout_width="576dp"
+        android:id="@+id/hourly_recyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:scrollbars="none"
         android:background="#3CF1EBF1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewContainer"
-    />
-
-    <ScrollView
-        android:id="@+id/weekly_weather"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsContainer">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/monday_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/monday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Monday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/mon_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/monday_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/monday_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/monday_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tuesday_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/tuesday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Tuesday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/tues_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tues_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tues_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tues_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Wed_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/wednesday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Wednesday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/wed_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/wed_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/wed_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/wed_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/thursday_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/thursday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Thursday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/thurs_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/thurs_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/thurs_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/thurs_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/friday_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/friday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Friday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/fri_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/fri_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/fri_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/fri_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sat_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/saturday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Saturday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/sat_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sat_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sat_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sat_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sunday_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:id="@+id/sunday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:text="Sunday"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/sun_condition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cloudy" />
-
-                    <Space
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sun_percentage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="69%"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sun_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="H:8"
-                        android:textSize="20dp" />
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/sun_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="L:0 "
-                        android:textSize="20dp" />
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@id/detailsContainer">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/daily_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hourly_recyclerView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!--    <ScrollView-->
+<!--        android:id="@+id/weekly_weather"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/detailsContainer">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/monday_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/monday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Monday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/mon_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/monday_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/monday_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/monday_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/tuesday_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tuesday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Tuesday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/tues_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tues_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tues_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tues_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/Wed_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/wednesday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Wednesday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/wed_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/wed_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/wed_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/wed_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/thursday_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/thursday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Thursday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/thurs_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/thurs_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/thurs_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/thurs_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/friday_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/friday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Friday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/fri_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/fri_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/fri_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/fri_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/sat_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/saturday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Saturday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/sat_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sat_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sat_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sat_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/sunday_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sunday"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="0.3"-->
+<!--                        android:text="Sunday"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/sun_condition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/cloudy" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="25dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sun_percentage"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="69%"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sun_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="H:8"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <Space-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/sun_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="L:0 "-->
+<!--                        android:textSize="20dp" />-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

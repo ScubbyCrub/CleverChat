@@ -67,17 +67,29 @@ public class SignInViewModel extends AndroidViewModel {
      */
     public void connect(final String theEmail, final String thePassword) {
         String url = "https://cleverchat.herokuapp.com/api/signin";
-//        Request request = new JsonObjectRequest(
-//                Request.Method.GET,
-//                url, new Response.Listener<String>(){
-//                    @
-//        }
-////        request.setRetryPolicy(new DefaultRetryPolicy(
-////                10_000,
-////                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-////                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-////        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-////                .addToRequestQueue(request);
+        Request request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                mResponse::setValue,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                String credentials = theEmail + ":" + thePassword;
+                String auth = "Basic "
+                        + Base64.encodeToString(credentials.getBytes(),
+                        Base64.NO_WRAP);
+                headers.put("Authorization", auth);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
     }
 
     /**

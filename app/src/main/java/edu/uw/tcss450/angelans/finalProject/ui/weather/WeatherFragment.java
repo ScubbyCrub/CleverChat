@@ -3,6 +3,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.uw.tcss450.angelans.finalProject.MainActivity;
 import edu.uw.tcss450.angelans.finalProject.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,18 +30,24 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentWeatherBinding;
 public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
     private String tempSymbol = "°C";
+    private Boolean flag = true;
     @Override
     public void onCreate(@Nullable Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mWeatherViewModel = provider
                 .get(WeatherViewModel.class);
-        mWeatherViewModel.getCurrentData("current");
     }
 
     @Override
     public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
                              Bundle theSavedInstanceState) {
+        if (flag) {
+            mWeatherViewModel.getDataByTime("current");
+            mWeatherViewModel.getDataByTime("hourly");
+            mWeatherViewModel.getDataByTime("daily");
+            flag = false;
+        }
         return theInflater.inflate(R.layout.fragment_weather, theContainer, false);
     }
 
@@ -58,23 +67,29 @@ public class WeatherFragment extends Fragment {
                 mBinding.sunset.setText(new SimpleDateFormat("HH:mm ", Locale.ENGLISH).format(new Date(currentWeather.getSunset()*1000)));
                 mBinding.wind.setText(Long.toString(Math.round(currentWeather.getWind())) + "Mph");
                 mBinding.pressure.setText(Long.toString(currentWeather.getPressure()));
-                mBinding.humidity.setText(Long.toString(currentWeather.getHumidity()));
+                mBinding.humidity.setText(Long.toString(currentWeather.getHumidity())+"%");
             }
         });
-        final RecyclerView recyclerView_24h = mBinding.recylerView24h;
+        final RecyclerView hourly_recyclerView = mBinding.hourlyRecyclerView;
+        final RecyclerView daily_recycleView = mBinding.dailyRecyclerView;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-        recyclerView_24h.setLayoutManager(linearLayoutManager);
+        hourly_recyclerView.setLayoutManager(linearLayoutManager);
+        daily_recycleView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
-        mWeatherViewModel.getCurrentData("hourly");
+
         mWeatherViewModel.addResponseObserver("hourly",getViewLifecycleOwner(),weatherList ->{
             if (!weatherList.isEmpty()){
-//                Weather dailyWeather = weatherList.get(0);
-//                mBinding.mondayHigh.setText("H: " +Long.toString(dailyWeather.getMax_temp())+ tempSymbol);
-//                mBinding.mondayLow.setText("H: " +Long.toString(dailyWeather.getMin_temp())+ tempSymbol);
-//                recyclerView_24h.setAdapter(new WeatherRecyclerViewAdapter(
-//                        weatherList));
-//                recyclerView_24h.getAdapter().notifyDataSetChanged();
-                recyclerView_24h.setAdapter(new WeatherRecyclerViewAdapter(
+                System.out.println("hour:" + weatherList.size());
+                hourly_recyclerView.setAdapter(new WeatherHourlyRecyclerViewAdapter(
+                        weatherList));
+            }
+        });
+
+
+        mWeatherViewModel.addResponseObserver("daily",getViewLifecycleOwner(),weatherList ->{
+            System.out.println("daily"+ weatherList.size());
+            if (!weatherList.isEmpty()){
+                daily_recycleView.setAdapter(new WeatherDailyRecyclerViewAdapter(
                         weatherList));
             }
         });

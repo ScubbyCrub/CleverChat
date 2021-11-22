@@ -1,9 +1,6 @@
 package edu.uw.tcss450.angelans.finalProject.ui.weather;
 
-import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
@@ -34,14 +31,14 @@ public class Weather implements Serializable {
         this.max_temp = max_temp;
         this.sunrise = sunrise;
         this.sunset = sunset;
-        this.wind = convertMeterspersecToMilesperhour(wind);
+        this.wind = convertMsToMph(wind);
         this.pressure = pressure;
         this.humidity = humidity;
         this.icon = icon;
     }
 
-    public Weather (long curr_temp, long min_temp, long max_temp, String icon){
-        this("","","","",curr_temp,min_temp,max_temp,-1,-1,-1.0,-1,-1,icon);
+    public Weather (String time, long min_temp, long max_temp, long humidity, String icon){
+        this("","","",time,-1,min_temp,max_temp,-1,-1,-1.0,-1,humidity,icon);
     }
 
     public Weather (String hour, long temp, String icon){
@@ -109,8 +106,25 @@ public class Weather implements Serializable {
         return time;
     }
 
-    public static double convertMeterspersecToMilesperhour(double meterspersec) {
-        String str = "" + meterspersec;
-        return (double) (meterspersec * 2.23694);
+    public String getIcon() {
+        return icon;
+    }
+
+    public static double convertMsToMph(double metPerSec) {
+        return (double) (metPerSec * 2.23694);
+    }
+
+    /**
+     * Provides equality solely based on MessageId.
+     * @param other the other object to check for equality
+     * @return true if other message ID matches this message ID, false otherwise
+     */
+    @Override
+    public boolean equals(@Nullable Object other) {
+        boolean result = false;
+        if (other instanceof Weather) {
+            result = time == ((Weather) other).time;
+        }
+        return result;
     }
 }

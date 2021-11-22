@@ -56,7 +56,7 @@ public class WeatherViewModel extends AndroidViewModel {
         return mWeather.get(time);
     }
 
-    public void getCurrentData(String time) {
+    public void getDataByTime(String time) {
         String url;
         if (time == "current"){
             url = "https://api.openweathermap.org/data/2.5/weather?units=metric&zip=98404,us&appid=d2dbfefbb461190d58e8c89d87bc0636";
@@ -86,41 +86,6 @@ public class WeatherViewModel extends AndroidViewModel {
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
     }
-
-    public void getDailyData() {
-        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.258728&lon=-122.4443&units=metric&exclude=minutely,alert&appid=d2dbfefbb461190d58e8c89d87bc0636";
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, //no body for this get request
-                this::handelSuccess,
-                this::handleError) {
-        };
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-    }
-
-    public void getHourlyData() {
-        String url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.258728&lon=-122.4443&units=metric&exclude=minutely,alert&appid=d2dbfefbb461190d58e8c89d87bc0636";
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, //no body for this get request
-                this::handelSuccess,
-                this::handleError) {
-        };
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-    }
-
 
     /**
      * How to handle if the network response comes back with errors.
@@ -201,7 +166,6 @@ public class WeatherViewModel extends AndroidViewModel {
                     now.add(Calendar.HOUR,1);
                     //inform observers of the change (setValue)
                 }
-                System.out.println("Size:"+list.size());
                 getOrCreateMapEntry("hourly").setValue(list);
             }catch (JSONException e) {
                 Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
@@ -212,13 +176,17 @@ public class WeatherViewModel extends AndroidViewModel {
             try {
                 list = getWeatherListByTime("daily");
                 JSONArray daily_weather_data = response.getJSONArray("daily");
-                for (int i = 0; i < daily_weather_data.length();i++) {
+                Calendar now = Calendar.getInstance();
+                String[] dayOfWeek = {"","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+                for (int i = 1; i < daily_weather_data.length();i++) {
                     JSONObject daily_weather = daily_weather_data.getJSONObject(i);
+                    String day = dayOfWeek[now.get(Calendar.DAY_OF_WEEK)];
                     Weather weather = new Weather(
-                            daily_weather.getJSONObject("temp").getLong("temp"),
+                            day,
                             daily_weather.getJSONObject("temp").getLong("min"),
                             daily_weather.getJSONObject("temp").getLong("max"),
-                            ""
+                            daily_weather.getLong("humidity"),
+                            daily_weather.getJSONArray("weather").getJSONObject(0).getString("icon")
                     );
                     if (!list.contains(weather)) {
                         // don't add a duplicate
@@ -227,8 +195,9 @@ public class WeatherViewModel extends AndroidViewModel {
                         // this shouldn't happen but could with the asynchronous
                         // nature of the application
                         Log.wtf("Weather temp already received",
-                                "Or duplicate time:" + weather.getCurr_temp());
+                                "Or duplicate time:" + weather.getTime());
                     }
+                    now.add(Calendar.DAY_OF_WEEK,1);
                 }
                 //inform observers of the change (setValue)
                 getOrCreateMapEntry("daily").setValue(list);

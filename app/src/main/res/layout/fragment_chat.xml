@@ -76,4 +76,5 @@
         app:layout_constraintStart_toEndOf="@+id/imageButton_add"
         app:layout_constraintTop_toTopOf="@+id/view2"
         app:layout_constraintVertical_bias="0.425" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
