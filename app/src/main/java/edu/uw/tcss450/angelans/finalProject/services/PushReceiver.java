@@ -17,7 +17,7 @@ import org.json.JSONException;
 
 import edu.uw.tcss450.angelans.finalProject.AuthActivity;
 import edu.uw.tcss450.angelans.finalProject.R;
-import edu.uw.tcss450.angelans.finalProject.ui.chat.ChatMessage;
+import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
 import me.pushy.sdk.Pushy;
 
 public class PushReceiver extends BroadcastReceiver {
@@ -38,10 +38,10 @@ public class PushReceiver extends BroadcastReceiver {
         //So perform logic/routing based on the "type"
         //feel free to change the key or type of values.
         String typeOfMessage = intent.getStringExtra("type");
-        ChatMessage message = null;
+        SingleChatMessage message = null;
         int chatId = -1;
         try{
-            message = ChatMessage.createFromJsonString(intent.getStringExtra("message"));
+            message = SingleChatMessage.createFromJsonString(intent.getStringExtra("message"));
             chatId = intent.getIntExtra("chatid", -1);
         } catch (JSONException e) {
             //Web service sent us something unexpected...I can't deal with this.

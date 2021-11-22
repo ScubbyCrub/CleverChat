@@ -28,16 +28,16 @@ import java.util.Objects;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
-public class ChatViewModel extends AndroidViewModel {
+public class SingleChatViewModel extends AndroidViewModel {
 
     /**
      * A Map of Lists of Chat Messages.
      * The Key represents the Chat ID
      * The value represents the List of (known) messages for that that room.
      */
-    private Map<Integer, MutableLiveData<List<ChatMessage>>> mMessages;
+    private Map<Integer, MutableLiveData<List<SingleChatMessage>>> mMessages;
 
-    public ChatViewModel(@NonNull Application application) {
+    public SingleChatViewModel(@NonNull Application application) {
         super(application);
         mMessages = new HashMap<>();
     }
@@ -50,7 +50,7 @@ public class ChatViewModel extends AndroidViewModel {
      */
     public void addMessageObserver(int chatId,
                                    @NonNull LifecycleOwner owner,
-                                   @NonNull Observer<? super List<ChatMessage>> observer) {
+                                   @NonNull Observer<? super List<SingleChatMessage>> observer) {
         getOrCreateMapEntry(chatId).observe(owner, observer);
     }
 
@@ -65,11 +65,11 @@ public class ChatViewModel extends AndroidViewModel {
      * @param chatId the id of the chat room List to retrieve
      * @return a reference to the list of messages
      */
-    public List<ChatMessage> getMessageListByChatId(final int chatId) {
+    public List<SingleChatMessage> getMessageListByChatId(final int chatId) {
         return getOrCreateMapEntry(chatId).getValue();
     }
 
-    private MutableLiveData<List<ChatMessage>> getOrCreateMapEntry(final int chatId) {
+    private MutableLiveData<List<SingleChatMessage>> getOrCreateMapEntry(final int chatId) {
         if(!mMessages.containsKey(chatId)) {
             mMessages.put(chatId, new MutableLiveData<>(new ArrayList<>()));
         }
@@ -170,14 +170,14 @@ public class ChatViewModel extends AndroidViewModel {
      * @param chatId
      * @param message
      */
-    public void addMessage(final int chatId, final ChatMessage message) {
-        List<ChatMessage> list = getMessageListByChatId(chatId);
+    public void addMessage(final int chatId, final SingleChatMessage message) {
+        List<SingleChatMessage> list = getMessageListByChatId(chatId);
         list.add(message);
         getOrCreateMapEntry(chatId).setValue(list);
     }
 
     private void handelSuccess(final JSONObject response) {
-        List<ChatMessage> list;
+        List<SingleChatMessage> list;
         if (!response.has("chatId")) {
             throw new IllegalStateException("Unexpected response in ChatViewModel: " + response);
         }
@@ -186,7 +186,7 @@ public class ChatViewModel extends AndroidViewModel {
             JSONArray messages = response.getJSONArray("rows");
             for(int i = 0; i < messages.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
-                ChatMessage cMessage = new ChatMessage(
+                SingleChatMessage cMessage = new SingleChatMessage(
                         message.getInt("messageid"),
                         message.getString("message"),
                         message.getString("email"),

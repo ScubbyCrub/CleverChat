@@ -7,8 +7,6 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,20 +16,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.ActivityMainBinding;
 import edu.uw.tcss450.angelans.finalProject.model.NewMessageCountViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 import edu.uw.tcss450.angelans.finalProject.services.PushReceiver;
-import edu.uw.tcss450.angelans.finalProject.ui.chat.ChatMessage;
-import edu.uw.tcss450.angelans.finalProject.ui.chat.ChatViewModel;
+import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
+import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatViewModel;
 
 /**
  * The activity that hosts fragments of the app that are available after a successful
@@ -137,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
      * A BroadcastReceiver that listens for messages sent from PushReceiver
      */
     private class MainPushMessageReceiver extends BroadcastReceiver {
-        private ChatViewModel mModel = new ViewModelProvider(MainActivity.this)
-                .get(ChatViewModel.class);
+        private SingleChatViewModel mModel = new ViewModelProvider(MainActivity.this)
+                .get(SingleChatViewModel.class);
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -148,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             NavDestination nd = nc.getCurrentDestination();
 
             if (intent.hasExtra("chatMessage")) {
-                ChatMessage cm = (ChatMessage) intent.getSerializableExtra("chatMessage");
+                SingleChatMessage cm = (SingleChatMessage) intent.getSerializableExtra("chatMessage");
 
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model

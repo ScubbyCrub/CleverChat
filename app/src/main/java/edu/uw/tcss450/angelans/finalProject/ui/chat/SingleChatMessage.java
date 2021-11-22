@@ -10,14 +10,14 @@ import java.io.Serializable;
 /**
  * Encapsulate chat message details.
  */
-public final class ChatMessage implements Serializable {
+public final class SingleChatMessage implements Serializable {
 
     private final int mMessageId;
     private final String mMessage;
     private final String mSender;
     private final String mTimeStamp;
 
-    public ChatMessage(int messageId, String message, String sender, String timeStamp) {
+    public SingleChatMessage(int messageId, String message, String sender, String timeStamp) {
         mMessageId = messageId;
         mMessage = message;
         mSender = sender;
@@ -31,9 +31,9 @@ public final class ChatMessage implements Serializable {
      * @return a ChatMessage Object with the details contained in the JSON String.
      * @throws JSONException when cmAsString cannot be parsed into a ChatMessage.
      */
-    public static ChatMessage createFromJsonString(final String cmAsJson) throws JSONException {
+    public static SingleChatMessage createFromJsonString(final String cmAsJson) throws JSONException {
         final JSONObject msg = new JSONObject(cmAsJson);
-        return new ChatMessage(msg.getInt("messageid"),
+        return new SingleChatMessage(msg.getInt("messageid"),
                 msg.getString("message"),
                 msg.getString("email"),
                 msg.getString("timestamp"));
@@ -63,8 +63,8 @@ public final class ChatMessage implements Serializable {
     @Override
     public boolean equals(@Nullable Object other) {
         boolean result = false;
-        if (other instanceof ChatMessage) {
-            result = mMessageId == ((ChatMessage) other).mMessageId;
+        if (other instanceof SingleChatMessage) {
+            result = mMessageId == ((SingleChatMessage) other).mMessageId;
         }
         return result;
     }

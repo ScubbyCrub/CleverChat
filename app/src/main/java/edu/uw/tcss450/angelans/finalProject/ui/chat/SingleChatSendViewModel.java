@@ -25,11 +25,11 @@ import java.util.Objects;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
-public class ChatSendViewModel extends AndroidViewModel {
+public class SingleChatSendViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
 
-    public ChatSendViewModel(@NonNull Application application) {
+    public SingleChatSendViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());

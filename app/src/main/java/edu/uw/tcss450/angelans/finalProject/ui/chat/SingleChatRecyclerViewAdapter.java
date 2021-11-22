@@ -17,16 +17,16 @@ import com.google.android.material.shape.CornerFamily;
 import java.util.List;
 
 import edu.uw.tcss450.angelans.finalProject.R;
-import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatMessageBinding;
+import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatMessageBinding;
 
-public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder> {
+public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleChatRecyclerViewAdapter.MessageViewHolder> {
 
     private final int CHAT_BACKGROUND_ALPHA = 255;
     private final int CHAT_OUTLINE_ALPHA = 255;
 
-    private final List<ChatMessage> mMessages;
+    private final List<SingleChatMessage> mMessages;
     private final String mEmail;
-    public ChatRecyclerViewAdapter(List<ChatMessage> messages, String email) {
+    public SingleChatRecyclerViewAdapter(List<SingleChatMessage> messages, String email) {
         this.mMessages = messages;
         mEmail = email;
     }
@@ -37,7 +37,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MessageViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.fragment_chat_message, parent, false));
+                .inflate(R.layout.fragment_single_chat_message, parent, false));
     }
 
     @Override
@@ -52,15 +52,15 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
     class MessageViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
-        private FragmentChatMessageBinding binding;
+        private FragmentSingleChatMessageBinding binding;
 
         public MessageViewHolder(@NonNull View view) {
             super(view);
             mView = view;
-            binding = FragmentChatMessageBinding.bind(view);
+            binding = FragmentSingleChatMessageBinding.bind(view);
         }
 
-        void setMessage(final ChatMessage message) {
+        void setMessage(final SingleChatMessage message) {
             final Resources res = mView.getContext().getResources();
             final MaterialCardView card = binding.cardRoot;
 

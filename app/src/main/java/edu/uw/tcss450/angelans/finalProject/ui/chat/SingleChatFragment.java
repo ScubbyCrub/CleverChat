@@ -12,22 +12,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.uw.tcss450.angelans.finalProject.R;
-import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatBinding;
+import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatBinding;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChatFragment extends Fragment {
+public class SingleChatFragment extends Fragment {
 
     //The chat ID for "global" chat
     private static final int HARD_CODED_CHAT_ID = 1;
 
-    private ChatViewModel mChatModel;
+    private SingleChatViewModel mChatModel;
     private UserInfoViewModel mUserModel;
-    private ChatSendViewModel mSendModel;
+    private SingleChatSendViewModel mSendModel;
 
-    public ChatFragment() {
+    public SingleChatFragment() {
         // Required empty public constructor
     }
 
@@ -36,23 +36,23 @@ public class ChatFragment extends Fragment {
         super.onCreate(savedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
-        mChatModel = provider.get(ChatViewModel.class);
+        mChatModel = provider.get(SingleChatViewModel.class);
         mChatModel.getFirstMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
-        mSendModel = provider.get(ChatSendViewModel.class);
+        mSendModel = provider.get(SingleChatSendViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        return inflater.inflate(R.layout.fragment_single_chat, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FragmentChatBinding binding = FragmentChatBinding.bind(getView());
+        FragmentSingleChatBinding binding = FragmentSingleChatBinding.bind(getView());
 
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
         binding.swipeContainer.setRefreshing(true);
@@ -60,7 +60,7 @@ public class ChatFragment extends Fragment {
         final RecyclerView rv = binding.recyclerMessages;
         //Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
         //holds.
-        rv.setAdapter(new ChatRecyclerViewAdapter(
+        rv.setAdapter(new SingleChatRecyclerViewAdapter(
                         mChatModel.getMessageListByChatId(HARD_CODED_CHAT_ID),
                         mUserModel.getEmail()));
 
