@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.153125" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.3671875" />
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/layout/card_chat.xml" value="0.33" />
@@ -25,22 +26,29 @@
         <entry key="app/src/main/res/drawable/button_round.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/button_state_list_anim_material.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/gradient_color.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_add_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_cloud_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.25068870523415976" />
         <entry key="app/src/main/res/layout/fragment_contact_card.xml" value="0.2827587565989237" />
+        <entry key="app/src/main/res/layout/fragment_daily_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_hourly_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_password_reset.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1404494382022472" />
+        <entry key="app/src/main/res/layout/fragment_weather_hour.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_weather_hourly.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1_round.xml" value="0.1" />
