@@ -192,6 +192,8 @@ public class SignInFragment extends Fragment {
                             Context.MODE_PRIVATE);
             // Store the credentials in SharedPrefs
             prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
+            System.out.println(prefs.getString(getString(R.string.keys_prefs_jwt), "")
+                    + " is the jwt (196)");
         }
 
         Navigation.findNavController(getView())
