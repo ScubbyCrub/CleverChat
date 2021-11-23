@@ -88,6 +88,7 @@ public class SingleChatViewModel extends AndroidViewModel {
      * @param jwt the users signed JWT
      */
     public void getFirstMessages(final int chatId, final String jwt) {
+        Log.d("SingleChatViewModel", "(getFirstMessages) message POST called by /api/messages/chatId");
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages/" + chatId;
 
@@ -95,7 +96,7 @@ public class SingleChatViewModel extends AndroidViewModel {
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
-                this::handelSuccess,
+                this::handleSuccess,
                 this::handleError) {
 
             @Override
@@ -131,6 +132,7 @@ public class SingleChatViewModel extends AndroidViewModel {
      * @param jwt the users signed JWT
      */
     public void getNextMessages(final int chatId, final String jwt) {
+        Log.d("SingleChatViewModel", "(getNextMessages) message POST called by /api/messages/chatId");
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages/" +
                 chatId +
@@ -141,7 +143,7 @@ public class SingleChatViewModel extends AndroidViewModel {
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
-                this::handelSuccess,
+                this::handleSuccess,
                 this::handleError) {
 
             @Override
@@ -176,7 +178,7 @@ public class SingleChatViewModel extends AndroidViewModel {
         getOrCreateMapEntry(chatId).setValue(list);
     }
 
-    private void handelSuccess(final JSONObject response) {
+    private void handleSuccess(final JSONObject response) {
         List<SingleChatMessage> list;
         if (!response.has("chatId")) {
             throw new IllegalStateException("Unexpected response in ChatViewModel: " + response);

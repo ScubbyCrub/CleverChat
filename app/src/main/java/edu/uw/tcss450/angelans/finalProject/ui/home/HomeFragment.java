@@ -10,13 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentHomeBinding;
+import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
+import me.pushy.sdk.Pushy;
 
 /**
  * Home Fragment to allow for UI elements to function when the user is interacting with
@@ -49,37 +52,54 @@ public class HomeFragment extends Fragment {
         UserInfoViewModel model = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
-        FragmentHomeBinding binding = FragmentHomeBinding.bind(getView());
+        mBinding = FragmentHomeBinding.bind(getView());
 
-        binding.textHomeUsername.setText(model.getEmail());
+        mBinding.textHomeUsername.setText(model.getEmail());
 
-        binding.tempChatButton.setOnClickListener(button ->
+        mBinding.tempChatButton.setOnClickListener(button ->
                 Navigation.findNavController(getView())
                         .navigate(HomeFragmentDirections.actionNavigationHomeToSingleChatFragment()
                 ));
+
         mBinding.buttonSignOut.setOnClickListener(button -> {
             signOut();
         });
+
         SharedPreferences prefs = getActivity().getSharedPreferences(
-                "shared_prefs",
-                Context.MODE_PRIVATE
-        );
+                getString(R.string.keys_shared_prefs),
+                Context.MODE_PRIVATE);
+
         prefs.edit().putString("email", model.getEmail()).apply();
         System.out.println("email: " + model.getEmail());
 //        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
+
+        // Token Tester
+        PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(getActivity()).get(PushyTokenViewModel.class);
+        Log.d("HomeFragment Tokens",  "Email: " + model.getEmail()
+                + "\n JWT Token: " + model.getmJwt()
+                + "\n PUSHY Token: " + pushyTokenViewModel.getPushyTokenString());
     }
 
     /**
-     *
+     * Removes the users jwt token from the saved preferences on signout
      */
     private void signOut() {
-        SharedPreferences prefs = getActivity().getSharedPreferences(
-         "shared_prefs",
-                Context.MODE_PRIVATE
-        );
+        SharedPreferences prefs =
+                this.getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
 
-        prefs.edit().remove("jwt").apply();
-        //End the app completely
-        getActivity().finishAndRemoveTask();
+        prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
+
+        PushyTokenViewModel model = new ViewModelProvider(this)
+                .get(PushyTokenViewModel.class);
+
+        // When we heard back from the web service, quit
+        model.addResponseObserver(this, result -> this.getActivity().finishAndRemoveTask());
+
+        model.deleteTokenFromWebservice(
+                new ViewModelProvider(this)
+                        .get(UserInfoViewModel.class).getmJwt()
+        );
     }
 }

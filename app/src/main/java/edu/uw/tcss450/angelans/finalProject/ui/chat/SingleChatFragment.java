@@ -1,6 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class SingleChatFragment extends Fragment {
 
         FragmentSingleChatBinding binding = FragmentSingleChatBinding.bind(getView());
 
+        Log.d("Single Chat Fragment:", "Progress Bar showing start");
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
         binding.swipeContainer.setRefreshing(true);
 
@@ -64,27 +66,23 @@ public class SingleChatFragment extends Fragment {
                         mChatModel.getMessageListByChatId(HARD_CODED_CHAT_ID),
                         mUserModel.getEmail()));
 
-
+        Log.d("Single Chat Fragment", "Fetch more msg when scrolled to top");
         //When the user scrolls to the top of the RV, the swiper list will "refresh"
         //The user is out of messages, go out to the service and get more
         binding.swipeContainer.setOnRefreshListener(() -> {
             mChatModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
         });
 
+        Log.d("Single Chat Fragment", "Inform chat list may have changed");
         mChatModel.addMessageObserver(HARD_CODED_CHAT_ID, getViewLifecycleOwner(),
                 list -> {
-                    /*
-                     * This solution needs work on the scroll position. As a group,
-                     * you will need to come up with some solution to manage the
-                     * recyclerview scroll position. You also should consider a
-                     * solution for when the keyboard is on the screen.
-                     */
                     //inform the RV that the underlying list has (possibly) changed
                     rv.getAdapter().notifyDataSetChanged();
                     rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
                     binding.swipeContainer.setRefreshing(false);
                 });
 
+        Log.d("Single Chat Fragment", "Send button clicked!");
         // Send button was clicked. Send the message via the SendViewModel
         binding.buttonSend.setOnClickListener(button -> {
             mSendModel.sendMessage(HARD_CODED_CHAT_ID,
@@ -92,6 +90,7 @@ public class SingleChatFragment extends Fragment {
                     binding.editMessage.getText().toString());
         });
 
+        Log.d("Single Chat Fragment", "Server responded to msg send, cleared text in chat");
         // When we get the response back from the server, clear the edittext
         mSendModel.addResponseObserver(getViewLifecycleOwner(), response ->
                 binding.editMessage.setText(""));
