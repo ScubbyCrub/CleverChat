@@ -61,7 +61,8 @@ public class HomeFragment extends Fragment {
 
         mBinding.tempChatButton.setOnClickListener(button ->
                 Navigation.findNavController(getView())
-                        .navigate(HomeFragmentDirections.actionNavigationHomeToSingleChatFragment()
+                        .navigate(HomeFragmentDirections
+                                .actionNavigationHomeToSingleChatFragment()
                 ));
 
         mBinding.buttonSignOut.setOnClickListener(button -> {
@@ -77,7 +78,8 @@ public class HomeFragment extends Fragment {
 //        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
 
         // Token Tester
-        PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(getActivity()).get(PushyTokenViewModel.class);
+        PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(
+                getActivity()).get(PushyTokenViewModel.class);
 //        Log.d("HomeFragment Tokens",  "Email: " + mModel.getEmail()
 //                + "\n JWT Token: " + mModel.getmJwt());
     }

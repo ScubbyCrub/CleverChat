@@ -25,7 +25,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class SingleChatFragment extends Fragment {
 
     //The chat ID for "global" chat
-    private  int HARD_CODED_CHAT_ID;
+    private int mGlobalChatId;
 
     private SingleChatViewModel mChatModel;
     private UserInfoViewModel mUserModel;
@@ -39,14 +39,14 @@ public class SingleChatFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(@Nullable Bundle theSavedInstanceState) {
+        super.onCreate(theSavedInstanceState);
         SingleChatFragmentArgs args = SingleChatFragmentArgs.fromBundle(getArguments());
-        HARD_CODED_CHAT_ID = args.getId();
+        mGlobalChatId = args.getId();
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mChatModel = provider.get(SingleChatViewModel.class);
-        mChatModel.getFirstMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
+        mChatModel.getFirstMessages(mGlobalChatId, mUserModel.getmJwt());
         mSendModel = provider.get(SingleChatSendViewModel.class);
 
         Log.d("ChatId", ""+args.getId());
@@ -54,38 +54,39 @@ public class SingleChatFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_chat, container, false);
+        return theInflater.inflate(R.layout.fragment_single_chat, theContainer, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
+        super.onViewCreated(theView, theSavedInstanceState);
 
         FragmentSingleChatBinding binding = FragmentSingleChatBinding.bind(getView());
 
         Log.d("Single Chat Fragment:", "Progress Bar showing start");
-        //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
+        //SetRefreshing shows the internal Swiper view progress bar.
+        // Show this until messages load.
         binding.swipeContainer.setRefreshing(true);
 
         final RecyclerView rv = binding.recyclerMessages;
         //Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
         //holds.
         rv.setAdapter(new SingleChatRecyclerViewAdapter(
-                        mChatModel.getMessageListByChatId(HARD_CODED_CHAT_ID),
+                        mChatModel.getMessageListByChatId(mGlobalChatId),
                         mUserModel.getEmail()));
 
         Log.d("Single Chat Fragment", "Fetch more msg when scrolled to top");
         //When the user scrolls to the top of the RV, the swiper list will "refresh"
         //The user is out of messages, go out to the service and get more
         binding.swipeContainer.setOnRefreshListener(() -> {
-            mChatModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
+            mChatModel.getNextMessages(mGlobalChatId, mUserModel.getmJwt());
         });
 
         Log.d("Single Chat Fragment", "Inform chat list may have changed");
-        mChatModel.addMessageObserver(HARD_CODED_CHAT_ID, getViewLifecycleOwner(),
+        mChatModel.addMessageObserver(mGlobalChatId, getViewLifecycleOwner(),
                 list -> {
                     //inform the RV that the underlying list has (possibly) changed
                     rv.getAdapter().notifyDataSetChanged();
@@ -96,12 +97,13 @@ public class SingleChatFragment extends Fragment {
         Log.d("Single Chat Fragment", "Send button clicked!");
         // Send button was clicked. Send the message via the SendViewModel
         binding.buttonSend.setOnClickListener(button -> {
-            mSendModel.sendMessage(HARD_CODED_CHAT_ID,
+            mSendModel.sendMessage(mGlobalChatId,
                     mUserModel.getmJwt(),
                     binding.editMessage.getText().toString());
         });
 
-        Log.d("Single Chat Fragment", "Server responded to msg send, cleared text in chat");
+        Log.d("Single Chat Fragment", "Server responded to msg send, " +
+                "cleared text in chat");
         // When we get the response back from the server, clear the edittext
         mSendModel.addResponseObserver(getViewLifecycleOwner(), response ->
                 binding.editMessage.setText(""));

@@ -27,11 +27,11 @@ public class RequestQueueSingleton {
     /**
      * Private constructor for RequestQueueSingleton.
      *
-     * @param context globally available, application-specific resources and classes for
+     * @param theContext globally available, application-specific resources and classes for
      *                this app.
      */
-    private RequestQueueSingleton(Context context) {
-        RequestQueueSingleton.mContext = context;
+    private RequestQueueSingleton(Context theContext) {
+        RequestQueueSingleton.mContext = theContext;
         mRequestQueue = getmRequestQueue();
 
         mImageLoader = new ImageLoader(mRequestQueue,
@@ -82,11 +82,11 @@ public class RequestQueueSingleton {
     /**
      * Adds a request to the request queue.
      *
-     * @param req The request to be added to the request queue.
+     * @param theRequest The request to be added to the request queue.
      * @param <T> The type of request that can be added to the request queue.
      */
-    public <T> void addToRequestQueue(Request<T> req) {
-        getmRequestQueue().add(req);
+    public <T> void addToRequestQueue(Request<T> theRequest) {
+        getmRequestQueue().add(theRequest);
     }
 
     /**

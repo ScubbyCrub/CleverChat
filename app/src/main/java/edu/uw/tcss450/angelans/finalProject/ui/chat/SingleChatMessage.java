@@ -23,28 +23,30 @@ public final class SingleChatMessage implements Serializable {
     /**
      * Constructor that holds the details for a single chat message.
      *
-     * @param messageId The unique ID number for a single message in a single chatroom.
-     * @param message The contents of the user's sent message.
-     * @param sender The email of the user that sent the message.
-     * @param timeStamp The time at which the message was sent.
+     * @param theMessageId The unique ID number for a single message in a single chatroom.
+     * @param theMessage The contents of the user's sent message.
+     * @param theSender The email of the user that sent the message.
+     * @param theTimeStamp The time at which the message was sent.
      */
-    public SingleChatMessage(int messageId, String message, String sender, String timeStamp) {
-        mMessageId = messageId;
-        mMessage = message;
-        mSender = sender;
-        mTimeStamp = timeStamp;
+    public SingleChatMessage(int theMessageId, String theMessage, String theSender,
+                             String theTimeStamp) {
+        mMessageId = theMessageId;
+        mMessage = theMessage;
+        mSender = theSender;
+        mTimeStamp = theTimeStamp;
     }
 
     /**
      * Static factory method to turn a properly formatted JSON String into a
      * ChatMessage object.
      *
-     * @param cmAsJson the String to be parsed into a ChatMessage Object.
+     * @param theChatMessageAsJson the String to be parsed into a ChatMessage Object.
      * @return a ChatMessage Object with the details contained in the JSON String.
      * @throws JSONException when cmAsString cannot be parsed into a ChatMessage.
      */
-    public static SingleChatMessage createFromJsonString(final String cmAsJson) throws JSONException {
-        final JSONObject msg = new JSONObject(cmAsJson);
+    public static SingleChatMessage createFromJsonString(final String theChatMessageAsJson)
+            throws JSONException {
+        final JSONObject msg = new JSONObject(theChatMessageAsJson);
         return new SingleChatMessage(msg.getInt("messageid"),
                 msg.getString("message"),
                 msg.getString("email"),
@@ -89,14 +91,14 @@ public final class SingleChatMessage implements Serializable {
 
     /**
      * Provides equality solely based on MessageId.
-     * @param other the other object to check for equality.
+     * @param theOther the other object to check for equality.
      * @return true if other message ID matches this message ID, false otherwise.
      */
     @Override
-    public boolean equals(@Nullable Object other) {
+    public boolean equals(@Nullable Object theOther) {
         boolean result = false;
-        if (other instanceof SingleChatMessage) {
-            result = mMessageId == ((SingleChatMessage) other).mMessageId;
+        if (theOther instanceof SingleChatMessage) {
+            result = mMessageId == ((SingleChatMessage) theOther).mMessageId;
         }
         return result;
     }

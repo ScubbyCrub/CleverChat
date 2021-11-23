@@ -38,10 +38,10 @@ public class SingleChatSendViewModel extends AndroidViewModel {
     /**
      * Constructor for SingleChatSendViewModel.
      *
-     * @param application The application the ViewModel is stored in.
+     * @param theApplication The application the ViewModel is stored in.
      */
-    public SingleChatSendViewModel(@NonNull Application application) {
-        super(application);
+    public SingleChatSendViewModel(@NonNull Application theApplication) {
+        super(theApplication);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
@@ -50,30 +50,30 @@ public class SingleChatSendViewModel extends AndroidViewModel {
      * Register as an observer to listen for the web responses once a message in a
      * single chat room is sent.
      *
-     * @param owner the fragment's lifecycle owner.
-     * @param observer the observer that wants to listen to updates to the web's responses to
-     *                 sending a single message.
+     * @param theOwner the fragment's lifecycle owner.
+     * @param theObserver the observer that wants to listen to updates to the web's responses
+     *                   to sending a single message.
      */
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        mResponse.observe(owner, observer);
+    public void addResponseObserver(@NonNull LifecycleOwner theOwner,
+                                    @NonNull Observer<? super JSONObject> theObserver) {
+        mResponse.observe(theOwner, theObserver);
     }
 
     /**
      * Sends a message to be stored in the web database.
      *
-     * @param chatId The unique ID of the chat room where the message should be stored.
-     * @param jwt The user's JWT token.
-     * @param message The contents of the message the user wanted to send.
+     * @param theChatId The unique ID of the chat room where the message should be stored.
+     * @param theJwt The user's JWT token.
+     * @param theMessage The contents of the message the user wanted to send.
      */
-    public void sendMessage(final int chatId, final String jwt, final String message) {
+    public void sendMessage(final int theChatId, final String theJwt, final String theMessage) {
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages";
 
         JSONObject body = new JSONObject();
         try {
-            body.put("message", message);
-            body.put("chatId", chatId);
+            body.put("message", theMessage);
+            body.put("chatId", theChatId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class SingleChatSendViewModel extends AndroidViewModel {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
-                headers.put("Authorization", jwt);
+                headers.put("Authorization", theJwt);
                 return headers;
             }
         };
@@ -106,16 +106,16 @@ public class SingleChatSendViewModel extends AndroidViewModel {
     /**
      * If there is a Volley error with receiving a web response, handle it here.
      *
-     * @param error The Volley error received from the web.
+     * @param theError The Volley error received from the web.
      */
-    private void handleError(final VolleyError error) {
-        if (Objects.isNull(error.networkResponse)) {
-            Log.e("NETWORK ERROR", error.getMessage());
+    private void handleError(final VolleyError theError) {
+        if (Objects.isNull(theError.networkResponse)) {
+            Log.e("NETWORK ERROR", theError.getMessage());
         }
         else {
-            String data = new String(error.networkResponse.data, Charset.defaultCharset());
+            String data = new String(theError.networkResponse.data, Charset.defaultCharset());
             Log.e("CLIENT ERROR",
-                    error.networkResponse.statusCode +
+                    theError.networkResponse.statusCode +
                             " " +
                             data);
         }

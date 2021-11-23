@@ -27,12 +27,13 @@ public class NewMessageCountViewModel extends ViewModel {
     /**
      * Register as an observer to listen for the new message counter.
      *
-     * @param owner the fragment's lifecycle owner.
-     * @param observer the observer that wants to listen to updates to new, unseen message counts.
+     * @param theOwner the fragment's lifecycle owner.
+     * @param theObserver the observer that wants to listen to updates to new, unseen
+     *                    message counts.
      */
-    public void addMessageCountObserver(@NonNull LifecycleOwner owner,
-                                        @NonNull Observer<? super Integer> observer) {
-        mNewMessageCount.observe(owner, observer);
+    public void addMessageCountObserver(@NonNull LifecycleOwner theOwner,
+                                        @NonNull Observer<? super Integer> theObserver) {
+        mNewMessageCount.observe(theOwner, theObserver);
     }
 
     /**

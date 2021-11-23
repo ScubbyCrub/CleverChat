@@ -25,29 +25,39 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatMessag
  * @author Group 6: Teresa, Vlad, Tien, Angela
  * @version Sprint 2
  */
-public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleChatRecyclerViewAdapter.MessageViewHolder> {
+public class SingleChatRecyclerViewAdapter
+        extends RecyclerView.Adapter<SingleChatRecyclerViewAdapter.MessageViewHolder> {
 
     private final int CHAT_FULL_OPACITY_ALPHA = 255;
 
     private final List<SingleChatMessage> mMessages;
     private final String mEmail;
-    public SingleChatRecyclerViewAdapter(List<SingleChatMessage> messages, String email) {
-        this.mMessages = messages;
-        mEmail = email;
+
+    /**
+     * Constructor for SingleChatRecyclerViewAdapter.
+     *
+     * @param theMessages The list of messages for the single chatroom.
+     * @param theEmail The email of the current user.
+     */
+    public SingleChatRecyclerViewAdapter(List<SingleChatMessage> theMessages,
+                                         String theEmail) {
+        this.mMessages = theMessages;
+        mEmail = theEmail;
     }
 
 
     @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup theParent,
+                                                int theViewType) {
         return new MessageViewHolder(LayoutInflater
-                .from(parent.getContext())
-                .inflate(R.layout.fragment_single_chat_message, parent, false));
+                .from(theParent.getContext())
+                .inflate(R.layout.fragment_single_chat_message, theParent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        holder.setMessage(mMessages.get(position));
+    public void onBindViewHolder(@NonNull MessageViewHolder theHolder, int thePosition) {
+        theHolder.setMessage(mMessages.get(thePosition));
     }
 
     @Override
@@ -57,24 +67,24 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
 
     class MessageViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
-        private FragmentSingleChatMessageBinding binding;
+        private FragmentSingleChatMessageBinding mBinding;
 
-        public MessageViewHolder(@NonNull View view) {
-            super(view);
-            mView = view;
-            binding = FragmentSingleChatMessageBinding.bind(view);
+        public MessageViewHolder(@NonNull View theView) {
+            super(theView);
+            mView = theView;
+            mBinding = FragmentSingleChatMessageBinding.bind(theView);
         }
 
-        void setMessage(final SingleChatMessage message) {
+        void setMessage(final SingleChatMessage theMessage) {
             final Resources res = mView.getContext().getResources();
-            final MaterialCardView card = binding.cardRoot;
+            final MaterialCardView card = mBinding.cardRoot;
 
             int standard = (int) res.getDimension(R.dimen.chat_margin);
             int extended = (int) res.getDimension(R.dimen.chat_margin_sided);
 
-            if (mEmail.equals(message.getSender())) {
+            if (mEmail.equals(theMessage.getSender())) {
                 //This message is from the user. Format it as such
-                binding.textMessage.setText(message.getMessage());
+                mBinding.textMessage.setText(theMessage.getMessage());
                 ViewGroup.MarginLayoutParams layoutParams =
                         (ViewGroup.MarginLayoutParams) card.getLayoutParams();
                 //Set the left margin
@@ -87,7 +97,7 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
                         ColorUtils.setAlphaComponent(
                             res.getColor(R.color.background_gradient_1, null),
                                 CHAT_FULL_OPACITY_ALPHA));
-                binding.textMessage.setTextColor(
+                mBinding.textMessage.setTextColor(
                         res.getColor(R.color.white, null));
 
                 card.setStrokeWidth(standard / 5);
@@ -108,8 +118,8 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
                 card.requestLayout();
             } else {
                 //This message is from another user. Format it as such
-                binding.textMessage.setText(message.getSender() +
-                        ": " + message.getMessage());
+                mBinding.textMessage.setText(theMessage.getSender() +
+                        ": " + theMessage.getMessage());
                 ViewGroup.MarginLayoutParams layoutParams =
                         (ViewGroup.MarginLayoutParams) card.getLayoutParams();
 
@@ -129,7 +139,7 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
                         res.getColor(R.color.background_gradient_2_darker, null),
                         CHAT_FULL_OPACITY_ALPHA));
 
-                binding.textMessage.setTextColor(
+                mBinding.textMessage.setTextColor(
                         res.getColor(R.color.white, null));
 
                 //Round the corners on the right side

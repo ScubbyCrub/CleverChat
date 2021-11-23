@@ -68,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_contact, R.id.navigation_chat, R.id.navigation_weather)
+                R.id.navigation_home, R.id.navigation_contact, R.id.navigation_chat,
+                R.id.navigation_weather)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this,
+                R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this,
+                R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -170,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
             NavDestination nd = nc.getCurrentDestination();
 
             if (intent.hasExtra("chatMessage")) {
-                SingleChatMessage cm = (SingleChatMessage) intent.getSerializableExtra("chatMessage");
+                SingleChatMessage cm = (SingleChatMessage)
+                        intent.getSerializableExtra("chatMessage");
 
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model
