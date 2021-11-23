@@ -49,11 +49,11 @@ public class ChatListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
-                        "shared_prefs",
+                        getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
-        Log.e("Contains json", ""+prefs.getString("jwt",""));
-        mModel.connectGet(prefs.getString("jwt",""));
+        Log.e("Contains json", ""+prefs.getString(getString(R.string.keys_prefs_jwt),""));
+        mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);

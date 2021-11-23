@@ -21,8 +21,7 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatMessag
 
 public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleChatRecyclerViewAdapter.MessageViewHolder> {
 
-    private final int CHAT_BACKGROUND_ALPHA = 255;
-    private final int CHAT_OUTLINE_ALPHA = 255;
+    private final int CHAT_FULL_OPACITY_ALPHA = 255;
 
     private final List<SingleChatMessage> mMessages;
     private final String mEmail;
@@ -81,14 +80,14 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
                             res.getColor(R.color.background_gradient_1, null),
-                            CHAT_BACKGROUND_ALPHA));
+                                CHAT_FULL_OPACITY_ALPHA));
                 binding.textMessage.setTextColor(
                         res.getColor(R.color.white, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
                         res.getColor(R.color.background_gradient_1, null),
-                        CHAT_OUTLINE_ALPHA));
+                        CHAT_FULL_OPACITY_ALPHA));
 
                 //Round the corners on the left side
                 card.setShapeAppearanceModel(
@@ -117,12 +116,12 @@ public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleCh
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
                                 res.getColor(R.color.background_gradient_2_darker, null),
-                                CHAT_BACKGROUND_ALPHA));
+                                CHAT_FULL_OPACITY_ALPHA));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
                         res.getColor(R.color.background_gradient_2_darker, null),
-                        CHAT_OUTLINE_ALPHA));
+                        CHAT_FULL_OPACITY_ALPHA));
 
                 binding.textMessage.setTextColor(
                         res.getColor(R.color.white, null));

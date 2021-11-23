@@ -177,24 +177,7 @@ public class SignInFragment extends Fragment {
                 mBinding.editEmailSignin.getText().toString(),
                 mBinding.editPasswordSignin.getText().toString());
     }
-    @Override
-    public void onStart() {
-        super.onStart();
-        SharedPreferences prefs =
-                getActivity().getSharedPreferences(
-                        "shared_prefs",
-                        Context.MODE_PRIVATE);
-        if (prefs.contains("jwt")) {
-            String token = prefs.getString("jwt", "");
-            JWT jwt = new JWT(token);
-            //check to see expired
-            if(!jwt.isExpired(0)) {
-                String email = jwt.getClaim("email").asString();
-                navigateToSuccess(email, token);
-                return;
-            }
-        }
-    }
+
     /**
      * Helper to abstract the navigation to the Activity past Authentication.
      *
@@ -202,22 +185,47 @@ public class SignInFragment extends Fragment {
      * @param theJwt the JSON Web Token supplied by the server.
      */
     private void navigateToSuccess(final String theEmail, final String theJwt) {
-        if(mBinding.switchStaySignedIn.isChecked()){
+        if (mBinding.switchStaySignedIn.isChecked()) {
             SharedPreferences prefs =
                     getActivity().getSharedPreferences(
-                            "shared_prefs",
-                            Context.MODE_PRIVATE
-                    );
-            //store the credentials in the shared preferences
-            prefs.edit().putString("jwt", theJwt).apply();
+                            getString(R.string.keys_shared_prefs),
+                            Context.MODE_PRIVATE);
+            // Store the credentials in SharedPrefs
+            prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
+            System.out.println(prefs.getString(getString(R.string.keys_prefs_jwt), "")
+                    + " is the jwt (196)");
         }
+
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
-                        .actionSignInFragmentToMainActivity(theEmail,theJwt));
+                        .actionSignInFragmentToMainActivity(theEmail, theJwt));
 
-        //remove the activity from the stack to not let the user back to the lock screen after
+        // Remove THIS activity from the task list. Pops off the backstack
         getActivity().finish();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                getString(R.string.keys_shared_prefs),
+                Context.MODE_PRIVATE);
+
+        if (prefs.contains(getString(R.string.keys_prefs_jwt))) {
+            String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+            JWT jwt = new JWT(token);
+            /* Check to see if the web token is still valid or not. To make a JWT expire after a
+             * longer or shorter time period, change the expiration time when the JWT is
+             * created on the web service.
+             */
+            if (!jwt.isExpired(0)) {
+                String email = jwt.getClaim("email").asString();
+                navigateToSuccess(email, token);
+                return;
+            }
+        }
+    }
+
 
     /**
      * An observer on the HTTP Response from the web server. This observer should be
@@ -228,7 +236,7 @@ public class SignInFragment extends Fragment {
     private void observeResponse(final JSONObject theResponse)  {
         if (theResponse.length() > 0) {
             if (theResponse.has("code")) {
-                Log.e("observerresponse","Respnose with code triggered");
+                Log.e("observerresponse","Response with code triggered");
                 try {
                     //navigate to resend if it was an unverified user error
                     if(theResponse.getString("code").equals("400")){
@@ -260,7 +268,7 @@ public class SignInFragment extends Fragment {
                 }
             }
         } else {
-            Log.d("JSON Response", "No Response");
+            Log.d("JSON Response (SignInFragment 269)", "No Response");
         }
     }
 

@@ -40,6 +40,10 @@ public class PushyTokenViewModel extends AndroidViewModel{
         mResponse.setValue(new JSONObject());
     }
 
+    public String getPushyTokenString() {
+        return mPushyToken.toString();
+    }
+
     /**
      * Register as an observer to listen for the PushToken.
      * @param owner the fragments lifecycle owner
@@ -75,6 +79,7 @@ public class PushyTokenViewModel extends AndroidViewModel{
      */
     private class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... params) {
+            Log.d("PushyTokenViewModel", "Attempt RegisterForPushNotificationsAsync");
             String deviceToken;
             try {
                 // Assign a unique token to this device
@@ -94,6 +99,8 @@ public class PushyTokenViewModel extends AndroidViewModel{
                 // Show error in log - You should add error handling for the user.
                 Log.e("ERROR RETRIEVING PUSHY TOKEN", token);
             } else {
+                Log.d("PushyTokenViewModel", "RegisterForPushNotificationsAsync " +
+                        "token set successfully!");
                 mPushyToken.setValue(token);
             }
         }
@@ -109,8 +116,10 @@ public class PushyTokenViewModel extends AndroidViewModel{
             throw new IllegalStateException("No pushy token. Do NOT call until token is retrieved");
         }
 
+        Log.d("PushyTokenViewModel 116",
+                "Attempting to traverse to {put} /pushyauth endpoint");
         String url = getApplication().getResources().getString(R.string.base_url) +
-                "pushyAuth";
+                "pushyauth";
 
         JSONObject body = new JSONObject();
         try {
@@ -145,7 +154,9 @@ public class PushyTokenViewModel extends AndroidViewModel{
     }
 
     public void deleteTokenFromWebservice(final String jwt) {
-        String url = getApplication().getResources().getString(R.string.base_url) + "pushyAuth";
+        Log.d("PushyTokenViewModel 154",
+                "Attempting to traverse to {Delete} /pushyauth endpoint");
+        String url = getApplication().getResources().getString(R.string.base_url) + "pushyauth";
 
         Request request = new JsonObjectRequest (
                 Request.Method.DELETE,
