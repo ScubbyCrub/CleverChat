@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -33,15 +34,18 @@ public class NewChatViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> mStatus;
     private MutableLiveData<List<Contact>> mSelectedContacts;
     private MutableLiveData<List<Contact>> mContacts;
+    private MutableLiveData<Integer> mChatId;
 
     public NewChatViewModel(@NonNull Application application) {
         super(application);
         mStatus = new MutableLiveData<>();
         mSelectedContacts = new MutableLiveData<>();
-        mStatus.setValue(false);
+//        mStatus.setValue(false);
         mSelectedContacts.setValue(new ArrayList<>());
         mContacts = new MutableLiveData<>();
         mContacts.setValue(new ArrayList<>());
+        mChatId = new MutableLiveData<>();
+        mChatId.setValue(0);
 
     }
 
@@ -68,7 +72,13 @@ public class NewChatViewModel extends AndroidViewModel {
         //on success navigate to chats fragment
         //TODO: idk get this to navigate to the newly made chat in the end
         System.out.println("new chat has been made!");
-        mStatus.setValue(true);
+        System.out.println(result.toString());
+        try{
+            mChatId.setValue(result.getInt("id"));
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        mStatus.setValue(true);;
     }
     public void connectPost(final String name, String jwt) {
         //make body
@@ -200,4 +210,7 @@ public class NewChatViewModel extends AndroidViewModel {
         Log.d("selected contacts", "addContact: " + mSelectedContacts.getValue().toString());
     }
 
+    public int getChatId(){
+        return mChatId.getValue();
+    }
 }
