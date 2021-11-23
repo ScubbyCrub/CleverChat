@@ -66,6 +66,7 @@ public class NewChatViewModel extends AndroidViewModel {
         //i.e. YOUR PROJECT
         //TODO: Make better error handling
 //        Log.e("CONNECTION ERROR", error.getLocalizedMessage(;
+        Log.e("Error.toString", error.getMessage());
         throw new IllegalStateException(error.getMessage());
     }
     public void handleResult(final JSONObject result) {
@@ -81,6 +82,7 @@ public class NewChatViewModel extends AndroidViewModel {
         mStatus.setValue(true);;
     }
     public void connectPost(final String name, String jwt) {
+
         //make body
         String[] memberIds = new String[mSelectedContacts.getValue().size()];
         for(int i = 0; i < memberIds.length; i++){

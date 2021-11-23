@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import edu.uw.tcss450.angelans.finalProject.MainActivity;
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentNewChatBinding;
 import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
@@ -39,14 +40,14 @@ public class NewChatFragment extends Fragment {
         //get shared prefs
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
-                        "shared_prefs",
+                        getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
         //make needed requests
         mNewChatViewModel = new ViewModelProvider(getActivity())
                 .get(NewChatViewModel.class);
         System.out.println(prefs.getString("email","") + " is the email");
         mNewChatViewModel.connectGetContacts(prefs.getString("email",""),
-                prefs.getString("jwt",""));
+                prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
@@ -59,7 +60,7 @@ public class NewChatFragment extends Fragment {
         Log.e("dfdfg", "onViewCreated: is this even working " );
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
-                        "shared_prefs",
+                        getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
 //        mNewChatViewModel.connectGetContacts("vladislavtregubov00@gmail.com", prefs.getString("jwt",""));
         mNewChatViewModel.addNewChatObserver(getViewLifecycleOwner(), created -> {
@@ -73,7 +74,7 @@ public class NewChatFragment extends Fragment {
             //make request
             mNewChatViewModel.connectPost(
                     mBinding.editTextChatName.getText().toString().trim(),
-                    prefs.getString("jwt","")
+                    prefs.getString(getString(R.string.keys_prefs_jwt),"")
             );
 
         });
