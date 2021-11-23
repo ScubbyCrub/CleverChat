@@ -30,6 +30,8 @@ import me.pushy.sdk.Pushy;
  */
 public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;
+
+    UserInfoViewModel mModel;
     /**
      * Constructor for HomeFragment.
      */
@@ -49,12 +51,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
-        UserInfoViewModel model = new ViewModelProvider(getActivity())
+        mModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
         mBinding = FragmentHomeBinding.bind(getView());
 
-        mBinding.textHomeUsername.setText(model.getEmail());
+        mBinding.textHomeUsername.setText(mModel.getEmail());
 
         mBinding.tempChatButton.setOnClickListener(button ->
                 Navigation.findNavController(getView())
@@ -69,14 +71,14 @@ public class HomeFragment extends Fragment {
                 getString(R.string.keys_shared_prefs),
                 Context.MODE_PRIVATE);
 
-        prefs.edit().putString("email", model.getEmail()).apply();
-        System.out.println("email: " + model.getEmail());
+        prefs.edit().putString("email", mModel.getEmail()).apply();
+        System.out.println("email: " + mModel.getEmail());
 //        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
 
         // Token Tester
         PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(getActivity()).get(PushyTokenViewModel.class);
-        Log.d("HomeFragment Tokens",  "Email: " + model.getEmail()
-                + "\n JWT Token: " + model.getmJwt()
+        Log.d("HomeFragment Tokens",  "Email: " + mModel.getEmail()
+                + "\n JWT Token: " + mModel.getmJwt()
                 + "\n PUSHY Token: " + pushyTokenViewModel.getPushyTokenString());
     }
 
@@ -84,6 +86,7 @@ public class HomeFragment extends Fragment {
      * Removes the users jwt token from the saved preferences on signout
      */
     private void signOut() {
+
         SharedPreferences prefs =
                 this.getActivity().getSharedPreferences(
                         getString(R.string.keys_shared_prefs),
@@ -98,7 +101,7 @@ public class HomeFragment extends Fragment {
         model.addResponseObserver(this, result -> this.getActivity().finishAndRemoveTask());
 
         model.deleteTokenFromWebservice(
-                new ViewModelProvider(this)
+                new ViewModelProvider(getActivity())
                         .get(UserInfoViewModel.class).getmJwt()
         );
     }
