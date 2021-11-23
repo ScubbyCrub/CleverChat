@@ -133,4 +133,45 @@ public class ContactListViewModel extends AndroidViewModel {
         }
     }
 
+
+    public void addContact(final String myEmail, final String toAdd, final String jwt) {
+        String url = "http://10.0.2.2:5000/api/contact/add";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", myEmail);
+            body.put("username", toAdd);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                this::handleAddedSuccess,
+                this::handleAddedError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
+    }
+    public void handleAddedSuccess(final JSONObject data){
+        Log.d("data", data.toString());
+    }
+    public void handleAddedError(final VolleyError error){
+        error.printStackTrace();
+    }
 }

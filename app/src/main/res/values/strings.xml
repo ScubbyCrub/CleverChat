@@ -27,6 +27,7 @@
     <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
     <string name="keys_prefs_jwt">Shared Prefs JWT</string>
     <string name="keys_prefs_signed_in">stay_signed_in</string>
+    <string name="text_search">Search</string>
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: 10.0.2.2:5000/api/ -->

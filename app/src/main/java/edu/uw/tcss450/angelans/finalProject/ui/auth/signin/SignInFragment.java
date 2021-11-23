@@ -193,6 +193,7 @@ public class SignInFragment extends Fragment {
         //always set the jwt that is used for requests
 
         prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
+        prefs.edit().putString("email",theEmail).apply();
         if (mBinding.switchStaySignedIn.isChecked()) {
 //            SharedPreferences prefs =
 //                    getActivity().getSharedPreferences(

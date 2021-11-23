@@ -1,5 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.contact;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,10 @@ public class ContactListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
         final RecyclerView rv = binding.listContact;
         ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(mContactListViewModel.getContactListByEMail(mUserModel.getEmail()));
@@ -62,6 +68,13 @@ public class ContactListFragment extends Fragment {
                 //set the wait fragment to invisible
                 binding.layoutWait.setVisibility(View.GONE);
             }
+        });
+        //add contacts
+        binding.buttonAddContact.setOnClickListener(pressed -> {
+            String toAdd= binding.editTextTextPersonName.getText().toString();
+            String email = prefs.getString("email","");
+            String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+            mContactListViewModel.addContact(email, toAdd, jwt);
         });
     }
 

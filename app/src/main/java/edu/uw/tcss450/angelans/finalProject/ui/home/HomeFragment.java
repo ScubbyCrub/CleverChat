@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
 
-        prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
+        prefs.edit().remove(getString(R.string.keys_prefs_signed_in)).apply();
 
         PushyTokenViewModel model = new ViewModelProvider(this)
                 .get(PushyTokenViewModel.class);
