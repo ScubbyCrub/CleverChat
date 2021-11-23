@@ -26,12 +26,13 @@ import me.pushy.sdk.Pushy;
  * the home screen.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 2
  */
 public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;
 
     UserInfoViewModel mModel;
+
     /**
      * Constructor for HomeFragment.
      */
@@ -77,13 +78,12 @@ public class HomeFragment extends Fragment {
 
         // Token Tester
         PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(getActivity()).get(PushyTokenViewModel.class);
-        Log.d("HomeFragment Tokens",  "Email: " + mModel.getEmail()
-                + "\n JWT Token: " + mModel.getmJwt()
-                + "\n PUSHY Token: " + pushyTokenViewModel.getPushyTokenString());
+//        Log.d("HomeFragment Tokens",  "Email: " + mModel.getEmail()
+//                + "\n JWT Token: " + mModel.getmJwt());
     }
 
     /**
-     * Removes the users jwt token from the saved preferences on signout
+     * Removes the users JWT token from the saved preferences on sign out.
      */
     private void signOut() {
 

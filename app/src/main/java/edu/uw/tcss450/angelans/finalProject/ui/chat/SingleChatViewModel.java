@@ -28,6 +28,12 @@ import java.util.Objects;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
+/**
+ * ViewModel that stores the information of a single chat room.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class SingleChatViewModel extends AndroidViewModel {
 
     /**
@@ -44,9 +50,10 @@ public class SingleChatViewModel extends AndroidViewModel {
 
     /**
      * Register as an observer to listen to a specific chat room's list of messages.
-     * @param chatId the chatid of the chat to observer
-     * @param owner the fragments lifecycle owner
-     * @param observer the observer
+     *
+     * @param chatId The chat ID of the chat given to the observer.
+     * @param owner The fragment's lifecycle owner.
+     * @param observer The observer that wants to see updates to a specific chatroom.
      */
     public void addMessageObserver(int chatId,
                                    @NonNull LifecycleOwner owner,
@@ -58,12 +65,8 @@ public class SingleChatViewModel extends AndroidViewModel {
      * Return a reference to the List<> associated with the chat room. If the View Model does
      * not have a mapping for this chatID, it will be created.
      *
-     * WARNING: While this method returns a reference to a mutable list, it should not be
-     * mutated externally in client code. Use public methods available in this class as
-     * needed.
-     *
-     * @param chatId the id of the chat room List to retrieve
-     * @return a reference to the list of messages
+     * @param chatId The ID of the chat room List to retrieve.
+     * @return A reference to the list of messages.
      */
     public List<SingleChatMessage> getMessageListByChatId(final int chatId) {
         return getOrCreateMapEntry(chatId).getValue();
@@ -84,8 +87,8 @@ public class SingleChatViewModel extends AndroidViewModel {
      * Subsequent requests to the web service for a given chat room should be made from
      * getNextMessages()
      *
-     * @param chatId the chatroom id to request messages of
-     * @param jwt the users signed JWT
+     * @param chatId The chatroom ID to request messages of.
+     * @param jwt The users signed JWT.
      */
     public void getFirstMessages(final int chatId, final String jwt) {
         Log.d("SingleChatViewModel", "(getFirstMessages) message POST called by /api/messages/chatId");
@@ -128,11 +131,12 @@ public class SingleChatViewModel extends AndroidViewModel {
      *
      * Subsequent calls to this method receive earlier and earlier messages.
      *
-     * @param chatId the chatroom id to request messages of
-     * @param jwt the users signed JWT
+     * @param chatId The chatroom id to request messages of.
+     * @param jwt The users signed JWT.
      */
     public void getNextMessages(final int chatId, final String jwt) {
-        Log.d("SingleChatViewModel", "(getNextMessages) message POST called by /api/messages/chatId");
+        Log.d("SingleChatViewModel",
+                "(getNextMessages) message POST called by /api/messages/chatId");
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages/" +
                 chatId +
@@ -169,8 +173,9 @@ public class SingleChatViewModel extends AndroidViewModel {
     /**
      * When a chat message is received externally to this ViewModel, add it
      * with this method.
-     * @param chatId
-     * @param message
+     *
+     * @param chatId The chat's unique ID that the message should be included in.
+     * @param message The content of the sent message.
      */
     public void addMessage(final int chatId, final SingleChatMessage message) {
         List<SingleChatMessage> list = getMessageListByChatId(chatId);
@@ -178,6 +183,11 @@ public class SingleChatViewModel extends AndroidViewModel {
         getOrCreateMapEntry(chatId).setValue(list);
     }
 
+    /**
+     * Handler if a web response to interact with messages in a single chat room is successful.
+     *
+     * @param response The response from the web service.
+     */
     private void handleSuccess(final JSONObject response) {
         List<SingleChatMessage> list;
         if (!response.has("chatId")) {
@@ -213,6 +223,11 @@ public class SingleChatViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * If the web service responds with a Volley error, handle it here.
+     *
+     * @param error The Volley error from the web service.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());

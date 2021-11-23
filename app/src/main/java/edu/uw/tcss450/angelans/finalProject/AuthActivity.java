@@ -13,9 +13,10 @@ import me.pushy.sdk.Pushy;
  * PasswordRest, etc.).
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 2
  */
 public class AuthActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
@@ -27,6 +28,9 @@ public class AuthActivity extends AppCompatActivity {
         initiatePushyTokenRequest();
     }
 
+    /**
+     * Retrieve and store the user's PushyToken while they're attempting to sign in.
+     */
     private void initiatePushyTokenRequest() {
         new ViewModelProvider(this).get(PushyTokenViewModel.class).retrieveToken();
     }

@@ -19,6 +19,12 @@ import java.util.List;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatMessageBinding;
 
+/**
+ * Class that manages the RecyclerView of a single chat room.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class SingleChatRecyclerViewAdapter extends RecyclerView.Adapter<SingleChatRecyclerViewAdapter.MessageViewHolder> {
 
     private final int CHAT_FULL_OPACITY_ALPHA = 255;

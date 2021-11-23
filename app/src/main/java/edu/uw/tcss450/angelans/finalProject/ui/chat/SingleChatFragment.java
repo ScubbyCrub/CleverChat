@@ -17,7 +17,10 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSingleChatBindin
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * The fragment that handles the functionality of the messaging screen of a single chatroom.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
  */
 public class SingleChatFragment extends Fragment {
 
@@ -28,6 +31,9 @@ public class SingleChatFragment extends Fragment {
     private UserInfoViewModel mUserModel;
     private SingleChatSendViewModel mSendModel;
 
+    /**
+     * Empty constructor for SingleChatFragment
+     */
     public SingleChatFragment() {
         // Required empty public constructor
     }

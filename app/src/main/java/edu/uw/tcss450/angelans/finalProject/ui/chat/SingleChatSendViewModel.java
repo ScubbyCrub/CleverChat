@@ -25,21 +25,47 @@ import java.util.Objects;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
+/**
+ * ViewModel that handles the web responses once a message in a single chat room is sent.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class SingleChatSendViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Constructor for SingleChatSendViewModel.
+     *
+     * @param application The application the ViewModel is stored in.
+     */
     public SingleChatSendViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Register as an observer to listen for the web responses once a message in a
+     * single chat room is sent.
+     *
+     * @param owner the fragment's lifecycle owner.
+     * @param observer the observer that wants to listen to updates to the web's responses to
+     *                 sending a single message.
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Sends a message to be stored in the web database.
+     *
+     * @param chatId The unique ID of the chat room where the message should be stored.
+     * @param jwt The user's JWT token.
+     * @param message The contents of the message the user wanted to send.
+     */
     public void sendMessage(final int chatId, final String jwt, final String message) {
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages";
@@ -77,8 +103,11 @@ public class SingleChatSendViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
-
-
+    /**
+     * If there is a Volley error with receiving a web response, handle it here.
+     *
+     * @param error The Volley error received from the web.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
