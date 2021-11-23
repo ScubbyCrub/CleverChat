@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -62,7 +63,13 @@ public class NewChatFragment extends Fragment {
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
 //        mNewChatViewModel.connectGetContacts("vladislavtregubov00@gmail.com", prefs.getString("jwt",""));
-
+        mNewChatViewModel.addNewChatObserver(getViewLifecycleOwner(), created -> {
+            //set up navigation
+            NewChatFragmentDirections.ActionNewChatFragmentToSingleChatFragment dir =
+                    NewChatFragmentDirections.actionNewChatFragmentToSingleChatFragment();
+            dir.setId(mNewChatViewModel.getChatId());
+            Navigation.findNavController(getView()).navigate(dir);
+        });
         mBinding.buttonCreateNewChat.setOnClickListener(button -> {
             //make request
             mNewChatViewModel.connectPost(

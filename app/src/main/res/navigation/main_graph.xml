@@ -32,6 +32,9 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_chat_to_singleChatFragment"
+            app:destination="@id/singleChatFragment" />
     </fragment>
 
     <fragment
@@ -47,11 +50,19 @@
         <action
             android:id="@+id/action_newChatFragment_to_navigation_chat"
             app:destination="@id/navigation_chat" />
+        <action
+            android:id="@+id/action_newChatFragment_to_singleChatFragment"
+            app:destination="@id/singleChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleChatFragment"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatFragment"
         android:label="fragment_single_chat"
-        tools:layout="@layout/fragment_single_chat" />
+        tools:layout="@layout/fragment_single_chat" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
     tools:layout="@layout/fragment_contact_list"/>
 </navigation>
