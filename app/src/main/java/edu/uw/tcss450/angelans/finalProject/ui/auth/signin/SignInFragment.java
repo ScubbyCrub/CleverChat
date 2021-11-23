@@ -185,13 +185,24 @@ public class SignInFragment extends Fragment {
      * @param theJwt the JSON Web Token supplied by the server.
      */
     private void navigateToSuccess(final String theEmail, final String theJwt) {
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        // Store the credentials in SharedPrefs
+        //always set the jwt that is used for requests
+
+        prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
         if (mBinding.switchStaySignedIn.isChecked()) {
-            SharedPreferences prefs =
-                    getActivity().getSharedPreferences(
-                            getString(R.string.keys_shared_prefs),
-                            Context.MODE_PRIVATE);
-            // Store the credentials in SharedPrefs
-            prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
+//            SharedPreferences prefs =
+//                    getActivity().getSharedPreferences(
+//                            getString(R.string.keys_shared_prefs),
+//                            Context.MODE_PRIVATE);
+//            // Store the credentials in SharedPrefs
+//            prefs.edit().putString(getString(R.string.keys_prefs_jwt), theJwt).apply();
+
+            //if stay signed in selected then set the sign in jwt
+            prefs.edit().putString(getString(R.string.keys_prefs_signed_in), theJwt).apply();
             System.out.println(prefs.getString(getString(R.string.keys_prefs_jwt), "")
                     + " is the jwt (196)");
         }
@@ -211,8 +222,8 @@ public class SignInFragment extends Fragment {
                 getString(R.string.keys_shared_prefs),
                 Context.MODE_PRIVATE);
 
-        if (prefs.contains(getString(R.string.keys_prefs_jwt))) {
-            String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+        if (prefs.contains(getString(R.string.keys_prefs_signed_in))) {
+            String token = prefs.getString(getString(R.string.keys_prefs_signed_in), "");
             JWT jwt = new JWT(token);
             /* Check to see if the web token is still valid or not. To make a JWT expire after a
              * longer or shorter time period, change the expiration time when the JWT is

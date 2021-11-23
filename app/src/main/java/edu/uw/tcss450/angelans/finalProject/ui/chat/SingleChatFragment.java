@@ -35,13 +35,14 @@ public class SingleChatFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SingleChatFragmentArgs args = SingleChatFragmentArgs.fromBundle(getArguments());
+        HARD_CODED_CHAT_ID = args.getId();
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mChatModel = provider.get(SingleChatViewModel.class);
         mChatModel.getFirstMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
         mSendModel = provider.get(SingleChatSendViewModel.class);
-        SingleChatFragmentArgs args = SingleChatFragmentArgs.fromBundle(getArguments());
-        HARD_CODED_CHAT_ID = args.getId();
+
         Log.d("ChatId", ""+args.getId());
 
     }
