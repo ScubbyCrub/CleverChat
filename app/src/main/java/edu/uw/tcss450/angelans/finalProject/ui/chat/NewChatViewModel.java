@@ -74,7 +74,7 @@ public class NewChatViewModel extends AndroidViewModel {
         System.out.println("new chat has been made!");
         System.out.println(result.toString());
         try{
-            mChatId.setValue(result.getInt("id"));
+            mChatId.setValue(result.getInt("chatid"));
         } catch (JSONException e){
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class SingleChatFragment extends Fragment {
 
     //The chat ID for "global" chat
-    private static final int HARD_CODED_CHAT_ID = 1;
+    private  int HARD_CODED_CHAT_ID;
 
     private SingleChatViewModel mChatModel;
     private UserInfoViewModel mUserModel;
@@ -39,6 +40,10 @@ public class SingleChatFragment extends Fragment {
         mChatModel = provider.get(SingleChatViewModel.class);
         mChatModel.getFirstMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
         mSendModel = provider.get(SingleChatSendViewModel.class);
+        SingleChatFragmentArgs args = SingleChatFragmentArgs.fromBundle(getArguments());
+        HARD_CODED_CHAT_ID = args.getId();
+        Log.d("ChatId", ""+args.getId());
+
     }
 
     @Override
