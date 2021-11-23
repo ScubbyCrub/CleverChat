@@ -12,8 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.angelans.finalProject.R;
+
+/**
+ * Fragment that holds new chat contact list
+ * @Author Vlad Tregubov
+ * @version 1
+ */
 public class ContactCardListNewChatFragment extends Fragment {
 
+    /**
+     * Empty Constructor that is required.
+     */
     public ContactCardListNewChatFragment() {
         // Required empty public constructor
     }

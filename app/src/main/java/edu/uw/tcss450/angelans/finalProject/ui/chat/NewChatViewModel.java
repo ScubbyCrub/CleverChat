@@ -26,21 +26,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
 
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 import edu.uw.tcss450.angelans.finalProject.model.Chat;
 import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
+/**
+ * View model that handles the data storage for the new chat fragment
+ * @author Vlad Tregubov
+ * @version 1
+ */
 public class NewChatViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> mStatus;
     private MutableLiveData<List<Contact>> mSelectedContacts;
     private MutableLiveData<List<Contact>> mContacts;
     private MutableLiveData<Integer> mChatId;
 
+    /**
+     * Constructor for the view model
+     * @param application the application
+     */
     public NewChatViewModel(@NonNull Application application) {
         super(application);
         mStatus = new MutableLiveData<>();
         mSelectedContacts = new MutableLiveData<>();
-//        mStatus.setValue(false);
         mSelectedContacts.setValue(new ArrayList<>());
         mContacts = new MutableLiveData<>();
         mContacts.setValue(new ArrayList<>());
@@ -49,31 +58,41 @@ public class NewChatViewModel extends AndroidViewModel {
 
     }
 
-    //add observer
+    /**
+     * Add observer to the status data
+     * @param owner owner of the obserrver
+     * @param observer observer datya type
+     */
     public void addNewChatObserver(@NonNull LifecycleOwner owner,
                                    @NonNull Observer<? super Boolean> observer){
         mStatus.observe(owner, observer);
     }
 
+    /**
+     * Add observer to chat selection data
+     * @param owner observer owner
+     * @param observer observer
+     */
     public void addSelectedChatObserver(@NonNull LifecycleOwner owner,
                                    @NonNull Observer<? super List<Contact>> observer){
         mContacts.observe(owner,observer);
     }
+
     //make the post request to create the new chat
     private void handleError(final
                              VolleyError error) {
         //you should add much better error handling in a production release.
         //i.e. YOUR PROJECT
         //TODO: Make better error handling
-//        Log.e("CONNECTION ERROR", error.getLocalizedMessage(;
         Log.e("Error.toString", error.getMessage());
         throw new IllegalStateException(error.getMessage());
     }
+
+    /**
+     * Handles the result of a successful request
+     * @param result json data objeect with the result
+     */
     public void handleResult(final JSONObject result) {
-        //on success navigate to chats fragment
-        //TODO: idk get this to navigate to the newly made chat in the end
-        System.out.println("new chat has been made!");
-        System.out.println(result.toString());
         try{
             mChatId.setValue(result.getInt("chatid"));
         } catch (JSONException e){
@@ -81,6 +100,12 @@ public class NewChatViewModel extends AndroidViewModel {
         }
         mStatus.setValue(true);;
     }
+
+    /**
+     *  Create the new chat
+     * @param name name of the chat
+     * @param jwt the users jwt
+     */
     public void connectPost(final String name, String jwt) {
 
         //make body
@@ -89,16 +114,15 @@ public class NewChatViewModel extends AndroidViewModel {
             memberIds[i] ="" + mSelectedContacts.getValue().get(i).getId();
         }
         JSONObject body = new JSONObject();
-//        System.out.println(members.toString());
         try {
             body.put("name",name);
             body.put("members",new JSONArray(memberIds));
-            System.out.println(body.getString("memberIds"));
         } catch(JSONException e){
             e.printStackTrace();
         }
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
         String url =
-                "http://10.0.2.2:5000/api/chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+                baseUrl + "chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
@@ -124,9 +148,14 @@ public class NewChatViewModel extends AndroidViewModel {
                 .add(request);
     }
 
+    /**
+     * Gets a list of users contacts from the database
+     * @param email The email of the user
+     * @param jwt the jwt of the user
+     */
     public void connectGetContacts(final String email, String jwt) {
-        System.out.printf("request for contacts:" + email + " " + jwt);
-        String url = "http://10.0.2.2:5000/api/contact/list";
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
+        String url = baseUrl + "contact/list";
 
         JSONObject body = new JSONObject();
         try {
@@ -160,7 +189,6 @@ public class NewChatViewModel extends AndroidViewModel {
     }
 
     private void handleSuccess(final JSONObject response){
-        Log.e("sdfsdf", "handleSuccess: This is the json data" + response.toString() );
         IntFunction<String> getString =
                 getApplication().getResources()::getString;
         try {
@@ -202,16 +230,27 @@ public class NewChatViewModel extends AndroidViewModel {
 
     }
 
+    /**
+     * adds contact to list of selected contacts
+     * @param contact contact
+     */
     public void addContact(Contact contact){
         mSelectedContacts.getValue().add(contact);
         Log.d("selected contacts", "addContact: " + mSelectedContacts.getValue().toString());
     }
-
+    /**
+     * remove contact to list of selected contacts
+     * @param contact contact
+     */
     public void removeContact(Contact contact){
         mSelectedContacts.getValue().remove(contact);
         Log.d("selected contacts", "addContact: " + mSelectedContacts.getValue().toString());
     }
 
+    /**
+     * get the id of the chat
+     * @return id of the chat
+     */
     public int getChatId(){
         return mChatId.getValue();
     }

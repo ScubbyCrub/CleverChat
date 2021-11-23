@@ -27,7 +27,11 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentNewChatBinding;
 import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
-
+/**
+ * Fragment that allows creation of new chat
+ * @author Vlad Tregubov
+ * @version  1
+ */
 public class NewChatFragment extends Fragment {
     private FragmentNewChatBinding mBinding;
     private NewChatViewModel mNewChatViewModel;
@@ -35,6 +39,7 @@ public class NewChatFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
     public void onCreate(@Nullable Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);
         //get shared prefs
@@ -45,24 +50,17 @@ public class NewChatFragment extends Fragment {
         //make needed requests
         mNewChatViewModel = new ViewModelProvider(getActivity())
                 .get(NewChatViewModel.class);
-        System.out.println(prefs.getString("email","") + " is the email");
         mNewChatViewModel.connectGetContacts(prefs.getString("email",""),
                 prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
+
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState){
         super.onViewCreated(theView,theSavedInstanceState);
-        String[] members = new String[1];
-
-        members[0] = "15";
-
-        //send the request
-        Log.e("dfdfg", "onViewCreated: is this even working " );
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
-//        mNewChatViewModel.connectGetContacts("vladislavtregubov00@gmail.com", prefs.getString("jwt",""));
         mNewChatViewModel.addNewChatObserver(getViewLifecycleOwner(), created -> {
             //set up navigation
             NewChatFragmentDirections.ActionNewChatFragmentToSingleChatFragment dir =
@@ -85,23 +83,12 @@ public class NewChatFragment extends Fragment {
             System.out.println("My Contact: " + contactList.toString());
             mBinding.listRoot.setAdapter(new ContactCardListRecyclerViewAdapter(contactList, add, remove));
         });
-
-
-        //add observer to navigate away from the page
-//        mNewChatViewModel.addNewChatObserver(getViewLifecycleOwner(), data -> {
-//            Navigation.findNavController(getView()).navigate(
-//                    NewChatFragmentDirections.actionNewChatFragmentToNavigationChat()
-//            );
-//        });
-
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         mBinding = FragmentNewChatBinding.inflate(inflater);
         return mBinding.getRoot();
-//        return inflater.inflate(R.layout.fragment_new_chat, container, false);
     }
 }

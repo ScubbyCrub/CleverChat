@@ -112,10 +112,9 @@ public class ChatListViewModel extends AndroidViewModel {
      * @param jwt JWT auth token for user
      */
     public void connectGet(String jwt) {
-        //TODO update this to use base url
-        String baseUrl = String.valueOf(R.string.base_url);
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
         String url =
-                "http://10.0.2.2:5000/api/chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+                baseUrl+ "chat"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

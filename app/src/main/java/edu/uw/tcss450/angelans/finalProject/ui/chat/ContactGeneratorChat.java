@@ -6,6 +6,11 @@ import java.util.List;
 import edu.uw.tcss450.angelans.finalProject.model.Chat;
 import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
+/**
+ * Generates mock contacts
+ * @author Vlad Tregubov
+ * @version  1
+ */
 public class ContactGeneratorChat {
     private static final Contact[] CONTACTS;
     public static final int COUNT = 20;
