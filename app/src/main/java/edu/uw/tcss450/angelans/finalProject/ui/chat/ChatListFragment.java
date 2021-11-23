@@ -16,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.function.Consumer;
+
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatListBinding;
+import edu.uw.tcss450.angelans.finalProject.model.Chat;
 
 public class ChatListFragment extends Fragment {
     private ChatListViewModel mModel;
@@ -60,9 +63,16 @@ public class ChatListFragment extends Fragment {
 
         FragmentChatListBinding binding = FragmentChatListBinding.bind(getView());
         //assign the adapaer to the actual recycler view3
+        Consumer<Chat> clicked = (chat) -> {
+//            Log.e("clicked chat", chat.getName() + " " + chat.getId() );
+            ChatListFragmentDirections.ActionNavigationChatToSingleChatFragment dir =
+                    ChatListFragmentDirections.actionNavigationChatToSingleChatFragment();
+            dir.setId(chat.getId());
+            Navigation.findNavController(getView()).navigate(dir);
+        };
         mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
             binding.listRoot.setAdapter(
-                    new ChatRecyclerViewAdapter(chatList)
+                    new ChatRecyclerViewAdapter(chatList, clicked)
             );
             //TODO: Add loading overlay here
         });

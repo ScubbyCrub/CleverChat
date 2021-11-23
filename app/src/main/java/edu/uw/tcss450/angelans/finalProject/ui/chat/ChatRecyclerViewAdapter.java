@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatCardBinding;
@@ -17,9 +18,11 @@ import edu.uw.tcss450.angelans.finalProject.model.Chat;
 
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.ChatViewHolder> {
     private List<Chat> mChats = new ArrayList<Chat>();
+    private final Consumer<Chat> selectedChat;
 
-    public ChatRecyclerViewAdapter(List<Chat> items){
+    public ChatRecyclerViewAdapter(List<Chat> items, Consumer<Chat> selectedChat){
         this.mChats = items;
+        this.selectedChat = selectedChat;
     }
     @NonNull
     @Override
@@ -93,6 +96,9 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 //            binding.textPubdate.setText(blog.getPubDate());
             //set the name for the chat
             binding.textContactName.setText(chat.getName());
+            binding.cardRoot.setOnClickListener(data -> {
+                selectedChat.accept(chat);
+            });
             //Use methods in the HTML class to format the HTML found in the text
 //            final String preview =  Html.fromHtml(
 //                    blog.getTeaser(),
