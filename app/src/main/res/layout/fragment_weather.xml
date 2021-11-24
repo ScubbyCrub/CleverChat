@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6DD5FA">
+    android:background="@drawable/button_gradient_color">
 
     <TextView
         android:id="@+id/city_name"
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#3CF1EBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -104,7 +104,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/sunrise" />
+                    android:src="@drawable/sunrise"/>
 
                 <Space
                     android:layout_width="wrap_content"
@@ -114,7 +114,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunrise"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/sunrise"
@@ -132,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#3CF1EBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -150,7 +151,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sunset"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/sunset"
@@ -168,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#3CF1EBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -186,7 +188,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wind"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/wind"
@@ -204,7 +207,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#3CF1EBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -222,7 +225,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pressure"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/pressure"
@@ -240,7 +244,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#3CF1EBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -258,7 +262,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Humidity"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/humidity"
@@ -274,9 +279,10 @@
         android:id="@+id/hourly_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#3CF1EBF1"
+        android:layout_marginTop="13.5dp"
+        android:background="@drawable/outerline_white"
         android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detailsContainer">
 
@@ -285,8 +291,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/daily_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="190dp"
+        android:background="@drawable/outerline_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hourly_recyclerView"
         app:layout_constraintBottom_toBottomOf="parent"/>
