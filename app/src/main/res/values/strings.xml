@@ -20,7 +20,7 @@
     <string name="text_email_sent">Please check your email. You will receive follow up instructions
         if there is account associated with this email.</string>
     <string name="new_chat">New Chat</string>
-    <string name="chats">Chats:</string>
+    <string name="chats">Chat</string>
     <string name="text_no_contact">You do not have any contact.</string>
     <string name="placeholder_username">Username</string>
     <string name="placeholder_email">sampleEmail@website.com</string>
@@ -28,6 +28,7 @@
     <string name="keys_prefs_jwt">Shared Prefs JWT</string>
     <string name="keys_prefs_signed_in">stay_signed_in</string>
     <string name="text_search">Search</string>
+    <string name="change_theme">Switch theme</string>
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->

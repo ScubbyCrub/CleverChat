@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/main_white"
+            android:textColor="@color/weather_text_color"
             android:textStyle="bold|italic"/>
 
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/main_white"
+            android:textColor="@color/weather_text_color"
             android:textStyle="bold|italic"/>
     </LinearLayout>
 

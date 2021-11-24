@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentHomeBinding;
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;
 
     UserInfoViewModel mModel;
+    SwitchCompat switchCompat;
 
     /**
      * Constructor for HomeFragment.
@@ -82,6 +86,23 @@ public class HomeFragment extends Fragment {
                 getActivity()).get(PushyTokenViewModel.class);
 //        Log.d("HomeFragment Tokens",  "Email: " + mModel.getEmail()
 //                + "\n JWT Token: " + mModel.getmJwt());
+
+
+        //DarkMode
+        mBinding.switchDarkmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                //Check condition
+                if(mBinding.switchDarkmode.isChecked()) {
+                    //Switch to dark mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                else {
+                    //Switch back to light mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
     }
 
     /**

@@ -48,9 +48,9 @@
         android:id="@+id/button_back_to_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_dark_blue"
+        android:backgroundTint="@color/gradient_background_1"
         android:text="@string/button_back_to_sign_in"
-        android:textColor="@color/main_white"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
 
