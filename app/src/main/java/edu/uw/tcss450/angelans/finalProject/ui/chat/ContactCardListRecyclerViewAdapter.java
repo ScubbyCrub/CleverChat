@@ -1,5 +1,6 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.Layout;
 import android.util.Log;
@@ -75,20 +76,29 @@ public class ContactCardListRecyclerViewAdapter extends RecyclerView.Adapter<Con
         }
 
         void setContact(final Contact contact) {
+            Resources res = mView.getContext().getResources();
             mContact = contact;
-            binding.layoutRootCardNewChat.setBackgroundColor(Color.LTGRAY);
+            binding.layoutRootCardNewChat.setBackgroundColor(
+                    res.getColor(R.color.white, null));
             binding.cardRootNewChat.setOnClickListener(data -> {
                 if(!selectedContacts.contains(contact)){
                     //add to contact
                     selectedContacts.add(contact);
                     mAddContact.accept(contact);
-                    binding.layoutRootCardNewChat.setBackgroundColor(Color.GRAY);
+                    binding.layoutRootCardNewChat.setBackgroundColor(
+                            res.getColor(R.color.background_gradient_2_lightest, null));
                 } else {
                     selectedContacts.remove(contact);
-                    binding.layoutRootCardNewChat.setBackgroundColor(Color.LTGRAY);
+                    binding.layoutRootCardNewChat.setBackgroundColor(
+                            res.getColor(R.color.white, null));
                     mRemoveContact.accept(contact);
                 }
             });
+
+            binding.textContactNameNewChat.setTextColor(
+                    res.getColor(R.color.black, null));
+            binding.textContactUserNameNewChat.setTextColor(
+                    res.getColor(R.color.black, null));
 
              binding.textContactNameNewChat.setText(contact.getFirstName());
              binding.textContactUserNameNewChat.setText(contact.getUsername());
