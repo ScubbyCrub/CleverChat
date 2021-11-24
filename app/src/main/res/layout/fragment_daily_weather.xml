@@ -9,20 +9,19 @@
         android:id="@+id/daily_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3CF1EBF1"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/week_day"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold|italic"
             android:text="Wednesday"
+            android:textColor="@color/white"
+            android:textSize="15dp"
 
-            android:textSize="15dp" />
+            android:textStyle="bold|italic" />
 
         <Space
             android:layout_width="5dp"
@@ -43,10 +42,10 @@
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold|italic"
             android:text="69%"
-            android:textSize="15dp" />
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
 
         <Space
             android:layout_width="10dp"
@@ -57,10 +56,10 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold|italic"
             android:text="H:8"
-            android:textSize="15dp" />
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
 
         <Space
             android:layout_width="10dp"
@@ -71,10 +70,10 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold|italic"
             android:text="L:0 "
-            android:textSize="15dp" />
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
 </RelativeLayout>

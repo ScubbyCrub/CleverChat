@@ -10,59 +10,57 @@
 
     <ImageButton
         android:id="@+id/button_add_contact"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/button_round"
-        android:src="@drawable/ic_search_white_30dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:layout_constraintEnd_toEndOf="@+id/layout_root"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toEndOf="@+id/text_title_contact"
-        app:layout_constraintTop_toTopOf="@+id/layout_root" />
+        app:layout_constraintHorizontal_bias="0.804"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="169dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="@string/hint_email"
         android:inputType="textPersonName"
-        android:text="@string/text_search"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.689"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
 
     <TextView
         android:id="@+id/text_title_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:fontFamily="sans-serif"
         android:text="@string/title_contact"
         android:textColor="@color/white"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/layout_wait"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_contact"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
-        android:layout_width="347dp"
-        android:layout_height="486dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="357dp"
+        android:layout_height="388dp"
+        android:layout_marginTop="48dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
         tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
         tools:listitem="@layout/fragment_contact_card" />
 
@@ -70,8 +68,8 @@
         android:id="@+id/layout_wait"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:visibility="gone"
+        android:background="@drawable/button_gradient_color"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

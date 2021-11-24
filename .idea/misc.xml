@@ -54,23 +54,34 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.28177083333333336" />
+        <entry key="app/src/main/res/drawable/outerline_white.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_chat_card.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_chat_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.25068870523415976" />
         <entry key="app/src/main/res/layout/fragment_contact_card.xml" value="0.2827587565989237" />
+        <entry key="app/src/main/res/layout/fragment_contact_card_list_new_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_contact_card_new_chat.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_contact_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_daily_weather.xml" value="0.19021739130434784" />
+        <entry key="app/src/main/res/layout/fragment_email_verification.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_hourly_weather.xml" value="0.19021739130434784" />
+        <entry key="app/src/main/res/layout/fragment_hourly_weather.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_new_chat.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/fragment_password_reset.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1404494382022472" />
+        <entry key="app/src/main/res/layout/fragment_single_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_single_chat_message.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_weather_hour.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_weather_hourly.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/drop_down.xml" value="0.178125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user1_round.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_avt_user2.xml" value="0.1" />
