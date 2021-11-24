@@ -78,7 +78,10 @@ public class NewChatViewModel extends AndroidViewModel {
         mContacts.observe(owner,observer);
     }
 
-    //make the post request to create the new chat
+    /**
+     * Handle any VolleyErrors that come back from web end communication.
+     * @param error The Volley error received from web end communication.
+     */
     private void handleError(final
                              VolleyError error) {
         //you should add much better error handling in a production release.
@@ -188,6 +191,10 @@ public class NewChatViewModel extends AndroidViewModel {
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     * Handle a successful input from the web end communication
+     * @param response The JSON web response to a web request
+     */
     private void handleSuccess(final JSONObject response){
         IntFunction<String> getString =
                 getApplication().getResources()::getString;
@@ -232,7 +239,7 @@ public class NewChatViewModel extends AndroidViewModel {
 
     /**
      * adds contact to list of selected contacts
-     * @param contact contact
+     * @param contact the user's new contact to add
      */
     public void addContact(Contact contact){
         mSelectedContacts.getValue().add(contact);
@@ -240,7 +247,7 @@ public class NewChatViewModel extends AndroidViewModel {
     }
     /**
      * remove contact to list of selected contacts
-     * @param contact contact
+     * @param contact the user's contact to remove
      */
     public void removeContact(Contact contact){
         mSelectedContacts.getValue().remove(contact);

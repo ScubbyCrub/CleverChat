@@ -8,6 +8,7 @@ import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
 /**
  * Generates mock contacts
+ *
  * @author Vlad Tregubov
  * @version  1
  */
@@ -23,13 +24,26 @@ public class ContactGeneratorChat {
         }
     }
 
+    /**
+     * Getter for a list of the user's contacts.
+     *
+     * @return A list of the user's contacts
+     */
     public static List<Contact> getContactList() {
         return Arrays.asList(CONTACTS);
     }
 
+    /**
+     * Getter for an array of the user's contacts.
+     *
+     * @return An array of the user's contacts.
+     */
     public static Contact[] getContacts() {
         return Arrays.copyOf(CONTACTS, CONTACTS.length);
     }
 
+    /**
+     * Constructor for ContactGeneratorChat
+     */
     public  ContactGeneratorChat() { }
 }

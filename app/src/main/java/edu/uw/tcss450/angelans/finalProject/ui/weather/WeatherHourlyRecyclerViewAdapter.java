@@ -11,8 +11,20 @@ import java.util.List;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentHourlyWeatherBinding;
 
+/**
+ * The RecyclerView that displays hourly weather information
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class WeatherHourlyRecyclerViewAdapter extends RecyclerView.Adapter<WeatherHourlyRecyclerViewAdapter.WeatherHourlyViewHolder> {
     private final List<Weather> mWeather;
+
+    /**
+     * Constructor for WeatherHourlyRecyclerViewAdapter
+     *
+     * @param weather The list of Weather data to display
+     */
     public WeatherHourlyRecyclerViewAdapter(List<Weather> weather) {
         this.mWeather = weather;
     }

@@ -23,14 +23,16 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
  * their contacts page.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 2
  */
-
 public class ContactListFragment extends Fragment {
 
     private ContactListViewModel mContactListViewModel;
     private UserInfoViewModel mUserModel;
 
+    /**
+     * Constructor for ContactListFragment
+     */
     public ContactListFragment() {
         // Required empty public constructor
     }
@@ -77,7 +79,4 @@ public class ContactListFragment extends Fragment {
             mContactListViewModel.addContact(email, toAdd, jwt);
         });
     }
-
-
-
 }

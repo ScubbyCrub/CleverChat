@@ -8,9 +8,10 @@ import edu.uw.tcss450.angelans.finalProject.R;
 
 /**
  * This class is used to create contact username, name and images for testing.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
  */
-
-
 public class ContactGenerator {
 //    public static final int COUNT = 20;
 //    public static final ContactInfo[] CONTACTS;

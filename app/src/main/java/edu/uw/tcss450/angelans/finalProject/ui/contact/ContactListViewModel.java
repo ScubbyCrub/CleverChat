@@ -28,25 +28,56 @@ import java.util.Objects;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
+/**
+ * ViewModel that stores information relevant to displaying contacts beyond the lifecycle
+ * of a fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class ContactListViewModel extends AndroidViewModel {
 
     private Map<String, MutableLiveData<List<ContactInfo>>> mContactList;
 
+    /**
+     * Constructor for ContactListViewModel
+     *
+     * @param application The application the ViewModel exists in
+     */
     public ContactListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new HashMap<>();
     }
 
+    /**
+     * Adds an observer to the contact list to inform the observer of list updates.
+     *
+     * @param email The current user's email.
+     * @param owner The fragment's lifecycle owner
+     * @param observer The observer that wants to know when the contacts list is updated.
+     */
     public void addContactListObserver(String email,
                                        @NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<ContactInfo>> observer) {
         getOrCreateMapEntry(email).observe(owner, observer);
     }
 
+    /**
+     * Getter for receiving a contact list of a user based on their email.
+     *
+     * @param email The user's email
+     * @return The user's contact list
+     */
     public List<ContactInfo> getContactListByEMail(final String email) {
         return getOrCreateMapEntry(email).getValue();
     }
 
+    /**
+     * Map one contact to another contact
+     *
+     * @param email The user's desired contact to connect with
+     * @return A map entry for connecting two contacts
+     */
     private MutableLiveData<List<ContactInfo>> getOrCreateMapEntry(final String email) {
         if(!mContactList.containsKey(email)) {
             mContactList.put(email, new MutableLiveData<>(new ArrayList<>()));
@@ -54,6 +85,12 @@ public class ContactListViewModel extends AndroidViewModel {
         return mContactList.get(email);
     }
 
+    /**
+     * Returns the contact list of a user from the database
+     *
+     * @param email The user's email
+     * @param jwt The user's JWT token
+     */
     public void getContactList(final String email, final String jwt) {
        String url = getApplication().getResources().getString(R.string.base_url) +
                  "contact/list";
@@ -89,6 +126,11 @@ public class ContactListViewModel extends AndroidViewModel {
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
     }
 
+    /**
+     * How to handle a successful return from the web service interaction.
+     *
+     * @param response The response from the web service.
+     */
     private void handelSuccess(final JSONObject response) {
         List<ContactInfo> list;
         if (!response.has("email")) {
@@ -122,6 +164,11 @@ public class ContactListViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * How to handle a Volley error if one returns from the web service.
+     *
+     * @param error The Volley error from the web service.
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
@@ -135,7 +182,13 @@ public class ContactListViewModel extends AndroidViewModel {
         }
     }
 
-
+    /**
+     * Adds a contact connection to the database of contacts
+     *
+     * @param myEmail The user's email
+     * @param toAdd The username of the contact to be added
+     * @param jwt The user's JWT token
+     */
     public void addContact(final String myEmail, final String toAdd, final String jwt) {
 
         String url =  getApplication().getResources().getString(R.string.base_url)  +
@@ -172,9 +225,21 @@ public class ContactListViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
     }
+
+    /**
+     * Display a log for the web service response of adding a contact
+     *
+     * @param data The JSON response from the web service
+     */
     public void handleAddedSuccess(final JSONObject data){
         Log.d("data", data.toString());
     }
+
+    /**
+     * Display a stack trace of if adding a contact through the web service threw a Volley error
+     *
+     * @param error The Volley error from the web service
+     */
     public void handleAddedError(final VolleyError error){
         error.printStackTrace();
     }
