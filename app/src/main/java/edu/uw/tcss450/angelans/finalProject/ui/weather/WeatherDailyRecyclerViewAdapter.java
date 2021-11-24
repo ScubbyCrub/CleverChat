@@ -9,8 +9,20 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentDailyWeatherBinding;
 
+/**
+ * The RecyclerView that displays daily weather information
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class WeatherDailyRecyclerViewAdapter extends RecyclerView.Adapter<WeatherDailyRecyclerViewAdapter.WeatherDailyViewHolder> {
     private final List<Weather> mWeather;
+
+    /**
+     * Constructor for WeatherDailyRecyclerViewAdapter
+     *
+     * @param weather The Weather the list of Weather data to display
+     */
     public WeatherDailyRecyclerViewAdapter(List<Weather> weather) {
         this.mWeather = weather;
     }

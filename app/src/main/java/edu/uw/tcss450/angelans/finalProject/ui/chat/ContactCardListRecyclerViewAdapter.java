@@ -65,12 +65,22 @@ public class ContactCardListRecyclerViewAdapter extends RecyclerView.Adapter<Con
         public FragmentContactCardNewChatBinding binding;
         private Contact mContact;
 
+        /**
+         * Constructor for ContactViewHolder
+         *
+         * @param view The view that ContactViewHolder exists in
+         */
         public ContactViewHolder(View view) {
             super(view);
             mView = view;
             binding = FragmentContactCardNewChatBinding.bind(view);
         }
 
+        /**
+         * Sets the contact that should be displayed in the recycler view.
+         *
+         * @param contact A member of the user's contact list.
+         */
         void setContact(final Contact contact) {
             Resources res = mView.getContext().getResources();
             mContact = contact;

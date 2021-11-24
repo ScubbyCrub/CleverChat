@@ -25,12 +25,13 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentWeatherBinding;
  * with a chat room.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 2
  */
 public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
     private String tempSymbol = "°C";
     private Boolean flag = true;
+
     @Override
     public void onCreate(@Nullable Bundle theSavedInstanceState) {
         super.onCreate(theSavedInstanceState);

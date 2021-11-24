@@ -21,6 +21,12 @@ import java.util.List;
 import java.util.Map;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
+/**
+ * Weather ViewModel that protects weather information beyond the lifecycle of a fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class WeatherViewModel extends AndroidViewModel {
     private Map<String, MutableLiveData<List<Weather>>> mWeather;
 
@@ -45,10 +51,22 @@ public class WeatherViewModel extends AndroidViewModel {
         getOrCreateMapEntry(time).observe(owner, observer);
     }
 
+    /**
+     * Returns weather information based on the time specified
+     *
+     * @param time The time to retrieve weather information from
+     * @return A list of weather patterns that match the given time of prediction
+     */
     public List<Weather> getWeatherListByTime(final String time) {
         return getOrCreateMapEntry(time).getValue();
     }
 
+    /**
+     * Creates a map entry between the time of weather and the weather's data
+     *
+     * @param time The time to map to a weather pattern
+     * @return A list of weather patterns that match the given time of prediction
+     */
     private MutableLiveData<List<Weather>> getOrCreateMapEntry(final String time) {
         if(!mWeather.containsKey(time)) {
             mWeather.put(time, new MutableLiveData<>(new ArrayList<Weather>()));
@@ -56,6 +74,11 @@ public class WeatherViewModel extends AndroidViewModel {
         return mWeather.get(time);
     }
 
+    /**
+     * Retrieves weather data from openweathermap.com based on the time requested
+     *
+     * @param time The time at which the weather pattern should happen
+     */
     public void getDataByTime(String time) {
         String url;
         if (time == "current"){
@@ -98,6 +121,11 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
 
+    /**
+     * How to handle if the network response comes back successful.
+     *
+     * @param response The web service's response to our web request.
+     */
     private void handelSuccess(final JSONObject response) {
         List<Weather> list;
         if (!response.has("main") && !response.has("daily") && !response.has("hourly")) {

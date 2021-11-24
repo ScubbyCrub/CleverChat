@@ -10,9 +10,20 @@ import java.util.List;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 
+/**
+ * The RecyclerView that displays Contacts
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ContactViewHolder> {
     private final List<ContactInfo> mContactList;
 
+    /**
+     * Constructor for ContactRecyclerViewAdapter
+     *
+     * @param contactInfos The list of the user's contacts to display
+     */
     public ContactRecyclerViewAdapter(List<ContactInfo> contactInfos) {
         mContactList = contactInfos;
     }

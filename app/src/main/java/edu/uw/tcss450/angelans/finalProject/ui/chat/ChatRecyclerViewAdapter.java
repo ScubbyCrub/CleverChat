@@ -61,6 +61,11 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         public FragmentChatCardBinding binding;
         private Chat mChat;
 
+        /**
+         * Constructor for ChatViewHolder
+         *
+         * @param view The view that this ChatViewHolder exists in
+         */
         public ChatViewHolder(View view) {
             super(view);
             mView = view;

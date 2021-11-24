@@ -55,6 +55,8 @@ public class ChatListFragment extends Fragment {
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
         mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
