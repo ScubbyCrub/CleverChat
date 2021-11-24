@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toTopOf="@+id/view_scroll"
         app:layout_constraintVertical_bias="0.125"
-        app:tint="@color/background_gradient_1" />
+        app:tint="@color/main_dark_blue" />
 
     <TextView
         android:id="@+id/text_home_username"
@@ -76,9 +76,9 @@
         android:id="@+id/button_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background_gradient_1"
+        android:backgroundTint="@color/main_dark_blue"
         android:text="@string/action_sign_out"
-        android:textColor="@color/white"
+        android:textColor="@color/main_white"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="parent"

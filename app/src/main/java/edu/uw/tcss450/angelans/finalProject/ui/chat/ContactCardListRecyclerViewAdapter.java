@@ -1,15 +1,11 @@
 package edu.uw.tcss450.angelans.finalProject.ui.chat;
 
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -79,26 +75,26 @@ public class ContactCardListRecyclerViewAdapter extends RecyclerView.Adapter<Con
             Resources res = mView.getContext().getResources();
             mContact = contact;
             binding.layoutRootCardNewChat.setBackgroundColor(
-                    res.getColor(R.color.white, null));
+                    res.getColor(R.color.main_white, null));
             binding.cardRootNewChat.setOnClickListener(data -> {
                 if(!selectedContacts.contains(contact)){
                     //add to contact
                     selectedContacts.add(contact);
                     mAddContact.accept(contact);
                     binding.layoutRootCardNewChat.setBackgroundColor(
-                            res.getColor(R.color.background_gradient_2_lightest, null));
+                            res.getColor(R.color.main_chat_contact, null));
                 } else {
                     selectedContacts.remove(contact);
                     binding.layoutRootCardNewChat.setBackgroundColor(
-                            res.getColor(R.color.white, null));
+                            res.getColor(R.color.main_white, null));
                     mRemoveContact.accept(contact);
                 }
             });
 
             binding.textContactNameNewChat.setTextColor(
-                    res.getColor(R.color.black, null));
+                    res.getColor(R.color.main_black, null));
             binding.textContactUserNameNewChat.setTextColor(
-                    res.getColor(R.color.black, null));
+                    res.getColor(R.color.main_black, null));
 
              binding.textContactNameNewChat.setText(contact.getFirstName());
              binding.textContactUserNameNewChat.setText(contact.getUsername());

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_gradient_1">#2C3E50</color>
-    <color name="background_gradient_2">#FD746C</color>
-    <color name="background_gradient_1_lightest">#8fb3cc</color>
-    <color name="background_gradient_2_lightest">#FFBBB3</color>
-    <color name="background_gradient_2_darker">#EE5F58</color>
-    <color name="red">#a73737</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="blue">#6DD5FA</color>
-    <color name="gray">#485563</color>
+    <color name="main_dark_blue">#2C3E50</color>
+    <color name="main_light_red">#FD746C</color>
+    <color name="main_chat_background">#8fb3cc</color>
+    <color name="main_chat_contact">#FFBBB3</color>
+    <color name="main_chat_contact_darker">#EE5F58</color>
+    <color name="main_red">#a73737</color>
+    <color name="main_black">#FF000000</color>
+    <color name="main_white">#FFFFFFFF</color>
+    <color name="main_gray">#485563</color>
 </resources>

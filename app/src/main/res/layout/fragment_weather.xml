@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Tacoma"
-        android:textColor="@color/white"
+        android:textColor="@color/main_white"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Clear Sky"
-            android:textColor="@color/white"
+            android:textColor="@color/main_white"
             android:textSize="18dp" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:fontFamily="sans-serif-thin"
             android:text="29°C"
-            android:textColor="@color/white"
+            android:textColor="@color/main_white"
             android:textSize="90dp" />
 
         <LinearLayout
@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Min Temp: 5*C"
-                android:textColor="@color/white" />
+                android:textColor="@color/main_white" />
 
             <Space
                 android:layout_width="50dp"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max Temp: 15*C"
-                android:textColor="@color/white" />
+                android:textColor="@color/main_white" />
         </LinearLayout>
 
     </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@color/main_white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sunrise"
                     android:textSize="12dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/main_black"/>
 
                 <TextView
                     android:id="@+id/sunrise"
@@ -133,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@color/main_white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sunset"
                     android:textSize="12dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/main_black"/>
 
                 <TextView
                     android:id="@+id/sunset"
@@ -170,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@color/main_white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:text="Wind"
                     android:textSize="12dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/main_black"/>
 
                 <TextView
                     android:id="@+id/wind"
@@ -207,7 +207,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@color/main_white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -226,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:text="Pressure"
                     android:textSize="12dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/main_black"/>
 
                 <TextView
                     android:id="@+id/pressure"
@@ -244,7 +244,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@color/main_white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -263,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:text="Humidity"
                     android:textSize="12dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/main_black"/>
 
                 <TextView
                     android:id="@+id/humidity"

@@ -30,7 +30,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="TODO"
         android:src="@drawable/ic_send_white_30dp"
-        app:tint="@color/red"
+        app:tint="@color/main_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
