@@ -44,6 +44,7 @@
         <entry key="..\:/Users/vladi/AndroidStudioProjects/TCSS450-Group6-Lab1Practice/TCSS450-Group6-GroupProject/app/src/main/res/menu/drop_down.xml" value="0.196875" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/button_gradient_color.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_gradient_color_chat.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/drawable/button_round.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/button_state_list_anim_material.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/gradient_color.xml" value="0.27760416666666665" />
@@ -53,12 +54,15 @@
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/drawable/ic_send_gray_24dp.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/drawable/ic_send_white_24dp.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/drawable/ic_send_white_30dp.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/outerline_white.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_chat_card.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_chat_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chat_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.25068870523415976" />
         <entry key="app/src/main/res/layout/fragment_contact_card.xml" value="0.2827587565989237" />

@@ -85,26 +85,26 @@ public class ContactCardListRecyclerViewAdapter extends RecyclerView.Adapter<Con
             Resources res = mView.getContext().getResources();
             mContact = contact;
             binding.layoutRootCardNewChat.setBackgroundColor(
-                    res.getColor(R.color.main_white, null));
+                    res.getColor(R.color.card_color, null));
             binding.cardRootNewChat.setOnClickListener(data -> {
                 if(!selectedContacts.contains(contact)){
                     //add to contact
                     selectedContacts.add(contact);
                     mAddContact.accept(contact);
                     binding.layoutRootCardNewChat.setBackgroundColor(
-                            res.getColor(R.color.main_chat_contact, null));
+                            res.getColor(R.color.card_select, null));
                 } else {
                     selectedContacts.remove(contact);
                     binding.layoutRootCardNewChat.setBackgroundColor(
-                            res.getColor(R.color.main_white, null));
+                            res.getColor(R.color.card_color, null));
                     mRemoveContact.accept(contact);
                 }
             });
 
             binding.textContactNameNewChat.setTextColor(
-                    res.getColor(R.color.main_black, null));
+                    res.getColor(R.color.card_main_text, null));
             binding.textContactUserNameNewChat.setTextColor(
-                    res.getColor(R.color.main_black, null));
+                    res.getColor(R.color.card_main_text, null));
 
              binding.textContactNameNewChat.setText(contact.getFirstName());
              binding.textContactUserNameNewChat.setText(contact.getUsername());

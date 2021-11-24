@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gradient_background_1">#2C3E50</color>
+    <color name="gradient_background_2">#FD746C</color>
+
+    <color name="chat_gradient_1">#212121</color>
+    <color name="chat_gradient_2">#000000</color>
+    <color name="chat_input">#FFFFFF</color>
+    <color name="chat_input_hover">#FFFFFF</color>
+    <color name="send_button">#FFFFFF</color>
+
+    <color name="meassage_send">#a73737</color>
+    <color name="message_receive">#616161</color>
+
+    <color name="red_for_question">#a73737</color>
+
+    <color name="card_color">#212121</color>
+    <color name="card_main_text">#FFFFFF</color>
+    <color name="card_sub_text">#E0E0E0</color>
+    <color name="card_select">#FD746C</color>
+
+    <color name="text_color">#FFFFFF</color>
+
+    <color name="weather_card">#EEEEEE</color>
+    <color name="weather_card_main_text">#FF000000</color>
+    <color name="weather_text_color">#FFFFFF</color>
+
+    <color name="round_add_button">#83FFFFFF</color>
+</resources>

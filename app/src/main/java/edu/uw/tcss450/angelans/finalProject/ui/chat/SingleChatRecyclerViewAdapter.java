@@ -95,14 +95,14 @@ public class SingleChatRecyclerViewAdapter
 
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
-                            res.getColor(R.color.main_dark_blue, null),
+                            res.getColor(R.color.meassage_send, null),
                                 CHAT_FULL_OPACITY_ALPHA));
                 mBinding.textMessage.setTextColor(
-                        res.getColor(R.color.main_white, null));
+                        res.getColor(R.color.text_color, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
-                        res.getColor(R.color.main_dark_blue, null),
+                        res.getColor(R.color.meassage_send, null),
                         CHAT_FULL_OPACITY_ALPHA));
 
                 //Round the corners on the left side
@@ -131,16 +131,16 @@ public class SingleChatRecyclerViewAdapter
 
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
-                                res.getColor(R.color.main_chat_contact_darker, null),
+                                res.getColor(R.color.message_receive, null),
                                 CHAT_FULL_OPACITY_ALPHA));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
-                        res.getColor(R.color.main_chat_contact_darker, null),
+                        res.getColor(R.color.message_receive, null),
                         CHAT_FULL_OPACITY_ALPHA));
 
                 mBinding.textMessage.setTextColor(
-                        res.getColor(R.color.main_white, null));
+                        res.getColor(R.color.text_color, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(

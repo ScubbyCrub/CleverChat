@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/main_white"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/card_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_root_card_new_chat"
@@ -21,7 +21,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:text="TextView"
-            android:textColor="@color/main_black"
+            android:textColor="@color/card_main_text"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/text_contact_name_new_chat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="TextView"
+            android:textColor="@color/card_sub_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.046"

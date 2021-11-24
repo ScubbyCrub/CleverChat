@@ -41,24 +41,23 @@
         android:src="@drawable/ic_profile_icon_background_white_100dp"
         app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toTopOf="@+id/view_scroll"
         app:layout_constraintVertical_bias="0.125"
-        app:tint="@color/main_dark_blue" />
+        app:tint="@color/gradient_background_1" />
 
     <TextView
         android:id="@+id/text_home_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/placeholder_username"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
-        app:layout_constraintTop_toTopOf="@+id/view_scroll"
-        app:layout_constraintVertical_bias="0.32" />
+        app:layout_constraintTop_toBottomOf="@+id/image_home_profile_icon_background" />
 
     <ImageView
         android:id="@+id/image_home_profile_icon_default"
@@ -76,15 +75,27 @@
         android:id="@+id/button_sign_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_dark_blue"
+        android:backgroundTint="@color/gradient_background_1"
         android:text="@string/action_sign_out"
-        android:textColor="@color/main_white"
+        android:textColor="@color/text_color"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
-        app:layout_constraintTop_toTopOf="@+id/view_scroll"
-        app:layout_constraintVertical_bias="0.931" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_darkmode"
+        app:layout_constraintVertical_bias="0.594" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_darkmode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Dark Mode"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/view_scroll"
+        app:layout_constraintTop_toBottomOf="@+id/text_home_username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

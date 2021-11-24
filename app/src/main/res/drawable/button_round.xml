@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <size android:height="40dp" android:width="40dp"/>
-    <solid android:color="#8DFFFFFF"/>
+    <solid android:color="@color/round_add_button"/>
     <corners android:radius="20dp"/>
 </shape>
