@@ -33,7 +33,7 @@ import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatViewModel;
  * sign in to an account (Home, Contacts, Chat, Weather, etc.).
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 2
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates the activity
      *
-     * @param theSavedInstanceState
+     * @param theSavedInstanceState Saved instance states that should be applied to this
+     *                              sign in session.
      */
     @Override
     protected void onCreate(Bundle theSavedInstanceState) {
@@ -67,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_contact, R.id.navigation_chat, R.id.navigation_weather)
+                R.id.navigation_home, R.id.navigation_contact, R.id.navigation_chat,
+                R.id.navigation_weather)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this,
+                R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
@@ -77,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this,
+                R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -102,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method inflates the menu and displays it on the screen
-     * @param menu the menu object to inflate
+     *
+     * @param menu The menu object to inflate.
      * @return true
      */
     @Override
@@ -113,9 +118,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This handles clicks to the menu and signs out the user
-     * @param item the item we are checking click for
-     * @return the item
+     * This handles clicks to the options menu and signs out the user.
+     *
+     * @param item The item we are checking click for.
+     * @return The item the user clicked on.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -130,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Removes the users jwt token from the saved preferences on signout
+     * Removes the users JWT token from the saved preferences on sign out.
      */
     private void signOut() {
         SharedPreferences prefs =
@@ -153,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * A BroadcastReceiver that listens for messages sent from PushReceiver
+     * A BroadcastReceiver that listens for messages sent from PushReceiver.
      */
     private class MainPushMessageReceiver extends BroadcastReceiver {
         private SingleChatViewModel mModel = new ViewModelProvider(MainActivity.this)
@@ -167,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
             NavDestination nd = nc.getCurrentDestination();
 
             if (intent.hasExtra("chatMessage")) {
-                SingleChatMessage cm = (SingleChatMessage) intent.getSerializableExtra("chatMessage");
+                SingleChatMessage cm = (SingleChatMessage)
+                        intent.getSerializableExtra("chatMessage");
 
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model

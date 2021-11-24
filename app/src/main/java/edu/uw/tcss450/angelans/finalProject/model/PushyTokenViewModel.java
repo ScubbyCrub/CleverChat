@@ -27,38 +27,56 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 import me.pushy.sdk.Pushy;
 
+/**
+ * ViewModel that stores the Pushy Token that is associated with a single signed-in user.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
+ */
 public class PushyTokenViewModel extends AndroidViewModel{
 
     private final MutableLiveData<String> mPushyToken;
     private final MutableLiveData<JSONObject> mResponse;
 
-    public PushyTokenViewModel(@NonNull Application application) {
-        super(application);
+    /**
+     * Constructor for PushyTokenViewModel.
+     *
+     * @param theApplication The application that holds this ViewModel.
+     */
+    public PushyTokenViewModel(@NonNull Application theApplication) {
+        super(theApplication);
         mPushyToken = new MutableLiveData<>();
         mPushyToken.setValue("");
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
-    public String getPushyTokenString() {
-        return mPushyToken.toString();
+    /**
+     * Register as an observer to listen for the PushToken.
+     *
+     * @param theOwner the fragment's lifecycle owner.
+     * @param theObserver the observer that wants to listen to updates to PushToken.
+     */
+    public void addTokenObserver(@NonNull LifecycleOwner theOwner,
+                                 @NonNull Observer<? super String> theObserver) {
+        mPushyToken.observe(theOwner, theObserver);
     }
 
     /**
-     * Register as an observer to listen for the PushToken.
-     * @param owner the fragments lifecycle owner
-     * @param observer the observer
+     * Register as an observer to see when the PushToken is assigned by the Pushy website.
+     *
+     * @param theOwner the fragment's lifecycle owner.
+     * @param theObserver the observer that wants to listen to updates to when the PushToken is
+     *                 received by Pushy.
      */
-    public void addTokenObserver(@NonNull LifecycleOwner owner,
-                                 @NonNull Observer<? super String> observer) {
-        mPushyToken.observe(owner, observer);
+    public void addResponseObserver(@NonNull LifecycleOwner theOwner,
+                                    @NonNull Observer<? super JSONObject> theObserver) {
+        mResponse.observe(theOwner, theObserver);
     }
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        mResponse.observe(owner, observer);
-    }
-
+    /**
+     * Have the user's sign-in instance be associated with a new or old PushyToken.
+     */
     public void retrieveToken() {
         if (!Pushy.isRegistered(getApplication().getApplicationContext())) {
 
@@ -73,12 +91,19 @@ public class PushyTokenViewModel extends AndroidViewModel{
     }
 
     /**
-     * This is the method described in the Pushy documentation. Note the Android class
-     * AsyncTask is deprecated as of Android Q. It is fine to use here and for this
-     * quarter. In your future Android development, look for an alternative solution.
+     * Helper class to communicate with the Pushy site to retrieve a user's PushyToken.
+     *
+     * Note the Android class AsyncTask is deprecated as of Android Q. It is fine to use now.
      */
     private class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, String> {
-        protected String doInBackground(Void... params) {
+        /**
+         * Retrieves a PushyToken in the background processes of the app.
+         *
+         * @param theParams Parameters that might be included while retrieving PushyToken in
+         *               a background task.
+         * @return The PushyToken associated with the user's account.
+         */
+        protected String doInBackground(Void... theParams) {
             Log.d("PushyTokenViewModel", "Attempt RegisterForPushNotificationsAsync");
             String deviceToken;
             try {
@@ -94,26 +119,28 @@ public class PushyTokenViewModel extends AndroidViewModel{
         }
 
         @Override
-        protected void onPostExecute(String token) {
-            if (token.isEmpty()) {
+        protected void onPostExecute(String theToken) {
+            if (theToken.isEmpty()) {
                 // Show error in log - You should add error handling for the user.
-                Log.e("ERROR RETRIEVING PUSHY TOKEN", token);
+                Log.e("ERROR RETRIEVING PUSHY TOKEN", theToken);
             } else {
                 Log.d("PushyTokenViewModel", "RegisterForPushNotificationsAsync " +
                         "token set successfully!");
-                mPushyToken.setValue(token);
+                mPushyToken.setValue(theToken);
             }
         }
     }
 
     /**
      * Send this Pushy device token to the web service.
-     * @param jwt
-     * @throws IllegalStateException when this method is called before the token is retrieve
+     *
+     * @param theJwt The user's JWT.
+     * @throws IllegalStateException when this method is called before the token is retrieve.
      */
-    public void sendTokenToWebservice(final String jwt) {
+    public void sendTokenToWebservice(final String theJwt) {
         if (mPushyToken.getValue().isEmpty()) {
-            throw new IllegalStateException("No pushy token. Do NOT call until token is retrieved");
+            throw new IllegalStateException("No pushy token. " +
+                    "Do NOT call until token is retrieved");
         }
 
         Log.d("PushyTokenViewModel 116",
@@ -139,7 +166,7 @@ public class PushyTokenViewModel extends AndroidViewModel{
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
-                headers.put("Authorization", jwt);
+                headers.put("Authorization", theJwt);
                 return headers;
             }
         };
@@ -153,7 +180,13 @@ public class PushyTokenViewModel extends AndroidViewModel{
                 .addToRequestQueue(request);
     }
 
-    public void deleteTokenFromWebservice(final String jwt) {
+    /**
+     * Delete the PushyToken associated with the user from the Push_Token table in the
+     * backend database.
+     *
+     * @param TheJwt The user's JWT.
+     */
+    public void deleteTokenFromWebservice(final String TheJwt) {
         Log.d("PushyTokenViewModel 154",
                 "Attempting to traverse to {Delete} /pushyauth endpoint");
         String url = getApplication().getResources().getString(R.string.base_url) + "pushyauth";
@@ -168,7 +201,7 @@ public class PushyTokenViewModel extends AndroidViewModel{
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key, value>
-                headers.put("Authorization", jwt);
+                headers.put("Authorization", TheJwt);
                 return headers;
             }
         };
@@ -182,21 +215,27 @@ public class PushyTokenViewModel extends AndroidViewModel{
                 .addToRequestQueue(request);
     }
 
-    private void handleError(final VolleyError error) {
-        if (Objects.isNull(error.networkResponse)) {
+    /**
+     * If there's a VolleyError with interacting with the PushyToken in the database,
+     * handle it here.
+     *
+     * @param theError The Volley Error.
+     */
+    private void handleError(final VolleyError theError) {
+        if (Objects.isNull(theError.networkResponse)) {
             try {
                 mResponse.setValue(new JSONObject("{" +
-                        "error:\"" + error.getMessage() +
+                        "error:\"" + theError.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
         }
         else {
-            String data = new String(error.networkResponse.data, Charset.defaultCharset());
+            String data = new String(theError.networkResponse.data, Charset.defaultCharset());
             try {
                 mResponse.setValue(new JSONObject("{" +
-                        "code:" + error.networkResponse.statusCode +
+                        "code:" + theError.networkResponse.statusCode +
                         ", data:" + data +
                         "}"));
             } catch (JSONException e) {

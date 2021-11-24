@@ -253,8 +253,10 @@ public class SignInFragment extends Fragment {
                     //navigate to resend if it was an unverified user error
                     if(theResponse.getString("code").equals("400")){
                         //navigate to the verify user fragment
-                        SignInFragmentDirections.ActionSignInFragmentToEmailVerificationFragment dir
-                                = SignInFragmentDirections.actionSignInFragmentToEmailVerificationFragment();
+                        SignInFragmentDirections
+                                .ActionSignInFragmentToEmailVerificationFragment dir
+                                = SignInFragmentDirections
+                                .actionSignInFragmentToEmailVerificationFragment();
                         dir.setEmail(String.valueOf(mBinding.editEmailSignin.getText()));
                         mSignInViewModel.resetValue();
                         Navigation.findNavController(getView()).navigate(dir);

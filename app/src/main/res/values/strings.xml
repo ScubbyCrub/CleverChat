@@ -30,7 +30,7 @@
     <string name="text_search">Search</string>
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
-         LocalHost in Android Studio: 10.0.2.2:5000/api/ -->
+         LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
     <string name="base_url">http://10.0.2.2:5000/api/</string>
 
     <!-- TODO: Remove or change this placeholder text -->
