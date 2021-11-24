@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
 public class ContactListViewModel extends AndroidViewModel {
@@ -54,7 +55,8 @@ public class ContactListViewModel extends AndroidViewModel {
     }
 
     public void getContactList(final String email, final String jwt) {
-        String url = "http://10.0.2.2:5000/api/contact/list";
+       String url = getApplication().getResources().getString(R.string.base_url) +
+                 "contact/list";
 
         JSONObject body = new JSONObject();
         try {
@@ -135,7 +137,9 @@ public class ContactListViewModel extends AndroidViewModel {
 
 
     public void addContact(final String myEmail, final String toAdd, final String jwt) {
-        String url = "http://10.0.2.2:5000/api/contact/add";
+
+        String url =  getApplication().getResources().getString(R.string.base_url)  +
+                "contact/add";
 
         JSONObject body = new JSONObject();
         try {

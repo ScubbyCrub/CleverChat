@@ -71,17 +71,6 @@
         app:layout_constraintTop_toTopOf="@+id/image_home_profile_icon_background" />
 
     <!-- TODO Test button to navigate to chat page, please remove later -->
-    <Button
-        android:id="@+id/temp_chat_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chat Test"
-        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
-        app:layout_constraintEnd_toEndOf="@+id/view_scroll"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toStartOf="@+id/view_scroll"
-        app:layout_constraintTop_toTopOf="@+id/view_scroll"
-        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/button_sign_out"
@@ -91,11 +80,11 @@
         android:text="@string/action_sign_out"
         android:textColor="@color/white"
         app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/view_scroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.938" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

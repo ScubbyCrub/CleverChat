@@ -59,11 +59,11 @@ public class HomeFragment extends Fragment {
 
         mBinding.textHomeUsername.setText(mModel.getEmail());
 
-        mBinding.tempChatButton.setOnClickListener(button ->
-                Navigation.findNavController(getView())
-                        .navigate(HomeFragmentDirections
-                                .actionNavigationHomeToSingleChatFragment()
-                ));
+//        mBinding.tempChatButton.setOnClickListener(button ->
+//                Navigation.findNavController(getView())
+//                        .navigate(HomeFragmentDirections
+//                                .actionNavigationHomeToSingleChatFragment()
+//                ));
 
         mBinding.buttonSignOut.setOnClickListener(button -> {
             signOut();
