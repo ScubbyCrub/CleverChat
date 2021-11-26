@@ -37,7 +37,7 @@ import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
  */
 public class ContactListViewModel extends AndroidViewModel {
 
-    private Map<String, MutableLiveData<List<ContactInfo>>> mContactList;
+    private Map<String, MutableLiveData<List<ContactList>>> mContactList;
 
     /**
      * Constructor for ContactListViewModel
@@ -58,7 +58,7 @@ public class ContactListViewModel extends AndroidViewModel {
      */
     public void addContactListObserver(String email,
                                        @NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super List<ContactInfo>> observer) {
+                                       @NonNull Observer<? super List<ContactList>> observer) {
         getOrCreateMapEntry(email).observe(owner, observer);
     }
 
@@ -68,7 +68,7 @@ public class ContactListViewModel extends AndroidViewModel {
      * @param email The user's email
      * @return The user's contact list
      */
-    public List<ContactInfo> getContactListByEMail(final String email) {
+    public List<ContactList> getContactListByEMail(final String email) {
         return getOrCreateMapEntry(email).getValue();
     }
 
@@ -78,7 +78,7 @@ public class ContactListViewModel extends AndroidViewModel {
      * @param email The user's desired contact to connect with
      * @return A map entry for connecting two contacts
      */
-    private MutableLiveData<List<ContactInfo>> getOrCreateMapEntry(final String email) {
+    private MutableLiveData<List<ContactList>> getOrCreateMapEntry(final String email) {
         if(!mContactList.containsKey(email)) {
             mContactList.put(email, new MutableLiveData<>(new ArrayList<>()));
         }
@@ -132,7 +132,7 @@ public class ContactListViewModel extends AndroidViewModel {
      * @param response The response from the web service.
      */
     private void handelSuccess(final JSONObject response) {
-        List<ContactInfo> list;
+        List<ContactList> list;
         if (!response.has("email")) {
             throw new IllegalStateException("Unexpected response in ContactListViewModel: " + response);
         }
@@ -141,7 +141,7 @@ public class ContactListViewModel extends AndroidViewModel {
             JSONArray contacts = response.getJSONArray("rows");
             for(int i = 0; i < contacts.length(); i++) {
                 JSONObject contact = contacts.getJSONObject(i);
-                ContactInfo mContact = new ContactInfo(
+                ContactList mContact = new ContactList(
                         contact.getString("username"),
                         contact.getString("name")
                 );

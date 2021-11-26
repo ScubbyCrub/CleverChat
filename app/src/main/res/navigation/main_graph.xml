@@ -41,7 +41,18 @@
         android:id="@+id/navigation_contact"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment"
         android:label="fragment_contact"
-        tools:layout="@layout/fragment_contact"/>
+        tools:layout="@layout/fragment_contact_list">
+        <action
+            android:id="@+id/action_navigation_contact_to_navigation_search"
+            app:destination="@id/navigation_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_contact_search"/>
+
     <fragment
         android:id="@+id/newChatFragment"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.NewChatFragment"
@@ -64,5 +75,4 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
-    tools:layout="@layout/fragment_contact_list"/>
 </navigation>

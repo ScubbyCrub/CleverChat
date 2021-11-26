@@ -29,6 +29,7 @@
     <string name="keys_prefs_signed_in">stay_signed_in</string>
     <string name="text_search">Search</string>
     <string name="change_theme">Switch theme</string>
+    <string name="no_user_found">No user found</string>
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->

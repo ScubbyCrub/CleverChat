@@ -2,7 +2,6 @@ package edu.uw.tcss450.angelans.finalProject.ui.contact;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,16 +16,17 @@ import edu.uw.tcss450.angelans.finalProject.R;
  * @version Sprint 2
  */
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ContactViewHolder> {
-    private final List<ContactInfo> mContactList;
+    private final List<ContactList> mContactList;
 
     /**
      * Constructor for ContactRecyclerViewAdapter
      *
-     * @param contactInfos The list of the user's contacts to display
+     * @param contactLists The list of the user's contacts to display
      */
-    public ContactRecyclerViewAdapter(List<ContactInfo> contactInfos) {
-        mContactList = contactInfos;
+    public ContactRecyclerViewAdapter(List<ContactList> contactLists) {
+        mContactList = contactLists;
     }
+
 
     @NonNull
     @Override
@@ -36,9 +36,9 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        ContactInfo contactInfo = mContactList.get(position);
-        holder.mName.setText(contactInfo.getmName());
-        holder.mUsername.setText(contactInfo.getmUsername());
+        ContactList contactList = mContactList.get(position);
+        holder.mName.setText(contactList.getmName());
+        holder.mUsername.setText(contactList.getmUsername());
     }
 
     @Override

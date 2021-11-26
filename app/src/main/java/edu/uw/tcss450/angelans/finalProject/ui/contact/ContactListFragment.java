@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentContactListBinding;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
+import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirections;
 
 /**
  * Contact Fragment to allow for UI elements to function when the user is interacting with
@@ -71,6 +73,7 @@ public class ContactListFragment extends Fragment {
                 binding.layoutWait.setVisibility(View.GONE);
             }
         });
+
         //add contacts
         binding.buttonAddContact.setOnClickListener(pressed -> {
             String toAdd= binding.editTextTextPersonName.getText().toString();
@@ -78,5 +81,11 @@ public class ContactListFragment extends Fragment {
             String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
             mContactListViewModel.addContact(email, toAdd, jwt);
         });
+
+        //Navigate to search page
+        binding.buttonSearchContact.setOnClickListener(button ->
+                Navigation.findNavController(getView()).navigate(
+                        ContactListFragmentDirections.actionNavigationContactToNavigationSearch()
+                ));
     }
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author Group 6: Teresa, Vlad, Tien, Angela
  * @version Sprint 2
  */
-public class ContactInfo implements Serializable {
+public class ContactList implements Serializable {
     private final String mUsername;
     private final String mName;
 
@@ -20,7 +20,7 @@ public class ContactInfo implements Serializable {
      * @param mUsername The username of the user in the contact list
      * @param mName The name of the user in the contact list
      */
-    public ContactInfo(String mUsername, String mName) {
+    public ContactList(String mUsername, String mName) {
         this.mUsername = mUsername;
         this.mName = mName;
     }
@@ -48,8 +48,8 @@ public class ContactInfo implements Serializable {
     @Override
     public boolean equals(@Nullable Object other) {
         boolean result = false;
-        if(other instanceof ContactInfo) {
-            result = mUsername.equals(((ContactInfo) other).mUsername);
+        if(other instanceof ContactList) {
+            result = mUsername.equals(((ContactList) other).mUsername);
         }
         return result;
     }
