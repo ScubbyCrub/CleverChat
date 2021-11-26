@@ -3,7 +3,7 @@
     <color name="gradient_background_1">#2C3E50</color>
     <color name="gradient_background_2">#FD746C</color>
 
-    <color name="chat_gradient_1">#212121</color>
+    <color name="chat_gradient_1">#000000</color>
     <color name="chat_gradient_2">#000000</color>
     <color name="chat_input">#FFFFFF</color>
     <color name="chat_input_hover">#FFFFFF</color>
