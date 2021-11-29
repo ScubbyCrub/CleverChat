@@ -82,6 +82,8 @@ public class ContactListFragment extends Fragment {
             mContactListViewModel.addContact(email, toAdd, jwt);
         });
 
+
+
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(

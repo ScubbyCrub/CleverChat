@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_cloud_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_delete_chat_24.xml" value="0.2109375" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/ic_send_gray_24dp.xml" value="0.21197916666666666" />
