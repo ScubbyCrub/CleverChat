@@ -2,6 +2,7 @@ package edu.uw.tcss450.angelans.finalProject.ui.contact;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,15 @@ import edu.uw.tcss450.angelans.finalProject.R;
  */
 public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecyclerViewAdapter.ContactViewHolder> {
     private final List<ContactList> mContactList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onDeleteClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     /**
      * Constructor for ContactRecyclerViewAdapter
@@ -31,7 +41,9 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ContactViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_contact_card, parent, false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_contact_card, parent, false);
+        ContactViewHolder vh = new ContactViewHolder(view, mListener);
+        return vh;
     }
 
     @Override
@@ -46,14 +58,29 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         return mContactList.size();
     }
 
-    public class ContactViewHolder extends RecyclerView.ViewHolder {
+    public static class ContactViewHolder extends RecyclerView.ViewHolder {
         public TextView mUsername;
         public TextView mName;
+        public ImageView mDelete;
 
-        public ContactViewHolder(View view) {
+        public ContactViewHolder(View view, OnItemClickListener listener) {
             super(view);
             mUsername = view.findViewById(R.id.text_contact_username);
             mName = view.findViewById(R.id.text_contact_name);
+            mDelete = view.findViewById(R.id.button_delete_contact);
+
+            //Delete a contact
+            mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null) {
+                        int position = getAdapterPosition(); //position of the card in this contact list
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onDeleteClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

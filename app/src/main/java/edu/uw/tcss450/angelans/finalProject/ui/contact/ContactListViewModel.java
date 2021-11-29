@@ -243,4 +243,66 @@ public class ContactListViewModel extends AndroidViewModel {
     public void handleAddedError(final VolleyError error){
         error.printStackTrace();
     }
+
+    /**
+     * Delete a contact connection to the database of contacts
+     *
+     * @param myEmail The user's email
+     * @param toDelete The username of the contact to be deleted
+     * @param jwt The user's JWT token
+     */
+    public void deleteContact(final String myEmail, final String toDelete, final String jwt) {
+
+        String url =  getApplication().getResources().getString(R.string.base_url)  +
+                "contact/delete";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", myEmail);
+            body.put("username", toDelete);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                this::handleDeletedSuccess,
+                this::handleDeletedError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
+    }
+
+    /**
+     * Display a log for the web service response of deleting a contact
+     *
+     * @param data The JSON response from the web service
+     */
+    public void handleDeletedSuccess(final JSONObject data){
+        Log.d("data", data.toString());
+    }
+
+    /**
+     * Display a stack trace of if adding a contact through the web service threw a Volley error
+     *
+     * @param error The Volley error from the web service
+     */
+    public void handleDeletedError(final VolleyError error){
+        error.printStackTrace();
+    }
 }

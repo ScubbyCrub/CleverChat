@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentContactListBinding;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
-import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirections;
 
 /**
  * Contact Fragment to allow for UI elements to function when the user is interacting with
@@ -71,6 +70,16 @@ public class ContactListFragment extends Fragment {
                 rv.getAdapter().notifyDataSetChanged();
                 //set the wait fragment to invisible
                 binding.layoutWait.setVisibility(View.GONE);
+                //Delete a contact
+                adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
+                    @Override
+                    public void onDeleteClick(int position) {
+                        String username = contactList.get(position).getmUsername();
+                        mContactListViewModel.deleteContact(mUserModel.getEmail(), username, mUserModel.getmJwt());
+                        contactList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                    }
+                });
             }
         });
 
@@ -81,8 +90,6 @@ public class ContactListFragment extends Fragment {
             String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
             mContactListViewModel.addContact(email, toAdd, jwt);
         });
-
-
 
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
