@@ -141,6 +141,9 @@ public class ChatListViewModel extends AndroidViewModel {
     }
 
     public void deleteChat(Chat chat, String jwt){
+        //remove from the view model
+        mChatList.getValue().remove(chat);
+        mChatList.setValue(mChatList.getValue());
         String baseUrl = getApplication().getResources().getString(R.string.base_url);
         String url =
                 baseUrl+ "chat/" + chat.getId(); //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
