@@ -16,7 +16,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/button_round"
-        android:src="@drawable/ic_search_white_30dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_title_contact"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,17 +35,28 @@
         app:layout_constraintStart_toStartOf="@+id/layout_wait"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <SearchView
+        android:id="@+id/searchView_exist_contact"
+        android:layout_width="354dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_contact"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
-        android:layout_width="357dp"
-        android:layout_height="388dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="354dp"
+        android:layout_height="436dp"
+        android:layout_marginTop="64dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_exist_contact"
         tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
         tools:listitem="@layout/fragment_contact_card" />
 

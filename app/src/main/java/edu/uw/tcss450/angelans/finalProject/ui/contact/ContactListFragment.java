@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,8 +80,22 @@ public class ContactListFragment extends Fragment {
                         adapter.notifyItemRemoved(position);
                     }
                 });
+                //Search through the existing list
+                binding.searchViewExistContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String input) {
+                        adapter.getFilter().filter(input);
+                        return false;
+                    }
+                });
             }
         });
+
 
 //        //add contacts
 //        binding.buttonAddContact.setOnClickListener(pressed -> {
