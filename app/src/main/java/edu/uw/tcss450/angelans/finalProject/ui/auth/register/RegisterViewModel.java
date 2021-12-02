@@ -91,11 +91,13 @@ public class RegisterViewModel extends AndroidViewModel {
      *
      * @param theFirst The first name of the new account.
      * @param theLast The last name of the new account.
+     * @param theUsername The unique username of the new account.
      * @param theEmail The email of the new account.
      * @param thePassword The password of the new account.
      */
     public void connect(final String theFirst,
                         final String theLast,
+                        final String theUsername,
                         final String theEmail,
                         final String thePassword) {
         String url = getApplication().getResources().getString(R.string.base_url) + "register";
@@ -103,6 +105,7 @@ public class RegisterViewModel extends AndroidViewModel {
         try {
             body.put("firstName", theFirst);
             body.put("lastName", theLast);
+            body.put("username", theUsername);
             body.put("email", theEmail);
             body.put("password", thePassword);
         } catch (JSONException e) {

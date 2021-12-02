@@ -37,6 +37,10 @@ public class RegisterFragment extends Fragment {
     private PasswordValidator mNameCheck = checkPWLength(1)
             .and(checkPwdOnlyHasLettersSpacesHyphens());
 
+    // Username contains 2-24 chars and only contains letters, numbers, hyphens, or underscores.
+    private PasswordValidator mUsernameCheck = checkPWLength(1,24)
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscores());
+
     // Email has more than 3 char, include special char "@", and only contains letters,
     // numbers, hyphens, underscores, or periods.
     private PasswordValidator mEmailCheck = checkPWLength(2)
@@ -133,10 +137,22 @@ public class RegisterFragment extends Fragment {
     private void checkLastName() {
         mNameCheck.processResult(
                 mNameCheck.apply(mBinding.editLastnameSignup.getText().toString().trim()),
-                this::checkEmail,
+                this::checkUsername,
                 result -> mBinding.editLastnameSignup.setError("Last names must be:\n" +
                         "1) 2-255 characters long\n" +
                         "2) Only contain letters, spaces, or hyphens"));
+    }
+
+    /**
+     * Checks if the username meets all minimum requirements.
+     */
+    private void checkUsername() {
+        mUsernameCheck.processResult(
+                mUsernameCheck.apply(mBinding.editUsernameSignup.getText().toString().trim()),
+                this::checkEmail,
+                result -> mBinding.editUsernameSignup.setError("Usernames must be:\n" +
+                        "1) 2-24 characters long\n" +
+                        "2) Only contain letters, numbers, hyphens, or underscores"));
     }
 
     /**
@@ -174,6 +190,7 @@ public class RegisterFragment extends Fragment {
         mRegisterViewModel.connect(
                 mBinding.editFirstnameSignup.getText().toString(),
                 mBinding.editLastnameSignup.getText().toString(),
+                mBinding.editUsernameSignup.getText().toString(),
                 mBinding.editEmailSignup.getText().toString(),
                 mBinding.editPasswordSignup.getText().toString());
     }
@@ -203,9 +220,13 @@ public class RegisterFragment extends Fragment {
         if (theResponse.length() > 0) {
             if (theResponse.has("code")) {
                 try {
-                    mBinding.editEmailSignup.setError(
-                            "Error Authenticating: " +
-                                    theResponse.getJSONObject("data").getString("message"));
+                    String errorDescription = "Error Authenticating: "
+                            + theResponse.getJSONObject("data").getString("message");
+                    if (errorDescription.contains("Username")) {
+                        mBinding.editUsernameSignup.setError(errorDescription);
+                    } else {
+                        mBinding.editEmailSignup.setError(errorDescription);
+                    }
                 } catch (JSONException e) {
                     Log.e("JSON Parse Error", e.getMessage());
                 }
