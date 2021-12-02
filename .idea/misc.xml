@@ -16,6 +16,7 @@
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/activity_auth.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_contact.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.375" />
+        <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_register.xml" value="0.375" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_reset_email_sent_out.xml" value="0.3671875" />
         <entry key="..\:/Users/purpl/OneDrive/College/2021-2022Q1/P1-MobileApplicationProgramming/TCSS450-Group6-GroupProject/app/src/main/res/layout/fragment_single_chat_message.xml" value="0.20572916666666666" />
@@ -52,6 +53,7 @@
         <entry key="app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_cloud_white_24dp.xml" value="0.28177083333333336" />
         <entry key="app/src/main/res/drawable/ic_contact_black_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_delete_chat_24.xml" value="0.2109375" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/ic_send_gray_24dp.xml" value="0.21197916666666666" />
@@ -69,6 +71,8 @@
         <entry key="app/src/main/res/layout/fragment_contact_card_list_new_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact_card_new_chat.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_contact_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_contact_search.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/fragment_contact_search_card.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_daily_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_email_verification.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
