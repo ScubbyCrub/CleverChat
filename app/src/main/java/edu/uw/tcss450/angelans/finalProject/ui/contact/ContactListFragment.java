@@ -83,13 +83,13 @@ public class ContactListFragment extends Fragment {
             }
         });
 
-        //add contacts
-        binding.buttonAddContact.setOnClickListener(pressed -> {
-            String toAdd= binding.editTextTextPersonName.getText().toString();
-            String email = prefs.getString("email","");
-            String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
-            mContactListViewModel.addContact(email, toAdd, jwt);
-        });
+//        //add contacts
+//        binding.buttonAddContact.setOnClickListener(pressed -> {
+//            String toAdd= binding.editTextTextPersonName.getText().toString();
+//            String email = prefs.getString("email","");
+//            String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+//            mContactListViewModel.addContact(email, toAdd, jwt);
+//        });
 
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
