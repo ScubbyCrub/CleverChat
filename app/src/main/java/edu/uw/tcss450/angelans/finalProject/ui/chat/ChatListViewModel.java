@@ -139,4 +139,36 @@ public class ChatListViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
+
+    public void deleteChat(Chat chat, String jwt){
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
+        String url =
+                baseUrl+ "chat/" + chat.getId(); //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+        Request request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null, //no body for this get request
+                this::handleDeleteResult,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                //TODO: Replace this to use the actual jwt stored in the app
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+    public void handleDeleteResult(JSONObject result){
+        System.out.println(result.toString());
+    }
 }

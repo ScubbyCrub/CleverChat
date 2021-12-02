@@ -32,6 +32,7 @@ import me.pushy.sdk.Pushy;
  * @version Sprint 2
  */
 public class HomeFragment extends Fragment {
+    String TAG = "PLEASE";
     FragmentHomeBinding mBinding;
 
     UserInfoViewModel mModel;
@@ -76,9 +77,26 @@ public class HomeFragment extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences(
                 getString(R.string.keys_shared_prefs),
                 Context.MODE_PRIVATE);
-
+        //handle dark mode
+        Log.e(TAG, "onViewCreated: " + prefs.contains(getString( R.string.keys_prefs_dark_mode)) );
+        if(prefs.contains(getString( R.string.keys_prefs_dark_mode))) {
+            System.out.println("Found preference");
+            Log.e("Found Prefs ", "OutserMethod:found pref" );
+            if(prefs.getBoolean(getString(R.string.keys_prefs_dark_mode),false)){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                Log.e("prefs", "onCheckedChanged: set dark" );
+                //update the switch to flip the correct direction
+                mBinding.switchDarkmode.setChecked(true);
+            } else {
+                System.out.println();
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                Log.e("prefs", "onCheckedChanged: set true light" );
+            }
+        }
         prefs.edit().putString("email", mModel.getEmail()).apply();
         System.out.println("email: " + mModel.getEmail());
+        System.out.println("Triggered!");
+
 //        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
 
         // Token Tester
@@ -92,15 +110,28 @@ public class HomeFragment extends Fragment {
         mBinding.switchDarkmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences prefs = getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+
                 //Check condition
+                //add it to the shared preferences
                 if(mBinding.switchDarkmode.isChecked()) {
                     //Switch to dark mode
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    if(prefs.contains((getString( R.string.keys_prefs_dark_mode)))){
+                        //update it
+                    prefs.edit().putBoolean(getString(R.string.keys_prefs_dark_mode), true).apply();
+                    Log.e("prefs", "onCheckedChanged: set true" );
+//                    }
                 }
                 else {
                     //Switch back to light mode
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    prefs.edit().putBoolean(getString(R.string.keys_prefs_dark_mode), false).apply();
+                    Log.e("prefs", "onCheckedChanged: set false" );
                 }
+                Log.e(TAG, "Found Prefs Method: " + prefs.contains(getString( R.string.keys_prefs_dark_mode)) );
             }
         });
     }

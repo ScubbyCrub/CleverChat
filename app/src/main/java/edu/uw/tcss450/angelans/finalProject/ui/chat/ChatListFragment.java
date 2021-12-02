@@ -59,7 +59,11 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-
+        //set up shared prefs
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
         FragmentChatListBinding binding = FragmentChatListBinding.bind(getView());
 
         //handle opening chats from list when clicked
@@ -69,11 +73,14 @@ public class ChatListFragment extends Fragment {
             dir.setId(chat.getId());
             Navigation.findNavController(getView()).navigate(dir);
         };
-
+        Consumer<Chat> delete = (chat) -> {
+            System.out.println("delete " + chat.getId());
+            mModel.deleteChat(chat,prefs.getString(getString(R.string.keys_prefs_jwt), ""));
+        };
         //set up recycler view on recieving data
         mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
             binding.listRoot.setAdapter(
-                    new ChatRecyclerViewAdapter(chatList, clicked)
+                    new ChatRecyclerViewAdapter(chatList, clicked, delete)
             );
             //TODO: Add loading overlay here
         });
