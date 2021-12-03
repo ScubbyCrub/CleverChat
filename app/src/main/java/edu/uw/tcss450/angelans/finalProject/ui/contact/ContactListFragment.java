@@ -57,19 +57,22 @@ public class ContactListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
-        SharedPreferences prefs =
-                getActivity().getSharedPreferences(
-                        getString(R.string.keys_shared_prefs),
-                        Context.MODE_PRIVATE);
+//        SharedPreferences prefs =
+//                getActivity().getSharedPreferences(
+//                        getString(R.string.keys_shared_prefs),
+//                        Context.MODE_PRIVATE);
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
-        final RecyclerView rv = binding.listContact;
-        ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(mContactListViewModel.getContactListByEMail(mUserModel.getEmail()));
-        rv.setAdapter(adapter);
+
         mContactListViewModel.addContactListObserver(mUserModel.getEmail(),getViewLifecycleOwner(), contactList -> {
             if (!contactList.isEmpty()) {
+                final RecyclerView rv = binding.listContact;
+                ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(contactList);
+                rv.setAdapter(adapter);
                 rv.getAdapter().notifyDataSetChanged();
+
                 //set the wait fragment to invisible
                 binding.layoutWait.setVisibility(View.GONE);
+
                 //Delete a contact
                 adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
                     @Override
@@ -80,6 +83,7 @@ public class ContactListFragment extends Fragment {
                         adapter.notifyItemRemoved(position);
                     }
                 });
+
                 //Search through the existing list
                 binding.searchViewExistContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
