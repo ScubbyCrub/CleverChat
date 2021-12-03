@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
 
     public void verifyWithServer() {
         FragmentContactSearchBinding mBinding = FragmentContactSearchBinding.bind(getView());
-        mSearchViewModel.getSearchList(mBinding.textInputSearch.getText().toString(), mUserModel.getmJwt());
+        mSearchViewModel.getSearchList(mBinding.textInputSearch.getText().toString(), mUserModel.getEmail(), mUserModel.getmJwt());
 
         mSearchViewModel.addSearchObserver(
                 mBinding.textInputSearch.getText().toString(),

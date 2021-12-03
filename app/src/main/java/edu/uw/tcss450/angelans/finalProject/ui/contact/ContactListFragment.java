@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -85,6 +86,7 @@ public class ContactListFragment extends Fragment {
                 });
 
                 //Search through the existing list
+                binding.searchViewExistContact.setImeOptions(EditorInfo.IME_ACTION_DONE);
                 binding.searchViewExistContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
