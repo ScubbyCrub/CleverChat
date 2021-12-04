@@ -11,6 +11,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -71,8 +72,8 @@ public class ContactListFragment extends Fragment {
                 rv.setAdapter(adapter);
                 rv.getAdapter().notifyDataSetChanged();
 
-                //set the wait fragment to invisible
-                binding.layoutWait.setVisibility(View.GONE);
+//                //set the wait fragment to invisible
+//                binding.layoutWait.setVisibility(View.GONE);
 
                 //Delete a contact
                 adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
@@ -116,5 +117,34 @@ public class ContactListFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(
                         ContactListFragmentDirections.actionNavigationContactToNavigationSearch()
                 ));
+
+        /**
+         * Switching between friend and request pages
+         */
+        //Request
+        binding.buttonContactRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Switch screen
+                binding.viewTheFriend.setVisibility(View.GONE);
+                binding.viewTheRequest.setVisibility(View.VISIBLE);
+                //Change the colors of 2 buttons
+                binding.buttonContactFriend.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch_inactive));
+                binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
+            }
+        });
+        //Friend
+        binding.buttonContactFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Switch screen
+                binding.viewTheRequest.setVisibility(View.GONE);
+                binding.viewTheFriend.setVisibility(View.VISIBLE);
+                //Change the colors of 2 buttons
+                binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch_inactive));
+                binding.buttonContactFriend.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
+
+            }
+        });
     }
 }

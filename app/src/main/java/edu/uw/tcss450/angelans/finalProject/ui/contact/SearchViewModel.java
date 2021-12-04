@@ -54,9 +54,8 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     public void getSearchList(final String input, final String email, final String jwt) {
-//        String url = getApplication().getResources().getString(R.string.base_url) +
-//                "search";
-        String url = "https://10.0.2.2:5000/api/search";
+        String url = getApplication().getResources().getString(R.string.base_url) +
+                "search";
         JSONObject body = new JSONObject();
         try {
             body.put("search", input);

@@ -21,6 +21,10 @@
 
     <color name="text_color">#FFFFFF</color>
 
+    <color name="button_contact_switch_inactive">#888484</color>
+    <color name="button_contact_switch">#EEEEEE</color>
+    <color name="button_text_contact_switch">#FF000000</color>
+
     <color name="weather_card">#EEEEEE</color>
     <color name="weather_card_main_text">#FF000000</color>
     <color name="weather_text_color">#FFFFFF</color>

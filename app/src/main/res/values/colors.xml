@@ -23,6 +23,13 @@
 
     <color name="search">#EEEEEE</color>
 
+    <color name="button_contact_switch_inactive">#454444</color>
+    <color name="button_contact_switch">#212121</color>
+    <color name="button_text_contact_switch">#EEEEEE</color>
+
+    <color name="request_accept">#76b852</color>
+    <color name="request_decline">#a73737</color>
+
     <color name="weather_card">#EEEEEE</color>
     <color name="weather_card_main_text">#FF000000</color>
     <color name="weather_text_color">#FFFFFF</color>
