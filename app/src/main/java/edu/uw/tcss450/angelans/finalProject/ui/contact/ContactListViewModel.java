@@ -62,6 +62,7 @@ public class ContactListViewModel extends AndroidViewModel {
         getOrCreateMapEntry(email).observe(owner, observer);
     }
 
+
     /**
      * Getter for receiving a contact list of a user based on their email.
      *
@@ -84,6 +85,7 @@ public class ContactListViewModel extends AndroidViewModel {
         }
         return mContactList.get(email);
     }
+
 
     /**
      * Returns the contact list of a user from the database

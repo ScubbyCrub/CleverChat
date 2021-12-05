@@ -74,7 +74,7 @@
         <entry key="app/src/main/res/layout/fragment_contact_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_contact_request_card.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_contact_search.xml" value="0.20104166666666667" />
-        <entry key="app/src/main/res/layout/fragment_contact_search_card.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_contact_search_card.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_daily_weather.xml" value="0.19021739130434784" />
         <entry key="app/src/main/res/layout/fragment_email_verification.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />

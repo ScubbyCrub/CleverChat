@@ -31,6 +31,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class ContactListFragment extends Fragment {
 
     private ContactListViewModel mContactListViewModel;
+    private RequestViewModel mRequestViewModel;
     private UserInfoViewModel mUserModel;
 
     /**
@@ -46,7 +47,9 @@ public class ContactListFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mContactListViewModel = provider.get(ContactListViewModel.class);
+        mRequestViewModel = provider.get(RequestViewModel.class);
         mContactListViewModel.getContactList(mUserModel.getEmail(), mUserModel.getmJwt());
+        mRequestViewModel.getRequestList(mUserModel.getEmail(), mUserModel.getmJwt());
     }
 
     @Override
@@ -72,8 +75,6 @@ public class ContactListFragment extends Fragment {
                 rv.setAdapter(adapter);
                 rv.getAdapter().notifyDataSetChanged();
 
-//                //set the wait fragment to invisible
-//                binding.layoutWait.setVisibility(View.GONE);
 
                 //Delete a contact
                 adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
@@ -103,6 +104,27 @@ public class ContactListFragment extends Fragment {
             }
         });
 
+        mRequestViewModel.addRequestListObserver(mUserModel.getEmail(),getViewLifecycleOwner(), requestList -> {
+            if (!requestList.isEmpty()) {
+                final RecyclerView rv = binding.listRequest;
+                RequestRecyclerViewAdapter adapter = new RequestRecyclerViewAdapter(requestList);
+                rv.setAdapter(adapter);
+                rv.getAdapter().notifyDataSetChanged();
+
+
+                //Delete a contact
+//                adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onDeleteClick(int position) {
+//                        String username = contactList.get(position).getmUsername();
+//                        mContactListViewModel.deleteContact(mUserModel.getEmail(), username, mUserModel.getmJwt());
+//                        contactList.remove(position);
+//                        adapter.notifyItemRemoved(position);
+//                    }
+//                });
+            }
+        });
+
 
 //        //add contacts
 //        binding.buttonAddContact.setOnClickListener(pressed -> {
@@ -118,9 +140,7 @@ public class ContactListFragment extends Fragment {
                         ContactListFragmentDirections.actionNavigationContactToNavigationSearch()
                 ));
 
-        /**
-         * Switching between friend and request pages
-         */
+        //Switching between friend and request pages
         //Request
         binding.buttonContactRequest.setOnClickListener(new View.OnClickListener() {
             @Override

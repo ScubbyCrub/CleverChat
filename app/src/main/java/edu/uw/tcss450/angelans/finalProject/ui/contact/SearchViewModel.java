@@ -137,4 +137,58 @@ public class SearchViewModel extends AndroidViewModel {
         }
     }
 
+    public void sendRequest(final String myEmail, final String usernameToSend, final String jwt) {
+        String url =  getApplication().getResources().getString(R.string.base_url)  +
+                "contact/sendRequest";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", myEmail);
+            body.put("username", usernameToSend);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                this::handleRequestSuccess,
+                this::handleRequestError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
+    }
+
+    /**
+     * Display a log for the web service response of sending a friend request
+     *
+     * @param data The JSON response from the web service
+     */
+    public void handleRequestSuccess(final JSONObject data){
+        Log.d("data", data.toString());
+    }
+
+    /**
+     * Display a stack trace of if sending a request through the web service threw a Volley error
+     *
+     * @param error The Volley error from the web service
+     */
+    public void handleRequestError(final VolleyError error){
+        error.printStackTrace();
+    }
+
 }

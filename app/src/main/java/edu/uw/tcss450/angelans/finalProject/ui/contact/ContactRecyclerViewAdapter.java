@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -111,14 +110,12 @@ public class ContactRecyclerViewAdapter extends RecyclerView.Adapter<ContactRecy
         public TextView mUsername;
         public TextView mName;
         public ImageView mDelete;
-//        public SearchView mSearchView;
 
         public ContactViewHolder(View view, OnItemClickListener listener) {
             super(view);
             mUsername = view.findViewById(R.id.text_contact_username);
             mName = view.findViewById(R.id.text_contact_name);
             mDelete = view.findViewById(R.id.button_delete_contact);
-//            mSearchView = view.findViewById(R.id.searchView_exist_contact);
 
             //Delete a contact
             mDelete.setOnClickListener(new View.OnClickListener() {

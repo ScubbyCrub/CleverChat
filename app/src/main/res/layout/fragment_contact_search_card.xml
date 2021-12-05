@@ -44,18 +44,20 @@
         <Button
             android:id="@+id/button_search_add"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="86dp"
-            android:layout_height="62dp"
+            android:layout_width="92dp"
+            android:layout_height="55dp"
             android:backgroundTint="@color/gradient_background_1"
             android:gravity="center"
-            android:text="Add"
+            android:text="@string/request"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/red_for_question"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.936"
             app:layout_constraintStart_toEndOf="@+id/text_search_username"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.523" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
