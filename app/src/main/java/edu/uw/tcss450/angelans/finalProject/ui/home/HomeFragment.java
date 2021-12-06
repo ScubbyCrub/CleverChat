@@ -18,11 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentHomeBinding;
 import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
-import me.pushy.sdk.Pushy;
+import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirections;
 
 /**
  * Home Fragment to allow for UI elements to function when the user is interacting with
@@ -34,7 +37,8 @@ import me.pushy.sdk.Pushy;
 public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;
 
-    UserInfoViewModel mModel;
+    UserInfoViewModel mUserInfoViewModel;
+    HomeViewModel mHomeViewModel;
     SwitchCompat switchCompat;
 
     /**
@@ -42,6 +46,13 @@ public class HomeFragment extends Fragment {
      */
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle theSavedInstanceState) {
+        super.onCreate(theSavedInstanceState);
+        mHomeViewModel = new ViewModelProvider(getActivity())
+                .get(HomeViewModel.class);
     }
 
     @Override
@@ -56,18 +67,27 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
-        mModel = new ViewModelProvider(getActivity())
+
+        // Instantiate ViewModels and Binding
+        mUserInfoViewModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);
 
         mBinding = FragmentHomeBinding.bind(getView());
 
-        mBinding.textHomeUsername.setText(mModel.getEmail());
+        Log.d("HomeFragment","User's email: " + mUserInfoViewModel.getEmail());
 
-//        mBinding.tempChatButton.setOnClickListener(button ->
-//                Navigation.findNavController(getView())
-//                        .navigate(HomeFragmentDirections
-//                                .actionNavigationHomeToSingleChatFragment()
-//                ));
+        mHomeViewModel.connectForUsername(mUserInfoViewModel.getEmail());
+        mHomeViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
+            try {
+                mBinding.textHomeUsername.setText(response.getString("username"));
+                Log.d("HomeFragment",
+                        "Home screen displaying username, username retrieval success!");
+            } catch (JSONException e) {
+                mBinding.textHomeUsername.setText(mUserInfoViewModel.getEmail());
+                Log.d("HomeFragment",
+                        "Home screen displaying email, username retrieval failed.");
+            }
+        });
 
         mBinding.buttonSignOut.setOnClickListener(button -> {
             signOut();
@@ -77,9 +97,8 @@ public class HomeFragment extends Fragment {
                 getString(R.string.keys_shared_prefs),
                 Context.MODE_PRIVATE);
 
-        prefs.edit().putString("email", mModel.getEmail()).apply();
-        System.out.println("email: " + mModel.getEmail());
-//        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
+        prefs.edit().putString("email", mUserInfoViewModel.getEmail()).apply();
+        System.out.println("email: " + mUserInfoViewModel.getEmail());
 
         // Token Tester
         PushyTokenViewModel pushyTokenViewModel = new ViewModelProvider(
