@@ -74,5 +74,18 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_singleChatFragment_to_chatMembersFragment"
+            app:destination="@id/chatMembersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatMembersFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.ChatMembersFragment"
+        android:label="fragment_chat_members"
+        tools:layout="@layout/fragment_chat_members" >
+        <argument
+            android:name="chatid"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_chat_members_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.chat.ChatMembersFragment">
+
+    <View
+        android:id="@+id/view_chat_members_2"
+        android:layout_width="409dp"
+        android:layout_height="72dp"
+        android:background="@drawable/button_gradient_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/members"
+        android:textColor="@color/text_color"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_chat_members_2"
+        app:layout_constraintEnd_toEndOf="@+id/view_chat_members_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_chat_members_2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_contact"
+        android:name="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
+        android:layout_width="365dp"
+        android:layout_height="626dp"
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_chat_members_2"
+        app:layout_constraintVertical_bias="0.515"
+        tools:context="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
+        tools:listitem="@layout/fragment_chat_member_card" />
+</androidx.constraintlayout.widget.ConstraintLayout>
