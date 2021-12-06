@@ -1,7 +1,5 @@
 package edu.uw.tcss450.angelans.finalProject.ui.contact;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,27 +110,38 @@ public class ContactListFragment extends Fragment {
                 rv.getAdapter().notifyDataSetChanged();
 
 
-                //Delete a contact
-//                adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
-//                    @Override
-//                    public void onDeleteClick(int position) {
-//                        String username = contactList.get(position).getmUsername();
-//                        mContactListViewModel.deleteContact(mUserModel.getEmail(), username, mUserModel.getmJwt());
-//                        contactList.remove(position);
-//                        adapter.notifyItemRemoved(position);
-//                    }
-//                });
+                //Accept a request
+                adapter.setAcceptClickListener(new RequestRecyclerViewAdapter.OnAcceptItemClickListener() {
+                    @Override
+                    public void onAcceptClick(int position) {
+                        String username = requestList.get(position).getmUsername();
+                        int answer = 1;
+                        mRequestViewModel.responseRequest(mUserModel.getEmail(), username, answer, mUserModel.getmJwt());
+                        requestList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        //Pop up message dialog
+                        Dialog dialog = new Dialog("accepted", username);
+                        dialog.show(getActivity().getSupportFragmentManager(), "accept dialog");
+                    }
+                });
+
+                //Decline a request
+                adapter.setDeclineClickListener(new RequestRecyclerViewAdapter.OnDeclineItemClickListener() {
+                    @Override
+                    public void onDeclineClick(int position) {
+                        String username = requestList.get(position).getmUsername();
+                        int answer = 0;
+                        mRequestViewModel.responseRequest(mUserModel.getEmail(), username, answer, mUserModel.getmJwt());
+                        requestList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        //Pop up message dialog
+                        Dialog dialog = new Dialog("declined", username);
+                        dialog.show(getActivity().getSupportFragmentManager(), "decline dialog");
+                    }
+                });
             }
         });
 
-
-//        //add contacts
-//        binding.buttonAddContact.setOnClickListener(pressed -> {
-//            String toAdd= binding.editTextTextPersonName.getText().toString();
-//            String email = prefs.getString("email","");
-//            String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
-//            mContactListViewModel.addContact(email, toAdd, jwt);
-//        });
 
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
