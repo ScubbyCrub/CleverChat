@@ -21,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
 
-    <!-- Once Usernames work, display email as a subheading
     <TextView
         android:id="@+id/text_home_email"
         android:layout_width="wrap_content"
@@ -32,7 +31,6 @@
         app:layout_constraintStart_toStartOf="@+id/view_scroll"
         app:layout_constraintTop_toBottomOf="@+id/text_home_username"
         app:layout_constraintVertical_bias="0.0" />
-    -->
 
     <ImageView
         android:id="@+id/image_home_profile_icon_background"
@@ -51,8 +49,8 @@
         android:id="@+id/text_home_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/placeholder_username"
+        android:text="@string/keys_username"
+        android:textColor="@color/weather_card_main_text"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/view_scroll"
         app:layout_constraintHorizontal_bias="0.496"

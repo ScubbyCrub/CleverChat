@@ -79,11 +79,23 @@ public class HomeFragment extends Fragment {
         mHomeViewModel.connectForUsername(mUserInfoViewModel.getEmail());
         mHomeViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             try {
+                // Put most recently retrieved username in shared preferences (asynchronous update)
+                SharedPreferences prefs = getActivity().getSharedPreferences(
+                        getString(R.string.keys_username),
+                        Context.MODE_PRIVATE);
+
+                prefs.edit().putString("currentUsername",
+                        response.getString("username")).apply();
+
+                // Display username and email
                 mBinding.textHomeUsername.setText(response.getString("username"));
+                mBinding.textHomeEmail.setText(mUserInfoViewModel.getEmail());
                 Log.d("HomeFragment",
                         "Home screen displaying username, username retrieval success!");
+
             } catch (JSONException e) {
                 mBinding.textHomeUsername.setText(mUserInfoViewModel.getEmail());
+                mBinding.textHomeEmail.setText("");
                 Log.d("HomeFragment",
                         "Home screen displaying email, username retrieval failed.");
             }

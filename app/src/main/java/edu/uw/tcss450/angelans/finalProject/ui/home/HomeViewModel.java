@@ -49,20 +49,13 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void connectForUsername(final String theEmail) {
-        String url = getApplication().getResources().getString(R.string.base_url) + "username";
-        JSONObject body = new JSONObject();
-        try {
-            body.put("email", "angelans@uw.edu");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.d("HomeViewModel", "error with building JSON ");
-        }
-        Log.d("HomeViewModel", "about to send JSON "
-                + body.toString());
+        String url = getApplication().getResources().getString(R.string.base_url)
+                + "username/" + theEmail;
+        Log.d("HomeViewModel", "about to send username GET request");
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
-                body,
+                null,
                 this::handleSuccess,
                 this::handleError);
         request.setRetryPolicy(new DefaultRetryPolicy(
