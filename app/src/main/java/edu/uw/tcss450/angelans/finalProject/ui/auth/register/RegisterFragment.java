@@ -37,8 +37,8 @@ public class RegisterFragment extends Fragment {
     private PasswordValidator mNameCheck = checkPWLength(1)
             .and(checkPwdOnlyHasLettersSpacesHyphens());
 
-    // Username contains 2-24 chars and only contains letters, numbers, hyphens, or underscores.
-    private PasswordValidator mUsernameCheck = checkPWLength(1,24)
+    // Username contains 2-18 chars and only contains letters, numbers, hyphens, or underscores.
+    private PasswordValidator mUsernameCheck = checkPWLength(1,18)
             .and(checkPwdOnlyHasLettersNumbersHyphensUnderscores());
 
     // Email has more than 3 char, include special char "@", and only contains letters,
@@ -151,7 +151,7 @@ public class RegisterFragment extends Fragment {
                 mUsernameCheck.apply(mBinding.editUsernameSignup.getText().toString().trim()),
                 this::checkEmail,
                 result -> mBinding.editUsernameSignup.setError("Usernames must be:\n" +
-                        "1) 2-24 characters long\n" +
+                        "1) 2-18 characters long\n" +
                         "2) Only contain letters, numbers, hyphens, or underscores"));
     }
 
