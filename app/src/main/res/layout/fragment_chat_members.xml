@@ -32,15 +32,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_contact"
         android:name="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
-        android:layout_width="365dp"
-        android:layout_height="626dp"
+        android:layout_width="376dp"
+        android:layout_height="577dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_chat_members_2"
-        app:layout_constraintVertical_bias="0.515"
         tools:context="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
         tools:listitem="@layout/fragment_chat_member_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -17,14 +18,23 @@ import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
 public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMembersRecyclerViewAdapter.ChatMembersViewHolder> {
     private List<Contact> mContacts = new ArrayList<Contact>();
+    private List<Contact> mCurrentContacts = new ArrayList<Contact>();
     private Consumer<Contact> addContact;
     private Consumer<Contact> deleteFromChat;
+    private HashSet<Integer> existingContacts = new HashSet<Integer>();
 
-    public ChatMembersRecyclerViewAdapter(List<Contact> items, Consumer<Contact> addContact, Consumer<Contact> deleteFromChat) {
+    public ChatMembersRecyclerViewAdapter(List<Contact> items,
+                                          List<Contact> currentContacts,
+                                          Consumer<Contact> addContact,
+                                          Consumer<Contact> deleteFromChat) {
+
         this.addContact = addContact;
         this.mContacts = items;
-        System.out.println("Contacts from Recycler View" + mContacts.toString());
         this.deleteFromChat = deleteFromChat;
+        this.mCurrentContacts = currentContacts;
+        for(Contact c : currentContacts){
+            existingContacts.add(c.getId());
+        }
     }
 
     @NonNull
@@ -63,6 +73,16 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
             mContact = contact;
             binding.textMemberUsername.setText(contact.getUsername());
             binding.textMembersName.setText(contact.getFirstName() + " " + contact.getLastName());
+            //add chat remove and add contact listeners
+            if(existingContacts.contains(contact.getId())){
+                binding.buttonAddMemberContact.setVisibility(View.GONE);
+            }
+            binding.buttonAddMemberContact.setOnClickListener(data -> {
+                addContact.accept(mContact);
+            });
+            binding.buttonMemberDelete.setOnClickListener(data -> {
+                deleteFromChat.accept(mContact);
+            });
         }
     }
 

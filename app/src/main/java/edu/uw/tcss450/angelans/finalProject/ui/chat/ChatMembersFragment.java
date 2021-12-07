@@ -37,6 +37,7 @@ public class ChatMembersFragment extends Fragment {
                         Context.MODE_PRIVATE);
         mModel = new ViewModelProvider(getActivity()).get(ChatMembersViewModel.class);
         ChatMembersFragmentArgs args = ChatMembersFragmentArgs.fromBundle(getArguments());
+        mModel.setEmail(prefs.getString("email",""));
         mModel.getChatMembers(prefs.getString(getString(R.string.keys_prefs_jwt),""),""+args.getChatid());
     }
 
@@ -50,20 +51,29 @@ public class ChatMembersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         //set up binding to the view
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
         FragmentChatMembersBinding binding = FragmentChatMembersBinding.bind(getView());
         super.onViewCreated(view,savedInstanceState);
         //add listener that connects the recycler view with the data
         Consumer<Contact> addContact = (contact) -> {
-            System.out.println("Adding to contacts");
+            System.out.println("Adding to contacts " + contact.getEmail());
+            mModel.addMemberAsContact(prefs.getString(getString(R.string.keys_prefs_jwt),""),
+                    prefs.getString("email",""),
+                    contact.getEmail());
         };
         Consumer<Contact> removeFromChat = (contact) -> {
-            System.out.println("Removing Contact From Chat");
+            System.out.println("Removing Contact From Chat " + contact.getEmail());
         };
-        mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
+        mModel.addCurrentContactsObserver(getViewLifecycleOwner(), contactList -> {
             System.out.println("Setting adapter");
+            System.out.println("Members: " + contactList.toString());
+            System.out.println("Current: " + mModel.getMemberList().toString());
             System.out.println(contactList.toString());
             binding.listContact.setAdapter(
-                    new ChatMembersRecyclerViewAdapter(contactList, addContact,removeFromChat)
+                    new ChatMembersRecyclerViewAdapter(mModel.getMemberList(),contactList, addContact,removeFromChat)
             );
         });
 
