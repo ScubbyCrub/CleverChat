@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     private NewMessageCountViewModel mNewMessageModel;
 
+    private SingleChatViewModel mSingleChatModel;
+
     /**
      * Creates the activity
      *
@@ -81,12 +83,23 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
+        mSingleChatModel = new ViewModelProvider(this).get(SingleChatViewModel.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.singleChatFragment) {
                 // When the user navigates to the chats page, modify the new message count
-                //TODO: Make compatible with multiple chat rooms
-                mNewMessageModel.reset();
+                // TODO Bug: MainActivity.onCreate() happens before SingleChatFragment.onCreate(),
+                // Leading to mostRecentlyVisitedChatID to be old by the time it tries
+                // to delete live notifs.
+                final int[] mostRecentlyVisitedChatID = {0};
+
+                mSingleChatModel.addMostRecentChatIDObserver(MainActivity.this, count -> {
+                    mostRecentlyVisitedChatID[0] = count;
+                });
+                Log.d("MainPushMessageReceiver",
+                        "Most Recent Visited Chat (onCreate) = " + mostRecentlyVisitedChatID[0]);
+
+                mNewMessageModel.reset(mostRecentlyVisitedChatID[0]);
             }
         });
 
@@ -209,20 +222,30 @@ public class MainActivity extends AppCompatActivity {
 
             NavDestination nd = nc.getCurrentDestination();
 
-            Log.d("MainPushMessageReceiver", "Incoming chat ID:" + intent.getIntExtra("chatid", -1));
+            int incomingChatID = intent.getIntExtra("chatid", -1);
+
+            Log.d("MainPushMessageReceiver", "Incoming chat ID:" + incomingChatID);
 
             // If the incoming intent is a chatMessage notificication
             if (intent.hasExtra("chatMessage")) {
                 SingleChatMessage cm = (SingleChatMessage)
                         intent.getSerializableExtra("chatMessage");
 
+                final int[] mostRecentlyVisitedChatID = {0};
+
+                mModel.addMostRecentChatIDObserver(MainActivity.this, count -> {
+                    mostRecentlyVisitedChatID[0] = count;
+                });
+
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                Log.d("MainPushMessageReceiver", "nd.getId() = " + nd.getId());
-                //TODO: Messages don't increment if you're in any SingleChat room,
-                // try to block notifs for current chatID room.
-                if (nd.getId() != R.id.singleChatFragment) {
-                    Log.d("MainPushMessageReceiver", "Unequal fragment ID means msg notif incremented!");
+                Log.d("MainPushMessageReceiver",
+                        "Most Recent Visited Chat (onReceive) = " + mostRecentlyVisitedChatID[0]);
+                if (nd.getId() != R.id.singleChatFragment
+                        || mostRecentlyVisitedChatID[0] != incomingChatID) {
+                    Log.d("MainPushMessageReceiver",
+                            "Different fragment or different chat view? "
+                                    + "Increment message count!");
                     mNewMessageModel.increment(intent.getIntExtra("chatid",-1));
                 }
 

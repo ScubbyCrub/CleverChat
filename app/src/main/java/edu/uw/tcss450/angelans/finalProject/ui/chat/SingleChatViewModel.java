@@ -42,10 +42,13 @@ public class SingleChatViewModel extends AndroidViewModel {
      * The value represents the List of (known) messages for that that room.
      */
     private Map<Integer, MutableLiveData<List<SingleChatMessage>>> mMessages;
+    private MutableLiveData<Integer> mCurrentChatID;
 
     public SingleChatViewModel(@NonNull Application theApplication) {
         super(theApplication);
         mMessages = new HashMap<>();
+        mCurrentChatID = new MutableLiveData<>();
+        mCurrentChatID.setValue(-1);
     }
 
     /**
@@ -60,6 +63,15 @@ public class SingleChatViewModel extends AndroidViewModel {
                                    @NonNull Observer<? super List<SingleChatMessage>>
                                            theObserver) {
         getOrCreateMapEntry(theChatId).observe(theOwner, theObserver);
+    }
+
+    public void updateMostRecentVisitedChatID(int theNewID) {
+        mCurrentChatID.setValue(theNewID);
+    }
+
+    public void addMostRecentChatIDObserver(@NonNull LifecycleOwner theOwner,
+                                            @NonNull Observer<Integer> theObserver) {
+        mCurrentChatID.observe(theOwner, theObserver);
     }
 
     /**

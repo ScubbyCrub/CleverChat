@@ -63,15 +63,20 @@ public class NewMessageCountViewModel extends ViewModel {
             }
         }
         // Tell observer a change happened.
+        Log.d("NewMessageCountViewModel", "mNewMessageCount Keys+: "
+                + mNewMessageCount.getValue().keySet());
         mNewMessageCount.setValue(mNewMessageCount.getValue());
     }
 
     /**
-     * Resets the count of unseen new messages received by the user.
+     * Resets the count of unseen new messages received by the user in a specific
+     * chat room by chatID
      */
-    public void reset() {
-        mNewMessageCount.getValue().clear();
+    public void reset(int theChatID) {
+        mNewMessageCount.getValue().remove(theChatID);
         // Tell observer change happened
+        Log.d("NewMessageCountViewModel", "mNewMessageCount Keys-: "
+                + mNewMessageCount.getValue().keySet());
         mNewMessageCount.setValue(mNewMessageCount.getValue());
     }
 }
