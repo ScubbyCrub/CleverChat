@@ -218,7 +218,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                if (nd.getId() != R.id.navigation_chat) {
+                Log.d("MainPushMessageReceiver", "nd.getId() = " + nd.getId());
+                //TODO: Messages don't increment if you're in any SingleChat room,
+                // try to block notifs for current chatID room.
+                if (nd.getId() != R.id.singleChatFragment) {
+                    Log.d("MainPushMessageReceiver", "Unequal fragment ID means msg notif incremented!");
                     mNewMessageModel.increment(intent.getIntExtra("chatid",-1));
                 }
 

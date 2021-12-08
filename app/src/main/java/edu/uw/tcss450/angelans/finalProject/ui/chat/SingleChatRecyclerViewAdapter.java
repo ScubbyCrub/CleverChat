@@ -118,7 +118,7 @@ public class SingleChatRecyclerViewAdapter
                 card.requestLayout();
             } else {
                 //This message is from another user. Format it as such
-                mBinding.textMessage.setText(theMessage.getSender() +
+                mBinding.textMessage.setText(theMessage.getSender().split("@")[0] +
                         ": " + theMessage.getMessage());
                 ViewGroup.MarginLayoutParams layoutParams =
                         (ViewGroup.MarginLayoutParams) card.getLayoutParams();
