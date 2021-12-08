@@ -78,6 +78,8 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
                 binding.buttonAddMemberContact.setVisibility(View.GONE);
             }
             binding.buttonAddMemberContact.setOnClickListener(data -> {
+                binding.buttonAddMemberContact.setImageResource(R.drawable.ic_baseline_pending_24);
+//                binding.buttonAddMemberContact
                 addContact.accept(mContact);
             });
             binding.buttonMemberDelete.setOnClickListener(data -> {
@@ -85,5 +87,9 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
             });
         }
     }
+    /**
+     *replace Fab with bar up top that shows chat name
+     * clicking on it directs to the fab nav fragment
+     */
 
 }

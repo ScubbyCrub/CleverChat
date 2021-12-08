@@ -32,15 +32,30 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_contact"
         android:name="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
-        android:layout_width="376dp"
-        android:layout_height="577dp"
+        android:layout_width="379dp"
+        android:layout_height="496dp"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_chat_members_2"
+        app:layout_constraintVertical_bias="0.104"
         tools:context="edu/uw/tcss450/angelans/finalProject/ui/chat/ChatMembersFragment.java"
         tools:listitem="@layout/fragment_chat_member_card" />
+
+    <Button
+        android:id="@+id/button_add_new_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/chat_gradient_1"
+        android:text="@string/add_members"
+        android:textColor="@color/text_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_contact"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

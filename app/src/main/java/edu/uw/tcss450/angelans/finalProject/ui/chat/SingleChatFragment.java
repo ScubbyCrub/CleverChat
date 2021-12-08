@@ -71,7 +71,8 @@ public class SingleChatFragment extends Fragment {
         //SetRefreshing shows the internal Swiper view progress bar.
         // Show this until messages load.
         binding.swipeContainer.setRefreshing(true);
-
+        //update chat name
+        binding.textChatName.setText(args.getChatName());
         final RecyclerView rv = binding.recyclerMessages;
         //Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
         //holds.
@@ -103,7 +104,7 @@ public class SingleChatFragment extends Fragment {
                     binding.editMessage.getText().toString());
         });
         //navigate to the chat members page
-        binding.fabSeeChatMembers.setOnClickListener(click -> {
+        binding.viewChatName.setOnClickListener(click -> {
             SingleChatFragmentDirections.ActionSingleChatFragmentToChatMembersFragment dir =
                     SingleChatFragmentDirections.actionSingleChatFragmentToChatMembersFragment();
             dir.setChatid(args.getId());

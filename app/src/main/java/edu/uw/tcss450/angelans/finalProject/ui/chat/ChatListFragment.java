@@ -79,6 +79,7 @@ public class ChatListFragment extends Fragment {
             ChatListFragmentDirections.ActionNavigationChatToSingleChatFragment dir =
                     ChatListFragmentDirections.actionNavigationChatToSingleChatFragment();
             dir.setId(chat.getId());
+            dir.setChatName(chat.getName());
             Navigation.findNavController(getView()).navigate(dir);
         };
         Consumer<Chat> delete = (chat) -> {

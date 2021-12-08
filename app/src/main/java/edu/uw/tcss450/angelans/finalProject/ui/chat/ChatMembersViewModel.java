@@ -235,4 +235,65 @@ public class ChatMembersViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
     }
+
+    public void deleteChatMember(String jwt, String chatid, String chatMemberId) {
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
+        JSONObject body = new JSONObject();
+        try {
+            body.put("chatid", chatid.trim());
+            body.put("memberid", chatMemberId.trim());
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println("Removing from chat...");
+        String url =
+                baseUrl+ "chat/delete"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body, //no body for this get request
+                this::handleMemberRemoval,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                //TODO: Replace this to use the actual jwt stored in the app
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+    public void handleMemberRemoval(JSONObject data){
+        System.out.println("Successful! : " + data.toString());
+
+        try {
+            if (data.has("message")) {
+                //the data is present
+                JSONArray removed = data.getJSONArray("message");
+                JSONObject removedMember = removed.getJSONObject(0);
+                List<Contact> currentContacts = mContactList.getValue();
+                List<Contact> updatedContacts = new ArrayList<Contact>();
+                for(Contact contact : currentContacts){
+                    if(contact.getId() != Integer.parseInt(removedMember.getString("memberid"))){
+                        updatedContacts.add(contact);
+                    }
+                }
+                mContactList.setValue(updatedContacts);
+                mCurrentContacts.setValue(mCurrentContacts.getValue());
+                //TODO REUSE THE CHAT CRTEATEION RECYCLE VIEW TO ADD THINGS TO THE CHAT BUT CHAGNE BEHAVIOUR SLIGHTLY
+            }
+        } catch(JSONException e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
+    }
 }

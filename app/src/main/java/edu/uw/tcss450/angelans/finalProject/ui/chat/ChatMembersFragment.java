@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,10 @@ public class ChatMembersFragment extends Fragment {
         };
         Consumer<Contact> removeFromChat = (contact) -> {
             System.out.println("Removing Contact From Chat " + contact.getEmail());
+            ChatMembersFragmentArgs args = ChatMembersFragmentArgs.fromBundle(getArguments());
+            mModel.deleteChatMember(prefs.getString(getString(R.string.keys_prefs_jwt),""),
+                    "" + args.getChatid(),
+                    "" + contact.getId());
         };
         mModel.addCurrentContactsObserver(getViewLifecycleOwner(), contactList -> {
             System.out.println("Setting adapter");
@@ -75,6 +80,13 @@ public class ChatMembersFragment extends Fragment {
             binding.listContact.setAdapter(
                     new ChatMembersRecyclerViewAdapter(mModel.getMemberList(),contactList, addContact,removeFromChat)
             );
+        });
+
+        binding.buttonAddNewMember.setOnClickListener(button -> {
+            ChatMembersFragmentDirections.ActionChatMembersFragmentToAddChatMembersFragment dir =
+               ChatMembersFragmentDirections.actionChatMembersFragmentToAddChatMembersFragment();
+            dir.setChatid(ChatMembersFragmentArgs.fromBundle(getArguments()).getChatid());
+            Navigation.findNavController(getView()).navigate(dir);
         });
 
     }

@@ -77,12 +77,29 @@
         <action
             android:id="@+id/action_singleChatFragment_to_chatMembersFragment"
             app:destination="@id/chatMembersFragment" />
+        <argument
+            android:name="chatName"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/chatMembersFragment"
         android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.ChatMembersFragment"
         android:label="fragment_chat_members"
         tools:layout="@layout/fragment_chat_members" >
+        <argument
+            android:name="chatid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_chatMembersFragment_to_addChatMembersFragment"
+            app:destination="@id/addChatMembersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addChatMembersFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.chat.AddChatMembersFragment"
+        android:label="fragment_add_chat_members"
+        tools:layout="@layout/fragment_add_chat_members" >
         <argument
             android:name="chatid"
             app:argType="integer"

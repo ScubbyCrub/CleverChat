@@ -46,6 +46,8 @@
     <string name="resend_verification">Resend Email</string>
     <string name="add_participants">Add Participants</string>
     <string name="members">Members</string>
+    <string name="add_members">Add New Members</string>
+    <string name="add">Add</string>
     <string name="not_verified_text">It appears that your email has not been verified. \n\n
         Please check your email for the verification email.
         \Or click the button below to resend the verification email.</string>
