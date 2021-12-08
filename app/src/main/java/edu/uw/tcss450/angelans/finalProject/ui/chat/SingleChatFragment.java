@@ -48,9 +48,6 @@ public class SingleChatFragment extends Fragment {
         mChatModel = provider.get(SingleChatViewModel.class);
         mChatModel.getFirstMessages(mGlobalChatId, mUserModel.getmJwt());
         mSendModel = provider.get(SingleChatSendViewModel.class);
-
-        mChatModel.updateMostRecentVisitedChatID(args.getId());
-        Log.d("SingleChatFragment", "mChatModel ID updated: "+args.getId());
     }
 
     @Override

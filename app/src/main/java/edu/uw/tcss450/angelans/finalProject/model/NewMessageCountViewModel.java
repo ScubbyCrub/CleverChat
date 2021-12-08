@@ -63,8 +63,6 @@ public class NewMessageCountViewModel extends ViewModel {
             }
         }
         // Tell observer a change happened.
-        Log.d("NewMessageCountViewModel", "mNewMessageCount Keys+: "
-                + mNewMessageCount.getValue().keySet());
         mNewMessageCount.setValue(mNewMessageCount.getValue());
     }
 
