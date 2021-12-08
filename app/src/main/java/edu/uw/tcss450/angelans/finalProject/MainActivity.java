@@ -14,11 +14,16 @@ import android.content.IntentFilter;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Iterator;
+import java.util.Set;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.ActivityMainBinding;
 import edu.uw.tcss450.angelans.finalProject.model.NewMessageCountViewModel;
@@ -76,6 +81,38 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.singleChatFragment) {
+                // When the user navigates to the chats page, modify the new message count
+                //TODO: Make compatible with multiple chat rooms
+                mNewMessageModel.reset();
+            }
+        });
+
+        mNewMessageModel.addMessageCountObserver(this, count -> {
+            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.navigation_chat);
+            badge.setMaxCharacterCount(2);
+
+            Set<Integer> countKeys = count.keySet();
+            Iterator<Integer> iteratorCountKeys = countKeys.iterator();
+            int totalMessageCount = 0;
+
+            // Find total value of new messages among all chats
+            while (iteratorCountKeys.hasNext()) {
+                totalMessageCount += count.get(iteratorCountKeys.next());
+            }
+
+            if (totalMessageCount > 0) {
+                // New messages! Update and show the notification badge.
+                badge.setNumber(totalMessageCount);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new messages, remove the badge
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
     }
 
     @Override
@@ -172,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
 
             NavDestination nd = nc.getCurrentDestination();
 
+            Log.d("MainPushMessageReceiver", "Incoming chat ID:" + intent.getIntExtra("chatid", -1));
+
+            // If the incoming intent is a chatMessage notificication
             if (intent.hasExtra("chatMessage")) {
                 SingleChatMessage cm = (SingleChatMessage)
                         intent.getSerializableExtra("chatMessage");
@@ -179,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model
                 if (nd.getId() != R.id.navigation_chat) {
-                    mNewMessageModel.increment();
+                    mNewMessageModel.increment(intent.getIntExtra("chatid",-1));
                 }
 
                 // Inform the view model holding chatroom messages of the new message

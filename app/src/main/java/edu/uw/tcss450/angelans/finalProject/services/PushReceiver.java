@@ -80,8 +80,8 @@ public class PushReceiver extends BroadcastReceiver {
                     new NotificationCompat.Builder(theContext, CHANNEL_ID)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.ic_chat_notification_24dp)
-                    .setContentTitle("Message from: " + message.getSender())
-                    .setContentText(message.getMessage())
+                    .setContentTitle("Message from " + message.getSender())
+                    .setContentText("\"" + message.getMessage() + "\"")
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent);
 
