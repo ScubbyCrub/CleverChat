@@ -6,10 +6,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +22,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import edu.uw.tcss450.angelans.finalProject.MainActivity;
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
+import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
 /**
  * Weather ViewModel that protects weather information beyond the lifecycle of a fragment.
@@ -75,42 +82,6 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     /**
-     * Retrieves weather data from openweathermap.com based on the time requested
-     *
-     * @param time The time at which the weather pattern should happen
-     */
-    public void getDataByTime(String time) {
-        String url;
-        if (time == "current"){
-            url = "https://api.openweathermap.org/data/2.5/weather?units=metric&zip=98404,us&appid=d2dbfefbb461190d58e8c89d87bc0636";
-        }
-        else if (time == "hourly"){
-            url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.2113&lon=-122.4126&units=metric&exclude=minutely,alert,daily,curernt&appid=d2dbfefbb461190d58e8c89d87bc0636";
-
-        }
-        else if (time == "daily"){
-            url = "https://api.openweathermap.org/data/2.5/onecall?lat=47.2113&lon=-122.4126&units=metric&exclude=minutely,alert,hourly,current&appid=d2dbfefbb461190d58e8c89d87bc0636";
-        }
-        else {
-            throw new IllegalStateException("Wrong time given");
-        }
-
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, //no body for this get request
-                this::handelSuccess,
-                this::handleError) {
-        };
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-    }
-
-    /**
      * How to handle if the network response comes back with errors.
      *
      * @param theError The error sent back from the web service.
@@ -131,7 +102,7 @@ public class WeatherViewModel extends AndroidViewModel {
         if (!response.has("main") && !response.has("daily") && !response.has("hourly")) {
             throw new IllegalStateException("Unexpected response in WeatherViewModel: " + response);
         }
-        if (response.has("main")){
+        if (response.has("name")){
             try {
                 list = getWeatherListByTime("current");
                 JSONObject current_weather_data = response.getJSONArray("weather").getJSONObject(0);
@@ -169,6 +140,42 @@ public class WeatherViewModel extends AndroidViewModel {
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
+//        else if (response.has("current")){
+//            try {
+//                list = getWeatherListByTime("current");
+//                JSONObject current_data = response.getJSONObject("current");
+//                JSONObject current_weather_data = response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp");
+//                Weather weather = new Weather(
+//                        "adsassa",
+//                        "US",
+//                        current_weather_data.getString("main"),
+//                        "",
+//                        current_data.getLong("temp"),
+//                        current_weather_data.getLong("min"),
+//                        current_weather_data.getLong("max"),
+//                        current_data.getLong("sunrise"),
+//                        current_data.getLong("sunset"),
+//                        current_data.getDouble("wind_speed"),
+//                        current_data.getLong("pressure"),
+//                        current_data.getLong("humidity"),
+//                        ""
+//                );
+//                if (!list.contains(weather)) {
+//                    // don't add a duplicate
+//                    list.add( weather);
+//                } else {
+//                    // this shouldn't happen but could with the asynchronous
+//                    // nature of the application
+//                    Log.wtf("Weather temp already received",
+//                            "Or duplicate time:" + weather.getCurr_temp());
+//                }
+//                //inform observers of the change (setValue)
+//                getOrCreateMapEntry("current").setValue(list);
+//            }catch (JSONException e) {
+//                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+//                Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+//            }
+//        }
         else if (response.has("hourly")){
             try {
                 list = getWeatherListByTime("hourly");
@@ -234,5 +241,47 @@ public class WeatherViewModel extends AndroidViewModel {
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
+    }
+
+    /**
+     * Retrieves weather data from openweathermap.com based on the time requested
+     *
+     * @param time The time at which the weather pattern should happen
+     */
+    public void connectGet(final String time,final String jwt, final String zipCode, final String lat, final String lon) {
+        if (jwt == null) {
+            throw new IllegalArgumentException("No UserInfoViewModel is assigned");
+        }
+        String url = "http://10.0.2.2:5000/api/" ;
+        if (time == "current"){
+            url = url + "current_weather";
+        }
+        else if (time == "hourly"){
+            url = url + "hourly_weather";
+        }
+        else if (time == "daily"){
+            url = url + "daily_weather";
+        }
+        else {
+            throw new IllegalStateException("Wrong time given");
+        }
+        Log.d("token", jwt);
+        Request request = new JsonObjectRequest(Request.Method.GET, url, null,
+                //no body for this get request
+                this::handelSuccess, this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", "Bearer " + jwt);
+                headers.put("latitude",lat);
+                headers.put("longitude",lon);
+                headers.put("zip",zipCode);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(10_000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext()).add(request);
     }
 }

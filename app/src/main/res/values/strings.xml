@@ -36,6 +36,7 @@
     <string name="request">Request</string>
     <string name="request_sent">Sent</string>
 
+
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
     <string name="base_url">http://10.0.2.2:5000/api/</string>
@@ -56,4 +57,5 @@
     <string name="not_verified_text">It appears that your email has not been verified. \n\n
         Please check your email for the verification email.
         \Or click the button below to resend the verification email.</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
