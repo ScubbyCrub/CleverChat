@@ -63,18 +63,26 @@ public class SearchFragment extends Fragment {
 
     public void verifyWithServer() {
         FragmentContactSearchBinding mBinding = FragmentContactSearchBinding.bind(getView());
-        mSearchViewModel.getSearchList(mBinding.textInputSearch.getText().toString(), mUserModel.getmJwt());
-        final RecyclerView rv = mBinding.listContactSearch;
-        SearchRecyclerViewAdapter adapter = new SearchRecyclerViewAdapter(
-                mSearchViewModel.getSearchListByInput(mBinding.textInputSearch.getText().toString())
-        );
-        rv.setAdapter(adapter);
+        mSearchViewModel.getSearchList(mBinding.textInputSearch.getText().toString(), mUserModel.getEmail(), mUserModel.getmJwt());
+
         mSearchViewModel.addSearchObserver(
-                mBinding.textInputSearch.getText().toString(),
-                getViewLifecycleOwner(),
-                searchList -> {
+                mBinding.textInputSearch.getText().toString(), getViewLifecycleOwner(), searchList -> {
                     if(!searchList.isEmpty()) {
+                        final RecyclerView rv = mBinding.listContactSearch;
+                        SearchRecyclerViewAdapter adapter = new SearchRecyclerViewAdapter(searchList);
+                        rv.setAdapter(adapter);
                         rv.getAdapter().notifyDataSetChanged();
+
+                        //Send a request
+                        adapter.setOnSearchClickListener(new SearchRecyclerViewAdapter.OnSearchItemClickListener() {
+                            @Override
+                            public void onRequestClick(int position) {
+                                String username = searchList.get(position).getmUsername();
+                                mSearchViewModel.sendRequest(mUserModel.getEmail(), username, mUserModel.getmJwt());
+                                searchList.remove(position);
+                                adapter.notifyItemRemoved(position);
+                            }
+                        });
                     }
                 }
         );

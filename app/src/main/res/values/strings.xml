@@ -30,11 +30,14 @@
     <string name="text_search">Search</string>
     <string name="change_theme">Switch theme</string>
     <string name="no_user_found">No user found</string>
-    <string name="label_location">Current location:</string>
+    <string name="friends">Friend</string>
+    <string name="request">Request</string>
+    <string name="request_sent">Sent</string>
+
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
-    <string name="base_url">https://cleverchat.herokuapp.com/api/</string>
+    <string name="base_url">http://10.0.2.2:5000/api/</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -45,8 +48,7 @@
     <string name="whoops">Whoops!</string>
     <string name="resend_verification">Resend Email</string>
     <string name="add_participants">Add Participants</string>
-    <string name="not_verified_text">It appears that your email has not been verified. \n\n
+    <string name = "not_verified_text">It appears that your email has not been verified. \n\n
         Please check your email for the verification email.
         \Or click the button below to resend the verification email.</string>
-    <string name="title_activity_maps">MapsActivity</string>
 </resources>

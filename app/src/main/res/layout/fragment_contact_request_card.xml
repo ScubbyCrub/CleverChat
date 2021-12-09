@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/search_card_root"
+    android:id="@+id/card_request"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -10,14 +10,14 @@
     app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_search_inner"
+        android:id="@+id/layout_inner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/text_search_name"
-        app:layout_constraintTop_toTopOf="@+id/text_search_name">
+        app:layout_constraintBottom_toTopOf="@+id/text_request_name"
+        app:layout_constraintTop_toTopOf="@+id/text_request_name">
 
         <TextView
-            android:id="@+id/text_search_username"
+            android:id="@+id/text_request_username"
             android:layout_width="263dp"
             android:layout_height="42dp"
             android:paddingLeft="8dp"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_search_name"
+            android:id="@+id/text_request_name"
             android:layout_width="261dp"
             android:layout_height="34dp"
             android:paddingLeft="8dp"
@@ -39,25 +39,32 @@
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/card_sub_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_search_username" />
+            app:layout_constraintTop_toBottomOf="@+id/text_request_username" />
 
-        <Button
-            android:id="@+id/button_search_add"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="92dp"
-            android:layout_height="55dp"
-            android:backgroundTint="@color/gradient_background_1"
-            android:gravity="center"
-            android:text="@string/request"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/red_for_question"
-            android:textSize="14sp"
+        <ImageButton
+            android:id="@+id/button_accept"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_request_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check_circle_30" />
+
+        <ImageButton
+            android:id="@+id/button_decline"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.936"
-            app:layout_constraintStart_toEndOf="@+id/text_search_username"
+            app:layout_constraintHorizontal_bias="0.341"
+            app:layout_constraintStart_toEndOf="@+id/button_accept"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.523" />
+            app:srcCompat="@drawable/ic_cancel_circle_30" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -8,26 +8,27 @@ import java.io.Serializable;
  * Contains serializable data of the user's contacts list
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 2
  */
-public class ContactList implements Serializable {
+public class RequestList implements Serializable {
     private final String mUsername;
     private final String mName;
 
     /**
-     * Constructor for ContactInfo
+     * Constructor for RequestList
      *
-     * @param mUsername The username of the user in the contact list
-     * @param mName The name of the user in the contact list
+     * @param mUsername The username of the user in the contact request list
+     * @param mName The name of the user in the contact request list
      */
-    public ContactList(String mUsername, String mName) {
+    public RequestList(String mUsername, String mName) {
         this.mUsername = mUsername;
         this.mName = mName;
     }
 
     /**
-     * Getter for the name of the single contact
+     * Getter for the name of the single contact request
      *
-     * @return The name of the single contact
+     * @return The name of the single contact request
      */
     public String getmName() {
         return mName;
@@ -39,16 +40,16 @@ public class ContactList implements Serializable {
 
 
     /**
-     * Prevents displaying duplicate entries in the contacts list
+     * Prevents displaying duplicate entries in the request list
      *
      * @param other The contact to display
-     * @return True if the passed contact is the same as the current contact, false otherwise.
+     * @return True if the passed request is the same as the current request, false otherwise.
      */
     @Override
     public boolean equals(@Nullable Object other) {
         boolean result = false;
-        if(other instanceof ContactList) {
-            result = mUsername.equals(((ContactList) other).mUsername);
+        if(other instanceof RequestList) {
+            result = mUsername.equals(((RequestList) other).mUsername);
         }
         return result;
     }

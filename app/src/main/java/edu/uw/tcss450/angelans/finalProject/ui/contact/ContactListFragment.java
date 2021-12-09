@@ -1,15 +1,15 @@
 package edu.uw.tcss450.angelans.finalProject.ui.contact;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -29,6 +29,7 @@ import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 public class ContactListFragment extends Fragment {
 
     private ContactListViewModel mContactListViewModel;
+    private RequestViewModel mRequestViewModel;
     private UserInfoViewModel mUserModel;
 
     /**
@@ -44,7 +45,9 @@ public class ContactListFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mContactListViewModel = provider.get(ContactListViewModel.class);
+        mRequestViewModel = provider.get(RequestViewModel.class);
         mContactListViewModel.getContactList(mUserModel.getEmail(), mUserModel.getmJwt());
+        mRequestViewModel.getRequestList(mUserModel.getEmail(), mUserModel.getmJwt());
     }
 
     @Override
@@ -57,19 +60,20 @@ public class ContactListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
-        SharedPreferences prefs =
-                getActivity().getSharedPreferences(
-                        getString(R.string.keys_shared_prefs),
-                        Context.MODE_PRIVATE);
+//        SharedPreferences prefs =
+//                getActivity().getSharedPreferences(
+//                        getString(R.string.keys_shared_prefs),
+//                        Context.MODE_PRIVATE);
         FragmentContactListBinding binding = FragmentContactListBinding.bind(getView());
-        final RecyclerView rv = binding.listContact;
-        ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(mContactListViewModel.getContactListByEMail(mUserModel.getEmail()));
-        rv.setAdapter(adapter);
+
         mContactListViewModel.addContactListObserver(mUserModel.getEmail(),getViewLifecycleOwner(), contactList -> {
             if (!contactList.isEmpty()) {
+                final RecyclerView rv = binding.listContact;
+                ContactRecyclerViewAdapter adapter = new ContactRecyclerViewAdapter(contactList);
+                rv.setAdapter(adapter);
                 rv.getAdapter().notifyDataSetChanged();
-                //set the wait fragment to invisible
-                binding.layoutWait.setVisibility(View.GONE);
+
+
                 //Delete a contact
                 adapter.setOnItemClickListener(new ContactRecyclerViewAdapter.OnItemClickListener() {
                     @Override
@@ -80,21 +84,96 @@ public class ContactListFragment extends Fragment {
                         adapter.notifyItemRemoved(position);
                     }
                 });
+
+                //Search through the existing list
+                binding.searchViewExistContact.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                binding.searchViewExistContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String input) {
+                        adapter.getFilter().filter(input);
+                        return false;
+                    }
+                });
             }
         });
 
-        //add contacts
-        binding.buttonAddContact.setOnClickListener(pressed -> {
-            String toAdd= binding.editTextTextPersonName.getText().toString();
-            String email = prefs.getString("email","");
-            String jwt = prefs.getString(getString(R.string.keys_prefs_jwt), "");
-            mContactListViewModel.addContact(email, toAdd, jwt);
+        mRequestViewModel.addRequestListObserver(mUserModel.getEmail(),getViewLifecycleOwner(), requestList -> {
+            if (!requestList.isEmpty()) {
+                final RecyclerView rv = binding.listRequest;
+                RequestRecyclerViewAdapter adapter = new RequestRecyclerViewAdapter(requestList);
+                rv.setAdapter(adapter);
+                rv.getAdapter().notifyDataSetChanged();
+
+
+                //Accept a request
+                adapter.setAcceptClickListener(new RequestRecyclerViewAdapter.OnAcceptItemClickListener() {
+                    @Override
+                    public void onAcceptClick(int position) {
+                        String username = requestList.get(position).getmUsername();
+                        int answer = 1;
+                        mRequestViewModel.responseRequest(mUserModel.getEmail(), username, answer, mUserModel.getmJwt());
+                        requestList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        //Pop up message dialog
+                        Dialog dialog = new Dialog("accepted", username);
+                        dialog.show(getActivity().getSupportFragmentManager(), "accept dialog");
+                    }
+                });
+
+                //Decline a request
+                adapter.setDeclineClickListener(new RequestRecyclerViewAdapter.OnDeclineItemClickListener() {
+                    @Override
+                    public void onDeclineClick(int position) {
+                        String username = requestList.get(position).getmUsername();
+                        int answer = 0;
+                        mRequestViewModel.responseRequest(mUserModel.getEmail(), username, answer, mUserModel.getmJwt());
+                        requestList.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        //Pop up message dialog
+                        Dialog dialog = new Dialog("declined", username);
+                        dialog.show(getActivity().getSupportFragmentManager(), "decline dialog");
+                    }
+                });
+            }
         });
+
 
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(
                         ContactListFragmentDirections.actionNavigationContactToNavigationSearch()
                 ));
+
+        //Switching between friend and request pages
+        //Request
+        binding.buttonContactRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Switch screen
+                binding.viewTheFriend.setVisibility(View.GONE);
+                binding.viewTheRequest.setVisibility(View.VISIBLE);
+                //Change the colors of 2 buttons
+                binding.buttonContactFriend.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch_inactive));
+                binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
+            }
+        });
+        //Friend
+        binding.buttonContactFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Switch screen
+                binding.viewTheRequest.setVisibility(View.GONE);
+                binding.viewTheFriend.setVisibility(View.VISIBLE);
+                //Change the colors of 2 buttons
+                binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch_inactive));
+                binding.buttonContactFriend.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
+
+            }
+        });
     }
 }

@@ -9,19 +9,6 @@
 
 
     <ImageButton
-        android:id="@+id/button_add_contact"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="80dp"
-        android:background="@drawable/button_round"
-        android:src="@drawable/ic_add_white_24dp"
-        app:layout_constraintEnd_toEndOf="@+id/layout_root"
-        app:layout_constraintHorizontal_bias="0.804"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
-
-    <ImageButton
         android:id="@+id/button_search_contact"
         android:layout_width="48dp"
         android:layout_height="0dp"
@@ -29,24 +16,11 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/button_round"
-        android:src="@drawable/ic_search_white_30dp"
+        android:src="@drawable/ic_add_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_title_contact"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="169dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/hint_email"
-        android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
-        android:textColorHint="@color/text_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
 
     <TextView
         android:id="@+id/text_title_contact"
@@ -59,48 +33,99 @@
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/layout_wait"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_contact"
-        android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
-        android:layout_width="357dp"
-        android:layout_height="388dp"
-        android:layout_marginTop="48dp"
-        android:orientation="vertical"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
-        tools:listitem="@layout/fragment_contact_card" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_wait"
+        android:id="@+id/view_the_friend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/button_gradient_color"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="30dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/button_contact_friend">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <SearchView
+            android:id="@+id/searchView_exist_contact"
+            android:layout_width="354dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/view_the_friend"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@id/view_the_friend"
+            app:layout_constraintTop_toTopOf="@id/view_the_friend" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_contact"
+            android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
+            android:layout_width="361dp"
+            android:layout_height="476dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/view_the_friend"
+            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintStart_toStartOf="@id/view_the_friend"
+            app:layout_constraintTop_toBottomOf="@+id/searchView_exist_contact"
+            tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
+            tools:listitem="@layout/fragment_contact_card" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_the_request"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_contact_request">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_request"
+            android:name="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactFragment.java"
+            android:layout_width="357dp"
+            android:layout_height="513dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/view_the_request"
+            app:layout_constraintStart_toStartOf="@id/view_the_request"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context="edu.uw.tcss450.angelans.finalProject.ui.contact.ContactListFragment.java"
+            tools:listitem="@layout/fragment_contact_request_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button_contact_friend"
+        android:layout_width="160dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/button_contact_switch"
+        android:text="@string/friends"
+        android:textColor="@color/button_text_contact_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
+
+    <Button
+        android:id="@+id/button_contact_request"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/button_contact_switch_inactive"
+        android:text="@string/request"
+        android:textColor="@color/button_text_contact_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/button_contact_friend"
+        app:layout_constraintTop_toBottomOf="@+id/text_title_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
