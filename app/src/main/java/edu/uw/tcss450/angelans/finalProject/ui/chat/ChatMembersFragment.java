@@ -63,7 +63,7 @@ public class ChatMembersFragment extends Fragment {
             System.out.println("Adding to contacts " + contact.getEmail());
             mModel.addMemberAsContact(prefs.getString(getString(R.string.keys_prefs_jwt),""),
                     prefs.getString("email",""),
-                    contact.getEmail());
+                    contact.getUsername());
         };
         Consumer<Contact> removeFromChat = (contact) -> {
             System.out.println("Removing Contact From Chat " + contact.getEmail());
@@ -78,7 +78,8 @@ public class ChatMembersFragment extends Fragment {
             System.out.println("Current: " + mModel.getMemberList().toString());
             System.out.println(contactList.toString());
             binding.listContact.setAdapter(
-                    new ChatMembersRecyclerViewAdapter(mModel.getMemberList(),contactList, addContact,removeFromChat)
+                    new ChatMembersRecyclerViewAdapter(mModel.getMemberList(),contactList,
+                            prefs.getString("email",""), addContact,removeFromChat)
             );
         });
 

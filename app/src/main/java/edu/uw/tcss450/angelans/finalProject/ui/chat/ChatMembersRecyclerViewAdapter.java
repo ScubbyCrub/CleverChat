@@ -22,9 +22,11 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
     private Consumer<Contact> addContact;
     private Consumer<Contact> deleteFromChat;
     private HashSet<Integer> existingContacts = new HashSet<Integer>();
+    private String mEmail = "";
 
     public ChatMembersRecyclerViewAdapter(List<Contact> items,
                                           List<Contact> currentContacts,
+                                          String myEmail,
                                           Consumer<Contact> addContact,
                                           Consumer<Contact> deleteFromChat) {
 
@@ -32,6 +34,7 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
         this.mContacts = items;
         this.deleteFromChat = deleteFromChat;
         this.mCurrentContacts = currentContacts;
+        this.mEmail = myEmail;
         for(Contact c : currentContacts){
             existingContacts.add(c.getId());
         }
@@ -74,7 +77,8 @@ public class ChatMembersRecyclerViewAdapter extends RecyclerView.Adapter<ChatMem
             binding.textMemberUsername.setText(contact.getUsername());
             binding.textMembersName.setText(contact.getFirstName() + " " + contact.getLastName());
             //add chat remove and add contact listeners
-            if(existingContacts.contains(contact.getId())){
+            if(existingContacts.contains(contact.getId()) || contact.getEmail().trim()
+                        .equals(mEmail.trim())){
                 binding.buttonAddMemberContact.setVisibility(View.GONE);
             }
             binding.buttonAddMemberContact.setOnClickListener(data -> {

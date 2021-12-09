@@ -132,13 +132,13 @@ public class ChatMembersViewModel extends AndroidViewModel {
         String baseUrl = getApplication().getResources().getString(R.string.base_url);
         JSONObject body = new JSONObject();
         try {
-            body.put("email", yourEmail);
-            body.put("username",addContactEmail);
+            body.put("email", yourEmail.trim());
+            body.put("username",addContactEmail.trim());
         } catch(JSONException e){
             e.printStackTrace();
         }
         String url =
-                baseUrl+ "contact/add"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+                baseUrl+ "contact/sendRequest"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
