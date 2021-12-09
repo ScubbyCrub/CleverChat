@@ -32,7 +32,7 @@ import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirecti
  * the home screen.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 2
+ * @version Sprint 3
  */
 public class HomeFragment extends Fragment {
     FragmentHomeBinding mBinding;

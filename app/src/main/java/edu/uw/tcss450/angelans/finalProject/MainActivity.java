@@ -38,7 +38,7 @@ import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatViewModel;
  * sign in to an account (Home, Contacts, Chat, Weather, etc.).
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 2
+ * @version Sprint 3
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;

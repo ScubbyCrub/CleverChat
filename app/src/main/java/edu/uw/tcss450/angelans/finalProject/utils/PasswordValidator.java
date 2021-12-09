@@ -6,6 +6,13 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
+/**
+ * Interface that is used for checking if registration credentials meet
+ * the restricted requirements for each field in the new account.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 3
+ */
 public interface PasswordValidator  extends Function<String, Optional<PasswordValidator.ValidationResult>> {
 
     static final int MAX_CHAR_INPUT_LENGTH = 255;

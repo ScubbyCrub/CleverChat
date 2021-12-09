@@ -29,7 +29,7 @@ import edu.uw.tcss450.angelans.finalProject.R;
  * lifetime of the fragment.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 3
  */
 public class RegisterViewModel extends AndroidViewModel {
 

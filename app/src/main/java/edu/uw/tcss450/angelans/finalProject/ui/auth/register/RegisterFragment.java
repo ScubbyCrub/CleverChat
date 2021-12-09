@@ -25,7 +25,7 @@ import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
  * to register a new account.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 1
+ * @version Sprint 3
  */
 public class RegisterFragment extends Fragment {
 

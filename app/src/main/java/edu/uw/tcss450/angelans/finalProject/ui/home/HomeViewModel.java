@@ -27,10 +27,22 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
 import edu.uw.tcss450.angelans.finalProject.ui.contact.ContactInfo;
 
+/**
+ * Home ViewModel that stores information relevant to displaying the homepage beyond the
+ * lifecycle of a fragment.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 3
+ */
 public class HomeViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Constructor for HomeViewModel
+     *
+     * @param theApplication The application the ViewModel exists within
+     */
     public HomeViewModel(@NonNull Application theApplication) {
         super(theApplication);
         mResponse = new MutableLiveData<>();
@@ -48,6 +60,11 @@ public class HomeViewModel extends AndroidViewModel {
         mResponse.observe(theOwner, theObserver);
     }
 
+    /**
+     * Retrieves the user's username from the database based on their email address.
+     *
+     * @param theEmail The user's email address.
+     */
     public void connectForUsername(final String theEmail) {
         String url = getApplication().getResources().getString(R.string.base_url)
                 + "username/" + theEmail;

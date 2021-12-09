@@ -25,7 +25,7 @@ import me.pushy.sdk.Pushy;
  * Currently stores message information, but can be modified to track other Pushy messages.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 2
+ * @version Sprint 3
  */
 public class PushReceiver extends BroadcastReceiver {
 

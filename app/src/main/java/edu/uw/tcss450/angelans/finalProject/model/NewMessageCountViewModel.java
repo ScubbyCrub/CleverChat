@@ -16,7 +16,7 @@ import java.util.Map;
  * minimized.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 2
+ * @version Sprint 3
  */
 public class NewMessageCountViewModel extends ViewModel {
     private MutableLiveData<Map<Integer,Integer>> mNewMessageCount;
@@ -42,24 +42,26 @@ public class NewMessageCountViewModel extends ViewModel {
     }
 
     /**
-     * Increments the count of unseen new messages received by the user.
-     * @param chatid
+     * Increments the count of unseen new messages received by the user, organized by
+     * specific chatID.
+     *
+     * @param theChatID The chatID room number to increment the unseen new message count.
      */
-    public void increment(int chatid) {
-        if (chatid <= -1) {
+    public void increment(int theChatID) {
+        if (theChatID <= -1) {
             Log.d("NewMessageCountViewModel", "Passed ChatID default (-1) or invalid");
         } else {
             // If chat already as unread messages, increment the key (chatID)'s counter value
-            if (mNewMessageCount.getValue().containsKey(chatid)) {
-                int currentChatCount = mNewMessageCount.getValue().get(chatid);
+            if (mNewMessageCount.getValue().containsKey(theChatID)) {
+                int currentChatCount = mNewMessageCount.getValue().get(theChatID);
                 currentChatCount ++;
-                mNewMessageCount.getValue().replace(chatid, currentChatCount);
+                mNewMessageCount.getValue().replace(theChatID, currentChatCount);
                 Log.d("NewMessageCountViewModel", "mNewMessageCount incremented (existing chat)"
-                        + chatid + " -> " + mNewMessageCount.getValue().get(chatid));
+                        + theChatID + " -> " + mNewMessageCount.getValue().get(theChatID));
             } else { // If a newly tracked chat got its first unread message, add it to map
-                mNewMessageCount.getValue().putIfAbsent(chatid, 1);
+                mNewMessageCount.getValue().putIfAbsent(theChatID, 1);
                 Log.d("NewMessageCountViewModel", "mNewMessageCount incremented (new chat)"
-                        + chatid + " -> " + mNewMessageCount.getValue().get(chatid));
+                        + theChatID + " -> " + mNewMessageCount.getValue().get(theChatID));
             }
         }
         // Tell observer a change happened.
@@ -69,6 +71,8 @@ public class NewMessageCountViewModel extends ViewModel {
     /**
      * Resets the count of unseen new messages received by the user in a specific
      * chat room by chatID
+     *
+     * @param theChatID The chatroom ID to reset the new message count.
      */
     public void reset(int theChatID) {
         mNewMessageCount.getValue().remove(theChatID);
