@@ -34,7 +34,6 @@
     <string name="request">Request</string>
     <string name="request_sent">Sent</string>
 
-
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
     <string name="base_url">http://10.0.2.2:5000/api/</string>

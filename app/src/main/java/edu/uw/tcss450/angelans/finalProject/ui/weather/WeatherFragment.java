@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +19,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentWeatherBinding;
-import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
-import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirections;
 
 /**
  * Weather Fragment to allow for UI elements to function when the user is interacting
@@ -32,9 +29,8 @@ import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirecti
  */
 public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
-    private String tempSymbol = "°F";
+    private String tempSymbol = "°C";
     private Boolean flag = true;
-    private UserInfoViewModel mUser;
 
     @Override
     public void onCreate(@Nullable Bundle theSavedInstanceState) {
@@ -42,20 +38,15 @@ public class WeatherFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mWeatherViewModel = provider
                 .get(WeatherViewModel.class);
-        mUser = provider.get(UserInfoViewModel.class);
-//        mWeatherViewModel.connectGet(mUser.getmJwt(),"98504");
     }
 
     @Override
     public View onCreateView(LayoutInflater theInflater, ViewGroup theContainer,
                              Bundle theSavedInstanceState) {
         if (flag) {
-//            mWeatherViewModel.getDataByTime("current");
-//            mWeatherViewModel.getDataByTime("hourly");
-//            mWeatherViewModel.getDataByTime("daily");
-            mWeatherViewModel.connectGet("current",mUser.getmJwt(),null,"37.41","-122.21");
-            mWeatherViewModel.connectGet("hourly",mUser.getmJwt(),"98404","37.41","-122.21");
-            mWeatherViewModel.connectGet("daily",mUser.getmJwt(),"98404","37.41","-122.21");
+            mWeatherViewModel.getDataByTime("current");
+            mWeatherViewModel.getDataByTime("hourly");
+            mWeatherViewModel.getDataByTime("daily");
             flag = false;
         }
         return theInflater.inflate(R.layout.fragment_weather, theContainer, false);
@@ -65,11 +56,6 @@ public class WeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentWeatherBinding mBinding = FragmentWeatherBinding.bind(getView());
-        mBinding.searchWeather.setOnClickListener(text ->{
-            Navigation.findNavController((getView())).navigate((
-                    WeatherFragmentDirections.actionNavigationWeatherToLocationFragment()
-            ));
-        });
         mWeatherViewModel.addResponseObserver("current",getViewLifecycleOwner(), weatherList ->{
             if (!weatherList.isEmpty()){
                 Weather currentWeather = weatherList.get(0);

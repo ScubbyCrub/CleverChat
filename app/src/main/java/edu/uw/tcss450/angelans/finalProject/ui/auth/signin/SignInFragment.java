@@ -24,9 +24,9 @@ import org.json.JSONObject;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
+import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
-import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -40,6 +40,7 @@ public class SignInFragment extends Fragment {
 
     private FragmentSignInBinding mBinding;
     private SignInViewModel mSignInViewModel;
+    private WeatherViewModel mWeatherViewModel;
 
     private PushyTokenViewModel mPushyTokenViewModel;
     private UserInfoViewModel mUserViewModel;

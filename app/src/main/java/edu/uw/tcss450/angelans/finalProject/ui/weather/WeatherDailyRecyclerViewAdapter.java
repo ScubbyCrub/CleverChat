@@ -59,8 +59,8 @@ public class WeatherDailyRecyclerViewAdapter extends RecyclerView.Adapter<Weathe
             binding.weekDay.setText(weather.getTime());
             Picasso.get().load("https://openweathermap.org/img/wn/" + weather.getIcon() + "@2x.png").into(binding.dailyCondition);
             binding.dailyHumidity.setText(Long.toString(weather.getHumidity())+ "%");
-            binding.dailyLow.setText("L: "+Long.toString(weather.getMin_temp())+ "°F");
-            binding.dailyHigh.setText("H: "+Long.toString(weather.getMax_temp())+ "°F");
+            binding.dailyLow.setText("L: "+Long.toString(weather.getMin_temp())+ "°C");
+            binding.dailyHigh.setText("H: "+Long.toString(weather.getMax_temp())+ "°C");
         }
     }
 }
