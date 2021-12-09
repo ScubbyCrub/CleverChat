@@ -58,4 +58,6 @@
         Please check your email for the verification email.
         \Or click the button below to resend the verification email.</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="old_password">Current Password</string>
+    <string name="new_password">New Password</string>
 </resources>

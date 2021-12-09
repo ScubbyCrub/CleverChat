@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_navigation_home_to_singleChatFragment"
             app:destination="@id/singleChatFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_appPasswordResetFragment"
+            app:destination="@id/appPasswordResetFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_weather"
@@ -118,6 +121,15 @@
         <action
             android:id="@+id/action_locationFragment_to_navigation_weather"
             app:destination="@id/navigation_weather" />
+    </fragment>
+    <fragment
+        android:id="@+id/appPasswordResetFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.AppPasswordResetFragment"
+        android:label="fragment_app_password_reset"
+        tools:layout="@layout/fragment_app_password_reset" >
+        <action
+            android:id="@+id/action_appPasswordResetFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     tools:layout="@layout/fragment_contact_list"/>
 </navigation>

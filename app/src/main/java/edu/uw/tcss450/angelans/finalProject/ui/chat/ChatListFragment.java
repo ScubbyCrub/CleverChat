@@ -58,10 +58,12 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        System.out.println("Resumed!x");
         SharedPreferences prefs =
                 getActivity().getSharedPreferences(
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
+        mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
         mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
     @Override
