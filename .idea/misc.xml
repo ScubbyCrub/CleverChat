@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/layout/fragment_email_verification.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_hourly_weather.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/fragment_location.xml" value="0.13802083333333334" />
+        <entry key="app/src/main/res/layout/fragment_location.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_map_weather.xml" value="0.1503623188405797" />
         <entry key="app/src/main/res/layout/fragment_new_chat.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/fragment_password_reset.xml" value="0.25" />
