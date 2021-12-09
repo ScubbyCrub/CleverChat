@@ -76,6 +76,15 @@ public class PushReceiver extends BroadcastReceiver {
                 i.putExtras(theIntent.getExtras());
 
                 theContext.sendBroadcast(i);
+            } else if (typeOfMessage.equals(TYPE_CONTACT)) {
+                //app is in the foreground so send the contact request to the active Activities
+                Log.d("PushReceiver", "Contact Request received in foreground");
+
+                //create an Intent to broadcast a message to other parts of the app.
+                Intent i = new Intent(RECEIVED_NEW_MESSAGE);
+                i.putExtras(theIntent.getExtras());
+
+                theContext.sendBroadcast(i);
             }
         } else {
             //app is in the background so create and post a notification

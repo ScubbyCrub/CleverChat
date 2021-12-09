@@ -20,6 +20,7 @@ import java.util.Map;
  */
 public class NewMessageCountViewModel extends ViewModel {
     private MutableLiveData<Map<Integer,Integer>> mNewMessageCount;
+    private MutableLiveData<Integer> mNewContactCount;
 
     /**
      * Constructor for NewMessageCountViewModel
@@ -27,6 +28,8 @@ public class NewMessageCountViewModel extends ViewModel {
     public NewMessageCountViewModel() {
         mNewMessageCount = new MutableLiveData<>();
         mNewMessageCount.setValue(new HashMap<Integer, Integer>());
+        mNewContactCount = new MutableLiveData<>();
+        mNewContactCount.setValue(0);
     }
 
     /**
@@ -42,12 +45,24 @@ public class NewMessageCountViewModel extends ViewModel {
     }
 
     /**
+     * Register as an observer to listen for the new contact counter.
+     *
+     * @param theOwner the fragment's lifecycle owner.
+     * @param theObserver the observer that wants to listen to updates to new, unseen
+     *                    contact counts.
+     */
+    public void addContactCountObserver(@NonNull LifecycleOwner theOwner,
+                                        @NonNull Observer<? super Integer> theObserver) {
+        mNewContactCount.observe(theOwner, theObserver);
+    }
+
+    /**
      * Increments the count of unseen new messages received by the user, organized by
      * specific chatID.
      *
      * @param theChatID The chatID room number to increment the unseen new message count.
      */
-    public void increment(int theChatID) {
+    public void incrementChatCount(int theChatID) {
         if (theChatID <= -1) {
             Log.d("NewMessageCountViewModel", "Passed ChatID default (-1) or invalid");
         } else {
@@ -74,11 +89,27 @@ public class NewMessageCountViewModel extends ViewModel {
      *
      * @param theChatID The chatroom ID to reset the new message count.
      */
-    public void reset(int theChatID) {
+    public void resetChatCount(int theChatID) {
         mNewMessageCount.getValue().remove(theChatID);
         // Tell observer change happened
         Log.d("NewMessageCountViewModel", "mNewMessageCount Keys-: "
                 + mNewMessageCount.getValue().keySet());
         mNewMessageCount.setValue(mNewMessageCount.getValue());
+    }
+
+    /**
+     * Increments the count of unseen new contacts received by the user by one.
+     */
+    public void incrementContactCount() {
+        int count = mNewContactCount.getValue();
+        count++;
+        mNewContactCount.setValue(count);
+    }
+
+    /**
+     * Resets the count of unseen new contacts received by the user to zero.
+     */
+    public void resetContactCount() {
+        mNewContactCount.setValue(0);
     }
 }

@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -88,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.singleChatFragment) {
                 // When the user navigates to the chats page, modify the new message count
-                // TODO Bug: MainActivity.onCreate() happens before SingleChatFragment.onCreate(),
-                // Leading to mostRecentlyVisitedChatID to be old by the time it tries
-                // to delete live notifs.
                 final int[] mostRecentlyVisitedChatID = {0};
 
                 mSingleChatModel.addMostRecentChatIDObserver(MainActivity.this, count -> {
@@ -99,7 +95,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainPushMessageReceiver",
                         "Most Recent Visited Chat (onCreate) = " + mostRecentlyVisitedChatID[0]);
 
-                mNewMessageModel.reset(mostRecentlyVisitedChatID[0]);
+                mNewMessageModel.resetChatCount(mostRecentlyVisitedChatID[0]);
+            } else if (destination.getId() == R.id.navigation_contact) {
+                // When the user navigates to the contacts page, modify the new message count
+                mNewMessageModel.resetContactCount();
             }
         });
 
@@ -122,6 +121,21 @@ public class MainActivity extends AppCompatActivity {
                 badge.setVisible(true);
             } else {
                 // User did some action to clear the new messages, remove the badge
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
+
+        mNewMessageModel.addContactCountObserver(this, count -> {
+            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.navigation_contact);
+            badge.setMaxCharacterCount(2);
+
+            if (count > 0) {
+                // New contact! Update and show the notification badge.
+                badge.setNumber(count);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new contact, remove the badge
                 badge.clearNumber();
                 badge.setVisible(false);
             }
@@ -246,11 +260,22 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainPushMessageReceiver",
                             "Different fragment or different chat view? "
                                     + "Increment message count!");
-                    mNewMessageModel.increment(intent.getIntExtra("chatid",-1));
+                    mNewMessageModel.incrementChatCount(intent.getIntExtra("chatid",-1));
                 }
 
                 // Inform the view model holding chatroom messages of the new message
                 mModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+            } else if (intent.getStringExtra("type").equals("contact")) {
+                // If the user is not on the chat screen, update the
+                // NewMessageCountView Model
+                Log.d("MainPushMessageReceiver", "current fragment ID = " + nd.getId());
+                if (nd.getId() != R.id.navigation_contact) {
+                    Log.d("MainPushMessageReceiver",
+                            "Different fragment?"
+                                    + " Increment contact count!");
+                    mNewMessageModel.incrementContactCount();
+                }
+                // Inform the view model holding chatroom messages of the new message
             }
         }
     }
