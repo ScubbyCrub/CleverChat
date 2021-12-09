@@ -43,6 +43,7 @@ import edu.uw.tcss450.angelans.finalProject.services.PushReceiver;
 import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
 import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatViewModel;
 import edu.uw.tcss450.angelans.finalProject.ui.weather.LocationViewModel;
+import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 
 /**
  * The activity that hosts fragments of the app that are available after a successful
@@ -53,7 +54,8 @@ import edu.uw.tcss450.angelans.finalProject.ui.weather.LocationViewModel;
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-
+    private WeatherViewModel mWeatherViewModel;
+    private UserInfoViewModel mUser;
     private ActivityMainBinding mBinding;
 
     private MainPushMessageReceiver mPushMessageReceiver;
@@ -72,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
-        new ViewModelProvider(this,
+        mUser = new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
         ).get(UserInfoViewModel.class);
 
         mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
+        mWeatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
 
 //        setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         mLocationModel = new ViewModelProvider(MainActivity.this)
                                 .get(LocationViewModel.class);
                     }
-                    mLocationModel.setLocation(location);
+                    mLocationModel.setLocation(location,MainActivity.this);
                 }
             };
         };
@@ -283,7 +286,11 @@ public class MainActivity extends AppCompatActivity {
                                     mLocationModel = new ViewModelProvider(MainActivity.this)
                                             .get(LocationViewModel.class);
                                 }
-                                mLocationModel.setLocation(location);
+                                mLocationModel.setLocation(location,MainActivity.this);
+                                mWeatherViewModel.connectGet("current",mUser.getmJwt(),String.valueOf(mLocationModel.getCurrentLocation().getLatitude()),String.valueOf(mLocationModel.getCurrentLocation().getLongitude()));
+                                mWeatherViewModel.connectGet("hourly",mUser.getmJwt(),String.valueOf(mLocationModel.getCurrentLocation().getLatitude()),String.valueOf(mLocationModel.getCurrentLocation().getLongitude()));
+                                mWeatherViewModel.connectGet("daily",mUser.getmJwt(),String.valueOf(mLocationModel.getCurrentLocation().getLatitude()),String.valueOf(mLocationModel.getCurrentLocation().getLongitude()));
+                                mLocationModel.setLocation(location,MainActivity.this);
                             }
                         }
                     });

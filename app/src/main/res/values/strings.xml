@@ -1,5 +1,4 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">TCSS 450 Group Project</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
@@ -35,11 +34,6 @@
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
     <string name="base_url">https://cleverchat.herokuapp.com/api/</string>
-
-=======
-    <string name="app_name">Tien Truong is Binzista</string>
->>>>>>> Develop-Tien
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_new_chat">Create New Chat</string>
     <string name="create">Create</string>
