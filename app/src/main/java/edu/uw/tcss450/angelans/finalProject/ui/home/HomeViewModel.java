@@ -25,7 +25,7 @@ import java.util.Objects;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
-import edu.uw.tcss450.angelans.finalProject.ui.contact.ContactInfo;
+//import edu.uw.tcss450.angelans.finalProject.ui.contact.ContactInfo;
 
 /**
  * Home ViewModel that stores information relevant to displaying the homepage beyond the
