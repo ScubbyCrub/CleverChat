@@ -38,18 +38,18 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!--  Used for loading new messages  -->
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="393dp"
+        android:layout_height="520dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/edit_message"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_messages"
@@ -60,7 +60,31 @@
             android:orientation="vertical"
             app:layoutManager="LinearLayoutManager"
             tools:context="edu.uw.tcss450.uiandnavigationlab.ui.blog.BlogListFragment"
-            tools:listitem="@layout/fragment_single_chat_message"/>
+            tools:listitem="@layout/fragment_single_chat_message" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <View
+        android:id="@+id/view_chat_name"
+        android:layout_width="410dp"
+        android:layout_height="65dp"
+        android:background="@color/gradient_background_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_chat_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_chat_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/view_chat_name"
+        app:layout_constraintTop_toTopOf="@+id/view_chat_name"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,15 +24,17 @@ import edu.uw.tcss450.angelans.finalProject.model.Chat;
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.ChatViewHolder> {
     private List<Chat> mChats = new ArrayList<Chat>();
     private final Consumer<Chat> selectedChat;
+    private final Consumer<Chat> deleteChat;
 
     /**
      * 2 argument constructor
      * @param items items to put in the list
      * @param selectedChat  Chat consumer
      */
-    public ChatRecyclerViewAdapter(List<Chat> items, Consumer<Chat> selectedChat){
+    public ChatRecyclerViewAdapter(List<Chat> items, Consumer<Chat> selectedChat, Consumer<Chat> deleteChat){
         this.mChats = items;
         this.selectedChat = selectedChat;
+        this.deleteChat = deleteChat;
     }
 
     @NonNull
@@ -81,6 +83,9 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
             binding.textContactName.setText(chat.getName());
             binding.cardRoot.setOnClickListener(data -> {
                 selectedChat.accept(chat);
+            });
+            binding.buttonDeleteChat.setOnClickListener(data -> {
+                deleteChat.accept(chat);
             });
         }
     }

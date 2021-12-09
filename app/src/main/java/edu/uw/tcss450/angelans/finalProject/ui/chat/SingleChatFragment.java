@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import edu.uw.tcss450.angelans.finalProject.R;
@@ -65,12 +66,13 @@ public class SingleChatFragment extends Fragment {
         super.onViewCreated(theView, theSavedInstanceState);
 
         FragmentSingleChatBinding binding = FragmentSingleChatBinding.bind(getView());
-
+        SingleChatFragmentArgs args = SingleChatFragmentArgs.fromBundle(getArguments());
         Log.d("Single Chat Fragment:", "Progress Bar showing start");
         //SetRefreshing shows the internal Swiper view progress bar.
         // Show this until messages load.
         binding.swipeContainer.setRefreshing(true);
-
+        //update chat name
+        binding.textChatName.setText(args.getChatName());
         final RecyclerView rv = binding.recyclerMessages;
         //Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
         //holds.
@@ -100,6 +102,13 @@ public class SingleChatFragment extends Fragment {
             mSendModel.sendMessage(mGlobalChatId,
                     mUserModel.getmJwt(),
                     binding.editMessage.getText().toString());
+        });
+        //navigate to the chat members page
+        binding.viewChatName.setOnClickListener(click -> {
+            SingleChatFragmentDirections.ActionSingleChatFragmentToChatMembersFragment dir =
+                    SingleChatFragmentDirections.actionSingleChatFragmentToChatMembersFragment();
+            dir.setChatid(args.getId());
+            Navigation.findNavController(getView()).navigate(dir);
         });
 
         Log.d("Single Chat Fragment", "Server responded to msg send, " +

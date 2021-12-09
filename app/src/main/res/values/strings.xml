@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TCSS 450 Group Project</string>
+    <string name="app_name">CleverChat</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
     <string name="hint_email">Email</string>
@@ -26,6 +26,7 @@
     <string name="placeholder_email">sampleEmail@website.com</string>
     <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
     <string name="keys_prefs_jwt">Shared Prefs JWT</string>
+    <string name="keys_prefs_dark_mode">Dark_Mode</string>
     <string name="keys_prefs_signed_in">stay_signed_in</string>
     <string name="text_search">Search</string>
     <string name="change_theme">Switch theme</string>
@@ -47,7 +48,11 @@
     <string name="whoops">Whoops!</string>
     <string name="resend_verification">Resend Email</string>
     <string name="add_participants">Add Participants</string>
-    <string name = "not_verified_text">It appears that your email has not been verified. \n\n
+    <string name="members">Members</string>
+    <string name="add_members">Add New Members</string>
+    <string name="add">Add</string>
+    <string name="select_contacts">Select Contacts:</string>
+    <string name="not_verified_text">It appears that your email has not been verified. \n\n
         Please check your email for the verification email.
         \Or click the button below to resend the verification email.</string>
 </resources>

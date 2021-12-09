@@ -55,11 +55,23 @@ public class ChatListFragment extends Fragment {
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
         mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-
+        //set up shared prefs
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
         FragmentChatListBinding binding = FragmentChatListBinding.bind(getView());
 
         //handle opening chats from list when clicked
@@ -67,13 +79,17 @@ public class ChatListFragment extends Fragment {
             ChatListFragmentDirections.ActionNavigationChatToSingleChatFragment dir =
                     ChatListFragmentDirections.actionNavigationChatToSingleChatFragment();
             dir.setId(chat.getId());
+            dir.setChatName(chat.getName());
             Navigation.findNavController(getView()).navigate(dir);
         };
-
+        Consumer<Chat> delete = (chat) -> {
+            System.out.println("delete " + chat.getId());
+            mModel.deleteChat(chat,prefs.getString(getString(R.string.keys_prefs_jwt), ""));
+        };
         //set up recycler view on recieving data
         mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
             binding.listRoot.setAdapter(
-                    new ChatRecyclerViewAdapter(chatList, clicked)
+                    new ChatRecyclerViewAdapter(chatList, clicked, delete)
             );
             //TODO: Add loading overlay here
         });
