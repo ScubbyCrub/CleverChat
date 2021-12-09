@@ -24,9 +24,9 @@ import org.json.JSONObject;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
-import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
+import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -40,7 +40,6 @@ public class SignInFragment extends Fragment {
 
     private FragmentSignInBinding mBinding;
     private SignInViewModel mSignInViewModel;
-    private WeatherViewModel mWeatherViewModel;
 
     private PushyTokenViewModel mPushyTokenViewModel;
     private UserInfoViewModel mUserViewModel;
@@ -106,12 +105,12 @@ public class SignInFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(
                     SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
                 ));
-        mBinding.buttonSignIn.setOnClickListener(this::attemptSignIn);
-//        mBinding.buttonSignIn.setOnClickListener(button ->
-//                Navigation.findNavController(getView())
-//                        .navigate(SignInFragmentDirections
-//                                .actionSignInFragmentToMainActivity("theEmail","theJwt")
-//        ));
+//        mBinding.buttonSignIn.setOnClickListener(this::attemptSignIn);
+        mBinding.buttonSignIn.setOnClickListener(button ->
+                Navigation.findNavController(getView())
+                        .navigate(SignInFragmentDirections
+                                .actionSignInFragmentToMainActivity("theEmail","theJwt")
+        ));
 
         mSignInViewModel.addResponseObserver(
                 getViewLifecycleOwner(),
