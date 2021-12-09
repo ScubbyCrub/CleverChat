@@ -14,11 +14,15 @@ import android.content.IntentFilter;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Iterator;
+import java.util.Set;
 
 import edu.uw.tcss450.angelans.finalProject.databinding.ActivityMainBinding;
 import edu.uw.tcss450.angelans.finalProject.model.NewMessageCountViewModel;
@@ -33,7 +37,7 @@ import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatViewModel;
  * sign in to an account (Home, Contacts, Chat, Weather, etc.).
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
- * @version Sprint 2
+ * @version Sprint 3
  */
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private MainPushMessageReceiver mPushMessageReceiver;
 
     private NewMessageCountViewModel mNewMessageModel;
+
+    private SingleChatViewModel mSingleChatModel;
 
     /**
      * Creates the activity
@@ -76,6 +82,64 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
+        mSingleChatModel = new ViewModelProvider(this).get(SingleChatViewModel.class);
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.singleChatFragment) {
+                // When the user navigates to the chats page, modify the new message count
+                final int[] mostRecentlyVisitedChatID = {0};
+
+                mSingleChatModel.addMostRecentChatIDObserver(MainActivity.this, count -> {
+                    mostRecentlyVisitedChatID[0] = count;
+                });
+                Log.d("MainPushMessageReceiver",
+                        "Most Recent Visited Chat (onCreate) = " + mostRecentlyVisitedChatID[0]);
+
+                mNewMessageModel.resetChatCount(mostRecentlyVisitedChatID[0]);
+            } else if (destination.getId() == R.id.navigation_contact) {
+                // When the user navigates to the contacts page, modify the new message count
+                mNewMessageModel.resetContactCount();
+            }
+        });
+
+        mNewMessageModel.addMessageCountObserver(this, count -> {
+            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.navigation_chat);
+            badge.setMaxCharacterCount(2);
+
+            Set<Integer> countKeys = count.keySet();
+            Iterator<Integer> iteratorCountKeys = countKeys.iterator();
+            int totalMessageCount = 0;
+
+            // Find total value of new messages among all chats
+            while (iteratorCountKeys.hasNext()) {
+                totalMessageCount += count.get(iteratorCountKeys.next());
+            }
+
+            if (totalMessageCount > 0) {
+                // New messages! Update and show the notification badge.
+                badge.setNumber(totalMessageCount);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new messages, remove the badge
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
+
+        mNewMessageModel.addContactCountObserver(this, count -> {
+            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.navigation_contact);
+            badge.setMaxCharacterCount(2);
+
+            if (count > 0) {
+                // New contact! Update and show the notification badge.
+                badge.setNumber(count);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new contact, remove the badge
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
     }
 
     @Override
@@ -172,18 +236,46 @@ public class MainActivity extends AppCompatActivity {
 
             NavDestination nd = nc.getCurrentDestination();
 
+            int incomingChatID = intent.getIntExtra("chatid", -1);
+
+            Log.d("MainPushMessageReceiver", "Incoming chat ID:" + incomingChatID);
+
+            // If the incoming intent is a chatMessage notificication
             if (intent.hasExtra("chatMessage")) {
                 SingleChatMessage cm = (SingleChatMessage)
                         intent.getSerializableExtra("chatMessage");
 
+                final int[] mostRecentlyVisitedChatID = {0};
+
+                mModel.addMostRecentChatIDObserver(MainActivity.this, count -> {
+                    mostRecentlyVisitedChatID[0] = count;
+                });
+
                 // If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                if (nd.getId() != R.id.navigation_chat) {
-                    mNewMessageModel.increment();
+                Log.d("MainPushMessageReceiver",
+                        "Most Recent Visited Chat (onReceive) = " + mostRecentlyVisitedChatID[0]);
+                if (nd.getId() != R.id.singleChatFragment
+                        || mostRecentlyVisitedChatID[0] != incomingChatID) {
+                    Log.d("MainPushMessageReceiver",
+                            "Different fragment or different chat view? "
+                                    + "Increment message count!");
+                    mNewMessageModel.incrementChatCount(intent.getIntExtra("chatid",-1));
                 }
 
                 // Inform the view model holding chatroom messages of the new message
                 mModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+            } else if (intent.getStringExtra("type").equals("contact")) {
+                // If the user is not on the chat screen, update the
+                // NewMessageCountView Model
+                Log.d("MainPushMessageReceiver", "current fragment ID = " + nd.getId());
+                if (nd.getId() != R.id.navigation_contact) {
+                    Log.d("MainPushMessageReceiver",
+                            "Different fragment?"
+                                    + " Increment contact count!");
+                    mNewMessageModel.incrementContactCount();
+                }
+                // Inform the view model holding chatroom messages of the new message
             }
         }
     }

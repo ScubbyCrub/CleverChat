@@ -6,19 +6,35 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
+/**
+ * Interface that is used for checking if registration credentials meet
+ * the restricted requirements for each field in the new account.
+ *
+ * @author Group 6: Teresa, Vlad, Tien, Angela
+ * @version Sprint 3
+ */
 public interface PasswordValidator  extends Function<String, Optional<PasswordValidator.ValidationResult>> {
 
     static final int MAX_CHAR_INPUT_LENGTH = 255;
 
-    //Password length more than 7
+    // Password length is more than 7
     static PasswordValidator checkPWLength() {
         return checkPWLength(7);
     }
 
+    // Password length is more than length
     static PasswordValidator checkPWLength(int length) {
         return password ->
                 Optional.of(password.length() > length
                         && password.length() <= MAX_CHAR_INPUT_LENGTH ?
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH);
+    }
+
+    // Password length is more than theMinLength and equal to or less than theMaxLength
+    static PasswordValidator checkPWLength(int theMinLength, int theMaxLength) {
+        return password ->
+                Optional.of(password.length() > theMinLength
+                        && password.length() <= theMaxLength ?
                         ValidationResult.SUCCESS : ValidationResult.PWD_INVALID_LENGTH);
     }
 
@@ -72,6 +88,32 @@ public interface PasswordValidator  extends Function<String, Optional<PasswordVa
                 || (currentChar > 45 && currentChar < 65)   // 65-90 = A-Z
                 || (currentChar > 90 && currentChar < 97)   // 97-122 = a-z
                 || (currentChar > 122)
+            ) { // If any char falls in illegal range, set to return false
+                checkResult = false;
+                break;
+            }
+        }
+        return checkResult;
+    }
+
+    // Checks if an input only contains letters, spaces, or hyphens as chars.
+    static PasswordValidator checkPwdOnlyHasLettersNumbersHyphensUnderscores() {
+        return password ->
+                Optional.of(hasLettersNumbersHyphensUnderscores(password) ?
+                        ValidationResult.SUCCESS : ValidationResult.PWD_INCLUDES_EXCLUDED);
+    }
+
+    // Helper method for checkPwdOnlyHasLettersNumbersHyphensUnderscores()
+    static boolean hasLettersNumbersHyphensUnderscores(String thePassword) {
+        boolean checkResult = true;
+        for (int i = 0; i < thePassword.length(); i++) {
+            char currentChar = thePassword.charAt(i);
+            if (currentChar < 45                            // 45 = hyphen
+                    || (currentChar > 45 && currentChar < 48)   // 48-57 = 0-9
+                    || (currentChar > 57 && currentChar < 65)   // 65-90 = A-Z
+                    || (currentChar > 90 && currentChar < 95)   // 95 = underscore
+                    || (currentChar > 95 && currentChar < 97)   // 97-122 = a-z
+                    || (currentChar > 122)
             ) { // If any char falls in illegal range, set to return false
                 checkResult = false;
                 break;

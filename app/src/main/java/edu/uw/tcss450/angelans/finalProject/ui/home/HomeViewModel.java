@@ -1,4 +1,4 @@
-package edu.uw.tcss450.angelans.finalProject.ui.auth.register;
+package edu.uw.tcss450.angelans.finalProject.ui.home;
 
 import android.app.Application;
 import android.util.Log;
@@ -15,32 +15,35 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
-
+import java.util.List;
 import java.util.Objects;
 
 import edu.uw.tcss450.angelans.finalProject.R;
+import edu.uw.tcss450.angelans.finalProject.ui.chat.SingleChatMessage;
+import edu.uw.tcss450.angelans.finalProject.ui.contact.ContactInfo;
 
 /**
- * Register ViewModel that protects user input to register their account beyond the
- * lifetime of the fragment.
+ * Home ViewModel that stores information relevant to displaying the homepage beyond the
+ * lifecycle of a fragment.
  *
  * @author Group 6: Teresa, Vlad, Tien, Angela
  * @version Sprint 3
  */
-public class RegisterViewModel extends AndroidViewModel {
+public class HomeViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
 
     /**
-     * Constructor for RegisterViewModel.
+     * Constructor for HomeViewModel
      *
-     * @param theApplication The application that RegisterViewModel should exist in.
+     * @param theApplication The application the ViewModel exists within
      */
-    public RegisterViewModel(@NonNull Application theApplication) {
+    public HomeViewModel(@NonNull Application theApplication) {
         super(theApplication);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
@@ -58,6 +61,46 @@ public class RegisterViewModel extends AndroidViewModel {
     }
 
     /**
+     * Retrieves the user's username from the database based on their email address.
+     *
+     * @param theEmail The user's email address.
+     */
+    public void connectForUsername(final String theEmail) {
+        String url = getApplication().getResources().getString(R.string.base_url)
+                + "username/" + theEmail;
+        Log.d("HomeViewModel", "about to send username GET request");
+        Request request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                this::handleSuccess,
+                this::handleError);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+    /**
+     * How to handle a successful return from the web service interaction.
+     *
+     * @param theResponse The response from the web service.
+     */
+    private void handleSuccess(final JSONObject theResponse) {
+        if (theResponse.length() > 0) {
+            if (!theResponse.has("username")) {
+                Log.e("Home Fragment","Username GET responded with error");
+            } else {
+                mResponse.setValue(theResponse);
+            }
+        } else {
+            Log.d("JSON Response (HomeFragment 89)", "No Response");
+        }
+    }
+
+    /**
      * How to handle if the network response comes back with errors.
      *
      * @param theError The error sent back from the web service.
@@ -69,7 +112,7 @@ public class RegisterViewModel extends AndroidViewModel {
                         "error:\"" + theError.getMessage() +
                         "\"}"));
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "(HomeViewModel) JSON Parse Error in handleError");
             }
         }
         else {
@@ -81,48 +124,8 @@ public class RegisterViewModel extends AndroidViewModel {
                 response.put("data", new JSONObject(data));
                 this.mResponse.setValue(response);
             } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
+                Log.e("JSON PARSE", "(HomeViewModel) JSON Parse Error in handleError");
             }
         }
     }
-
-    /**
-     * Send a web request to the server to register a new user account.
-     *
-     * @param theFirst The first name of the new account.
-     * @param theLast The last name of the new account.
-     * @param theUsername The unique username of the new account.
-     * @param theEmail The email of the new account.
-     * @param thePassword The password of the new account.
-     */
-    public void connect(final String theFirst,
-                        final String theLast,
-                        final String theUsername,
-                        final String theEmail,
-                        final String thePassword) {
-        String url = getApplication().getResources().getString(R.string.base_url) + "register";
-        JSONObject body = new JSONObject();
-        try {
-            body.put("firstName", theFirst);
-            body.put("lastName", theLast);
-            body.put("username", theUsername);
-            body.put("email", theEmail);
-            body.put("password", thePassword);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Request request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                body,
-                mResponse::setValue,
-                this::handleError);
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Volley.newRequestQueue(getApplication().getApplicationContext())
-                .add(request);
-    }
 }
-

@@ -76,10 +76,14 @@ public class ChatListFragment extends Fragment {
 
         //handle opening chats from list when clicked
         Consumer<Chat> clicked = (chat) -> {
+            SingleChatViewModel mChatModel = new ViewModelProvider(getActivity())
+                    .get(SingleChatViewModel.class);
             ChatListFragmentDirections.ActionNavigationChatToSingleChatFragment dir =
                     ChatListFragmentDirections.actionNavigationChatToSingleChatFragment();
             dir.setId(chat.getId());
             dir.setChatName(chat.getName());
+            mChatModel.updateMostRecentVisitedChatID(chat.getId());
+            Log.d("ChatListFragment", "Recent SingleChat ID updated: " + chat.getId());
             Navigation.findNavController(getView()).navigate(dir);
         };
         Consumer<Chat> delete = (chat) -> {

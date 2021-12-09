@@ -2,6 +2,7 @@
     <string name="app_name">CleverChat</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
+    <string name="hint_username">Username</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_re_password">Re-type Password</string>
@@ -22,12 +23,12 @@
     <string name="new_chat">New Chat</string>
     <string name="chats">Chat</string>
     <string name="text_no_contact">You do not have any contact.</string>
-    <string name="placeholder_username">Username</string>
     <string name="placeholder_email">sampleEmail@website.com</string>
     <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
     <string name="keys_prefs_jwt">Shared Prefs JWT</string>
     <string name="keys_prefs_dark_mode">Dark_Mode</string>
     <string name="keys_prefs_signed_in">stay_signed_in</string>
+    <string name="keys_username">Username</string>
     <string name="text_search">Search</string>
     <string name="change_theme">Switch theme</string>
     <string name="no_user_found">No user found</string>
