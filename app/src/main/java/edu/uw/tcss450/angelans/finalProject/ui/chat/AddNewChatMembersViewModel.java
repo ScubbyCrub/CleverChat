@@ -37,6 +37,7 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mCurrentContacts;
     private String JWT = "";
     private String EMAIL = "";
+    private String CHAT_ID = "";
 
     /**
      * Constructor for the view model
@@ -107,9 +108,11 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
      * @param email The email of the user
      * @param jwt the jwt of the user
      */
-    public void connectGetContacts(final String email, String jwt) {
+    public void connectGetContacts(final String email, String jwt, String chatid) {
         JWT = jwt;
         EMAIL = email;
+        CHAT_ID = chatid;
+        System.out.println(jwt + " " + email);
         String baseUrl = getApplication().getResources().getString(R.string.base_url);
         String url = baseUrl + "contact/list";
 
@@ -148,7 +151,7 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
      * Handle a successful input from the web end communication
      * @param response The JSON web response to a web request
      */
-    private void handleSuccess(final JSONObject response){
+    private void  handleSuccess(final JSONObject response){
         IntFunction<String> getString =
                 getApplication().getResources()::getString;
         try {
@@ -167,14 +170,14 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
                             jsonContact.getString("name").split(" ")[0],
                             jsonContact.getString("name").split(" ")[1]);
                     boolean contains = false;
-                    for(Contact c : mContacts.getValue()){
+                    for(Contact c : mCurrentContacts.getValue()){
                         if(c.getId() == aContact.getId()){
                             contains = true;
                             break;
                         }
                     }
                     if (!contains) {
-                        mContacts.getValue().add(0,aContact);
+                        mCurrentContacts.getValue().add(0,aContact);
                     }
                 }
             } else {
@@ -186,30 +189,23 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
             Log.e("ERROR!", e.getMessage());
         }
 
-        mContacts.setValue(mContacts.getValue());
+        mCurrentContacts.setValue(mCurrentContacts.getValue());
         //call the get current contacts method
-        connectGetContacts(JWT, EMAIL);
+        getCurrentChatMembers(JWT);
 
     }
     /**
      * Get the current contacts of the user
      */
-    public void getCurrentContacts(String jwt, String email) {
+    private void getCurrentChatMembers(String jwt) {
         String baseUrl = getApplication().getResources().getString(R.string.base_url);
-        JSONObject body = new JSONObject();
-        try {
-            body.put("email", email.trim());
-        } catch(JSONException e){
-            e.printStackTrace();
-        }
-        System.out.println("Getting contacts for: " + email);
         String url =
-                baseUrl+ "contact/list"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+                baseUrl+ "chat/members/" + CHAT_ID; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
         Request request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.GET,
                 url,
-                body, //no body for this get request
-                this::handleGetContactsResult,
+                null, //no body for this get request
+                this::handleChatMemberResult,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
@@ -221,6 +217,7 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
             }
         };
 
+
         request.setRetryPolicy(new DefaultRetryPolicy(
                 10_000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -228,7 +225,48 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
+
     }
+
+    private void handleChatMemberResult(JSONObject jsonObject) {
+        List<Contact> currentContacts = mCurrentContacts.getValue();
+        if(jsonObject.has("members")){
+            try{
+                JSONArray members = jsonObject.getJSONArray("members");
+                System.out.println(members.length());
+                boolean contains = false;
+                int toRemove = -1;
+                for(int i = 0; i < members.length(); i++){
+                    /*
+                    Check to see if the member of contacts is already in the room
+                    if they are remove them from the list of contact
+                    terrible algo but its 3 am so it ll work
+                    n^2 run time
+                     */
+                    JSONObject cur = members.getJSONObject(i);
+                    //get the current id
+                    int curId = Integer.parseInt(cur.getString("memberid"));
+                    //chck if it is already in the chat
+                    for(int j = 0; j < currentContacts.size(); j++){
+                        if (currentContacts.get(j).getId() == curId){
+                            toRemove = j;
+                            contains = true;
+                            break;
+                        }
+                    }
+                    //honestly this is wack
+                    if(contains){
+                        currentContacts.remove(toRemove);
+                        contains = false;
+                    }
+                }
+            } catch( JSONException e){
+                e.printStackTrace();
+            }
+            mContacts.setValue(currentContacts);
+        }
+    }
+
     public void handleGetContactsResult(JSONObject data){
         System.out.println("Successful! : " + data.toString());
         if(mCurrentContacts.getValue().size() > 0){
@@ -259,6 +297,55 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
             System.out.println(e.toString());
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Add Chat members
+     */
+    public void addMembers(String jwt) {
+        String[] memberIds = new String[mSelectedContacts.getValue().size()];
+        for(int i = 0; i < memberIds.length; i++){
+            memberIds[i] ="" + mSelectedContacts.getValue().get(i).getId();
+        }
+        JSONObject body = new JSONObject();
+        try {
+            body.put("members", new JSONArray(memberIds));
+            body.put("chatid", CHAT_ID);
+        } catch (JSONException err){
+            err.printStackTrace();
+        }
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
+        String url =
+                baseUrl+ "chat/add"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body, //no body for this get request
+                this::handleAddResult,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                //TODO: Replace this to use the actual jwt stored in the app
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+
+    }
+
+    private void handleAddResult(JSONObject jsonObject) {
+        System.out.println(jsonObject.toString());
     }
 
     /**

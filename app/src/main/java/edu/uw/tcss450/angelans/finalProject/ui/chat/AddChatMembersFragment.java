@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import java.util.function.Consumer;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentAddChatMembersBinding;
-import edu.uw.tcss450.angelans.finalProject.databinding.FragmentNewChatBinding;
 import edu.uw.tcss450.angelans.finalProject.model.Contact;
 
 /**
@@ -26,7 +24,7 @@ import edu.uw.tcss450.angelans.finalProject.model.Contact;
  */
 public class AddChatMembersFragment extends Fragment {
     private FragmentAddChatMembersBinding mBinding;
-    private AddNewChatMembersViewModel mNewChatViewModel;
+    private AddNewChatMembersViewModel addNewChatMembersViewModel;
 
 
     public AddChatMembersFragment() {
@@ -42,11 +40,12 @@ public class AddChatMembersFragment extends Fragment {
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
         //make needed requests
-        mNewChatViewModel = new ViewModelProvider(getActivity())
+        addNewChatMembersViewModel = new ViewModelProvider(getActivity())
                 .get(AddNewChatMembersViewModel.class);
         //get the contacts of the user
-        mNewChatViewModel.connectGetContacts(prefs.getString("email",""),
-                prefs.getString(getString(R.string.keys_prefs_jwt),""));
+        addNewChatMembersViewModel.connectGetContacts(prefs.getString("email",""),
+                prefs.getString(getString(R.string.keys_prefs_jwt),""),
+                "" + AddChatMembersFragmentArgs.fromBundle(getArguments()).getChatid());
     }
 
     @Override
@@ -69,16 +68,21 @@ public class AddChatMembersFragment extends Fragment {
 //            //make request
 //            mNewChatViewModel.connectPost(
 //                    mBinding.editTextChatName.getText().toString().trim(),
-//                    prefs.getString(getString(R.string.keys_prefs_jwt),"")
+//                    prefs.getString(getString(R.string.keys_prefs_jwt), "")
 //            );
 //
 //        });
-        Consumer<Contact> add = (contact) -> mNewChatViewModel.addContact(contact);
-        Consumer<Contact> remove = (contact) -> mNewChatViewModel.removeContact(contact);
+        Consumer<Contact> add = (contact) -> addNewChatMembersViewModel.addContact(contact);
+        Consumer<Contact> remove = (contact) -> addNewChatMembersViewModel.removeContact(contact);
         ContactGeneratorChat stuff = new ContactGeneratorChat();
-        mNewChatViewModel.addSelectedChatObserver(getViewLifecycleOwner(), contactList -> {
+        addNewChatMembersViewModel.addSelectedChatObserver(getViewLifecycleOwner(), contactList -> {
             System.out.println("My Contact: " + contactList.toString());
             mBinding.listAddContacts.setAdapter(new ContactCardListRecyclerViewAdapter(contactList, add, remove));
+        });
+        mBinding.button.setOnClickListener(clicked -> {
+            System.out.println("Adding Members!");
+            addNewChatMembersViewModel.addMembers(prefs.getString(
+                    getString(R.string.keys_prefs_jwt),""));
         });
     }
 
