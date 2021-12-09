@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.google.android.material.navigation.NavigationBarItemView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,7 +70,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View theView, @Nullable Bundle theSavedInstanceState) {
         super.onViewCreated(theView, theSavedInstanceState);
-
+        //password reset navigation
+        mBinding.buttonResetPasswordInApp.setOnClickListener(click -> {
+            Navigation.findNavController(getView()).navigate(
+                    HomeFragmentDirections.actionNavigationHomeToAppPasswordResetFragment()
+            );
+        });
         // Instantiate ViewModels and Binding
         mUserInfoViewModel = new ViewModelProvider(getActivity())
                 .get(UserInfoViewModel.class);

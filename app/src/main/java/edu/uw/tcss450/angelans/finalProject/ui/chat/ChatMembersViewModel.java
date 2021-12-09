@@ -296,4 +296,6 @@ public class ChatMembersViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
     }
+
+    public List<Contact> getChatMembers(){ return mContactList.getValue();}
 }
