@@ -13,6 +13,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,9 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mSelectedContacts;
     private MutableLiveData<List<Contact>> mContacts;
     private MutableLiveData<Integer> mChatId;
+    private MutableLiveData<List<Contact>> mCurrentContacts;
+    private String JWT = "";
+    private String EMAIL = "";
 
     /**
      * Constructor for the view model
@@ -47,6 +51,9 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
         mContacts.setValue(new ArrayList<>());
         mChatId = new MutableLiveData<>();
         mChatId.setValue(0);
+
+        mCurrentContacts = new MutableLiveData<>();
+        mCurrentContacts.setValue(new ArrayList<>());
     }
 
     /**
@@ -101,6 +108,8 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
      * @param jwt the jwt of the user
      */
     public void connectGetContacts(final String email, String jwt) {
+        JWT = jwt;
+        EMAIL = email;
         String baseUrl = getApplication().getResources().getString(R.string.base_url);
         String url = baseUrl + "contact/list";
 
@@ -178,7 +187,78 @@ public class AddNewChatMembersViewModel extends AndroidViewModel {
         }
 
         mContacts.setValue(mContacts.getValue());
+        //call the get current contacts method
+        connectGetContacts(JWT, EMAIL);
 
+    }
+    /**
+     * Get the current contacts of the user
+     */
+    public void getCurrentContacts(String jwt, String email) {
+        String baseUrl = getApplication().getResources().getString(R.string.base_url);
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", email.trim());
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
+        System.out.println("Getting contacts for: " + email);
+        String url =
+                baseUrl+ "contact/list"; //TODO NOTE WE USE  10.0.2.2 FOR LOCALHOST
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body, //no body for this get request
+                this::handleGetContactsResult,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                //TODO: Replace this to use the actual jwt stored in the app
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+    public void handleGetContactsResult(JSONObject data){
+        System.out.println("Successful! : " + data.toString());
+        if(mCurrentContacts.getValue().size() > 0){
+            mCurrentContacts.setValue(new ArrayList<>());
+        }
+        try {
+            if (data.has("rows")) {
+                //the data is present
+                JSONArray members = data.getJSONArray("rows");
+                for(int i = 0; i < members.length(); i++){
+                    JSONObject current = members.getJSONObject(i);
+                    System.out.println(current.toString());
+                    Contact curContact = new Contact(
+                            current.getInt("memberid"),
+                            current.getString("username"),
+                            current.getString("username"),
+                            "", // TODO Update with nickname
+                            "",
+                            ""
+                    );
+                    mCurrentContacts.getValue().add(0,curContact);
+
+                }
+                mCurrentContacts.setValue(mCurrentContacts.getValue());
+                System.out.println(mCurrentContacts.getValue().toString());
+            }
+        } catch(JSONException e){
+            System.out.println(e.toString());
+            e.printStackTrace();
+        }
     }
 
     /**

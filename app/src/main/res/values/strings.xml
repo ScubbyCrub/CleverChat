@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TCSS 450 Group Project</string>
+    <string name="app_name">CleverChat</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_last_name">Last Name</string>
     <string name="hint_email">Email</string>
