@@ -33,6 +33,7 @@ public class ContactListFragment extends Fragment {
     private ContactListViewModel mContactListViewModel;
     private RequestViewModel mRequestViewModel;
     private UserInfoViewModel mUserModel;
+    private NewMessageCountViewModel mNewMessageCountViewModel;
 
     /**
      * Constructor for ContactListFragment
@@ -50,6 +51,7 @@ public class ContactListFragment extends Fragment {
         mRequestViewModel = provider.get(RequestViewModel.class);
         mContactListViewModel.getContactList(mUserModel.getEmail(), mUserModel.getmJwt());
         mRequestViewModel.getRequestList(mUserModel.getEmail(), mUserModel.getmJwt());
+        mNewMessageCountViewModel = provider.get(NewMessageCountViewModel.class);
     }
 
     @Override
@@ -144,6 +146,15 @@ public class ContactListFragment extends Fragment {
             }
         });
 
+        mNewMessageCountViewModel.addContactCountObserver(getViewLifecycleOwner(), count -> {
+            if (count > 0) {
+                String countString = count.toString();
+                if (count > 9) {
+                    countString = "9+";
+                }
+                binding.buttonContactRequest.setText("Request (" + countString + ")");
+            }
+        });
 
         //Navigate to search page
         binding.buttonSearchContact.setOnClickListener(button ->
@@ -167,6 +178,7 @@ public class ContactListFragment extends Fragment {
                 binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
                 // Reset contact notifications
                 mNewMessageModel.resetContactCount();
+                binding.buttonContactRequest.setText("Request");
             }
         });
         //Friend
