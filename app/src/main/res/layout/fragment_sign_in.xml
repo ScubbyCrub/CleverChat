@@ -14,23 +14,22 @@
         android:fadingEdge="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/edit_email_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/edit_password_signin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -65,7 +64,7 @@
         android:id="@+id/button_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="56dp"
         android:backgroundTint="@color/gradient_background_2"
         android:text="@string/sign_in"
         android:textColor="@color/text_color"
@@ -79,21 +78,21 @@
         android:id="@+id/edit_password_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/text_ask_forgot_password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/text_ask_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="8dp"
         android:clickable="false"
         android:contextClickable="true"
         android:text="Forgot Password?"
@@ -101,7 +100,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/button_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -109,7 +108,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif"
         android:text="Sign In"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -118,18 +116,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view_outer_signin"
-        app:layout_constraintVertical_bias="0.708" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Switch
         android:id="@+id/switch_stay_signed_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="121dp"
+        android:layout_marginBottom="110dp"
         android:text="@string/stay_signed_in"
         app:layout_constraintBottom_toBottomOf="@+id/view_outer_signin"
         app:layout_constraintEnd_toEndOf="@+id/view_outer_signin"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/view_outer_signin"
         app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_outer_signin"
+        app:layout_constraintVertical_bias="1"
+        app:srcCompat="@drawable/cleverchat_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
