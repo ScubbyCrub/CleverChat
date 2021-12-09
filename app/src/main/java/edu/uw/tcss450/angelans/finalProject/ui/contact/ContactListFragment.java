@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentContactListBinding;
+import edu.uw.tcss450.angelans.finalProject.model.NewMessageCountViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
+import edu.uw.tcss450.angelans.finalProject.ui.auth.register.RegisterViewModel;
 
 /**
  * Contact Fragment to allow for UI elements to function when the user is interacting with
@@ -152,14 +154,19 @@ public class ContactListFragment extends Fragment {
         //Switching between friend and request pages
         //Request
         binding.buttonContactRequest.setOnClickListener(new View.OnClickListener() {
+            NewMessageCountViewModel mNewMessageModel = new ViewModelProvider(getActivity())
+                    .get(NewMessageCountViewModel.class);
             @Override
             public void onClick(View view) {
+
                 //Switch screen
                 binding.viewTheFriend.setVisibility(View.GONE);
                 binding.viewTheRequest.setVisibility(View.VISIBLE);
                 //Change the colors of 2 buttons
                 binding.buttonContactFriend.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch_inactive));
                 binding.buttonContactRequest.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.button_contact_switch));
+                // Reset contact notifications
+                mNewMessageModel.resetContactCount();
             }
         });
         //Friend

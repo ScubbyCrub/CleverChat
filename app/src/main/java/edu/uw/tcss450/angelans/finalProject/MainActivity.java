@@ -113,10 +113,11 @@ public class MainActivity extends AppCompatActivity {
                         "Most Recent Visited Chat (onCreate) = " + mostRecentlyVisitedChatID[0]);
 
                 mNewMessageModel.resetChatCount(mostRecentlyVisitedChatID[0]);
-            } else if (destination.getId() == R.id.navigation_contact) {
-                // When the user navigates to the contacts page, modify the new message count
-                mNewMessageModel.resetContactCount();
             }
+//            else if (destination.getId() == R.id.navigation_contact) {
+//                // When the user navigates to the contacts page, modify the new message count
+//                mNewMessageModel.resetContactCount();
+//            }
         });
 
         mNewMessageModel.addMessageCountObserver(this, count -> {
@@ -318,16 +319,9 @@ public class MainActivity extends AppCompatActivity {
                 // Inform the view model holding chatroom messages of the new message
                 mModel.addMessage(intent.getIntExtra("chatid", -1), cm);
             } else if (intent.getStringExtra("type").equals("contact")) {
-                // If the user is not on the chat screen, update the
-                // NewMessageCountView Model
-                Log.d("MainPushMessageReceiver", "current fragment ID = " + nd.getId());
-                if (nd.getId() != R.id.navigation_contact) {
                     Log.d("MainPushMessageReceiver",
-                            "Different fragment?"
-                                    + " Increment contact count!");
+                            "Increment contact count!");
                     mNewMessageModel.incrementContactCount();
-                }
-                // Inform the view model holding chatroom messages of the new message
             }
         }
     }
