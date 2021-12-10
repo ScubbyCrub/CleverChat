@@ -21,7 +21,6 @@
         app:layout_constraintStart_toEndOf="@+id/text_title_contact"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/text_title_contact"
         android:layout_width="wrap_content"

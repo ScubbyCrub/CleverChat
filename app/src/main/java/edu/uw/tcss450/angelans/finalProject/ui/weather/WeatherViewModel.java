@@ -45,6 +45,9 @@ public class WeatherViewModel extends AndroidViewModel {
     public WeatherViewModel(@NonNull Application theApplication) {
         super(theApplication);
         mWeather = new HashMap<>();
+        mWeather.put("current",new MutableLiveData<>(new ArrayList<Weather>()));
+        mWeather.put("hourly",new MutableLiveData<>(new ArrayList<Weather>()));
+        mWeather.put("daily",new MutableLiveData<>(new ArrayList<Weather>()));
     }
 
     /**
@@ -55,7 +58,7 @@ public class WeatherViewModel extends AndroidViewModel {
      */
     public void addResponseObserver(String time,@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super List<Weather>> observer) {
-        getOrCreateMapEntry(time).observe(owner, observer);
+        mWeather.get(time).observe(owner, observer);
     }
 
     /**
@@ -65,7 +68,7 @@ public class WeatherViewModel extends AndroidViewModel {
      * @return A list of weather patterns that match the given time of prediction
      */
     public List<Weather> getWeatherListByTime(final String time) {
-        return getOrCreateMapEntry(time).getValue();
+        return mWeather.get(time).getValue();
     }
 
     /**
@@ -74,12 +77,16 @@ public class WeatherViewModel extends AndroidViewModel {
      * @param time The time to map to a weather pattern
      * @return A list of weather patterns that match the given time of prediction
      */
-    private MutableLiveData<List<Weather>> getOrCreateMapEntry(final String time) {
+    private void getOrCreateMapEntry(final String time,ArrayList<Weather> list) {
         if(!mWeather.containsKey(time)) {
-            mWeather.put(time, new MutableLiveData<>(new ArrayList<Weather>()));
+            mWeather.put(time, new MutableLiveData<>(list));
         }
-        return mWeather.get(time);
+        else {
+            mWeather.get(time).setValue(list);
+        }
     }
+
+
 
     /**
      * How to handle if the network response comes back with errors.
@@ -98,30 +105,28 @@ public class WeatherViewModel extends AndroidViewModel {
      * @param response The web service's response to our web request.
      */
     private void handelSuccess(final JSONObject response) {
-        List<Weather> list;
+        ArrayList<Weather> list = new ArrayList<Weather>();
         if (!response.has("main") && !response.has("daily") && !response.has("hourly")) {
             throw new IllegalStateException("Unexpected response in WeatherViewModel: " + response);
         }
-        if (response.has("name")){
+        if (response.has("current")){
             try {
-                list = getWeatherListByTime("current");
-                JSONObject current_weather_data = response.getJSONArray("weather").getJSONObject(0);
-                JSONObject current_main_data = response.getJSONObject("main");
-                JSONObject current_wind_data = response.getJSONObject("wind");
-                JSONObject current_sys_data = response.getJSONObject("sys");
+                list = new ArrayList<Weather>();
+                JSONObject current_data = response.getJSONObject("current");
+                JSONObject current_weather_data = response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp");
                 Weather weather = new Weather(
-                        response.getString("name"),
-                        current_sys_data.getString("country"),
-                        current_weather_data.getString("main"),
                         "",
-                        current_main_data.getLong("temp"),
-                        current_main_data.getLong("temp_min"),
-                        current_main_data.getLong("temp_max"),
-                        current_sys_data.getLong("sunrise"),
-                        current_sys_data.getLong("sunset"),
-                        current_wind_data.getDouble("speed"),
-                        current_main_data.getLong("pressure"),
-                        current_main_data.getLong("humidity"),
+                        "US",
+                        current_data.getJSONArray("weather").getJSONObject(0).getString("main"),
+                        "",
+                        current_data.getLong("temp"),
+                        current_weather_data.getLong("min"),
+                        current_weather_data.getLong("max"),
+                        current_data.getLong("sunrise"),
+                        current_data.getLong("sunset"),
+                        current_data.getDouble("wind_speed"),
+                        current_data.getLong("pressure"),
+                        current_data.getLong("humidity"),
                         ""
                 );
                 if (!list.contains(weather)) {
@@ -134,51 +139,15 @@ public class WeatherViewModel extends AndroidViewModel {
                             "Or duplicate time:" + weather.getCurr_temp());
                 }
                 //inform observers of the change (setValue)
-                getOrCreateMapEntry("current").setValue(list);
+                getOrCreateMapEntry("current",list);
             }catch (JSONException e) {
-                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel in current");
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
-//        else if (response.has("current")){
-//            try {
-//                list = getWeatherListByTime("current");
-//                JSONObject current_data = response.getJSONObject("current");
-//                JSONObject current_weather_data = response.getJSONArray("daily").getJSONObject(0).getJSONObject("temp");
-//                Weather weather = new Weather(
-//                        "adsassa",
-//                        "US",
-//                        current_weather_data.getString("main"),
-//                        "",
-//                        current_data.getLong("temp"),
-//                        current_weather_data.getLong("min"),
-//                        current_weather_data.getLong("max"),
-//                        current_data.getLong("sunrise"),
-//                        current_data.getLong("sunset"),
-//                        current_data.getDouble("wind_speed"),
-//                        current_data.getLong("pressure"),
-//                        current_data.getLong("humidity"),
-//                        ""
-//                );
-//                if (!list.contains(weather)) {
-//                    // don't add a duplicate
-//                    list.add( weather);
-//                } else {
-//                    // this shouldn't happen but could with the asynchronous
-//                    // nature of the application
-//                    Log.wtf("Weather temp already received",
-//                            "Or duplicate time:" + weather.getCurr_temp());
-//                }
-//                //inform observers of the change (setValue)
-//                getOrCreateMapEntry("current").setValue(list);
-//            }catch (JSONException e) {
-//                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
-//                Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
-//            }
-//        }
-        else if (response.has("hourly")){
+        if (response.has("hourly")){
             try {
-                list = getWeatherListByTime("hourly");
+                list = new ArrayList<Weather>();
                 JSONArray hourly_weather_data = response.getJSONArray("hourly");
                 Calendar now = Calendar.getInstance();
                 for (int i = 0; i < 24;i++) {
@@ -201,15 +170,15 @@ public class WeatherViewModel extends AndroidViewModel {
                     now.add(Calendar.HOUR,1);
                     //inform observers of the change (setValue)
                 }
-                getOrCreateMapEntry("hourly").setValue(list);
+                getOrCreateMapEntry("hourly",list);
             }catch (JSONException e) {
-                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel in hourly");
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
         else if (response.has("daily")){
             try {
-                list = getWeatherListByTime("daily");
+                list = new ArrayList<Weather>();
                 JSONArray daily_weather_data = response.getJSONArray("daily");
                 Calendar now = Calendar.getInstance();
                 String[] dayOfWeek = {"","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -235,9 +204,9 @@ public class WeatherViewModel extends AndroidViewModel {
                     now.add(Calendar.DAY_OF_WEEK,1);
                 }
                 //inform observers of the change (setValue)
-                getOrCreateMapEntry("daily").setValue(list);
+                getOrCreateMapEntry("daily",list);
             }catch (JSONException e) {
-                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel");
+                Log.e("JSON PARSE ERROR", "Found in handle Success WeatherViewModel in daily");
                 Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
             }
         }
@@ -248,7 +217,7 @@ public class WeatherViewModel extends AndroidViewModel {
      *
      * @param time The time at which the weather pattern should happen
      */
-    public void connectGet(final String time,final String jwt, final String zipCode, final String lat, final String lon) {
+    public void connectGet(final String time,final String jwt, final String lat, final String lon) {
         if (jwt == null) {
             throw new IllegalArgumentException("No UserInfoViewModel is assigned");
         }
@@ -276,7 +245,6 @@ public class WeatherViewModel extends AndroidViewModel {
                 headers.put("Authorization", "Bearer " + jwt);
                 headers.put("latitude",lat);
                 headers.put("longitude",lon);
-                headers.put("zip",zipCode);
                 return headers;
             }
         };
@@ -284,4 +252,6 @@ public class WeatherViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         Volley.newRequestQueue(getApplication().getApplicationContext()).add(request);
     }
+
+
 }
