@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentChatListBinding;
 import edu.uw.tcss450.angelans.finalProject.model.Chat;
+import edu.uw.tcss450.angelans.finalProject.model.NewMessageCountViewModel;
 
 /**
  * Fragment that displays the list of the users current chats that they are a part of
@@ -29,6 +30,7 @@ import edu.uw.tcss450.angelans.finalProject.model.Chat;
  */
 public class ChatListFragment extends Fragment {
     private ChatListViewModel mModel;
+    private NewMessageCountViewModel mNewMessageCountViewModel;
 
     /**
      * Constructor for chat list fragment
@@ -54,6 +56,8 @@ public class ChatListFragment extends Fragment {
                         Context.MODE_PRIVATE);
         mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
         mModel.connectGet(prefs.getString(getString(R.string.keys_prefs_jwt),""));
+        mNewMessageCountViewModel = new ViewModelProvider(getActivity())
+                .get(NewMessageCountViewModel.class);
     }
     @Override
     public void onResume() {
@@ -94,10 +98,12 @@ public class ChatListFragment extends Fragment {
         };
         //set up recycler view on recieving data
         mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
-            binding.listRoot.setAdapter(
-                    new ChatRecyclerViewAdapter(chatList, clicked, delete)
-            );
-            //TODO: Add loading overlay here
+            mNewMessageCountViewModel.addMessageCountObserver(getViewLifecycleOwner(), idMessageMap -> {
+                binding.listRoot.setAdapter(
+                        new ChatRecyclerViewAdapter(chatList, clicked, delete, idMessageMap)
+                );
+                //TODO: Add loading overlay here
+            } );
         });
 
         //add listener to new chat button
