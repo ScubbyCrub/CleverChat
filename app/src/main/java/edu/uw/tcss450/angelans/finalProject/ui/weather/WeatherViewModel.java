@@ -221,7 +221,7 @@ public class WeatherViewModel extends AndroidViewModel {
         if (jwt == null) {
             throw new IllegalArgumentException("No UserInfoViewModel is assigned");
         }
-        String url = "http://10.0.2.2:5000/api/" ;
+        String url = getApplication().getResources().getString(R.string.base_url) ;
         if (time == "current"){
             url = url + "current_weather";
         }
