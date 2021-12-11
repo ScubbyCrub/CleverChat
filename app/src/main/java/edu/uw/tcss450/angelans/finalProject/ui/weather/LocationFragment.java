@@ -3,6 +3,8 @@ package edu.uw.tcss450.angelans.finalProject.ui.weather;
 import android.annotation.SuppressLint;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ import edu.uw.tcss450.angelans.finalProject.databinding.FragmentLocationBinding;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
 
 public class LocationFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
-    private LocationViewModel mModel;
+    private LocationViewModel mLocation;
     private WeatherViewModel mWeatherViewModel;
     private GoogleMap mMap;
     private UserInfoViewModel mUser;
@@ -52,6 +54,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
         mWeatherViewModel = provider
                 .get(WeatherViewModel.class);
         mUser = provider.get(UserInfoViewModel.class);
+        mLocation = provider.get(LocationViewModel.class);
     }
 
     @Override
@@ -91,16 +94,18 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                     }else {
                         Address address = addressList.get(0);
                         LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        city = address.getLocality();
-                        zipCode = address.getPostalCode();
-                        country = address.getCountryName();
+//                        country = address.getCountryName();
                         latitude = Double.toString(address.getLatitude());
                         longitude = Double.toString(address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                        mWeatherViewModel.connectGet("current",mUser.getmJwt(),"98404","37.41","-122.21");
-                        mWeatherViewModel.connectGet("hourly",mUser.getmJwt(),"98404","37.41","-122.21");
-                        mWeatherViewModel.connectGet("daily",mUser.getmJwt(),"98404","37.41","-122.21");
+                        mWeatherViewModel.connectGet("current", mUser.getmJwt(), latitude, longitude);
+                        mWeatherViewModel.connectGet("hourly", mUser.getmJwt(), latitude, longitude);
+                        mWeatherViewModel.connectGet("daily", mUser.getmJwt(), latitude, longitude);
+                        Location temp = new Location(LocationManager.GPS_PROVIDER);
+                        temp.setLatitude(latLng.latitude);
+                        temp.setLongitude(latLng.longitude);
+                        mLocation.setLocation(temp,getActivity());
                     }
                 }
                 return false;
@@ -145,5 +150,12 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
         mMap.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                         latLng, mMap.getCameraPosition().zoom));
+        mWeatherViewModel.connectGet("current", mUser.getmJwt(), String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+        mWeatherViewModel.connectGet("hourly", mUser.getmJwt(), String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+        mWeatherViewModel.connectGet("daily", mUser.getmJwt(), String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+        Location temp = new Location(LocationManager.GPS_PROVIDER);
+        temp.setLatitude(latLng.latitude);
+        temp.setLongitude(latLng.longitude);
+        mLocation.setLocation(temp,getActivity());
     }
 }

@@ -32,6 +32,7 @@ import edu.uw.tcss450.angelans.finalProject.ui.auth.signin.SignInFragmentDirecti
  */
 public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
+    private LocationViewModel mLocation;
     private String tempSymbol = "°F";
     private Boolean flag = true;
     private UserInfoViewModel mUser;
@@ -43,6 +44,7 @@ public class WeatherFragment extends Fragment {
         mWeatherViewModel = provider
                 .get(WeatherViewModel.class);
         mUser = provider.get(UserInfoViewModel.class);
+        mLocation = provider.get(LocationViewModel.class);
 //        mWeatherViewModel.connectGet(mUser.getmJwt(),"98504");
     }
 
@@ -53,9 +55,9 @@ public class WeatherFragment extends Fragment {
 //            mWeatherViewModel.getDataByTime("current");
 //            mWeatherViewModel.getDataByTime("hourly");
 //            mWeatherViewModel.getDataByTime("daily");
-            mWeatherViewModel.connectGet("current",mUser.getmJwt(),null,"37.41","-122.21");
-            mWeatherViewModel.connectGet("hourly",mUser.getmJwt(),"98404","37.41","-122.21");
-            mWeatherViewModel.connectGet("daily",mUser.getmJwt(),"98404","37.41","-122.21");
+//            mWeatherViewModel.connectGet("current",mUser.getmJwt(),"98101","37.41","-122.21");
+//            mWeatherViewModel.connectGet("hourly",mUser.getmJwt(),"98404","37.41","-122.21");
+//            mWeatherViewModel.connectGet("daily",mUser.getmJwt(),"98404","37.41","-122.21");
             flag = false;
         }
         return theInflater.inflate(R.layout.fragment_weather, theContainer, false);
@@ -73,7 +75,7 @@ public class WeatherFragment extends Fragment {
         mWeatherViewModel.addResponseObserver("current",getViewLifecycleOwner(), weatherList ->{
             if (!weatherList.isEmpty()){
                 Weather currentWeather = weatherList.get(0);
-                mBinding.cityName.setText(currentWeather.getCity() + ", " + currentWeather.getCountry());
+                mBinding.cityName.setText(mLocation.getCity());
                 mBinding.status.setText(currentWeather.getDescription());
                 mBinding.temp.setText(Long.toString(currentWeather.getCurr_temp())+ tempSymbol);
                 mBinding.tempMin.setText("Min Temp: "+Long.toString(currentWeather.getMin_temp())+ tempSymbol);
@@ -90,7 +92,6 @@ public class WeatherFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         hourly_recyclerView.setLayoutManager(linearLayoutManager);
         daily_recycleView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-
 
         mWeatherViewModel.addResponseObserver("hourly",getViewLifecycleOwner(),weatherList ->{
             if (!weatherList.isEmpty()){
