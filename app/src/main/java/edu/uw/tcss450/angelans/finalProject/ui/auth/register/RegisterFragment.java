@@ -116,7 +116,7 @@ public class RegisterFragment extends Fragment {
                         "1) Only associated with one account\n" +
                         "2) 3-255 characters long\n" +
                         "3) Have an @ sign\n" +
-                        "4) Only contain letters, numbers, hyphens, underscores, or periods"));
+                        "4) Only contain letters, numbers, hyphens, underscores, plus signs, or periods"));
     }
 
     /**
