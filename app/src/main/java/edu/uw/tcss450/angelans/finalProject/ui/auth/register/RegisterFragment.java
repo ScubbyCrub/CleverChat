@@ -46,7 +46,7 @@ public class RegisterFragment extends Fragment {
     private PasswordValidator mEmailCheck = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"))
-            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign());
 
     /*
     PW length > 7
