@@ -150,7 +150,7 @@ public class SignInFragment extends Fragment {
                 result -> mBinding.editEmailSignin.setError("Emails must be:\n" +
                         "1) 3-255 characters long\n" +
                         "2) Have an @ sign\n" +
-                        "3) Only contain letters, numbers, hyphens, underscores, or periods"));
+                        "3) Only contain letters, numbers, hyphens, underscores, plus signs, or periods"));
     }
 
     /**
