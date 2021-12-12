@@ -58,7 +58,7 @@ public class WeatherHourlyRecyclerViewAdapter extends RecyclerView.Adapter<Weath
         }
 
         void setHourlyData(final Weather weather) {
-            binding.hourlyTime.setText(weather.getTime());
+            binding.hourlyTime.setText(weather.getTime() + ":00");
             Picasso.get().load("https://openweathermap.org/img/wn/" + weather.getIcon() + "@2x.png").into(binding.imageViewHourly);
             binding.hourlyTemp.setText(Long.toString(weather.getCurr_temp())+ "°F");
         }
