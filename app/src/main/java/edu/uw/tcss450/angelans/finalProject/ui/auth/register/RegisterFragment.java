@@ -218,7 +218,7 @@ public class RegisterFragment extends Fragment {
      */
     private void observeResponse(final JSONObject theResponse) {
         if (theResponse.length() > 0) {
-            if (theResponse.has("code")) {
+            if (theResponse.has("message")) {
                 try {
                     String errorDescription = "Error Authenticating: "
                             + theResponse.getJSONObject("data").getString("message");
