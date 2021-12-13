@@ -38,7 +38,7 @@
 
     <!-- Live Website: https://cleverchat.herokuapp.com/api/
          LocalHost in Android Studio: http://10.0.2.2:5000/api/ -->
-    <string name="base_url">http://10.0.2.2:5000/api/</string>
+    <string name="base_url">https://cleverchat.herokuapp.com/api/</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_new_chat">Create New Chat</string>
