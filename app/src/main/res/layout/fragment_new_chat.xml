@@ -52,8 +52,8 @@
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
         android:ems="10"
+        android:hint="Enter Chat Name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_name3" />

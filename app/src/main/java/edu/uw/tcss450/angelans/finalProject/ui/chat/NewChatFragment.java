@@ -66,6 +66,7 @@ public class NewChatFragment extends Fragment {
             NewChatFragmentDirections.ActionNewChatFragmentToSingleChatFragment dir =
                     NewChatFragmentDirections.actionNewChatFragmentToSingleChatFragment();
             dir.setId(mNewChatViewModel.getChatId());
+            dir.setChatName(mBinding.editTextChatName.getText().toString().trim());
             Navigation.findNavController(getView()).navigate(dir);
         });
         mBinding.buttonCreateNewChat.setOnClickListener(button -> {
