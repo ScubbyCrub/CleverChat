@@ -124,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/appPasswordResetFragment"
-        android:name="edu.uw.tcss450.angelans.finalProject.AppPasswordResetFragment"
+        android:name="edu.uw.tcss450.angelans.finalProject.ui.auth.passwordreset.AppPasswordResetFragment"
         android:label="fragment_app_password_reset"
         tools:layout="@layout/fragment_app_password_reset" >
         <action

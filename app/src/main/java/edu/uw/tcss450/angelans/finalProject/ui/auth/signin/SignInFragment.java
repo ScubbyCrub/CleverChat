@@ -26,7 +26,6 @@ import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.databinding.FragmentSignInBinding;
 import edu.uw.tcss450.angelans.finalProject.model.PushyTokenViewModel;
 import edu.uw.tcss450.angelans.finalProject.model.UserInfoViewModel;
-import edu.uw.tcss450.angelans.finalProject.ui.weather.WeatherViewModel;
 import edu.uw.tcss450.angelans.finalProject.utils.PasswordValidator;
 
 /**
@@ -47,7 +46,7 @@ public class SignInFragment extends Fragment {
     private PasswordValidator mCheckEmail = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"))
-            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign());
 
     /*
     PW length > 7
@@ -151,7 +150,7 @@ public class SignInFragment extends Fragment {
                 result -> mBinding.editEmailSignin.setError("Emails must be:\n" +
                         "1) 3-255 characters long\n" +
                         "2) Have an @ sign\n" +
-                        "3) Only contain letters, numbers, hyphens, underscores, or periods"));
+                        "3) Only contain letters, numbers, hyphens, underscores, plus signs, or periods"));
     }
 
     /**

@@ -46,7 +46,7 @@ public class RegisterFragment extends Fragment {
     private PasswordValidator mEmailCheck = checkPWLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"))
-            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign());
+            .and(checkPwdOnlyHasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign());
 
     /*
     PW length > 7
@@ -116,7 +116,7 @@ public class RegisterFragment extends Fragment {
                         "1) Only associated with one account\n" +
                         "2) 3-255 characters long\n" +
                         "3) Have an @ sign\n" +
-                        "4) Only contain letters, numbers, hyphens, underscores, or periods"));
+                        "4) Only contain letters, numbers, hyphens, underscores, plus signs, or periods"));
     }
 
     /**
@@ -218,7 +218,7 @@ public class RegisterFragment extends Fragment {
      */
     private void observeResponse(final JSONObject theResponse) {
         if (theResponse.length() > 0) {
-            if (theResponse.has("code")) {
+            if (theResponse.has("message")) {
                 try {
                     String errorDescription = "Error Authenticating: "
                             + theResponse.getJSONObject("data").getString("message");

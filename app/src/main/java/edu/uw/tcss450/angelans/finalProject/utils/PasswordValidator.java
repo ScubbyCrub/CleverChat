@@ -122,19 +122,21 @@ public interface PasswordValidator  extends Function<String, Optional<PasswordVa
         return checkResult;
     }
 
-    // Checks if an input only contains letters, numbers, hyphens, underscores, periods, @ signs
-    static PasswordValidator checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign() {
+    // Checks if an input only contains letters, numbers, hyphens, underscores, periods,
+    // @ signs, plus signs
+    static PasswordValidator checkPwdOnlyHasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign() {
         return password ->
-                Optional.of(hasLettersNumbersHyphensUnderscoresPeriodsAtSign(password) ?
+                Optional.of(hasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign(password) ?
                         ValidationResult.SUCCESS : ValidationResult.PWD_INCLUDES_EXCLUDED);
     }
 
-    // Helper method for checkPwdOnlyHasLettersNumbersHyphensUnderscoresPeriodsAtSign()
-    static boolean hasLettersNumbersHyphensUnderscoresPeriodsAtSign(String thePassword) {
+    // Helper method for checkPwdOnlyHasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign()
+    static boolean hasLettersNumbersHyphensUnderscoresPlusSignPeriodsAtSign(String thePassword) {
         boolean checkResult = true;
         for (int i = 0; i < thePassword.length(); i++) {
             char currentChar = thePassword.charAt(i);
-            if (currentChar < 45                                // 45-46 = hyphen, period
+            if (    currentChar < 43                            // 43 = + sign
+                    || (currentChar > 43 && currentChar < 45)   // 45-46 = hyphen, period
                     || (currentChar > 46 && currentChar < 48)   // 48-57 = numbers
                     || (currentChar > 57 && currentChar < 64)   // 64-90 = @ sign, A-Z
                     || (currentChar > 90 && currentChar < 95)   // 95 = underscore
