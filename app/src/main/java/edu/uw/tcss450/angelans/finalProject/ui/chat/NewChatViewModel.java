@@ -87,8 +87,10 @@ public class NewChatViewModel extends AndroidViewModel {
         //you should add much better error handling in a production release.
         //i.e. YOUR PROJECT
         //TODO: Make better error handling
-        Log.e("Error.toString", error.getMessage());
-        throw new IllegalStateException(error.getMessage());
+//        Log.e("Error.toString", error.getMessage());
+//        throw new IllegalStateException(error.getMessage());
+        //stopping crash from no contact
+        mContacts.setValue(new ArrayList<Contact>());
     }
 
     /**
