@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.uw.tcss450.angelans.finalProject.R;
 import edu.uw.tcss450.angelans.finalProject.io.RequestQueueSingleton;
 
 public class EmailVerificationViewModel extends AndroidViewModel {
@@ -30,7 +31,7 @@ public class EmailVerificationViewModel extends AndroidViewModel {
 
     public void connect(String email){
         //TODO updatae this to point to the web endpoint
-        String url = "http://10.0.2.2:5000/api/verification";
+        String url = getApplication().getResources().getString(R.string.base_url) + "verification";
         JSONObject body = new JSONObject();
         try {
             body.put("userEmail",email);
